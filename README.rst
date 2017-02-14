@@ -1,5 +1,12 @@
-# GL_Project
-The project is about the maintenance planification of company
+========
+GL PROJECT
+========
+Jeu de Ghost réalisé dans le cadre d'un projet pour un cours de programmation orienté objet à l'université Paris Diderot - Paris 7
+
+.. image:: http://www.notrecinema.com/images/filmsp/planes_55074_11922.jpg
+
+
+An aicraft maintenance planification system
 
 Hsieh Yung-Kun quincy.tw@gmail.com 
 Fekih Meriem fekih.meriem2@gmail.com 
