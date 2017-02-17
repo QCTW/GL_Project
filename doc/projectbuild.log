@@ -1,0 +1,6 @@
+- To re-constrcut jetty project with Eclipse, follow the instruction here:
+  https://neelzone.wordpress.com/2007/06/18/jetty-and-eclipse-integration/
+  
+
+- To configure maven for hot-deploy to jetty:
+  https://maven.apache.org/plugins/maven-war-plugin/usage.html

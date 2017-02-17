@@ -1,0 +1,3 @@
+This contexts folder should be copied to jetty server folder (the same level as start.jar)
+
+Configure the file app.xml to where you put your GLA eclipse project.

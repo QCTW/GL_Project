@@ -13,8 +13,8 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-public class JettyMain {
-
+public class JettyMain 
+{
 	public static void main(String[] args) throws Exception {
 		// Initialize the server
 		Server server = new Server();
@@ -56,5 +56,4 @@ public class JettyMain {
 		server.start();
 
 	}
-
 }
