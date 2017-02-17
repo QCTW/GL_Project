@@ -2,5 +2,5 @@
   https://neelzone.wordpress.com/2007/06/18/jetty-and-eclipse-integration/
   
 
-- To configure maven for hot-deploy to jetty:
-  https://maven.apache.org/plugins/maven-war-plugin/usage.html
+- To configure maven for jetty on eclipse:
+  http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html#jetty-run-goal
