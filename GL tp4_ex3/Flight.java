@@ -1,3 +1,5 @@
+import java.util.Date;
+
 class Flight{
 	private String commercialId;
 	private String departureAirport;
