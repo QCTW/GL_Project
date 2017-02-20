@@ -7,6 +7,9 @@
    <packaging>war</packaging>
    <name>Paris 7 MCC Project</name>
    <url>http://localhost</url>
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
    <build>
     <plugins>
       <!-- plugin>
