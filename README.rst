@@ -1,5 +1,11 @@
-# GL_Project
-The project is about the maintenance planification of company
+========
+GL PROJECT
+========
+
+An aicraft maintenance planification system
+
+.. image:: http://www.notrecinema.com/images/filmsp/planes_55074_11922.jpg
+
 
 Hsieh Yung-Kun quincy.tw@gmail.com 
 Fekih Meriem fekih.meriem2@gmail.com 
