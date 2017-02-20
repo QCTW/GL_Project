@@ -1,6 +1,11 @@
 package com.example.jetty_jersey.Dao;
 
 public class TaskType{
+	
+	private String periodicity;
+	private String ataCategory;
+	private Boolean hangarNeed;
+	
 	public String getPeriodicity() {
 		return periodicity;
 	}
@@ -19,9 +24,7 @@ public class TaskType{
 	public void setHangarNeed(Boolean hangarNeed) {
 		this.hangarNeed = hangarNeed;
 	}
-	private String periodicity;
-	private String ataCategory;
-	private Boolean hangarNeed;
+	
 
 	
 
