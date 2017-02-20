@@ -10,7 +10,7 @@ public class AtaStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/view/{id}")
 	public String getAtaById(@PathParam("id") int id){
-		return new ArrayList<Task>();
+		return new String();
 	}
 
 }
