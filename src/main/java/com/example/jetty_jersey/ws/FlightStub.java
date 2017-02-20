@@ -5,5 +5,12 @@ import com.example.jetty_jersey.Dao.*;
 
 @Path("/Flight")
 public class FlightStub {
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public Flight flightById(@PathParam("id") int id){
+		return new Task();
+}
 
 }
