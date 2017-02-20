@@ -10,7 +10,7 @@ public class FlightStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/view/{id}")
 	public Flight flightById(@PathParam("id") int id){
-		return new Fligh();
+		return new Flight();
 }
 
 }
