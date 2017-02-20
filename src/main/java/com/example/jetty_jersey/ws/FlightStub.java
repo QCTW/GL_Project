@@ -8,9 +8,9 @@ public class FlightStub {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
+	@Path("/view/{id}")
 	public Flight flightById(@PathParam("id") int id){
-		return new Task();
+		return new Fligh();
 }
 
 }
