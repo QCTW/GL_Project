@@ -1,24 +1,29 @@
-public interface TaskTypeDao{
+package com.example.jetty_jersey.DaoInterface;
+
+import java.util.List;
+
+import com.example.jetty_jersey.Dao.*;
+public interface TaskListDao{
 	
 	/**
 	*@return the list of TaskTypes that need or not to be done in a hangar
 	**/
-	List<TaskType> getTaskTypesbyHangerNeed(Boolean hangarNeed);
+	List<TaskList> getTaskTypesbyHangerNeed(Boolean hangarNeed);
 	/**
 	*@return the list of TaskTypes corresponding to given ataCategory
 	**/
-	List<TaskType> getTaskTypesbyAtaCategory(String ataCategory);
+	List<TaskList> getTaskTypesbyAtaCategory(String ataCategory);
 	/**
 	*@return the list of TaskTypes done in the given amount of time months:days:hours:minutes
 	**/
-	List<TaskType> getTaskTypesbyPeriodicityEquals(String period);
+	List<TaskList> getTaskTypesbyPeriodicityEquals(String period);
 	
 	/**
 	*@return the list of TaskTypes done in less amount of time that the given one months:days:hours:minutes
 	**/
-	List<TaskType> getTaskTypesbyPeriodicityLessThan(String period);
+	List<TaskList> getTaskTypesbyPeriodicityLessThan(String period);
 	/**
 	*@return the list of TaskTypes done in more given amount of time that the given one months:days:hours:minutes
 	**/
-	List<TaskType> getTaskTypesbyPeriodicityGreaterThan(String period);
+	List<TaskList> getTaskTypesbyPeriodicityGreaterThan(String period);
 }
