@@ -11,7 +11,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
    <build>
-    <plugins>
+     <plugins>
       <!-- plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -20,14 +20,27 @@
           <webappDirectory>/sample/servlet/container/deploy/directory</webappDirectory>
         </configuration>
       </plugin -->
+        <plugin> 
+	<groupId>org.apache.maven.plugins</groupId> 
+	<artifactId>maven-dependency-plugin</artifactId>
+	<executions><execution><phase>generate-sources</phase>
+	<goals><goal>build-classpath</goal>
+	</goals><configuration> 
+	<outputFile>${project.basedir}/src/main/resources/classpath</outputFile></configuration></execution></executions>
+	</plugin>
         <plugin>
 	      <groupId>org.eclipse.jetty</groupId>
 	      <artifactId>jetty-maven-plugin</artifactId>
 	      <version>9.4.1.v20170120</version>
-	    </plugin>
+        </plugin>
     </plugins>
   </build>
   <dependencies>
+	<dependency>
+	    <groupId>org.elasticsearch.client</groupId>
+	    <artifactId>transport</artifactId>
+	    <version>5.2.1</version>
+	</dependency>
 	<!-- Jetty -->
 	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
