@@ -5,6 +5,7 @@ public class Plane{
 	private String planeType; 
 	
 	public String getPlaneId() {
+		System.out.println("hello");
 		return planeId;
 	}
 	public void setPlaneId(String planeId) {
