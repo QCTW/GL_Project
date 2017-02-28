@@ -21,3 +21,8 @@ $(function(){
 		getServerData("ws/example/aircraft",callDone);
 	});
 });
+$(function(){
+	$("#button2").click(function(){
+		getServerData("ws/example/aircraft",callDone);
+	});
+});

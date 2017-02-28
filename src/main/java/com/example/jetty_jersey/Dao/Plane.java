@@ -18,6 +18,5 @@ public class Plane{
 		this.planeType = planeType;
 	}
 	
-
 	
 }
