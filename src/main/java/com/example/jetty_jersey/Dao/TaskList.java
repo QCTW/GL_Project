@@ -1,6 +1,6 @@
 package com.example.jetty_jersey.Dao;
 
-public class TaskType{
+public class TaskList{
 	
 	private String periodicity;
 	private String ataCategory;
