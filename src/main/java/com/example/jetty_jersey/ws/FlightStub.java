@@ -16,6 +16,7 @@ public class FlightStub {
 	@Path("/view/{id}")
 	public Flight flightById(@PathParam("id") int id){
 		return new Flight();
-}
+	}
+	
 
 }
