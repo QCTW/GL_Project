@@ -3,6 +3,10 @@ package com.example.jetty_jersey.Dao;
 import java.util.Date;
 
 public class Flight{
+	
+	
+	private long id;
+	
 	private String commercialId;
 	private String departureAirport;
 	private String arrivalAirport;
