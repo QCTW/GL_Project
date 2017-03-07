@@ -7,7 +7,6 @@ import com.example.jetty_jersey.DaoInterface.MroDao;
 
 public class MroImpl implements MroDao {
 
-	@Override
 	public List<MRO> getMrobyQualification(String qualification) {
 		// TODO Auto-generated method stub
 		return null;
