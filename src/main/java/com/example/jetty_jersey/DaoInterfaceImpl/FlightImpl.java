@@ -23,7 +23,6 @@ public class FlightImpl implements FlightDao {
 	}
 
 	public List<Flight> getFlightsbyArrivalAirport(String airport) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
