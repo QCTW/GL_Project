@@ -1,0 +1,15 @@
+PUT mcc/1
+{
+  "email" : "quincy.tw@gmail.com"
+}
+
+PUT mcc/2
+{
+  "email" : "hocine@gmail.com"
+}
+
+PUT mcc/3
+{
+  "email" : "abc@hotmail.fr"
+}
+
