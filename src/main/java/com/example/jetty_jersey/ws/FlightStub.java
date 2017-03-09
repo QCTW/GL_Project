@@ -7,15 +7,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.example.jetty_jersey.Dao.*;
+import com.example.jetty_jersey.DaoInterface.FlightDao;
+import com.example.jetty_jersey.DaoInterfaceImpl.FlightImpl;
 
 @Path("/Flight")
 public class FlightStub {
 	
+	FlightDao flight = new FlightImpl();
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/view/{id}")
 	public Flight flightById(@PathParam("id") int id){
-		return new Flight();
+		return flight.getFlightbyId(id+"");
 	}
 	
 

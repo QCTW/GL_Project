@@ -24,8 +24,8 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Task> allTasks(){
-		taskList.getAllTasks();
-		return new ArrayList<Task>();
+		return taskList.getAllTasks();
+		
 	}
 	
 	@GET
@@ -46,7 +46,7 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public void addTask(){
-		
+
 	}
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
