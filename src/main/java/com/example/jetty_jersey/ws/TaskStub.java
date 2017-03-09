@@ -12,9 +12,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.example.jetty_jersey.Dao.*;
+import com.example.jetty_jersey.DaoInterface.TaskDao;
+import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
 
 @Path("/task")
 public class TaskStub {
+	
+	TaskDao taskList = new TaskImpl();
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public List<Task> allTasks(){
+		taskList.getAllTasks();
+		return new ArrayList<Task>();
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,11 +67,5 @@ public class TaskStub {
 	public void deleteTaskById(@PathParam("id") int id){
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 }

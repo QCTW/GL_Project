@@ -67,4 +67,10 @@ public class TaskImpl implements TaskDao {
 		return null;
 	}
 
+	@Override
+	public List<Task> getAllTasks() {
+		
+		return null;
+	}
+
 }

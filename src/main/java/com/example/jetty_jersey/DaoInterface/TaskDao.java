@@ -43,5 +43,9 @@ public interface TaskDao{
 	**/
 	List<Task> getTaskbyEndYear(String year);
 
+	/**
+	*@return the list of all
+	**/
+	List<Task> getAllTasks();
 
 }
