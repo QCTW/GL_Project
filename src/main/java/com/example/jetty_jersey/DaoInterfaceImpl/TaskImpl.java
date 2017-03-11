@@ -73,4 +73,10 @@ public class TaskImpl implements TaskDao {
 		return null;
 	}
 
+	@Override
+	public Task getTasksById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

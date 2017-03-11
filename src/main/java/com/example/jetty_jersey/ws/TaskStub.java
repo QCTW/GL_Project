@@ -1,8 +1,6 @@
 package com.example.jetty_jersey.ws;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -26,15 +24,8 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Task> allTasks(){
-		//taskList.getAllTasks();
-		List<Task> t = new ArrayList<Task>();
-		Task task = null;
-		for(int i=0; i<10; i++){
-			task = new Task(new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true);
-			t.add(task);
-		}
+		return taskList.getAllTasks();
 		
-		return t;
 	}
 	
 	@GET
@@ -48,14 +39,14 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public Task taskById(@PathParam("id") int id){
-		return new Task();
+		return taskList.getTasksById(id+"");
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public void addTask(){
-		
+
 	}
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

@@ -47,5 +47,10 @@ public interface TaskDao{
 	*@return the list of all
 	**/
 	List<Task> getAllTasks();
+	
+	/**
+	*@return the task with the given id
+	**/
+	Task getTasksById(String id);
 
 }
