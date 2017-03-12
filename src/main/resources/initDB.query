@@ -39,5 +39,17 @@ PUT mro/3
  "surname" : "Quincy"
  }
  
+ PUT plane/1
+ {
+ "planetype" : "A 380"
+ }
  
+ PUT plane/2
+ {
+ "planetype" : "Boeing 747 "
+ }
  
+ PUT plane/3
+ {
+ "planetype" : "Air Force One"
+ }
