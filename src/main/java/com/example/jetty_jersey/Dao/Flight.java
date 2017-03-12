@@ -2,6 +2,17 @@ package com.example.jetty_jersey.Dao;
 
 import java.util.Date;
 
+/*
+PUT flight/id
+ {
+ "comercialid" : "exmaple of comercial id"
+ "departureairport" : "example of departure airport"
+ "arrivalairport" : "example of arrival airport"
+ "departuretime" : "example of departure time"
+ "arrivaltime" : "example of arrival time"
+ }
+*/
+
 public class Flight{
 	
 	
