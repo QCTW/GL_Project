@@ -8,7 +8,7 @@ package com.example.jetty_jersey.Dao;
  "qualification" : "example of qualification"
  "name" : "example of name"
  "surname" : "example of surname"
- 
+ }
 
 */
 
