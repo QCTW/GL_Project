@@ -1,11 +1,24 @@
 package com.example.jetty_jersey.Dao;
 
+/**
+ 
+ PUT mro/id
+ {
+ 
+ "qualification" : "étudiant master info"
+ "name" : "oulebsir"
+ "surname" : "hocine"
+ 
+
+*/
+
 public class MRO{
 	
 	private String qualification;
 	private String name;
 	private String surname;
 	private String id;
+	
 	public String getQualification() {
 		return qualification;
 	}
