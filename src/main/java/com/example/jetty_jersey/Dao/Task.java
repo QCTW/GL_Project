@@ -1,25 +1,40 @@
 package com.example.jetty_jersey.Dao;
 import java.security.Timestamp;
+import java.util.Date;
 
 
 public class Task{
 	
-	private Timestamp startTime;
-	private Timestamp endTime;
+	private Date startTime;
+	private Date endTime;
 	private String description;
 	private String periodicity;
 	private String ataCategory;
 	private boolean hangarNeed;
-	public Timestamp getStartTime() {
+	
+	public Task(){
+		
+	}
+	public Task(Date startTime, Date endTime, String description, String periodicity, String ataCategory,
+			boolean hangarNeed) {
+		super();
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.description = description;
+		this.periodicity = periodicity;
+		this.ataCategory = ataCategory;
+		this.hangarNeed = hangarNeed;
+	}
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public Timestamp getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 	public String getDescription() {
@@ -48,7 +63,6 @@ public class Task{
 	}
 	
 	
-
 	
 
 }

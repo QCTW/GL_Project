@@ -13,3 +13,43 @@ PUT mcc/3
   "email" : "abc@hotmail.fr"
 }
 
+PUT mro/1
+ {
+ 
+ "qualification" : "studient in master info p7"
+ "name" : "oulebsir"
+ "surname" : "hocine"
+ 
+}
+
+
+PUT mro/2
+ {
+ 
+ "qualification" : "studient in master info p7"
+ "name" : "Kaba"
+ "surname" : "sarah"
+ }
+ 
+PUT mro/3
+ {
+ 
+ "qualification" : "studient in master info p7"
+ "name" : "Hsieh"
+ "surname" : "Quincy"
+ }
+ 
+ PUT plane/1
+ {
+ "planetype" : "A 380"
+ }
+ 
+ PUT plane/2
+ {
+ "planetype" : "Boeing 747 "
+ }
+ 
+ PUT plane/3
+ {
+ "planetype" : "Air Force One"
+ }
