@@ -5,9 +5,9 @@ package com.example.jetty_jersey.Dao;
  PUT mro/id
  {
  
- "qualification" : "étudiant master info"
- "name" : "oulebsir"
- "surname" : "hocine"
+ "qualification" : "example of qualification"
+ "name" : "example of name"
+ "surname" : "example of surname"
  
 
 */
