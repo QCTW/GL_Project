@@ -1,6 +1,7 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -18,14 +19,20 @@ import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
 @Path("/task")
 public class TaskStub {
 	
-	TaskDao taskList = new TaskImpl();
+	static TaskDao taskList = new TaskImpl();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Task> allTasks(){
-		return taskList.getAllTasks();
-		
+		//return taskList.getAllTasks();
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		for(int i =0; i<10; i++){
+			t = new Task(new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true);
+			tl.add(t);
+		}
+		return tl;
 	}
 	
 	@GET
