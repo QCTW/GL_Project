@@ -1,5 +1,11 @@
 package com.example.jetty_jersey.Dao;
+/*
+ PUT plane/id
+ {
+ "planetype" : "exmaple of plane type"
+ }
 
+*/
 public class Plane{
 	private String planeId;
 	private String planeType; 
