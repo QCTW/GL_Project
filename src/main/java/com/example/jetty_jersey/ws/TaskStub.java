@@ -34,6 +34,19 @@ public class TaskStub {
 		}
 		return tl;
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/planes//{id}")
+	public List<Task> tasksByPlaneId(@PathParam("id") int id){
+		//return taskList.getAllTasks();
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		for(int i =0; i<10; i++){
+			t = new Task(new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true);
+			tl.add(t);
+		}
+		return tl;
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
