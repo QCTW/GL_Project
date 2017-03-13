@@ -21,7 +21,7 @@ public class TaskImpl implements TaskDao {
 		List<Task> tl  = new ArrayList<>();
 		Task t;
 		int x;
-		for(int i =0; i<10; i++){
+		for(int i =0; i<100; i++){
 			x = (int)(Math.random() *3) +1;
 			t = new Task(i,x);
 			tl.add(t);

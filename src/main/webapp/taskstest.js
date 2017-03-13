@@ -7,9 +7,22 @@ function getServerData(url, success){
 }
 var task;
 function getAllTasks(result){
+	var tab =$('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
 	for(var i=0; i<result.length; i++){
-		var templateExample = _.template($('#taskTemp').html());
-		var html = templateExample({
+		tab.row.add( [
+			//dateFormat(Date(result[i]), "mm/dd/yyyy"),
+			new Date (result[i].startTime),
+			//JSON.stringify(result[i].startTime),
+			JSON.stringify(result[i].endTime),
+			JSON.stringify(result[i].description),
+			JSON.stringify(result[i].periodicity),
+			JSON.stringify(result[i].ataCategory),
+			JSON.stringify(result[i].hangarNeed)
+		] ).draw( false );
+		//var templateExample = _.template($('#taskTemp').html());
+		/*var html = templateExample({
 			"starttimetask":JSON.stringify(result[i].startTime),
 			"endtimetask":JSON.stringify(result[i].endTime),
 			"descriptiontask":JSON.stringify(result[i].description),
@@ -18,9 +31,11 @@ function getAllTasks(result){
 			"hangartask":JSON.stringify(result[i].hangarNeed),
 		
 		});
-		$('#tabb').append(html);
+		$('#tabb').append(html);*/
 	}
-} 
+}
+
+
 
 
 

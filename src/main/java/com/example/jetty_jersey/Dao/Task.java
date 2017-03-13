@@ -40,7 +40,7 @@ public class Task{
 		this.description = "description"+id;
 		this.periodicity = "periodicity"+id;
 		this.ataCategory = "ata"+id;
-		this.hangarNeed = true;
+		this.hangarNeed = (Math.random()<0.5)?true:false;
 		this.planeId = planeId;
 		this.taskStatus = 0;
 	}
