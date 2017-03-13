@@ -14,6 +14,7 @@ public class Task{
 	private boolean hangarNeed;
 	private int planeId;
 	private int taskStatus;
+	private static int cpt=0;
 	
 	public Task(){
 		
@@ -34,12 +35,13 @@ public class Task{
 	}
 	
 	public Task(int id, int planeId){
-		this.id = id;
+		int x = (int)(Math.random()*1000);
+		this.id = cpt++;
 		this.startTime = new Date((long)(Math.random()*System.currentTimeMillis()));
 		this.endTime = new Date((long)(Math.random()*System.currentTimeMillis()));
-		this.description = "description"+id;
-		this.periodicity = "periodicity"+id;
-		this.ataCategory = "ata"+id;
+		this.description = "description"+x;
+		this.periodicity = "periodicity"+x;
+		this.ataCategory = "ata"+x;
 		this.hangarNeed = (Math.random()<0.5)?true:false;
 		this.planeId = planeId;
 		this.taskStatus = 0;

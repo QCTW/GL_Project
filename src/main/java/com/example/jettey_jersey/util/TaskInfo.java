@@ -10,8 +10,8 @@ import com.example.jetty_jersey.Dao.Task;
 public class TaskInfo {
 	
 	public List<Task> tasklist ;
-	Plane plane;
-	Flight flight;
+	public Plane plane;
+	public Flight flight;
 	
 	public TaskInfo(Plane plane, Flight flight) {
 		super();

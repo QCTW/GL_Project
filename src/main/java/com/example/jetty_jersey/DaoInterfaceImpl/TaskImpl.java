@@ -42,7 +42,9 @@ public class TaskImpl implements TaskDao {
 
 	@Override
 	public TaskInfo getTasksByPlaneId(int id) {
-		Plane plane = new Plane(id,"airbus");
+		double x = Math.random();
+		String s = (x<0.3)?"airbus":(x<0.6)?"cessna":"boeing";
+		Plane plane = new Plane(id,s);
 		Flight flight = new Flight(1, id);
 		
 		TaskInfo taskinfo = new TaskInfo(plane, flight);
