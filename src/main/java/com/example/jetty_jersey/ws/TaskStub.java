@@ -29,11 +29,26 @@ public class TaskStub {
 		List<Task> tl  = new ArrayList<>();
 		Task t;
 		for(int i =0; i<10; i++){
-			t = new Task(new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true);
+			t = new Task(i,new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true,1,0);
 			tl.add(t);
 		}
 		return tl;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/plane/all/{id}")
+	public List<Task> allTasksByPlaneId(@PathParam("id") int id){
+		//return taskList.getAllTasks();
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		for(int i =0; i<10; i++){
+			t = new Task(i,new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true,id,0);
+			tl.add(t);
+		}
+		return tl;
+	}
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
