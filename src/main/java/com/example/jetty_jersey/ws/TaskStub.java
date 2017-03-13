@@ -37,7 +37,7 @@ public class TaskStub {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/plane/all/{id}")
+	@Path("/plane/{id}")
 	public List<Task> allTasksByPlaneId(@PathParam("id") int id){
 		//return taskList.getAllTasks();
 		List<Task> tl  = new ArrayList<>();
