@@ -15,7 +15,7 @@ function getAllTasks(result){
 			//dateFormat(Date(result[i]), "mm/dd/yyyy"),
 			new Date (result[i].startTime),
 			//JSON.stringify(result[i].startTime),
-			JSON.stringify(result[i].endTime),
+			new Date (result[i].endTime),
 			JSON.stringify(result[i].description),
 			JSON.stringify(result[i].periodicity),
 			JSON.stringify(result[i].ataCategory),
