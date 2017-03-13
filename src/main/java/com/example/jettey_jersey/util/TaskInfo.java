@@ -1,5 +1,6 @@
-package com.example.jetty_jersey.ws;
+package com.example.jettey_jersey.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.jetty_jersey.Dao.Flight;
@@ -8,15 +9,19 @@ import com.example.jetty_jersey.Dao.Task;
 
 public class TaskInfo {
 	
-	List<Task> tasklist ;
+	public List<Task> tasklist ;
 	Plane plane;
 	Flight flight;
 	
-	public TaskInfo(List<Task> tasklist, Plane plane, Flight flight) {
+	public TaskInfo(Plane plane, Flight flight) {
 		super();
-		this.tasklist = tasklist;
+		this.tasklist = new ArrayList<>();
 		this.plane = plane;
 		this.flight = flight;
+	}
+	
+	public void addTask(Task t){
+		tasklist.add(t);
 	}
 	
 	

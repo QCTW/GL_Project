@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.example.jettey_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.*;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
 import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
@@ -40,23 +42,32 @@ public class TaskStub {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/plane/{id}")
-	public List<Task> allTasksByPlaneId(@PathParam("id") int id){
+	public TaskInfo allTasksByPlaneId(@PathParam("id") int id){
 		//return taskList.getAllTasks();
+		Plane plane = new Plane(id,"airbus");
+		Flight flight = new Flight(1, id);
+		
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
 		List<Task> tl  = new ArrayList<>();
 		Task t;
 		for(int i =0; i<10; i++){
 			t = new Task(i,id);
-			tl.add(t);
+			taskinfo.addTask(t);
 		}
-		return tl;
+		return taskinfo;
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Task taskById(@PathParam("id") int id){
-		return new Task(id,1);
+	public TaskInfo taskById(@PathParam("id") int id){
+		Plane plane = new Plane(2,"airbus");
+		Flight flight = new Flight(1, 2);
+		Task t = new Task(id,2);
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		taskinfo.addTask(t);
+		return taskinfo;
 	}
 	
 	@POST
