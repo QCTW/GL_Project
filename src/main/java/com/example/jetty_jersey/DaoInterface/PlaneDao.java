@@ -13,5 +13,5 @@ public interface PlaneDao{
 	/**
 	*@return the plane corresponding to the given id
 	**/
-	Plane getPlanebyId(String id);
+	Plane getPlanebyId(int id);
 }

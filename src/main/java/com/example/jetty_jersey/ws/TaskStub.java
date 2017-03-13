@@ -27,8 +27,8 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Task> allTasks(){
-		//return taskList.getAllTasks();
-		List<Task> tl  = new ArrayList<>();
+		return taskList.getAllTasks();
+		/*List<Task> tl  = new ArrayList<>();
 		Task t;
 		int x;
 		for(int i =0; i<10; i++){
@@ -37,14 +37,15 @@ public class TaskStub {
 			tl.add(t);
 		}
 		return tl;
+		*/
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/plane/{id}")
 	public TaskInfo allTasksByPlaneId(@PathParam("id") int id){
-		//return taskList.getAllTasks();
-		Plane plane = new Plane(id,"airbus");
+		return taskList.getTasksByPlaneId(id);
+		/*Plane plane = new Plane(id,"airbus");
 		Flight flight = new Flight(1, id);
 		
 		TaskInfo taskinfo = new TaskInfo(plane, flight);
@@ -54,7 +55,7 @@ public class TaskStub {
 			t = new Task(i,id);
 			taskinfo.addTask(t);
 		}
-		return taskinfo;
+		return taskinfo;*/
 	}
 	
 	
@@ -62,12 +63,14 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public TaskInfo taskById(@PathParam("id") int id){
+		return taskList.getTasksById(id);/*
 		Plane plane = new Plane(2,"airbus");
 		Flight flight = new Flight(1, 2);
 		Task t = new Task(id,2);
 		TaskInfo taskinfo = new TaskInfo(plane, flight);
 		taskinfo.addTask(t);
 		return taskinfo;
+		*/
 	}
 	
 	@POST
