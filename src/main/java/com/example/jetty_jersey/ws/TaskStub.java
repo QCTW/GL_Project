@@ -28,8 +28,10 @@ public class TaskStub {
 		//return taskList.getAllTasks();
 		List<Task> tl  = new ArrayList<>();
 		Task t;
+		int x;
 		for(int i =0; i<10; i++){
-			t = new Task(i,new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true,1,0);
+			x = (int)(Math.random() *3) +1;
+			t = new Task(i,x);
 			tl.add(t);
 		}
 		return tl;
@@ -43,7 +45,7 @@ public class TaskStub {
 		List<Task> tl  = new ArrayList<>();
 		Task t;
 		for(int i =0; i<10; i++){
-			t = new Task(i,new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true,id,0);
+			t = new Task(i,id);
 			tl.add(t);
 		}
 		return tl;
@@ -52,23 +54,16 @@ public class TaskStub {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/user/{id}")
-	public List<Task> allTasksFromUser(@PathParam("id") int id){
-		return new ArrayList<Task>();
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public Task taskById(@PathParam("id") int id){
-		return taskList.getTasksById(id+"");
+		return new Task(id,1);
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public void addTask(){
-
+		
 	}
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

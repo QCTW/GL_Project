@@ -32,6 +32,18 @@ public class Task{
 		this.planeId = planeId;
 		this.taskStatus = taskStatus;
 	}
+	
+	public Task(int id, int planeId){
+		this.id = id;
+		this.startTime = new Date();
+		this.endTime = new Date();
+		this.description = "description"+id;
+		this.periodicity = "periodicity"+id;
+		this.ataCategory = "ata"+id;
+		this.hangarNeed = true;
+		this.planeId = planeId;
+		this.taskStatus = 0;
+	}
 
 	public int getId() {
 		return id;
