@@ -8,14 +8,12 @@ function getServerData(url, success){
 var task;
 function getAllTasks(result){
 	var tab =$('#example').DataTable( {
-        "pagingType": "full_numbers"
     } );
 	for(var i=0; i<result.length; i++){
 		tab.row.add( [
-			//dateFormat(Date(result[i]), "mm/dd/yyyy"),
-			new Date (result[i].startTime),
-			//JSON.stringify(result[i].startTime),
-			new Date (result[i].endTime),
+			JSON.stringify(result[i].id),
+			new Date(result[i].startTime),
+			new Date(result[i].endTime),
 			JSON.stringify(result[i].description),
 			JSON.stringify(result[i].periodicity),
 			JSON.stringify(result[i].ataCategory),

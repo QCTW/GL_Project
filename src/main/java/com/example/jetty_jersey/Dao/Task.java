@@ -35,7 +35,7 @@ public class Task{
 	
 	public Task(int id, int planeId){
 		this.id = id;
-		this.startTime = new Date();
+		this.startTime = new Date((long)(Math.random()*System.currentTimeMillis()));
 		this.endTime = new Date((long)(Math.random()*System.currentTimeMillis()));
 		this.description = "description"+id;
 		this.periodicity = "periodicity"+id;
