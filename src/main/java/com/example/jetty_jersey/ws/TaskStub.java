@@ -44,7 +44,7 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all2")
 	public List<TaskInfo> allTasks2(){
-		List<TaskInfo> l = new ArrayList<>();
+		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		for(int i=0; i<10; i++){
 			l.add(taskList.getTasksByPlaneId(i));
 		}

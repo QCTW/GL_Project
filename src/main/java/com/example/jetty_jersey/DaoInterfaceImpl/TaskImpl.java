@@ -18,7 +18,7 @@ public class TaskImpl implements TaskDao {
 	}
 	@Override
 	public List<Task> getAllTasks() {
-		List<Task> tl  = new ArrayList<>();
+		List<Task> tl  = new ArrayList<Task>();
 		Task t;
 		int x;
 		for(int i =0; i<100; i++){
@@ -48,7 +48,7 @@ public class TaskImpl implements TaskDao {
 		Flight flight = new Flight(1, id);
 		
 		TaskInfo taskinfo = new TaskInfo(plane, flight);
-		List<Task> tl  = new ArrayList<>();
+		List<Task> tl  = new ArrayList<Task>();
 		Task t;
 		for(int i =0; i<10; i++){
 			t = new Task(i,id);

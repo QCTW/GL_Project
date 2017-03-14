@@ -15,7 +15,7 @@ public class TaskInfo {
 	
 	public TaskInfo(Plane plane, Flight flight) {
 		super();
-		this.tasklist = new ArrayList<>();
+		this.tasklist = new ArrayList<Task>();
 		this.plane = plane;
 		this.flight = flight;
 	}
