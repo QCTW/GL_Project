@@ -19,7 +19,8 @@ public class DatabaseSimulator
 	{
 		String queryPath = "src/main/resources/initDB.query";
 		File fQuery = new File(queryPath);
-		System.out.println(fQuery.getAbsolutePath());
+		System.out.println("Read query file from : " + fQuery.getAbsolutePath());
+
 		FileInputStream fstream = new FileInputStream(queryPath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
