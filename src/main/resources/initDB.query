@@ -79,3 +79,45 @@ PUT gla/flight/100
 	 "departureTime" : "01-12-2007",
 	 "arrivalTime" : "03-12-2007"
  }
+ 
+ PUT gla/task/1
+ {
+ 
+ "startTime" : "21/03/2017"
+ "endTime" : "25/03/2017"
+ "description" : "pneu train avant "
+ "periodicity" : "tous les mois"
+ "ataCategory" : "ata1"
+ "hangarNeed" : "true"
+
+}
+
+
+PUT gla/task/2
+ {
+ 
+ "startTime" : "22/03/2017"
+ "endTime" : "26/03/2017"
+ "description" : "pneu train arriere "
+ "periodicity" : "tous les mois"
+ "ataCategory" : "ata1"
+ "hangarNeed" : "true"
+
+}
+
+
+
+PUT gla/task/3
+ {
+ 
+ "startTime" : "28/03/2017"
+ "endTime" : "28/04/2017"
+ "description" : "gouverne de profondeur"
+ "periodicity" : "tous les six mois"
+ "ataCategory" : "ata2"
+ "hangarNeed" : "true"
+
+}
+ 
+ 
+ 
