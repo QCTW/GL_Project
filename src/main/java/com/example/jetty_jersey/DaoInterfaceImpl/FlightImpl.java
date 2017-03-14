@@ -26,4 +26,10 @@ public class FlightImpl implements FlightDao {
 		return null;
 	}
 
+	@Override
+	public Flight getFlightbyPlaneId(int planeId) {
+		// TODO Auto-generated method stub
+		return new Flight((int)Math.random()*100, planeId);
+	}
+
 }

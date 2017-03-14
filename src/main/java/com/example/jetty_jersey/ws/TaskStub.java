@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.example.jettey_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.*;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
 import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
@@ -25,35 +27,68 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Task> allTasks(){
-		//return taskList.getAllTasks();
-		List<Task> tl  = new ArrayList<>();
+		return taskList.getAllTasks();
+		/*List<Task> tl  = new ArrayList<>();
 		Task t;
+		int x;
 		for(int i =0; i<10; i++){
-			t = new Task(new Date(), new Date(), "description"+i, "periodicity"+i, "ata"+i, true);
+			x = (int)(Math.random() *3) +1;
+			t = new Task(i,x);
 			tl.add(t);
 		}
 		return tl;
+		*/
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/user/{id}")
-	public List<Task> allTasksFromUser(@PathParam("id") int id){
-		return new ArrayList<Task>();
+	@Path("/all2")
+	public List<TaskInfo> allTasks2(){
+		List<TaskInfo> l = new ArrayList<TaskInfo>();
+		for(int i=0; i<10; i++){
+			l.add(taskList.getTasksByPlaneId(i));
+		}
+		return l;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/plane/{id}")
+	public TaskInfo allTasksByPlaneId(@PathParam("id") int id){
+		return taskList.getTasksByPlaneId(id);
+		/*Plane plane = new Plane(id,"airbus");
+		Flight flight = new Flight(1, id);
+		
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		for(int i =0; i<10; i++){
+			t = new Task(i,id);
+			taskinfo.addTask(t);
+		}
+		return taskinfo;*/
+	}
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Task taskById(@PathParam("id") int id){
-		return taskList.getTasksById(id+"");
+	public TaskInfo taskById(@PathParam("id") int id){
+		return taskList.getTasksById(id);/*
+		Plane plane = new Plane(2,"airbus");
+		Flight flight = new Flight(1, 2);
+		Task t = new Task(id,2);
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		taskinfo.addTask(t);
+		return taskinfo;
+		*/
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public void addTask(){
-
+		
 	}
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
