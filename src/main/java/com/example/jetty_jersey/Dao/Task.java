@@ -1,7 +1,21 @@
 package com.example.jetty_jersey.Dao;
 import java.security.Timestamp;
 import java.util.Date;
+/*
+PUT gla/task/id
+ {
+ 
+ "startTime" : "21/03/2017"
+ "endTime" : "25/03/2017"
+ "description" : "pneu train avant "
+ "periodicity" : "tous les mois"
+ "ataCategory" : "ata1"
+ "hangarNeed" : "true"
 
+}
+
+
+*/
 
 public class Task{
 	
