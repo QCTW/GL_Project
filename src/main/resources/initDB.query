@@ -89,6 +89,9 @@ PUT gla/flight/100
  "periodicity" : "tous les mois",
  "ataCategory" : "ata1",
  "hangarNeed" : "true",
+ "planeId" : "1",
+ "taskStatus" : "8",
+ "mroId" : "2"
 
 }
 
@@ -101,7 +104,10 @@ PUT gla/task/2
  "description" : "pneu train arriere ",
  "periodicity" : "tous les mois",
  "ataCategory" : "ata1",
- "hangarNeed" : "true"
+ "hangarNeed" : "true",
+ "planeId" : "2",
+ "taskStatus" : "7",
+ "mroId" : "3"
 
 }
 
@@ -115,7 +121,10 @@ PUT gla/task/3
  "description" : "gouverne de profondeur",
  "periodicity" : "tous les six mois",
  "ataCategory" : "ata2",
- "hangarNeed" : "true"
+ "hangarNeed" : "true",
+ "planeId" : "3",
+ "taskStatus" : "9",
+ "mroId" : "5"
 
 }
  
