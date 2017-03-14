@@ -1,55 +1,54 @@
-PUT mcc/1
-{
-  "email" : "quincy.tw@gmail.com"
+## NOTE :
+## Comment always start with ## in our query file
+## URL must be : <database_name>/<table_name>/<key_id>
+
+PUT gla/mcc/1
+{ "email" : "quincy.tw@gmail.com" }
+
+PUT gla/mcc/2
+{ 
+  "email" : "hocine@gmail.com" 
 }
 
-PUT mcc/2
-{
-  "email" : "hocine@gmail.com"
-}
-
-PUT mcc/3
+PUT gla/mcc/3
 {
   "email" : "abc@hotmail.fr"
 }
 
-PUT mro/1
- {
- 
- "qualification" : "studient in master info p7"
- "name" : "oulebsir"
- "surname" : "hocine"
- 
+PUT gla/mro/1
+{
+ "qualification" : "studient in master info p7",
+ "name" : "Oulebsir",
+ "surname" : "Hocine"
 }
 
+PUT gla/mro/2
+{
 
-PUT mro/2
- {
- 
  "qualification" : "studient in master info p7"
  "name" : "Kaba"
- "surname" : "sarah"
- }
+ "surname" : "Sarah"
+}
  
-PUT mro/3
- {
+PUT gla/mro/3
+{
  
  "qualification" : "studient in master info p7"
  "name" : "Hsieh"
  "surname" : "Quincy"
- }
+}
  
- PUT plane/1
- {
+PUT gla/plane/1
+{
  "planetype" : "A 380"
- }
+}
  
- PUT plane/2
- {
+PUT gla/plane/2
+{
  "planetype" : "Boeing 747 "
- }
+}
  
- PUT plane/3
- {
+PUT gla/plane/3
+{
  "planetype" : "Air Force One"
- }
+}
