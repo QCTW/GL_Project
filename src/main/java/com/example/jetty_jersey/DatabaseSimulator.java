@@ -1,4 +1,4 @@
-package main.java.com.example.jetty_jersey;
+package com.example.jetty_jersey;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package main.java.com.example.jetty_jersey;
+package com.example.jetty_jersey;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
