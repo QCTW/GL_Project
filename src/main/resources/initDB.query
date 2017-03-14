@@ -25,16 +25,16 @@ PUT gla/mro/1
 PUT gla/mro/2
 {
 
- "qualification" : "studient in master info p7"
- "name" : "Kaba"
+ "qualification" : "studient in master info p7",
+ "name" : "Kaba",
  "surname" : "Sarah"
 }
  
 PUT gla/mro/3
 {
  
- "qualification" : "studient in master info p7"
- "name" : "Hsieh"
+ "qualification" : "studient in master info p7",
+ "name" : "Hsieh",
  "surname" : "Quincy"
 }
  
