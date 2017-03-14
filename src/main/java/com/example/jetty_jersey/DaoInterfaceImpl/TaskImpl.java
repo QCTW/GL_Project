@@ -16,7 +16,7 @@ public class TaskImpl implements TaskDao {
 	public TaskImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+
 	public List<Task> getAllTasks() {
 		List<Task> tl  = new ArrayList<Task>();
 		Task t;
@@ -29,7 +29,7 @@ public class TaskImpl implements TaskDao {
 		return tl;
 	}
 
-	@Override
+	
 	public TaskInfo getTasksById(int id) {
 		PlaneDao p = new PlaneImpl();
 		Task t = new Task(id,2);
@@ -40,7 +40,7 @@ public class TaskImpl implements TaskDao {
 		return taskinfo;
 	}
 
-	@Override
+
 	public TaskInfo getTasksByPlaneId(int id) {
 		double x = Math.random();
 		String s = (x<0.3)?"airbus":(x<0.6)?"cessna":"boeing";
@@ -56,17 +56,17 @@ public class TaskImpl implements TaskDao {
 		}
 		return taskinfo;
 	}
-	@Override
+	
 	public void addTask(Task t) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	
 	public void modifyTask(Task t) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+
 	public void addTask(int id) {
 		// TODO Auto-generated method stub
 		
