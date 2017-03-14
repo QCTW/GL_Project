@@ -68,7 +68,7 @@ PUT gla/flight/100
 	 "departureAirport" : "Amiens",
 	 "arrivalAirport" : "Conakry",
 	 "departureTime" : "02-09-2016",
-	 "arrivalTime" : "03-09-2016",
+	 "arrivalTime" : "03-09-2016"
  }
  
  PUT gla/flight/300
