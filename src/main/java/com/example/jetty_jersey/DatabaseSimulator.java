@@ -1,6 +1,7 @@
 package com.example.jetty_jersey;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ public class DatabaseSimulator
 
 	public static void main(String[] args) throws Exception
 	{
-		String queryPath = "/Users/Quincy/git/ParisVII_GLA_2017/src/main/resources/initDB.query";
+		String queryPath = "src/main/resources/initDB.query";
+		File fQuery = new File(queryPath);
+		System.out.println(fQuery.getAbsolutePath());
 		FileInputStream fstream = new FileInputStream(queryPath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -88,6 +91,7 @@ public class DatabaseSimulator
 			// StatusLine rl = indexResponse.getStatusLine();
 			System.out.println(EntityUtils.toString(indexResponse.getEntity()));
 		}
+		restClient.close();
 	}
 
 	private static void processQuery(DatabaseQuery currentQuery, String strLine) throws Exception
