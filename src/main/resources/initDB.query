@@ -25,16 +25,16 @@ PUT gla/mro/1
 PUT gla/mro/2
 {
 
- "qualification" : "studient in master info p7"
- "name" : "Kaba"
+ "qualification" : "studient in master info p7",
+ "name" : "Kaba",
  "surname" : "Sarah"
 }
  
 PUT gla/mro/3
 {
  
- "qualification" : "studient in master info p7"
- "name" : "Hsieh"
+ "qualification" : "studient in master info p7",
+ "name" : "Hsieh",
  "surname" : "Quincy"
 }
  
@@ -52,3 +52,30 @@ PUT gla/plane/3
 {
  "planetype" : "Air Force One"
 }
+
+PUT gla/flight/100
+ {
+ 	"commercialId" : "Boeing001",
+	 "departureAirport" : "CDG",
+	 "arrivalAirport" : "Nantes",
+	 "departureTime" : "21-03-2017",
+	 "arrivalTime" : "23-03-2017"
+ }
+ 
+ PUT gla/flight/200
+ {
+ 	"commercialId" : "Airbus001",
+	 "departureAirport" : "Amiens",
+	 "arrivalAirport" : "Conakry",
+	 "departureTime" : "02-09-2016",
+	 "arrivalTime" : "03-09-2016",
+ }
+ 
+ PUT gla/flight/300
+ {
+ 	"commercialId" : "Boeing002",
+	 "departureAirport" : "Orly",
+	 "arrivalAirport" : "Lille",
+	 "departureTime" : "01-12-2007",
+	 "arrivalTime" : "03-12-2007"
+ }
