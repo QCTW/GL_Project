@@ -14,6 +14,7 @@ public class Task{
 	private boolean hangarNeed;
 	private int planeId;
 	private int taskStatus;
+	private int mroId;
 	private static int cpt=0;
 	
 	public Task(){
