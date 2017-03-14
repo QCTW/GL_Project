@@ -16,13 +16,24 @@ PUT flight/id
 public class Flight{
 	
 	
-	private long id;
+	private int id;
 	
 	private String commercialId;
 	private String departureAirport;
 	private String arrivalAirport;
 	private Date departureTime;
 	private Date arrivalTime;
+	private int planeId;
+	
+	public Flight(int id,int planeId){
+		this.id = id;
+		this.commercialId = "commercialId"+id;
+		this.departureAirport = "Dairport"+id;
+		this.arrivalAirport = "Aairport"+id;
+		this.departureTime = new Date();
+		this.arrivalTime = new Date();
+		this.planeId = planeId;
+	}
 	public String getCommercialId() {
 		return commercialId;
 	}

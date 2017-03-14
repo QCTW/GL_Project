@@ -9,15 +9,17 @@ var task;
 function getAllTasks(result){
 	var tab =$('#example').DataTable( {
     } );
+	console.log(result[1].plane.planeType);
 	for(var i=0; i<result.length; i++){
+		for(var j=0 ; j<result[i].tasklist.length ; j++ ){
+		console.log(result[i].tasklist[j].id);
 		tab.row.add( [
-			JSON.stringify(result[i].id),
-			new Date(result[i].startTime),
-			new Date(result[i].endTime),
-			JSON.stringify(result[i].description),
-			JSON.stringify(result[i].periodicity),
-			JSON.stringify(result[i].ataCategory),
-			JSON.stringify(result[i].hangarNeed)
+			JSON.stringify(result[i].tasklist[j].id),
+			JSON.stringify(result[i].tasklist[j].ataCategory),
+			JSON.stringify(result[i].tasklist[j].description),
+			new Date(result[i].tasklist[j].endTime),
+			new Date(result[i].flight.departureTime),
+			JSON.stringify(result[i].plane.planeType)
 		] ).draw( false );
 		//var templateExample = _.template($('#taskTemp').html());
 		/*var html = templateExample({
@@ -31,6 +33,7 @@ function getAllTasks(result){
 		});
 		$('#tabb').append(html);*/
 	}
+	}
 }
 
 
@@ -38,7 +41,7 @@ function getAllTasks(result){
 
 
 $(function(){
-		getServerData("ws/task/all",getAllTasks);
+		getServerData("ws/task/all2",getAllTasks);
 });
 /*
 function callDone(result){

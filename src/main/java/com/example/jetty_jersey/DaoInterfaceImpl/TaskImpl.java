@@ -1,82 +1,77 @@
 package com.example.jetty_jersey.DaoInterfaceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.jettey_jersey.util.TaskInfo;
+import com.example.jetty_jersey.Dao.Flight;
+import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Task;
+import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
 
 public class TaskImpl implements TaskDao {
 
-	public List<Task> getTaskbyDay(String dayMonthYear) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public TaskImpl() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public List<Task> getTaskbyMonth(String monthYear) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyHour(String hourDaymonth) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyYear(String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyStartDay(String dayMonthYear) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyStartMonth(String monthYear) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyStartHour(String hourDaymonth) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyStartYear(String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyEndDay(String dayMonthYear) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyEndMonth(String monthYear) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyEndHour(String hourDaymonth) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Task> getTaskbyEndYear(String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public List<Task> getAllTasks() {
-		
-		return null;
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		int x;
+		for(int i =0; i<100; i++){
+			x = (int)(Math.random() *3) +1;
+			t = new Task(i,x);
+			tl.add(t);
+		}
+		return tl;
 	}
 
 	@Override
-	public Task getTasksById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public TaskInfo getTasksById(int id) {
+		PlaneDao p = new PlaneImpl();
+		Task t = new Task(id,2);
+		Plane plane = p.getPlanebyId(t.getPlaneId());
+		Flight flight = new Flight(1, plane.getPlaneId());
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		taskinfo.addTask(t);
+		return taskinfo;
 	}
+
+	@Override
+	public TaskInfo getTasksByPlaneId(int id) {
+		double x = Math.random();
+		String s = (x<0.3)?"airbus":(x<0.6)?"cessna":"boeing";
+		Plane plane = new Plane(id,s);
+		Flight flight = new Flight(1, id);
+		
+		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		List<Task> tl  = new ArrayList<>();
+		Task t;
+		for(int i =0; i<10; i++){
+			t = new Task(i,id);
+			taskinfo.addTask(t);
+		}
+		return taskinfo;
+	}
+	@Override
+	public void addTask(Task t) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void modifyTask(Task t) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addTask(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

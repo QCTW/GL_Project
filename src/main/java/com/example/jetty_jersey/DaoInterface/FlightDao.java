@@ -21,5 +21,10 @@ public interface FlightDao{
 	*@return the list of flights that will land to the given airport
 	**/
 	List<Flight> getFlightsbyArrivalAirport(String airport);
+	
+	/**
+	*@return the flight by the planeid
+	**/
+	Flight getFlightbyPlaneId(int planeId);
 
 }

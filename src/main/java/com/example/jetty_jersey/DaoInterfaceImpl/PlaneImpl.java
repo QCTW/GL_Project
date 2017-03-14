@@ -12,9 +12,9 @@ public class PlaneImpl implements PlaneDao {
 		return null;
 	}
 
-	public Plane getPlanebyId(String id) {
+	public Plane getPlanebyId(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Plane(id, "airbus");
 	}
 
 }
