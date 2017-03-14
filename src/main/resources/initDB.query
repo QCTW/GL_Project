@@ -53,7 +53,7 @@ PUT gla/plane/3
  "planetype" : "Air Force One"
 }
 
-PUT gla/flight/f1
+PUT gla/flight/100
  {
  	"commercialId" : "Boeing001",
 	 "departureAirport" : "CDG",
@@ -62,7 +62,7 @@ PUT gla/flight/f1
 	 "arrivalTime" : "23-03-2017"
  }
  
- PUT gla/flight/f2
+ PUT gla/flight/200
  {
  	"commercialId" : "Airbus001",
 	 "departureAirport" : "Amiens",
@@ -71,7 +71,7 @@ PUT gla/flight/f1
 	 "arrivalTime" : "03-09-2016",
  }
  
- PUT gla/flight/f3
+ PUT gla/flight/300
  {
  	"commercialId" : "Boeing002",
 	 "departureAirport" : "Orly",
