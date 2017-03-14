@@ -16,7 +16,7 @@ public class DatabaseSimulator
 
 	public static void main(String[] args) throws Exception
 	{
-		String queryPath = "/Users/Quincy/git/ParisVII_GLA_2017/src/main/resources/initDB.query";
+		String queryPath = "C:/Users/mo-20/GL_Project/src/main/resources/initDB.query";
 		FileInputStream fstream = new FileInputStream(queryPath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
