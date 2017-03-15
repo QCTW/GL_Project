@@ -31,17 +31,22 @@
           <div class="panel-body">
             <div class="col-md-0"></div>
             <div class="col-md-10">
-            <h5><b>ATA Category : </b>communication</h5>
+            <div id=taskView>
+            <script id="taskViewScript" type="text/template" >
+            
+            <h5><b>ATA Category : </b><%= ata %></h5>
             <h5><b>ATA : </b>1504578</h5>
             <h5><b>Qualification : </b>Engineer</h5>
             <h5><b>Start Date : </b>15/04/2017</h5>
             <h5><b>End Date : </b>15/04/2017</h5>
-            <h5><b>Descrition : </h5>
+            <h5><b>Description :</b> </h5>
                                 <p>..................................................
                                 <br>..................................................
                                 <br>..................................................</p>
             <h5><b>Periodicity : </b>1 vol par semaine</h5>
             <h5><b>Hangar Need : </b>Yes</h5>
+            </script>
+			</div>
             </div>
           </div>
           <div class="panel-footer">
@@ -53,6 +58,8 @@
       </div>
     </div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="taskView_mro.js"></script>
 	</body>
 </html>
