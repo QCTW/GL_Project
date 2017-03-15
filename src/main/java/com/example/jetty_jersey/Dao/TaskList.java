@@ -1,4 +1,4 @@
-/** PUT gla/taskList/
+/** PUT gla/taskList/1
  *{
  *
  * "periodicity" : "tous les six mois",
