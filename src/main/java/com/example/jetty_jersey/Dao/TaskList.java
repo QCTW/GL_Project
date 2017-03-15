@@ -1,3 +1,12 @@
+/** PUT gla/taskList/1
+ *{
+ *
+ * "periodicity" : "tous les six mois",
+ * "ataCategory" : "ata2",
+ * "hangarNeed" : "true"
+ *
+ *}
+ **/
 package com.example.jetty_jersey.Dao;
 
 public class TaskList{
