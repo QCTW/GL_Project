@@ -127,6 +127,33 @@ PUT gla/task/3
  "mroId" : "5"
 
 }
+
+PUT gla/taskList/1000
+{
+ 
+  "periodicity" : "tous les six mois",
+  "ataCategory" : "ata2",
+  "hangarNeed" : "true"
+ 
+ }
+ 
+ PUT gla/taskList/2000
+{
+ 
+  "periodicity" : "tous les deux vols",
+  "ataCategory" : "ata",
+  "hangarNeed" : "true"
+ 
+ }
+ 
+  PUT gla/taskList/3000
+{
+ 
+  "periodicity" : "a chaque aller-retour",
+  "ataCategory" : "ata4",
+  "hangarNeed" : "true"
+ 
+ }
  
  
  
