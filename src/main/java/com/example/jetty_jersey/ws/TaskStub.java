@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -84,10 +85,10 @@ public class TaskStub {
 		*/
 	}
 	
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public void addTask(){
+	public void addTask(TaskInfo taskInfo){
 		
 	}
 	@POST

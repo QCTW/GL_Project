@@ -10,7 +10,7 @@ var task;
 function getTask(taskInfo){
 	var templateTaskView = _.template($('#taskViewScript').html());
 	var html = templateTaskView({
-		"ata":JSON.stringify(taskInfo.plane.planeType),
+		"ata":JSON.stringify(taskInfo.tasklist[0].ataCategory),
 		
 
 		});
