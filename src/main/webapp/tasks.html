@@ -10,13 +10,8 @@
 	<link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 	<!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"-->
 	
-    <script type="text/javascript" language="javascript" src="bootstrap/js/jquery-1.12.4.js">
-	</script>
-	<script type="text/javascript" language="javascript" src="bootstrap/js/jquery.dataTables.min.js">
-	</script>
-	<script type="text/javascript" language="javascript" src="bootstrap/js/dataTables.bootstrap.min.js">
-	</script>
-	<script type="text/javascript" class="init" src="taskstest2.js"></script>
+	
+    
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +39,7 @@
     <!-- TASK MENU -->
 		
 		<div id="tasksmenu" class="tab-pane fade in active">
-					<h3></h3>			
+					<h3>view tasks</h3>			
 				    <table id="example" class="table table-hover">
 						<thead>
 							<tr>
@@ -63,51 +58,26 @@
 		
 		
 		<div id="planes" class="tab-pane fade">
-			<div class="row">
-				<div class="col-md-0"></div>
-				<div class="col-md-10"> <b> &nbsp; &nbsp; &nbsp; &nbsp;Please, select a plane to see all tasks </b><br> </br></div>
-			</div>
-			<div class="row" align="center">
-				<div class="col-md-1"></div>
-			    <div class="col-md-10">
-				    <table class="table table-hover">
-
+			<h3>view planes</h3>			
+				    <table id="planeslist" class="table table-hover">
+						<thead>
 							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
+								<th>Id</th>
+								<th>Planes types</th>
 							</tr>
-							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
-							</tr>
-							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
-							</tr>
-							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
-							</tr>
-							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
-							</tr>
-							<tr>
-							  <td >...</td><td >...</td><td >...</td><td >...</td><td >...</td>
-							</tr>
+							</thead>
 				  </table>
-				</div>
-				<div align="center">
-					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
 		</div>
 </div>
 </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="bootstrap/js/jquery-1.12.4.js">
+	</script>
+	<script type="text/javascript"  src="bootstrap/js/jquery.dataTables.min.js">
+	</script>
+	<script type="text/javascript"  src="bootstrap/js/dataTables.bootstrap.min.js">
+	</script>
+	<script type="text/javascript" class="init" src="taskstest2.js"></script>
   </body>
 </html>

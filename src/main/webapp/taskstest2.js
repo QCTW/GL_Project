@@ -6,9 +6,10 @@ function getServerData(url, success){
     }).done(success);
 }
 var task;
+
 function getAllTasks(result){
 	var tab =$('#example').DataTable( {
-    } );
+	} );
 	console.log(result[1].plane.planeType);
 	for(var i=0; i<result.length; i++){
 		for(var j=0 ; j<result[i].tasklist.length ; j++ ){
@@ -21,6 +22,9 @@ function getAllTasks(result){
 			formatDate(new Date(result[i].flight.departureTime)),
 			JSON.stringify(result[i].plane.planeType)
 		] ).draw( false );
+		
+		
+		/* We did not delete this part because we still need it */
 		//var templateExample = _.template($('#taskTemp').html());
 		/*var html = templateExample({
 			"starttimetask":JSON.stringify(result[i].startTime),
@@ -33,6 +37,19 @@ function getAllTasks(result){
 		});
 		$('#tabb').append(html);*/
 	}
+	}
+}
+function getAllPlanes(result){
+	
+	var planes =$('#planeslist').DataTable( {
+	} );
+	
+	//console.log(result[1].plane.planeType);
+	for(var i=0; i<result.length; i++){
+		planes.row.add( [
+			JSON.stringify(result[i].planeId),
+			JSON.stringify(result[i].planeType)
+		] ).draw( false );
 	}
 }
 
@@ -56,4 +73,7 @@ function formatDate(date) {
 
 $(function(){
 		getServerData("ws/task/all2",getAllTasks);
+});
+$(function(){
+	getServerData("ws/plane/all",getAllPlanes);
 });
