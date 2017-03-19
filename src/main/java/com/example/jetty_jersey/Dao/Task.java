@@ -1,5 +1,4 @@
 package com.example.jetty_jersey.Dao;
-import java.security.Timestamp;
 import java.util.Date;
 
 
@@ -46,6 +45,7 @@ public class Task{
 		this.hangarNeed = (Math.random()<0.5)?true:false;
 		this.planeId = planeId;
 		this.taskStatus = 0;
+		this.mroId = (int)(Math.random()*10);
 	}
 
 	public int getId() {
@@ -119,6 +119,15 @@ public class Task{
 	public void setTaskStatus(int taskStatus) {
 		this.taskStatus = taskStatus;
 	}
+
+	public int getMroId() {
+		return mroId;
+	}
+
+	public void setMroId(int mroId) {
+		this.mroId = mroId;
+	}
+	
 	
 	
 	

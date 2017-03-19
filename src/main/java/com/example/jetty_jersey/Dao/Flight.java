@@ -17,7 +17,6 @@ public class Flight{
 	
 	
 	private int id;
-	
 	private String commercialId;
 	private String departureAirport;
 	private String arrivalAirport;
@@ -32,6 +31,18 @@ public class Flight{
 		this.arrivalAirport = "Aairport"+id;
 		this.departureTime = new Date();
 		this.arrivalTime = new Date();
+		this.planeId = planeId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getPlaneId() {
+		return planeId;
+	}
+	public void setPlaneId(int planeId) {
 		this.planeId = planeId;
 	}
 	public String getCommercialId() {

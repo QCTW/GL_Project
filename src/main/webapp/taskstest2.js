@@ -17,8 +17,8 @@ function getAllTasks(result){
 			JSON.stringify(result[i].tasklist[j].id),
 			JSON.stringify(result[i].tasklist[j].ataCategory),
 			JSON.stringify(result[i].tasklist[j].description),
-			new Date(result[i].tasklist[j].endTime),
-			new Date(result[i].flight.departureTime),
+			formatDate(new Date(result[i].tasklist[j].endTime)),
+			formatDate(new Date(result[i].flight.departureTime)),
 			JSON.stringify(result[i].plane.planeType)
 		] ).draw( false );
 		//var templateExample = _.template($('#taskTemp').html());
@@ -36,6 +36,20 @@ function getAllTasks(result){
 	}
 }
 
+function formatDate(date) {
+	  var monthNames = [
+	    "January", "February", "March",
+	    "April", "May", "June", "July",
+	    "August", "September", "October",
+	    "November", "December"
+	  ];
+
+	  var day = date.getDate();
+	  var monthIndex = date.getMonth();
+	  var year = date.getFullYear();
+
+	  return year + ' ' + monthNames[monthIndex] + ' ' + day;
+	}
 
 
 
@@ -43,25 +57,3 @@ function getAllTasks(result){
 $(function(){
 		getServerData("ws/task/all2",getAllTasks);
 });
-/*
-function callDone(result){
-	var templateExample = _.template($('#templateExample').html());
-
-	var html = templateExample({
-		"attribute":JSON.stringify(result)
-	});
-
-	$("#result").append(html);
-}
-
-$(function(){
-	$("#button").click(function(){
-		getServerData("ws/example/aircraft",callDone);
-	});
-});
-$(function(){
-	$("#button2").click(function(){
-		getServerData("ws/example/aircraft",callDone);
-	});
-});
-*/
