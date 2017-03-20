@@ -95,7 +95,7 @@ public class DatabaseSimulator
 			}
 		} catch (Exception e)
 		{
-
+			e.printStackTrace();
 		} finally
 		{
 			// Close the input stream
