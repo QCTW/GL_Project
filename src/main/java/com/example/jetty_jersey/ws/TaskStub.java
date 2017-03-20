@@ -29,16 +29,7 @@ public class TaskStub {
 	@Path("/all")
 	public List<Task> allTasks(){
 		return taskList.getAllTasks();
-		/*List<Task> tl  = new ArrayList<>();
-		Task t;
-		int x;
-		for(int i =0; i<10; i++){
-			x = (int)(Math.random() *3) +1;
-			t = new Task(i,x);
-			tl.add(t);
-		}
-		return tl;
-		*/
+		
 	}
 	
 	@GET
@@ -47,7 +38,7 @@ public class TaskStub {
 	public List<TaskInfo> allTasks2(){
 		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		for(int i=0; i<10; i++){
-			l.add(taskList.getTasksByPlaneId(i));
+			l.add(DAO.getTaskDao().getTasksByPlaneId(i));
 		}
 		return l;
 	}
