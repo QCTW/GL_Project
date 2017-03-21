@@ -21,7 +21,7 @@ public class Task{
 	}
 
 	public Task(int id, Date startTime, Date endTime, String description, String periodicity, String ataCategory,
-			boolean hangarNeed, int planeId, int taskStatus) {
+			boolean hangarNeed, int planeId, int taskStatus,int mroId) {
 		super();
 		this.id = id;
 		this.startTime = startTime;
@@ -32,6 +32,7 @@ public class Task{
 		this.hangarNeed = hangarNeed;
 		this.planeId = planeId;
 		this.taskStatus = taskStatus;
+		this.mroId =  mroId;
 	}
 	
 	public Task(int id, int planeId){
