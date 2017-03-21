@@ -12,7 +12,7 @@ public class DatabaseConnecter
 	private final RestClient restClient = RestClient
 			.builder(new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_DEFAULT, "http"), new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_SECOND, "http")).build();
 
-	Response execute(DatabaseQuery q)
+	public Response execute(DatabaseQuery q)
 	{
 		Response r = null;
 		try
@@ -29,6 +29,11 @@ public class DatabaseConnecter
 		return r;
 	}
 
+	/**
+	 * 
+	 * @param tableName
+	 * @return
+	 */
 	public Response selectAllFromTableName(String tableName)
 	{
 		DatabaseQuery query = new DatabaseQuery(tableName, DatabaseExecuteType.SELECT);
@@ -45,5 +50,12 @@ public class DatabaseConnecter
 			{
 				e.printStackTrace();
 			}
+	}
+
+	public Response selectAllFromTableWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
+	{
+		DatabaseQuery query = new DatabaseQuery(tableName, DatabaseExecuteType.SELECT);
+		query.addConditionEq(fieldName, fieldValue);
+		return execute(query);
 	}
 }
