@@ -22,7 +22,7 @@ public class PlaneStub {
 		List<Plane> l = new ArrayList<Plane>();
 		double x;
 		String s; 
-		for(int i=0; i<10; i++){
+		for(int i=0; i<50; i++){
 			x = Math.random();
 			s = (x<0.3)?"airbus":(x<0.6)?"cessna":"boeing";
 			l.add(new Plane(i, s));

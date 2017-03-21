@@ -7,6 +7,8 @@ function getServerData(url, success){
 }
 var task;
 
+
+//GET ALL TASK
 function getAllTasks(result){
 	var tab =$('#example').DataTable( {
 	} );
@@ -38,7 +40,15 @@ function getAllTasks(result){
 		$('#tabb').append(html);*/
 	}
 	}
+	$('#example tbody').on('click','tr', function(){
+		var data = tab.row( this ).data();
+		var x = parseInt(data[0],10);
+		document.location.href="taskView_mro.html?id="+x;
+		//alert ('you clicked on '+data[0]+'\'s row');
+	});
 }
+
+
 function getAllPlanes(result){
 	
 	var planes =$('#planeslist').DataTable( {
