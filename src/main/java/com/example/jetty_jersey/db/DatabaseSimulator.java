@@ -23,7 +23,8 @@ public class DatabaseSimulator
 
 		FileInputStream fstream = null;
 		BufferedReader br = null;
-		RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200, "http"), new HttpHost("localhost", 9201, "http")).build();
+		RestClient restClient = RestClient
+				.builder(new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_DEFAULT, "http"), new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_SECOND, "http")).build();
 		try
 		{
 			fstream = new FileInputStream(queryPath);
@@ -122,7 +123,7 @@ public class DatabaseSimulator
 		if (pos1Comma == -1)
 			throw new Exception("Incorrect key-value syntax : Missing comma between key and value");
 
-		currentQuery.putData(strLine);
+		currentQuery.putQueryContent(strLine);
 	}
 
 }
