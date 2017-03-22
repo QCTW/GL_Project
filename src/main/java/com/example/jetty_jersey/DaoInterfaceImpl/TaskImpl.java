@@ -49,7 +49,7 @@ public class TaskImpl implements TaskDao
 		Task t = new Task(id, 2);
 		Plane plane = p.getPlanebyId(t.getPlaneId());
 		Flight flight = new Flight(1, plane.getPlaneId());
-		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		TaskInfo taskinfo = new TaskInfo(plane, flight, null);
 		taskinfo.addTask(t);
 		return taskinfo;
 	}
@@ -61,7 +61,7 @@ public class TaskImpl implements TaskDao
 		Plane plane = new Plane(id, s);
 		Flight flight = new Flight(1, id);
 
-		TaskInfo taskinfo = new TaskInfo(plane, flight);
+		TaskInfo taskinfo = new TaskInfo(plane, flight,null);
 		List<Task> tl = new ArrayList<Task>();
 		Task t;
 		for (int i = 0; i < 10; i++)
