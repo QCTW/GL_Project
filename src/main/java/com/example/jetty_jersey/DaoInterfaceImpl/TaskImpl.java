@@ -3,7 +3,7 @@ package com.example.jetty_jersey.DaoInterfaceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.jettey_jersey.util.TaskInfo;
+import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.Flight;
 import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Task;
@@ -61,7 +61,7 @@ public class TaskImpl implements TaskDao
 		Plane plane = new Plane(id, s);
 		Flight flight = new Flight(1, id);
 
-		TaskInfo taskinfo = new TaskInfo(plane, flight,null);
+		TaskInfo taskinfo = new TaskInfo(plane, flight, null);
 		List<Task> tl = new ArrayList<Task>();
 		Task t;
 		for (int i = 0; i < 10; i++)
