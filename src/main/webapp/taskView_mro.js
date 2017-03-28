@@ -22,11 +22,13 @@ function getTask(taskInfo){
 		});
 	if(taskInfo.tasklist[0].taskStatus==1){
 		//s="ws/task/add"
-        $('#buttons').append("<button type=\"button\" class=\"btn btn-default btn-xl\">Add</button>");
+        $('#buttons').append('<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add</button>');
+        getServerData("ws/mro/all",getAllMro);
 	}
 	else if(taskInfo.tasklist[0].taskStatus==2){
         //s="ws/task/add"
-        $('#buttons').append("<button type=\"button\" class=\"btn btn-default btn-xl\">Edit</button>");
+        $('#buttons').append('<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Edit</button>');
+        getServerData("ws/mro/all",getAllMro);
     }
     else if(taskInfo.tasklist[0].taskStatus==3){
         //s="ws/task/add"
@@ -34,6 +36,34 @@ function getTask(taskInfo){
     }
 	$('#taskView').append(html);
 
+}
+function getAllMro(result){
+    var tab =$('#mroList').DataTable( {
+    } );
+    for(var i=0; i<result.length; i++){
+            tab.row.add( [
+                JSON.stringify(result[i].id),
+                JSON.stringify(result[i].name),
+                JSON.stringify(result[i].qualification)
+            ] ).draw( false );
+    }
+    $('#mroList').on('click','tr', function(){
+        var data = tab.row( this ).data();
+        var x = parseInt(data[0],10);
+        var id = this.id;
+        var index = $.inArray(id, selected);
+
+        if ( index === -1 ) {
+            selected.push( id );
+        } else {
+            selected.splice( index, 1 );
+        }
+
+        $(this).toggleClass('selected');
+        //document.location.href="taskView_mro.html?id="+x;
+        //alert ('you clicked on '+data[0]+'\'s row');
+
+    });
 }
 
 var getUrlParameter = function getUrlParameter(sParam) {
