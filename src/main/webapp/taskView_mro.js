@@ -6,7 +6,7 @@ function getServerData(url, success){
     }).done(success);
 }
 var task;
-
+var s;
 function getTask(taskInfo){
 	var templateTaskView = _.template($('#taskViewScript').html());
 	var html = templateTaskView({
@@ -20,8 +20,22 @@ function getTask(taskInfo){
 		"hangarNeed":JSON.stringify(taskInfo.tasklist[0].hangarNeed),
 
 		});
+	if(taskInfo.tasklist[0].taskStatus==1){
+		//s="ws/task/add"
+        $('#buttons').append("<button type=\"button\" class=\"btn btn-default btn-xl\">Add</button>");
+	}
+	else if(taskInfo.tasklist[0].taskStatus==2){
+        //s="ws/task/add"
+        $('#buttons').append("<button type=\"button\" class=\"btn btn-default btn-xl\">Edit</button>");
+    }
+    else if(taskInfo.tasklist[0].taskStatus==3){
+        //s="ws/task/add"
+        $('#buttons').append("<button type=\"button\" class=\"btn btn-default btn-xl\">Remove</button>");
+    }
 	$('#taskView').append(html);
+
 }
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),

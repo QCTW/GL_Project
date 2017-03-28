@@ -45,7 +45,7 @@ public class Task{
 		this.ataCategory = "ata"+x;
 		this.hangarNeed = (Math.random()<0.5)?true:false;
 		this.planeId = planeId;
-		this.taskStatus = 0;
+		this.taskStatus = (Math.random()<0.5)?1:2;;
 		this.mroId = (int)(Math.random()*10);
 	}
 
