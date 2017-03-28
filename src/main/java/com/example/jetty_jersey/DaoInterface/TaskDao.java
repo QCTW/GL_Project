@@ -14,6 +14,11 @@ public interface TaskDao
 	List<Task> getAllTasks();
 
 	/**
+	 * @return the list of all
+	 **/
+	List<Task> getTasksInRange(int nStart, int nEnd);
+
+	/**
 	 * @return the task with the given id
 	 **/
 	TaskInfo getTasksById(int id);
