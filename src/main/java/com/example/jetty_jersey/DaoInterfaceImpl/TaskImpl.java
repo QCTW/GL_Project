@@ -90,4 +90,9 @@ public class TaskImpl implements TaskDao
 
 	}
 
+	public List<Task> getTasksInRange(int nStart, int nEnd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
