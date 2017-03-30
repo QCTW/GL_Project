@@ -1,4 +1,4 @@
-
+w3IncludeHTML();
 function getServerData(url, success){
     $.ajax({
         dataType: "json",
