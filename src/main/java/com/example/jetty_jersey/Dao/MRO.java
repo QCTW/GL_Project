@@ -21,6 +21,7 @@ public class MRO{
 	
 	public MRO() {
 		id = (int)(Math.random()*100);
+		name= "name"+id;
 		qualification = "qualif"+id;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.Flight;
+import com.example.jetty_jersey.Dao.MRO;
 import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Task;
 import com.example.jetty_jersey.DaoInterface.PlaneDao;
@@ -49,7 +50,8 @@ public class TaskImpl implements TaskDao
 		Task t = new Task(id, 2);
 		Plane plane = p.getPlanebyId(t.getPlaneId());
 		Flight flight = new Flight(1, plane.getPlaneId());
-		TaskInfo taskinfo = new TaskInfo(plane, flight, null);
+		MRO mro = new MRO();
+		TaskInfo taskinfo = new TaskInfo(plane, flight, mro);
 		taskinfo.addTask(t);
 		return taskinfo;
 	}

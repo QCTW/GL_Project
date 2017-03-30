@@ -7,6 +7,7 @@ function getServerData(url, success) {
 var task;
 var s;
 function getTask(taskInfo) {
+	task = taskInfo;
 	var templateTaskView = _.template($('#taskViewScript').html());
 	var html = templateTaskView({
 		"ata" : JSON.stringify(taskInfo.tasklist[0].ataCategory),
@@ -17,6 +18,7 @@ function getTask(taskInfo) {
 		"description" : JSON.stringify(taskInfo.tasklist[0].description),
 		"periodicity" : JSON.stringify(taskInfo.tasklist[0].periodicity),
 		"hangarNeed" : JSON.stringify(taskInfo.tasklist[0].hangarNeed),
+		"mro" : JSON.stringify(taskInfo.mro.name),
 
 	});
 	if (taskInfo.tasklist[0].taskStatus == 1) {
@@ -68,6 +70,23 @@ function getAllMro(result) {
 	});
 	
 	$('#mroList').on('click', 'tr', function() {
+		var data = tab.row(this).data();
+		document.getElementById("mroSelected").innerHTML = "<h5><b>Mro : </b>"+data[1]+"</h5>";
+		$('#myModal').modal('hide');
+		/*var templateTaskView = _.template($('#taskViewScript').html());
+		var html = templateTaskView({
+			"ata" : JSON.stringify(task.tasklist[0].ataCategory),
+			"id" : JSON.stringify(task.tasklist[0].id),
+			"qualification" : JSON.stringify(task.tasklist[0].description),
+			"startDate" : JSON.stringify(task.tasklist[0].startTime),
+			"endDate" : JSON.stringify(task.tasklist[0].endTime),
+			"description" : JSON.stringify(task.tasklist[0].description),
+			"periodicity" : JSON.stringify(task.tasklist[0].periodicity),
+			"hangarNeed" : JSON.stringify(task.tasklist[0].hangarNeed),
+			"mro" : data[1]
+
+		});*/
+		$('#taskView').append(html);
 		/*var data = tab.row(this).data();
 		var x = parseInt(data[0], 10);
 		var id = this.id;
