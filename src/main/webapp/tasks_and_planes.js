@@ -1,4 +1,8 @@
 w3IncludeHTML();
+
+//Session["test"] = "blablabla";
+//session.setAttribute("test", var);
+
 function getServerData(url, success){
     $.ajax({
         dataType: "json",
