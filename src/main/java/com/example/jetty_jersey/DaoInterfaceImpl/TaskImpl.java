@@ -10,6 +10,7 @@ import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Task;
 import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
+import com.example.jetty_jersey.db.DatabaseSettings;
 
 public class TaskImpl implements TaskDao
 {
@@ -20,28 +21,7 @@ public class TaskImpl implements TaskDao
 
 	public List<Task> getAllTasks()
 	{
-		List<Task> tl = new ArrayList<Task>();
-		// DatabaseConnecter dbConnect = new DatabaseConnecter();
-
-		// DatabaseQuery dbQuery = new DatabaseQuery("GET", "gla/mcc/1");
-		// dbQuery.putQueryContent("...");
-		//
-		// DatabaseQuery dbQuery = new DatabaseQuery("Task", DatabaseExecuteType.SELECT);
-		// dbQuery.addConditionEq("ataCategory", "ata4");
-		// dbConnect.execute(dbQuery);
-
-		// Response r1 = dbConnect.selectAllFromTableName("Task");
-		// Response r2 = dbConnect.selectAllFromTableWhereFieldEqValue("Task", "ataCategory", "ata4");
-
-		Task t;
-		int x;
-		for (int i = 0; i < 100; i++)
-		{
-			x = (int) (Math.random() * 3) + 1;
-			t = new Task(i, x);
-			tl.add(t);
-		}
-		return tl;
+		return getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
 	}
 
 	public TaskInfo getTasksById(int id)
@@ -64,7 +44,6 @@ public class TaskImpl implements TaskDao
 		Flight flight = new Flight(1, id);
 
 		TaskInfo taskinfo = new TaskInfo(plane, flight, null);
-		List<Task> tl = new ArrayList<Task>();
 		Task t;
 		for (int i = 0; i < 10; i++)
 		{
@@ -92,9 +71,18 @@ public class TaskImpl implements TaskDao
 
 	}
 
-	public List<Task> getTasksInRange(int nStart, int nEnd) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Task> getTasksInRange(int iStart, int iEnd)
+	{
+		List<Task> tl = new ArrayList<Task>();
+		Task t;
+		int x;
+		for (int i = 0; i < 100; i++)
+		{
+			x = (int) (Math.random() * 3) + 1;
+			t = new Task(i, x);
+			tl.add(t);
+		}
+		return tl;
 	}
 
 }
