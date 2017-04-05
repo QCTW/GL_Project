@@ -48,7 +48,7 @@ public class DatabaseQuery
 
 	public HttpEntity getEntity() throws Exception
 	{
-		return new NStringEntity("{\n" + buildQueryBody() + "}", ContentType.APPLICATION_JSON);
+		return new NStringEntity("{\n" + buildQueryBody() + "\n}", ContentType.APPLICATION_JSON);
 	}
 
 	private String buildQueryBody() throws Exception
@@ -125,7 +125,7 @@ public class DatabaseQuery
 	{
 		try
 		{
-			return method + " " + url + "\n" + getEntity().toString();
+			return method + " " + url + "\n" + buildQueryBody();
 		} catch (Exception e)
 		{
 			e.printStackTrace();

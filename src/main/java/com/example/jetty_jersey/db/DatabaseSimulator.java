@@ -32,10 +32,12 @@ public class DatabaseSimulator
 			ArrayList<DatabaseQuery> queries = new ArrayList<DatabaseQuery>();
 			String strLine;
 			int syntaxStatus = 0;
+			int lineCount = 0;
 			DatabaseQuery currentQuery = null;
 			// Read File Line By Line
 			while ((strLine = br.readLine()) != null)
 			{
+				lineCount++;
 				strLine = strLine.trim();
 				if (strLine.startsWith("##") || strLine.length() == 0)
 					continue;
@@ -57,27 +59,20 @@ public class DatabaseSimulator
 						{
 							if (syntaxStatus == 1)
 							{
-								if (strLine.startsWith("{"))
+								if (strLine.startsWith("{") && strLine.length() == 1)
 								{
 									syntaxStatus++;
-									strLine = strLine.substring(1).trim();
 								}
-							}
-
-							if (syntaxStatus == 2 && strLine.length() > 0)
+							} else if (syntaxStatus == 2 && strLine.length() > 0)
 							{
-								if (strLine.startsWith("}"))
+								if (strLine.startsWith("}") && strLine.length() == 1)
 								{
 									syntaxStatus = 0;
 									queries.add(currentQuery);
 								} else
 								{
-									processQuery(currentQuery, strLine);
-									if (strLine.endsWith("}"))
-									{
-										syntaxStatus = 0;
-										queries.add(currentQuery);
-									}
+									currentQuery.putQueryContent(strLine);
+									// System.out.println("Line(" + lineCount + "):" + strLine);
 								}
 							}
 						} else
@@ -90,8 +85,8 @@ public class DatabaseSimulator
 
 			for (DatabaseQuery q : queries)
 			{
+				// System.out.println("Execute query:" + q.toString());
 				Response indexResponse = restClient.performRequest(q.getMethod(), q.getURL(), Collections.<String, String> emptyMap(), q.getEntity());
-				// StatusLine rl = indexResponse.getStatusLine();
 				System.out.println(EntityUtils.toString(indexResponse.getEntity()));
 			}
 		} catch (Exception e)
@@ -113,17 +108,4 @@ public class DatabaseSimulator
 			}
 		}
 	}
-
-	private static void processQuery(DatabaseQuery currentQuery, String strLine) throws Exception
-	{
-		if (strLine.endsWith("}"))
-			strLine = strLine.substring(0, strLine.length() - 1);
-
-		int pos1Comma = strLine.indexOf(":");
-		if (pos1Comma == -1)
-			throw new Exception("Incorrect key-value syntax : Missing comma between key and value");
-
-		currentQuery.putQueryContent(strLine);
-	}
-
 }

@@ -89,7 +89,7 @@ public class TaskImpl implements TaskDao
 					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
 					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			tl.add(t);
-			log.debug(t.toString());
+			System.out.println(t.toString());
 		}
 		dbConnect.close();
 		return tl;
