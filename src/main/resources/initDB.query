@@ -58,8 +58,8 @@ PUT gla/flight/100
  	"commercialId" : "Boeing001",
 	 "departureAirport" : "CDG",
 	 "arrivalAirport" : "Nantes",
-	 "departureTime" : "21-03-2017",
-	 "arrivalTime" : "23-03-2017"
+	 "departureTime" : "21/03/2017",
+	 "arrivalTime" : "23/03/2017"
  }
  
  PUT gla/flight/200
@@ -67,8 +67,8 @@ PUT gla/flight/100
  	"commercialId" : "Airbus001",
 	 "departureAirport" : "Amiens",
 	 "arrivalAirport" : "Conakry",
-	 "departureTime" : "02-09-2016",
-	 "arrivalTime" : "03-09-2016"
+	 "departureTime" : "02/09/2016",
+	 "arrivalTime" : "03/09/2016"
  }
  
  PUT gla/flight/300
@@ -76,8 +76,8 @@ PUT gla/flight/100
  	"commercialId" : "Boeing002",
 	 "departureAirport" : "Orly",
 	 "arrivalAirport" : "Lille",
-	 "departureTime" : "01-12-2007",
-	 "arrivalTime" : "03-12-2007"
+	 "departureTime" : "01/12/2007",
+	 "arrivalTime" : "03/12/2007"
  }
  
  PUT gla/task/1
@@ -111,8 +111,6 @@ PUT gla/task/2
 
 }
 
-
-
 PUT gla/task/3
  {
  
@@ -137,7 +135,7 @@ PUT gla/taskList/1000
  
  }
  
- PUT gla/taskList/2000
+PUT gla/taskList/2000
 {
  
   "periodicity" : "tous les deux vols",
@@ -146,7 +144,7 @@ PUT gla/taskList/1000
  
  }
  
-  PUT gla/taskList/3000
+PUT gla/taskList/3000
 {
  
   "periodicity" : "a chaque aller-retour",
