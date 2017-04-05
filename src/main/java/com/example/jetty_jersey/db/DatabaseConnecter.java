@@ -5,12 +5,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpHost;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Response;
@@ -21,19 +22,20 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHitField;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.*;
 
 public class DatabaseConnecter
 {
+	private static Logger log = LogManager.getLogger(DatabaseConnecter.class.getName());
 	private final RestClient restClient = RestClient
 			.builder(new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_DEFAULT, "http"), new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_SECOND, "http")).build();
 
+	// About TransportClient : https://www.devdiscoveries.com/elasticsearch/java-elasticsearch-become-up-and-running/
+	private final Settings settings = Settings.builder().put("client.transport.sniff", true).build();
 	@SuppressWarnings("unchecked")
-	private final TransportClient client = new PreBuiltTransportClient(Settings.EMPTY);
-	// private final SearchRequestBuilder request = client.prepareSearch("index").setTypes("type").setSearchType(SearchType.QUERY_THEN_FETCH).setFrom(0).setSize(10).addFields(RESPONSE_FIELDS);
+	private final TransportClient client = new PreBuiltTransportClient(settings);
 
 	public DatabaseConnecter()
 	{
@@ -42,9 +44,9 @@ public class DatabaseConnecter
 			client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(DatabaseSettings.DB_HOST), DatabaseSettings.DB_PORT_TRANSPORT));
 		} catch (UnknownHostException e)
 		{
-			e.printStackTrace();
+			log.error("Error while initializing database connection. \n"
+					+ "Please check that cluster.name in /usr/local/etc/elasticsearch/elasticsearch.yml is properly configured as 'cluster.name: elasticsearch'.", e);
 		}
-
 	}
 
 	public Response execute(DatabaseQuery q)
@@ -56,10 +58,10 @@ public class DatabaseConnecter
 
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			log.error("Error while performing REST database request", e);
 		} catch (Exception e)
 		{
-			e.printStackTrace();
+			log.error("Exception while performing REST database request", e);
 		}
 		return r;
 	}
@@ -103,11 +105,13 @@ public class DatabaseConnecter
 		List<Map<String, String>> lRet = new ArrayList<Map<String, String>>();
 		for (SearchHit hit : res.getHits().getHits())
 		{
-			HashMap<String, String> hm = new HashMap<String, String>();
+			CustomHashMap<String, String> hm = new CustomHashMap<String, String>();
 			lRet.add(hm);
-			for (Entry<String, SearchHitField> s : hit.fields().entrySet())
+			hm.put("_db", hit.getIndex());
+			hm.put("id", hit.getId());
+			for (Entry<String, Object> s : hit.getSource().entrySet())
 			{
-				System.out.println(s.getKey() + "." + s.getValue().getName() + ":" + s.getValue().getValue());
+				hm.putIfAbsent(s.getKey(), (String) s.getValue());
 			}
 		}
 		return lRet;
@@ -117,7 +121,7 @@ public class DatabaseConnecter
 	{
 		SearchResponse response = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).setSearchType(SearchType.DFS_QUERY_THEN_FETCH).setFrom(nStart).setSize(nEnd).setExplain(true)
 				.get();
-
+		log.debug("selectInRangeFromTableName(" + tableName + "," + nStart + "" + nEnd + ") result:\n" + response.toString());
 		return wrapResults(response);
 	}
 
@@ -129,8 +133,11 @@ public class DatabaseConnecter
 				restClient.close();
 			} catch (IOException e)
 			{
-				e.printStackTrace();
+				log.error("Unable to close REST database connection", e);
 			}
+
+		if (client != null)
+			client.close();
 	}
 
 }

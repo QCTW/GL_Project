@@ -2,6 +2,10 @@ package com.example.jetty_jersey.DaoInterfaceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.Flight;
@@ -10,10 +14,13 @@ import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Task;
 import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
+import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
+import com.example.jetty_jersey.db.Utility;
 
 public class TaskImpl implements TaskDao
 {
+	private static Logger log = LogManager.getLogger(TaskImpl.class.getName());
 
 	public TaskImpl()
 	{
@@ -73,16 +80,26 @@ public class TaskImpl implements TaskDao
 
 	public List<Task> getTasksInRange(int iStart, int iEnd)
 	{
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("task", iStart, iEnd);
 		List<Task> tl = new ArrayList<Task>();
-		Task t;
-		int x;
-		for (int i = 0; i < 100; i++)
+		for (Map<String, String> m : results)
 		{
-			x = (int) (Math.random() * 3) + 1;
-			t = new Task(i, x);
+			Task t = new Task(Utility.convertIntString(m.get("id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
+					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
+					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			tl.add(t);
+			log.debug(t.toString());
 		}
+		dbConnect.close();
 		return tl;
+	}
+
+	// For test only
+	public static void main(String[] args)
+	{
+		TaskImpl test = new TaskImpl();
+		test.getAllTasks();
 	}
 
 }
