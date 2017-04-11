@@ -26,7 +26,7 @@ public class TaskImpl implements TaskDao
 	{
 	}
 
-	public List<Task> getAllTasks()
+	public List<TaskInfo> getAllTasks()
 	{
 		return getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
 	}
@@ -78,21 +78,27 @@ public class TaskImpl implements TaskDao
 
 	}
 
-	public List<Task> getTasksInRange(int iStart, int iEnd)
+	public List<TaskInfo> getTasksInRange(int iStart, int iEnd)
 	{
+		Plane pp;
+		Flight ff;
+		MRO mm;
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("task", iStart, iEnd);
 		List<Task> tl = new ArrayList<Task>();
 		for (Map<String, String> m : results)
+		
 		{
 			Task t = new Task(Utility.convertIntString(m.get("id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
 					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
 					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			tl.add(t);
+			
 			log.debug(t.toString());
 		}
 		dbConnect.close();
-		return tl;
+		//return tl;
+		return null;
 	}
 
 	// For test only
