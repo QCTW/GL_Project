@@ -33,6 +33,14 @@
 	      <artifactId>jetty-maven-plugin</artifactId>
 	      <version>9.4.1.v20170120</version>
       </plugin>
+		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>jetty-authentication-example</warName>
+				</configuration>
+		</plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-shade-plugin</artifactId>
@@ -94,6 +102,11 @@
 	<dependency>
 		<groupId>org.eclipse.jetty</groupId>
 		<artifactId>jetty-server</artifactId>
+		<version>9.2.14.v20151106</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-webapp</artifactId>
 		<version>9.2.14.v20151106</version>
 	</dependency>
 	<dependency>
