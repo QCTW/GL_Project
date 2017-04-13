@@ -10,7 +10,7 @@ function getServerData(url, success){
     }).done(success);
 }
 var task;
-
+var idt;
 
 //GET ALL TASK
 function getAllTasks(result){
@@ -19,40 +19,48 @@ function getAllTasks(result){
 	console.log(result[1].plane.planeType);
 	for(var i=0; i<result.length; i++){
 		for(var j=0 ; j<result[i].tasklist.length ; j++ ){
-		console.log(result[i].tasklist[j].id);
-		tab.row.add( [
-			JSON.stringify(result[i].tasklist[j].id),
+		//console.log(result[i].tasklist[j].id);
+			idt=JSON.stringify(result[i].tasklist[j].id);
+			tab.row.add( [
+			idt,
 			JSON.stringify(result[i].tasklist[j].ataCategory),
 			JSON.stringify(result[i].tasklist[j].description),
 			formatDate(new Date(result[i].tasklist[j].endTime)),
 			formatDate(new Date(result[i].flight.departureTime)),
-			JSON.stringify(result[i].plane.planeType)
+			JSON.stringify(result[i].plane.planeType),
+			
+			(result[i].tasklist[j].taskStatus == 1)?
+					"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
+					"class='btn icon-btn btn-success'>  " +
+					"<span class='glyphicon btn-glyphicon glyphicon-plus img-circle text-success'></span>Add " +
+					"</button>"
+					:
+						"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
+						"class='btn icon-btn btn-info'>  " +
+						"<span class='glyphicon btn-glyphicon glyphicon-edit img-circle text-info'></span>Edit " +
+						"</button>"
+				
+			//'<button onclick="getSTask('+idt+')" class="btn icon-btn btn-success btn-md" data-toggle="modal" data-target="#myModal"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span></button>'
 		] ).draw( false );
 		
 		
-		/* We did not delete this part because we still need it */
-		//var templateExample = _.template($('#taskTemp').html());
-		/*var html = templateExample({
-			"starttimetask":JSON.stringify(result[i].startTime),
-			"endtimetask":JSON.stringify(result[i].endTime),
-			"descriptiontask":JSON.stringify(result[i].description),
-			"periodicitytask":JSON.stringify(result[i].periodicity),
-			"atatask":JSON.stringify(result[i].ataCategory),
-			"hangartask":JSON.stringify(result[i].hangarNeed),
-		
-		});
-		$('#tabb').append(html);*/
 	}
 	}
-	$('#example tbody').on('click','tr', function(){
+	/*$('#example tbody').on('click','tr', function(){
 		var data = tab.row( this ).data();
 		var x = parseInt(data[0],10);
 		//$("#content").load('viewTask.html');
 		document.location.href="taskView_mro.html?id="+x;
 		//alert ('you clicked on '+data[0]+'\'s row');
-	});
+	});*/
 }
 
+function getSTask(id){
+	var x = parseInt(id,10);
+	$('#myModal').modal('show')
+	//$("#content").load('viewTask.html');
+	//document.location.href="taskView_mro.html?id="+x;
+}
 
 function getAllPlanes(result){
 	
