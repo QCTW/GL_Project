@@ -11,12 +11,12 @@ public interface TaskDao
 	/**
 	 * @return the list of all
 	 **/
-	List<Task> getAllTasks();
+	List<TaskInfo> getAllTasks();
 
 	/**
 	 * @return the list of all
 	 **/
-	List<Task> getTasksInRange(int nStart, int nEnd);
+	List<TaskInfo> getTasksInRange(int nStart, int nEnd);
 
 	/**
 	 * @return the task with the given id

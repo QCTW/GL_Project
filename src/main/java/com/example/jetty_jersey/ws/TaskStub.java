@@ -27,7 +27,7 @@ public class TaskStub
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<Task> allTasks()
+	public List<TaskInfo> allTasks()
 	{
 		return taskList.getAllTasks();
 

@@ -1,5 +1,6 @@
 package com.example.jetty_jersey;
 
+import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -8,13 +9,13 @@ import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-public class JettyMain 
-{
+public class JettyMain {
 	public static void main(String[] args) throws Exception {
 		// Initialize the server
 		Server server = new Server();
@@ -47,13 +48,31 @@ public class JettyMain
 		handlerPortalCtx.setContextPath("/");
 		handlerPortalCtx.setHandler(handlerPortal);
 
+		// Creating the WebAppContext for the created content
+		WebAppContext ctx = new WebAppContext();
+		ctx.setResourceBase("src/main/webapp");
+
+		// Creating the LoginService for the realm
+		HashLoginService loginService = new HashLoginService("JCGRealm");
+
+		// Setting the realm configuration there the users, passwords and roles
+		// reside
+		loginService.setConfig("jcgrealm.txt");
+
+		// Appending the loginService to the Server
+		server.addBean(loginService);
+
+		// Setting the handler
+		server.setHandler(ctx);
+
 		// Activate handlers
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
-		contexts.setHandlers(new Handler[] { handlerWebServices, handlerPortalCtx });
+		contexts.setHandlers(new Handler[] { ctx, handlerWebServices, handlerPortalCtx });
 		server.setHandler(contexts);
 
 		// Start server
 		server.start();
+		server.join();
 
 	}
 }
