@@ -1,6 +1,7 @@
 package com.example.jetty_jersey.DaoInterfaceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +22,15 @@ import com.example.jetty_jersey.db.Utility;
 public class TaskImpl implements TaskDao
 {
 	private static Logger log = LogManager.getLogger(TaskImpl.class.getName());
+	private final Map<String, Plane> planeCache = new HashMap<String, Plane>();
+	private final Map<String, Flight> flightCache = new HashMap<String, Flight>();
+	private final Map<String, MRO> mroCache = new HashMap<String, MRO>();
 
 	public TaskImpl()
 	{
 	}
 
-	public List<Task> getAllTasks()
+	public List<TaskInfo> getAllTasks()
 	{
 		return getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
 	}
@@ -38,26 +42,30 @@ public class TaskImpl implements TaskDao
 		Plane plane = p.getPlanebyId(t.getPlaneId());
 		Flight flight = new Flight(1, plane.getPlaneId());
 		MRO mro = new MRO();
-		TaskInfo taskinfo = new TaskInfo(plane, flight, mro);
-		taskinfo.addTask(t);
+		TaskInfo taskinfo = new TaskInfo(t, plane, flight, mro);
 		return taskinfo;
 	}
 
-	public TaskInfo getTasksByPlaneId(int id)
+	public List<TaskInfo> getTasksByPlaneId(int id)
 	{
-		double x = Math.random();
-		String s = (x < 0.3) ? "airbus" : (x < 0.6) ? "cessna" : "boeing";
-		Plane plane = new Plane(id, s);
-		Flight flight = new Flight(1, id);
-
-		TaskInfo taskinfo = new TaskInfo(plane, flight, null);
-		Task t;
-		for (int i = 0; i < 10; i++)
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "planeId", Integer.toString(id));
+		List<TaskInfo> tl = new ArrayList<TaskInfo>();
+		for (Map<String, String> m : results)
 		{
-			t = new Task(i, id);
-			taskinfo.addTask(t);
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
+					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
+					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+			MRO mro = getMROById(dbConnect, m.get("mroId"));
+			Plane p = getPlaneById(dbConnect, m.get("planeId"));
+			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
+			TaskInfo wrap = new TaskInfo(t, p, f, mro);
+			tl.add(wrap);
+			System.out.println(t.toString());
+
 		}
-		return taskinfo;
+		dbConnect.close();
+		return tl;
 	}
 
 	public void addTask(Task t)
@@ -72,30 +80,90 @@ public class TaskImpl implements TaskDao
 
 	}
 
-	public void addTask(int id)
+	public void deleteTask(int id)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public List<Task> getTasksInRange(int iStart, int iEnd)
+	public List<TaskInfo> getTasksInRange(int iStart, int iEnd)
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("task", iStart, iEnd);
-		List<Task> tl = new ArrayList<Task>();
+		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
-			Task t = new Task(Utility.convertIntString(m.get("id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
 					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
 					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
-			tl.add(t);
+			MRO mro = getMROById(dbConnect, m.get("mroId"));
+			Plane p = getPlaneById(dbConnect, m.get("planeId"));
+			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
+			TaskInfo wrap = new TaskInfo(t, p, f, mro);
+			tl.add(wrap);
 			System.out.println(t.toString());
+
 		}
 		dbConnect.close();
 		return tl;
 	}
 
-	// For test only
+	private MRO getMROById(DatabaseConnecter dbc, String id)
+	{
+		MRO m = mroCache.get(id);
+		if (m == null)
+		{
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("mro", "_id", id);
+			if (res == null || res.size() <= 0)
+				log.error("Unable to find MRO id : " + id + " in the database!");
+			else
+			{
+				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"));
+				m.setQualification(res.get(0).get("qualification"));
+				mroCache.put(id, m);
+			}
+		}
+		return m;
+	}
+
+	private Plane getPlaneById(DatabaseConnecter dbc, String id)
+	{
+		Plane p = planeCache.get(id);
+		if (p == null)
+		{
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("plane", "_id", id);
+			if (res == null || res.size() <= 0)
+				log.error("Unable to find plane id : " + id + " in the database!");
+			else
+			{
+				p = new Plane(Utility.convertIntString(id), res.get(0).get("planeType"));
+				planeCache.put(id, p);
+			}
+		}
+		return p;
+	}
+
+	private Flight getFlightByPlaneId(DatabaseConnecter dbc, String id)
+	{
+		Flight f = flightCache.get(id);
+		if (f == null)
+		{
+			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", id);
+			if (res == null || res.size() <= 0)
+				log.error("Unable to find flight id : " + id + " in the database!");
+			else
+			{
+				Map<String, String> fst = res.get(0);
+				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"),
+						Utility.convertDateString(fst.get("departureTime")), Utility.convertDateString(fst.get("arrivalTime")), Utility.convertIntString(fst.get("planeId")));
+				flightCache.put(id, f);
+			}
+		}
+		return f;
+	}
+
+	// For unit test
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();

@@ -1,4 +1,5 @@
 package com.example.jetty_jersey.Dao;
+
 /*
  PUT plane/id
  {
@@ -6,29 +7,31 @@ package com.example.jetty_jersey.Dao;
  }
 
 */
-public class Plane{
-	private int planeId;
+public class Plane
+{
+	private final int planeId;
 	private String planeType;
-	public Plane(int planeId, String planeType) {
+
+	public Plane(int planeId, String planeType)
+	{
 		super();
 		this.planeId = planeId;
 		this.planeType = planeType;
 	}
-	public int getPlaneId() {
+
+	public int getPlaneId()
+	{
 		return planeId;
 	}
-	public void setPlaneId(int planeId) {
-		this.planeId = planeId;
-	}
-	public String getPlaneType() {
+
+	public String getPlaneType()
+	{
 		return planeType;
 	}
-	public void setPlaneType(String planeType) {
+
+	public void setPlaneType(String planeType)
+	{
 		this.planeType = planeType;
-	} 
-	
-	
-	
-	
-	
+	}
+
 }

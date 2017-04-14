@@ -41,7 +41,7 @@ public class TaskStub
 		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		for (int i = 0; i < 10; i++)
 		{
-			l.add(DAO.getTaskDao().getTasksByPlaneId(i));
+			l.addAll(DAO.getTaskDao().getTasksByPlaneId(i));
 		}
 		return l;
 	}
@@ -49,7 +49,7 @@ public class TaskStub
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/plane/{id}")
-	public TaskInfo allTasksByPlaneId(@PathParam("id") int id)
+	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id)
 	{
 		return taskList.getTasksByPlaneId(id);
 		/*

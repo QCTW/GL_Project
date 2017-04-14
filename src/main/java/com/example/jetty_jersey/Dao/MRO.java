@@ -7,7 +7,6 @@ package com.example.jetty_jersey.Dao;
  * 
  * "qualification" : "example of qualification"
  * "name" : "example of name"
- * "surname" : "example of surname"
  * }
  * 
  */
@@ -16,10 +15,15 @@ public class MRO
 {
 
 	private String qualification = "N/A";
-	private String name;
+	private String name = "Not assigned";
 	private final int id;
 
-	public MRO(String name, int mroId)
+	public MRO()
+	{
+		this.id = -1;
+	}
+
+	public MRO(int mroId, String name)
 	{
 		this.name = name;
 		this.id = mroId;

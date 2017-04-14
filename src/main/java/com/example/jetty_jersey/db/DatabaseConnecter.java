@@ -37,6 +37,9 @@ public class DatabaseConnecter
 	@SuppressWarnings("unchecked")
 	private final TransportClient client = new PreBuiltTransportClient(settings);
 
+	/**
+	 * Create one instance for one session and don't forget to call close() at the end of query.
+	 */
 	public DatabaseConnecter()
 	{
 		try
@@ -108,7 +111,7 @@ public class DatabaseConnecter
 			CustomHashMap<String, String> hm = new CustomHashMap<String, String>();
 			lRet.add(hm);
 			hm.put("_db", hit.getIndex());
-			hm.put("id", hit.getId());
+			hm.put("_id", hit.getId());
 			for (Entry<String, Object> s : hit.getSource().entrySet())
 			{
 				hm.putIfAbsent(s.getKey(), (String) s.getValue());

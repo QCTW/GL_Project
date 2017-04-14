@@ -26,7 +26,7 @@ public interface TaskDao
 	/**
 	 * @return the task with the given plane id
 	 **/
-	TaskInfo getTasksByPlaneId(int id);
+	List<TaskInfo> getTasksByPlaneId(int id);
 
 	/**
 	 * @return add a task
@@ -41,6 +41,6 @@ public interface TaskDao
 	/**
 	 * @return delete a task
 	 **/
-	void addTask(int id);
+	void deleteTask(int taskId);
 
 }

@@ -1,8 +1,5 @@
 package com.example.jetty_jersey.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.jetty_jersey.Dao.Flight;
 import com.example.jetty_jersey.Dao.MRO;
 import com.example.jetty_jersey.Dao.Plane;
@@ -11,23 +8,17 @@ import com.example.jetty_jersey.Dao.Task;
 public class TaskInfo
 {
 
-	public List<Task> tasklist;
+	public Task task;
 	public Plane plane;
 	public Flight flight;
-	public MRO mro;
+	public MRO mro; // To check with Mohamad if MRO should be here or in the Task
 
-	public TaskInfo(Plane plane, Flight flight, MRO mro)
+	public TaskInfo(Task task, Plane plane, Flight flight, MRO mro)
 	{
-		super();
-		this.tasklist = new ArrayList<Task>();
+		this.task = task;
 		this.plane = plane;
 		this.flight = flight;
 		this.mro = mro;
-	}
-
-	public void addTask(Task t)
-	{
-		tasklist.add(t);
 	}
 
 }

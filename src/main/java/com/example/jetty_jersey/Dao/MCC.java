@@ -17,11 +17,6 @@ public class MCC
 		return mccId;
 	}
 
-	public void setMccId(String mccId)
-	{
-		this.mccId = mccId;
-	}
-
 	public String getEmail()
 	{
 		return email;

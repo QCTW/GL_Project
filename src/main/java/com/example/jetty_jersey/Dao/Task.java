@@ -7,7 +7,7 @@ import com.example.jetty_jersey.db.Utility;
 public class Task
 {
 
-	private int id;
+	private final int id;
 	private Date startTime;
 	private Date endTime;
 	private String description;
@@ -53,11 +53,6 @@ public class Task
 	public int getId()
 	{
 		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
 	}
 
 	public Date getStartTime()
