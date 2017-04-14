@@ -79,6 +79,7 @@ PUT gla/plane/6
 
 PUT gla/flight/1
 {
+ 	"planeId" : "1",
  	"commercialId" : "AF7724",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Nantes-NTE",
@@ -88,6 +89,7 @@ PUT gla/flight/1
  
 PUT gla/flight/2
 {
+    "planeId" : "2",
  	"commercialId" : "AF1134",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Berlin-TXL",
@@ -97,6 +99,7 @@ PUT gla/flight/2
  
 PUT gla/flight/3
 {
+    "planeId" : "3",
  	"commercialId" : "BR88",
 	"departureAirport" : "Taipei-TPE",
 	"arrivalAirport" : "Paris-CDG",
@@ -106,6 +109,7 @@ PUT gla/flight/3
  
 PUT gla/flight/4
 {
+    "planeId" : "4",
  	"commercialId" : "EK72",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Dubaï-DXB",
@@ -115,6 +119,7 @@ PUT gla/flight/4
  
 PUT gla/flight/5
 {
+    "planeId" : "5",
  	"commercialId" : "JAL216",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Tokyo-HND",
@@ -164,7 +169,7 @@ PUT gla/task/3
  "hangarNeed" : "false",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "5"
+ "mroId" : "1"
 }
 
 PUT gla/task/4
@@ -178,7 +183,7 @@ PUT gla/task/4
  "hangarNeed" : "true",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "5"
+ "mroId" : "1"
 }
 
 PUT gla/task/5
@@ -192,7 +197,7 @@ PUT gla/task/5
  "hangarNeed" : "true",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "5"
+ "mroId" : "2"
 }
 
 PUT gla/taskList/1
