@@ -44,7 +44,7 @@ public class DatabaseSimulator
 				if (strLine.startsWith("PUT") || strLine.startsWith("GET") || strLine.startsWith("POST") || strLine.startsWith("DELETE"))
 				{
 					if (syntaxStatus != 0)
-						throw new Exception("Incorrect syntax : Query is not closed with {...}");
+						throw new Exception("Incorrect syntax : Query is not closed with {...} at line " + lineCount);
 
 					int pos1StSpace = strLine.indexOf(" ");
 					String strMethod = strLine.substring(0, pos1StSpace);
