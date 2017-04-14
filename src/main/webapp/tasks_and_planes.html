@@ -38,7 +38,7 @@
 
 			<div id="tasksmenu" class="tab-pane fade in active">
 				<h3>view tasks</h3>
-				<table id="example" class="table table-hover">
+				<table id="example" class="table table-striped">
 					<thead>
 						<tr>
 							<th>Id</th>
@@ -47,6 +47,7 @@
 							<th>end Time</th>
 							<th>departure of plane</th>
 							<th>plane</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -69,6 +70,30 @@
 				</table>
 			</div>
 		</div>
+		 <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Task : </h4>
+                        </div>
+                        <div class="modal-body">
+                            <!--  >table id="mroList" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>MRO Id</th>
+                                    <th>MRO Name</th>
+                                    <th>Qualification</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table -->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            
 	</div>
 <script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -76,5 +101,10 @@
 <script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" class="init" src="tasks_and_planes.js"></script>
+<script type="text/javascript" class="init" src="tasks_and_planes.js"></script>
+<style>
+.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+.icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
+</style>
 </body>
 </html>
