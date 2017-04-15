@@ -121,6 +121,7 @@ public class TaskImpl implements TaskDao
 				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"));
 				m.setQualification(res.get(0).get("qualification"));
 				mroCache.put(id, m);
+				System.out.println(m.toString() + " created");
 			}
 		}
 		return m;
@@ -138,6 +139,7 @@ public class TaskImpl implements TaskDao
 			{
 				p = new Plane(Utility.convertIntString(id), res.get(0).get("planeType"));
 				planeCache.put(id, p);
+				System.out.println(p.toString() + " created");
 			}
 		}
 		return p;
@@ -158,6 +160,7 @@ public class TaskImpl implements TaskDao
 				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"),
 						Utility.convertDateString(fst.get("departureTime")), Utility.convertDateString(fst.get("arrivalTime")), Utility.convertIntString(fst.get("planeId")));
 				flightCache.put(id, f);
+				System.out.println(f.toString() + " created");
 			}
 		}
 		return f;

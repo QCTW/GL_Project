@@ -2,6 +2,8 @@ package com.example.jetty_jersey.Dao;
 
 import java.util.Date;
 
+import com.example.jetty_jersey.db.Utility;
+
 /*
 PUT flight/id
  {
@@ -109,6 +111,13 @@ public class Flight
 	public void setArrivalTime(Date arrivalTime)
 	{
 		this.arrivalTime = arrivalTime;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Flight(" + id + "," + commercialId + "," + departureAirport + "," + arrivalAirport + "," + Utility.convertDateToString(departureTime) + "," + Utility.convertDateToString(arrivalTime)
+				+ "," + planeId + ")";
 	}
 
 }

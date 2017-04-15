@@ -8,12 +8,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpHost;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.transport.TransportClient;
@@ -21,6 +24,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.Script;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -67,6 +71,66 @@ public class DatabaseConnecter
 			log.error("Exception while performing REST database request", e);
 		}
 		return r;
+	}
+
+	public long deleteAllFromTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
+	{
+		List<String> idList = getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
+		int sucessCount = 0;
+		for (String id : idList)
+		{
+			DeleteResponse res = client.prepareDelete(DatabaseSettings.DB_NAME, tableName, id).get();
+			System.out.println(res);
+			sucessCount++;
+		}
+		return sucessCount;
+	}
+
+	public long updateDataInTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue, Map<String, String> data)
+	{
+		List<String> ids = new ArrayList<String>();
+		if (fieldName.equals("_id"))
+			ids.add(fieldValue);
+		else
+		{
+			List<String> idList = getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
+			ids.addAll(idList);
+		}
+		Script sc = prepareScriptFromDataToUpdate(data);
+		int successCount = 0;
+		for (String id : ids)
+		{
+			UpdateRequest updateRequest = new UpdateRequest(DatabaseSettings.DB_NAME, tableName, id).script(sc);
+			try
+			{
+				client.update(updateRequest).get();
+			} catch (InterruptedException e)
+			{
+				log.error("Unable to execute database update", e);
+			} catch (ExecutionException e)
+			{
+				log.error("Unable to execute database update", e);
+			}
+		}
+		return successCount;
+	}
+
+	private Script prepareScriptFromDataToUpdate(Map<String, String> data)
+	{
+		// TODO Not finish yet!!
+		return new Script("ctx._source.gender = \"male\"");
+	}
+
+	/**
+	 * TODO
+	 * 
+	 * @param tableName
+	 * @param dataList
+	 * @return
+	 */
+	public long insertToTableName(String tableName, List<Map<String, String>> dataList)
+	{
+		return -1;
 	}
 
 	/**
@@ -117,6 +181,25 @@ public class DatabaseConnecter
 				hm.putIfAbsent(s.getKey(), (String) s.getValue());
 			}
 		}
+		return lRet;
+	}
+
+	public List<String> getIdInTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
+	{
+		QueryBuilder qb = QueryBuilders.termQuery(fieldName, fieldValue);
+		SearchResponse scrollResp = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).addSort(FieldSortBuilder.DOC_FIELD_NAME, SortOrder.ASC)
+				.setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).setQuery(qb).setSize(DatabaseSettings.MAX_BOLK_RESULTS).get();
+		// Scroll until no hits are returned
+		List<String> lRet = new ArrayList<String>();
+		do
+		{
+			for (SearchHit hit : scrollResp.getHits().getHits())
+			{
+				lRet.add(hit.getId());
+			}
+			scrollResp = client.prepareSearchScroll(scrollResp.getScrollId()).setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).execute().actionGet();
+		} while (scrollResp.getHits().getHits().length != 0); // Zero hits mark the end of the scroll and the while loop.
+
 		return lRet;
 	}
 

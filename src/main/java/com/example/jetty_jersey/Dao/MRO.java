@@ -54,4 +54,10 @@ public class MRO
 		return id;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "MRO(" + id + "," + name + "," + qualification + ")";
+	}
+
 }

@@ -34,4 +34,10 @@ public class Plane
 		this.planeType = planeType;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Plane(" + planeId + "," + planeType + ")";
+	}
+
 }
