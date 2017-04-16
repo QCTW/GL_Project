@@ -139,7 +139,7 @@ public class TaskImpl implements TaskDao
 				log.error("Unable to find plane id : " + id + " in the database!");
 			else
 			{
-				p = new Plane(Utility.convertIntString(id), res.get(0).get("planeType"));
+				p = new Plane(Utility.convertIntString(id), res.get(0).get("planetype"));
 				planeCache.put(id, p);
 				System.out.println(p.toString() + " created");
 			}
