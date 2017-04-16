@@ -12,6 +12,8 @@ import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.Flight;
 import com.example.jetty_jersey.Dao.MRO;
 import com.example.jetty_jersey.Dao.Plane;
+import com.example.jetty_jersey.Dao.Status;
+import com.example.jetty_jersey.Dao.Status.Execution;
 import com.example.jetty_jersey.Dao.Task;
 import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
@@ -68,22 +70,22 @@ public class TaskImpl implements TaskDao
 		return tl;
 	}
 
-	public void addTask(Task t)
+	public Status addTask(Task t)
 	{
 		// TODO Auto-generated method stub
-
+		return new Status(Execution.FAILED);
 	}
 
-	public void modifyTask(Task t)
+	public Status modifyTask(Task t)
 	{
 		// TODO Auto-generated method stub
-
+		return new Status(Execution.FAILED);
 	}
 
-	public void deleteTask(int id)
+	public Status deleteTask(int id)
 	{
 		// TODO Auto-generated method stub
-
+		return new Status(Execution.FAILED);
 	}
 
 	public List<TaskInfo> getTasksInRange(int iStart, int iEnd)

@@ -31,16 +31,16 @@ public interface TaskDao
 	/**
 	 * @return add a task
 	 **/
-	void addTask(Task t);
+	Status addTask(Task t);
 
 	/**
 	 * @return modify a task
 	 **/
-	void modifyTask(Task t);
+	Status modifyTask(Task t);
 
 	/**
 	 * @return delete a task
 	 **/
-	void deleteTask(int taskId);
+	Status deleteTask(int taskId);
 
 }

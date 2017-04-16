@@ -22,13 +22,14 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.script.Script;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.*;
+import static org.elasticsearch.common.xcontent.XContentFactory.*;
 
 public class DatabaseConnecter
 {
@@ -96,11 +97,15 @@ public class DatabaseConnecter
 			List<String> idList = getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
 			ids.addAll(idList);
 		}
-		Script sc = prepareScriptFromDataToUpdate(data);
+		XContentBuilder jsonDoc = prepareScriptFromDataToUpdate(data);
 		int successCount = 0;
 		for (String id : ids)
 		{
-			UpdateRequest updateRequest = new UpdateRequest(DatabaseSettings.DB_NAME, tableName, id).script(sc);
+			UpdateRequest updateRequest = new UpdateRequest();
+			updateRequest.index(DatabaseSettings.DB_NAME);
+			updateRequest.type(tableName);
+			updateRequest.id(id);
+			updateRequest.doc(jsonDoc);
 			try
 			{
 				client.update(updateRequest).get();
@@ -113,12 +118,25 @@ public class DatabaseConnecter
 			}
 		}
 		return successCount;
+
 	}
 
-	private Script prepareScriptFromDataToUpdate(Map<String, String> data)
+	private XContentBuilder prepareScriptFromDataToUpdate(Map<String, String> data)
 	{
-		// TODO Not finish yet!!
-		return new Script("ctx._source.gender = \"male\"");
+		XContentBuilder jsonb = null;
+		try
+		{
+			jsonb = jsonBuilder().startObject();
+			for (Entry<String, String> e : data.entrySet())
+			{
+				jsonb.field(e.getKey(), e.getValue());
+			}
+			jsonb.endObject();
+		} catch (Exception e1)
+		{
+			log.error("Error while generating json document for update");
+		}
+		return jsonb;
 	}
 
 	/**
