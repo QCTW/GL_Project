@@ -29,6 +29,10 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.*;
+
+import com.example.jetty_jersey.Dao.Status;
+import com.example.jetty_jersey.Dao.Status.Execution;
+
 import static org.elasticsearch.common.xcontent.XContentFactory.*;
 
 public class DatabaseConnecter
@@ -74,17 +78,31 @@ public class DatabaseConnecter
 		return r;
 	}
 
-	public long deleteAllFromTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
+	public Status deleteAllFromTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
 	{
+		Status s = null;
 		List<String> idList = getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
-		int sucessCount = 0;
-		for (String id : idList)
+		if (idList.size() == 0)
 		{
-			DeleteResponse res = client.prepareDelete(DatabaseSettings.DB_NAME, tableName, id).get();
-			System.out.println(res);
-			sucessCount++;
+			s = new Status(Execution.FAILED);
+			String msg = "No record found for deletion: " + fieldName + "=" + fieldValue + " in table:" + tableName;
+			s.setMessage(msg);
+			log.error("[Data inconsistency] " + msg);
+		} else
+		{
+			int sucessCount = 0;
+			for (String id : idList)
+			{
+				DeleteResponse res = client.prepareDelete(DatabaseSettings.DB_NAME, tableName, id).get();
+				System.out.println(res);
+				sucessCount++;
+			}
+
+			s = new Status(Execution.SUCCESSFUL);
+			s.setResultyCount(sucessCount);
 		}
-		return sucessCount;
+
+		return s;
 	}
 
 	public long updateDataInTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue, Map<String, String> data)

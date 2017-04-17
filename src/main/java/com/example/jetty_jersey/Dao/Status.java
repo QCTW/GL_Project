@@ -11,6 +11,7 @@ public class Status
 		SUCCESSFUL, FAILED,
 	}
 
+	private int count = 0;
 	private String msg = "";
 	private Execution exe = Execution.FAILED;
 
@@ -24,13 +25,30 @@ public class Status
 		return msg;
 	}
 
+	public void setResultyCount(int c)
+	{
+		count = c;
+	}
+
+	public int getResultCount()
+	{
+		return count;
+	}
+
 	public void setMessage(String str)
 	{
 		msg = str;
 	}
 
-	public Execution getException()
+	public Execution getExecutionStatus()
 	{
 		return exe;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Status:" + exe + " Count:" + count + " Msg:" + msg;
+	}
+
 }

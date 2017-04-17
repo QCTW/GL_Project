@@ -84,8 +84,10 @@ public class TaskImpl implements TaskDao
 
 	public Status deleteTask(int id)
 	{
-		// TODO Auto-generated method stub
-		return new Status(Execution.FAILED);
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		Status deletedStatus = dbc.deleteAllFromTableNameWhereFieldEqValue("task", "_id", String.valueOf(id));
+		dbc.close();
+		return deletedStatus;
 	}
 
 	public List<TaskInfo> getTasksInRange(int iStart, int iEnd)
@@ -173,6 +175,9 @@ public class TaskImpl implements TaskDao
 	{
 		TaskImpl test = new TaskImpl();
 		test.getAllTasks();
+
+		Status s = test.deleteTask(1);
+		System.out.println("Delete task _id=1:" + s.toString());
 	}
 
 }
