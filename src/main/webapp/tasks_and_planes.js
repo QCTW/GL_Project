@@ -18,18 +18,18 @@ function getAllTasks(result){
 	} );
 	
 	for(var i=0; i<result.length; i++){
-		for(var j=0 ; j<result[i].tasklist.length ; j++ ){
+		//for(var j=0 ; j<result[i].tasklist.length ; j++ ){
 		//console.log(result[i].tasklist[j].id);
-			idt=JSON.stringify(result[i].tasklist[j].id);
+			idt=JSON.stringify(result[i].task.id);
 			tab.row.add( [
 			idt,
-			JSON.stringify(result[i].tasklist[j].ataCategory),
-			JSON.stringify(result[i].tasklist[j].description),
-			formatDate(new Date(result[i].tasklist[j].endTime)),
+			JSON.stringify(result[i].task.ataCategory),
+			JSON.stringify(result[i].task.description),
+			formatDate(new Date(result[i].task.endTime)),
 			formatDate(new Date(result[i].flight.departureTime)),
 			JSON.stringify(result[i].plane.planeType),
 			
-			(result[i].tasklist[j].taskStatus == 1)?
+			(result[i].task.taskStatus == 1)?
 					"<button onclick='getSTask("+idt+")' " +
 					"class='btn icon-btn btn-primary'>  " +
 					"<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> " +
@@ -44,7 +44,7 @@ function getAllTasks(result){
 		] ).draw( false );
 		
 		
-	}
+	//}
 	}
 	/*$('#example tbody').on('click','tr', function(){
 		var data = tab.row( this ).data();
