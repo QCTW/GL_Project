@@ -8,7 +8,7 @@ import com.example.jetty_jersey.DaoInterfaceImpl.*;
 public class DAO
 {
 
-	private static TaskDao t;
+	private TaskDao t;
 	private static FlightDao f;
 	private static PlaneDao p;
 
@@ -21,7 +21,7 @@ public class DAO
 		return f;
 	}
 
-	public static TaskDao getTaskDao()
+	public TaskDao getTaskDao()
 	{
 		if (t == null)
 		{

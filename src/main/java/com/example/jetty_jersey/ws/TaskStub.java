@@ -27,7 +27,6 @@ public class TaskStub
 	public List<TaskInfo> allTasks()
 	{
 		return taskDao.getAllTasks();
-
 	}
 
 	@GET
