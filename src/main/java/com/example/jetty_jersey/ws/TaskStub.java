@@ -1,6 +1,5 @@
 package com.example.jetty_jersey.ws;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -16,34 +15,19 @@ import javax.ws.rs.core.MediaType;
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Dao.*;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
-import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
 
 @Path("/task")
 public class TaskStub
 {
-
-	static TaskDao taskList = new TaskImpl();
+	private static TaskDao taskDao = DAO.getTaskDao();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<TaskInfo> allTasks()
 	{
-		return DAO.getTaskDao().getAllTasks();
+		return taskDao.getAllTasks();
 
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/all2")
-	public List<TaskInfo> allTasks2()
-	{
-		List<TaskInfo> l = new ArrayList<TaskInfo>();
-		for (int i = 0; i < 10; i++)
-		{
-			l.addAll(DAO.getTaskDao().getTasksByPlaneId(i));
-		}
-		return l;
 	}
 
 	@GET
@@ -51,20 +35,7 @@ public class TaskStub
 	@Path("/plane/{id}")
 	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id)
 	{
-		return taskList.getTasksByPlaneId(id);
-		/*
-		 * Plane plane = new Plane(id,"airbus");
-		 * Flight flight = new Flight(1, id);
-		 * 
-		 * TaskInfo taskinfo = new TaskInfo(plane, flight);
-		 * List<Task> tl = new ArrayList<>();
-		 * Task t;
-		 * for(int i =0; i<10; i++){
-		 * t = new Task(i,id);
-		 * taskinfo.addTask(t);
-		 * }
-		 * return taskinfo;
-		 */
+		return taskDao.getTasksByPlaneId(id);
 	}
 
 	@GET
@@ -72,14 +43,7 @@ public class TaskStub
 	@Path("/{id}")
 	public TaskInfo taskById(@PathParam("id") int id)
 	{
-		return taskList.getTasksById(id);/*
-											 * Plane plane = new Plane(2,"airbus");
-											 * Flight flight = new Flight(1, 2);
-											 * Task t = new Task(id,2);
-											 * TaskInfo taskinfo = new TaskInfo(plane, flight);
-											 * taskinfo.addTask(t);
-											 * return taskinfo;
-											 */
+		return taskDao.getTasksById(id);
 	}
 
 	@PUT
@@ -111,7 +75,7 @@ public class TaskStub
 	@Path("/delete/{id}")
 	public void deleteTaskById(@PathParam("id") int id)
 	{
-
+		taskDao.deleteTask(id);
 	}
 
 }

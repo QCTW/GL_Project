@@ -175,7 +175,6 @@ public class TaskImpl implements TaskDao
 	{
 		TaskImpl test = new TaskImpl();
 		test.getAllTasks();
-
 		Status s = test.deleteTask(1);
 		System.out.println("Delete task _id=1:" + s.toString());
 	}
