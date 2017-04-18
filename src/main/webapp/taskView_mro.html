@@ -39,24 +39,21 @@
       <div class="col-md-6">
         <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading"><b>Task ...</b></div>
+          
+          <div class="panel-heading"><h2 id="taskId"></h2></div>
           <div class="panel-body">
             <div class="col-md-0"></div>
             <div class="col-md-10">
             <div id=taskView>
-            <script id="taskViewScript" type="text/template" >
-            
-            <h5><b>ATA Category : </b><%= ata %></h5>
-            <h5><b>ID : </b><%= id %></h5>
-            <h5><b>Qualification : </b><%= qualification %></h5>
-            <h5><b>Start Date : </b><%= startDate %></h5>
-            <h5><b>End Date : </b><%= endDate %></h5>
-            <h5><b>Description :</b> </h5>
-                                <p><%= description %></p>
-            <h5><b>Periodicity : </b><%= periodicity %></h5>
-            <h5><b>Hangar Need : </b><%= hangarNeed %></h5>
-			<h5 id="mroSelected" ><b>Mro : </b><%= mro %></h5>
-            </script>
+	            <h5 id="ata"></h5>
+	            <h5 id="qualification"></h5>
+	            <h5 id="startDate"></h5>
+	            <h5 id="endDate"></h5>
+	            <h5 id="description"></h5>
+	            <h5 id="periodicity"></h5>
+	            <h5 id="hangarNeed"></h5>
+	            <h5 id="mro"></h5>
+           
 			</div>
             </div>
           </div>
@@ -85,7 +82,7 @@
             </div><!-- /.modal -->
           <div class="panel-footer">
             <div align="center" id="buttons">
-
+				<button class="btn btn-primary btn-lg">Submit</button>
             </div>
           </div>
         </div>

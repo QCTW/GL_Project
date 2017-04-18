@@ -16,7 +16,7 @@
 			<url-pattern>/tasks_and_planes.html</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
-			<role-name>admin</role-name>
+			<role-name>mcc</role-name>
 		</auth-constraint>
 	</security-constraint>
 

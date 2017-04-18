@@ -29,7 +29,7 @@ public class TaskStub
 	@Path("/all")
 	public List<TaskInfo> allTasks()
 	{
-		return taskList.getAllTasks();
+		return DAO.getTaskDao().getAllTasks();
 
 	}
 

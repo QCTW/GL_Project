@@ -16,7 +16,7 @@ var idt;
 function getAllTasks(result){
 	var tab =$('#example').DataTable( {
 	} );
-	console.log(result[1].plane.planeType);
+	
 	for(var i=0; i<result.length; i++){
 		for(var j=0 ; j<result[i].tasklist.length ; j++ ){
 		//console.log(result[i].tasklist[j].id);
@@ -30,14 +30,14 @@ function getAllTasks(result){
 			JSON.stringify(result[i].plane.planeType),
 			
 			(result[i].tasklist[j].taskStatus == 1)?
-					"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
-					"class='btn icon-btn btn-success'>  " +
-					"<span class='glyphicon btn-glyphicon glyphicon-plus img-circle text-success'></span>Add " +
+					"<button onclick='getSTask("+idt+")' " +
+					"class='btn icon-btn btn-primary'>  " +
+					"<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> " +
 					"</button>"
 					:
 						"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
 						"class='btn icon-btn btn-info'>  " +
-						"<span class='glyphicon btn-glyphicon glyphicon-edit img-circle text-info'></span>Edit " +
+						"<span class='glyphicon btn-glyphicon glyphicon-edit'></span> " +
 						"</button>"
 				
 			//'<button onclick="getSTask('+idt+')" class="btn icon-btn btn-success btn-md" data-toggle="modal" data-target="#myModal"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span></button>'
@@ -57,9 +57,9 @@ function getAllTasks(result){
 
 function getSTask(id){
 	var x = parseInt(id,10);
-	$('#myModal').modal('show')
+	//$('#myModal').modal('show')
 	//$("#content").load('viewTask.html');
-	//document.location.href="taskView_mro.html?id="+x;
+	document.location.href="taskView_mro.html?id="+x;
 }
 
 function getAllPlanes(result){
@@ -67,7 +67,6 @@ function getAllPlanes(result){
 	var planes =$('#planeslist').DataTable( {
 	} );
 	
-	//console.log(result[1].plane.planeType);
 	for(var i=0; i<result.length; i++){
 		planes.row.add( [
 			JSON.stringify(result[i].planeId),
@@ -95,7 +94,7 @@ function formatDate(date) {
 
 
 $(function(){
-		getServerData("ws/task/all2",getAllTasks);
+		getServerData("ws/task/all",getAllTasks);
 });
 $(function(){
 	getServerData("ws/plane/all",getAllPlanes);

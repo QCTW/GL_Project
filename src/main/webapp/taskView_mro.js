@@ -6,9 +6,21 @@ function getServerData(url, success) {
 }
 var task;
 var s;
+//$('#taskId').append("Task n° ");
 function getTask(taskInfo) {
 	task = taskInfo;
-	var templateTaskView = _.template($('#taskViewScript').html());
+	
+	$('#taskId').html("Task n° "+taskInfo.tasklist[0].id);
+	$('#ata').html("Ata Category        : "+JSON.stringify(taskInfo.tasklist[0].ataCategory));
+	$('#startDate').html("Start date    : "+JSON.stringify(taskInfo.tasklist[0].startTime));
+	$('#endDate').html("End date : "+JSON.stringify(taskInfo.tasklist[0].endTime));
+	$('#description').html("Description : "+JSON.stringify(taskInfo.tasklist[0].description));
+	$('#periodicity').html("Periodicity : "+JSON.stringify(taskInfo.tasklist[0].periodicity));
+	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.tasklist[0].hangarNeed);
+	$('#mro').html("Mro :  "+taskInfo.mro.name);
+	
+	
+	/*var templateTaskView = _.template($('#taskViewScript').html());
 	var html = templateTaskView({
 		"ata" : JSON.stringify(taskInfo.tasklist[0].ataCategory),
 		"id" : JSON.stringify(taskInfo.tasklist[0].id),
@@ -21,6 +33,7 @@ function getTask(taskInfo) {
 		"mro" : JSON.stringify(taskInfo.mro.name),
 
 	});
+	
 	if (taskInfo.tasklist[0].taskStatus == 1) {
 		// s="ws/task/add"
 		$('#buttons')
@@ -40,6 +53,7 @@ function getTask(taskInfo) {
 						"<button type=\"button\" class=\"btn btn-default btn-xl\">Remove</button>");
 	}
 	$('#taskView').append(html);
+	*/
 
 }
 function getAllMro(result) {
