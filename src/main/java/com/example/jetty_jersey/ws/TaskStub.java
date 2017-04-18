@@ -21,7 +21,7 @@ import com.example.jetty_jersey.DaoInterfaceImpl.TaskImpl;
 @Path("/task")
 public class TaskStub
 {
-
+	DAO dao = new DAO();
 	static TaskDao taskList = new TaskImpl();
 
 	@GET
@@ -29,7 +29,7 @@ public class TaskStub
 	@Path("/all")
 	public List<TaskInfo> allTasks()
 	{
-		return DAO.getTaskDao().getAllTasks();
+		return dao.getTaskDao().getAllTasks();
 
 	}
 
@@ -41,7 +41,7 @@ public class TaskStub
 		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		for (int i = 0; i < 10; i++)
 		{
-			l.addAll(DAO.getTaskDao().getTasksByPlaneId(i));
+		//	l.addAll(DAO.getTaskDao().getTasksByPlaneId(i));
 		}
 		return l;
 	}
