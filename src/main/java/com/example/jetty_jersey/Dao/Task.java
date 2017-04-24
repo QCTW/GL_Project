@@ -2,6 +2,7 @@ package com.example.jetty_jersey.Dao;
 
 import java.util.Date;
 
+import com.example.jetty_jersey.db.CustomHashMap;
 import com.example.jetty_jersey.db.Utility;
 
 public class Task
@@ -48,6 +49,23 @@ public class Task
 		this.taskStatus = (Math.random() < 0.5) ? 1 : 2;
 		;
 		this.mroId = (int) (Math.random() * 10);
+	}
+
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
+		chm.put("_id", String.valueOf(id));
+		chm.put("startTime", Utility.convertDateToString(startTime));
+		chm.put("endTime", Utility.convertDateToString(endTime));
+		chm.put("description", description);
+		chm.put("periodicity", periodicity);
+		chm.put("ataCategory", ataCategory);
+		chm.put("hangarNeed", Boolean.toString(hangarNeed));
+		chm.put("planeId", String.valueOf(planeId));
+		chm.put("taskStatus", String.valueOf(taskStatus));
+		chm.put("mroId", String.valueOf(mroId));
+
+		return chm;
 	}
 
 	public int getId()

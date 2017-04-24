@@ -13,7 +13,6 @@ import com.example.jetty_jersey.Dao.Flight;
 import com.example.jetty_jersey.Dao.MRO;
 import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Status;
-import com.example.jetty_jersey.Dao.Status.Execution;
 import com.example.jetty_jersey.Dao.Task;
 import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
@@ -63,7 +62,6 @@ public class TaskImpl implements TaskDao
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
 			TaskInfo wrap = new TaskInfo(t, p, f, mro);
 			tl.add(wrap);
-			System.out.println(t.toString());
 
 		}
 		dbConnect.close();
@@ -72,14 +70,18 @@ public class TaskImpl implements TaskDao
 
 	public Status addTask(Task t)
 	{
-		// TODO Auto-generated method stub
-		return new Status(Execution.FAILED);
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		Status s = dbc.insertToTableName("task", t.toMap());
+		dbc.close();
+		return s;
 	}
 
 	public Status modifyTask(Task t)
 	{
-		// TODO Auto-generated method stub
-		return new Status(Execution.FAILED);
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		Status s = dbc.updateDataInTableNameWhereFieldEqValue("task", "_id", String.valueOf(t.getId()), t.toMap());
+		dbc.close();
+		return s;
 	}
 
 	public Status deleteTask(int id)
@@ -105,8 +107,6 @@ public class TaskImpl implements TaskDao
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
 			TaskInfo wrap = new TaskInfo(t, p, f, mro);
 			tl.add(wrap);
-			System.out.println(t.toString());
-
 		}
 		dbConnect.close();
 		return tl;
@@ -125,7 +125,6 @@ public class TaskImpl implements TaskDao
 				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"));
 				m.setQualification(res.get(0).get("qualification"));
 				mroCache.put(id, m);
-				System.out.println(m.toString() + " created");
 			}
 		}
 		return m;
@@ -143,7 +142,6 @@ public class TaskImpl implements TaskDao
 			{
 				p = new Plane(Utility.convertIntString(id), res.get(0).get("planetype"));
 				planeCache.put(id, p);
-				System.out.println(p.toString() + " created");
 			}
 		}
 		return p;
@@ -164,7 +162,6 @@ public class TaskImpl implements TaskDao
 				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"),
 						Utility.convertDateString(fst.get("departureTime")), Utility.convertDateString(fst.get("arrivalTime")), Utility.convertIntString(fst.get("planeId")));
 				flightCache.put(id, f);
-				System.out.println(f.toString() + " created");
 			}
 		}
 		return f;
@@ -174,9 +171,19 @@ public class TaskImpl implements TaskDao
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
+		Task t = new Task(-1, Utility.convertDateString("23/04/2017"), Utility.convertDateString("24/04/2017"),
+				"3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
+				"Each flight", "Aircraft General (ATA 00-18)", false, 3, 9, 1);
+		Status s = test.addTask(t);
+		System.out.println("Add new task by _id=-1 : " + s.toString());
 		test.getAllTasks();
-		Status s = test.deleteTask(1);
-		System.out.println("Delete task _id=1:" + s.toString());
+		s = test.deleteTask(3);
+		System.out.println("Delete task _id=3 : " + s.toString());
+		t = new Task(3, Utility.convertDateString("23/05/2017"), Utility.convertDateString("24/05/2017"),
+				"3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
+				"Each flight", "Aircraft General (ATA 00-18)", false, 3, 5, 1);
+		s = test.addTask(t);
+		System.out.println("Add back task _id=3 : " + s.toString());
 	}
 
 }

@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,6 +15,7 @@ import org.apache.http.HttpHost;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.action.update.UpdateRequest;
@@ -38,6 +40,7 @@ import static org.elasticsearch.common.xcontent.XContentFactory.*;
 public class DatabaseConnecter
 {
 	private static Logger log = LogManager.getLogger(DatabaseConnecter.class.getName());
+	private static HashMap<String, Integer> maxIdMap = new HashMap<String, Integer>();
 	private final RestClient restClient = RestClient
 			.builder(new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_DEFAULT, "http"), new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_SECOND, "http")).build();
 
@@ -105,7 +108,7 @@ public class DatabaseConnecter
 		return s;
 	}
 
-	public long updateDataInTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue, Map<String, String> data)
+	public Status updateDataInTableNameWhereFieldEqValue(String tableName, String fieldName, String fieldValue, Map<String, String> data)
 	{
 		List<String> ids = new ArrayList<String>();
 		if (fieldName.equals("_id"))
@@ -115,7 +118,7 @@ public class DatabaseConnecter
 			List<String> idList = getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
 			ids.addAll(idList);
 		}
-		XContentBuilder jsonDoc = prepareScriptFromDataToUpdate(data);
+		XContentBuilder jsonDoc = prepareScriptFromDataToUpdate(tableName, data);
 		int successCount = 0;
 		for (String id : ids)
 		{
@@ -127,6 +130,7 @@ public class DatabaseConnecter
 			try
 			{
 				client.update(updateRequest).get();
+				successCount++;
 			} catch (InterruptedException e)
 			{
 				log.error("Unable to execute database update", e);
@@ -135,11 +139,16 @@ public class DatabaseConnecter
 				log.error("Unable to execute database update", e);
 			}
 		}
-		return successCount;
+
+		Status s = new Status((successCount > 0) ? Execution.SUCCESSFUL : Execution.FAILED);
+		s.setResultyCount(successCount);
+		if (successCount == 0)
+			s.setMessage("Data update failed");
+		return s;
 
 	}
 
-	private XContentBuilder prepareScriptFromDataToUpdate(Map<String, String> data)
+	private XContentBuilder prepareScriptFromDataToUpdate(String tableName, Map<String, String> data)
 	{
 		XContentBuilder jsonb = null;
 		try
@@ -147,7 +156,8 @@ public class DatabaseConnecter
 			jsonb = jsonBuilder().startObject();
 			for (Entry<String, String> e : data.entrySet())
 			{
-				jsonb.field(e.getKey(), e.getValue());
+				if (!e.getKey().equals("_id") && !e.getKey().equals("_db"))
+					jsonb.field(e.getKey(), e.getValue());
 			}
 			jsonb.endObject();
 		} catch (Exception e1)
@@ -157,16 +167,75 @@ public class DatabaseConnecter
 		return jsonb;
 	}
 
+	private String generateNewId(String tableName)
+	{
+		Integer maxId = new Integer(0);
+		synchronized (maxIdMap) // Only once at a time to update the max _id of each table in the hash map
+		{
+			maxId = maxIdMap.get(tableName);
+			if (maxId == null)
+			{
+				List<Map<String, String>> l = selectAllFromTableName(tableName);
+				String strMax = findMaxIndexId(l);
+				maxId = new Integer(Integer.parseInt(strMax) + 1);
+				log.debug("Get max _id=" + strMax + " from database table " + tableName);
+			} else
+			{
+				maxId = new Integer(maxId.intValue() + 1);
+			}
+			maxIdMap.put(tableName, maxId);
+		}
+		log.debug("New _id: " + maxId + " genertated from table: " + tableName);
+		return maxId.toString();
+	}
+
+	private String findMaxIndexId(List<Map<String, String>> l)
+	{
+		int nMax = 0;
+		for (Map<String, String> m : l)
+		{
+			String id = m.get("_id");
+			int nId = Integer.parseInt(id);
+			if (nMax < nId)
+				nMax = nId;
+		}
+		return Integer.toString(nMax);
+	}
+
 	/**
-	 * TODO
-	 * 
 	 * @param tableName
 	 * @param dataList
 	 * @return
 	 */
-	public long insertToTableName(String tableName, List<Map<String, String>> dataList)
+	public Status insertToTableName(String tableName, Map<String, String> data)
 	{
-		return -1;
+		int successCount = 0;
+		String givenId = data.get("_id");
+		String newId = givenId.equals("-1") ? generateNewId(tableName) : givenId;
+		XContentBuilder jsonDoc = prepareScriptFromDataToUpdate(tableName, data);
+		IndexRequest indexRequest = new IndexRequest(DatabaseSettings.DB_NAME, tableName, newId).source(jsonDoc);
+		UpdateRequest updateRequest = new UpdateRequest();
+		updateRequest.index(DatabaseSettings.DB_NAME);
+		updateRequest.type(tableName);
+		updateRequest.id(newId);
+		updateRequest.doc(jsonDoc).upsert(indexRequest);
+		try
+		{
+			client.update(updateRequest).get();
+			successCount++;
+		} catch (InterruptedException e)
+		{
+			log.error("Unable to execute database update", e);
+		} catch (ExecutionException e)
+		{
+			log.error("Unable to execute database update", e);
+		}
+
+		Status s = new Status((successCount > 0) ? Execution.SUCCESSFUL : Execution.FAILED);
+		s.setResultyCount(successCount);
+		if (successCount == 0)
+			s.setMessage("Data insert failed");
+		return s;
 	}
 
 	/**
