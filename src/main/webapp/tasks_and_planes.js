@@ -24,7 +24,7 @@ function getAllTasks(result){
 			tab.row.add( [
 			idt,
 			JSON.stringify(result[i].task.ataCategory),
-			JSON.stringify(result[i].task.description),
+			//JSON.stringify(result[i].task.description),
 			formatDate(new Date(result[i].task.endTime)),
 			formatDate(new Date(result[i].flight.departureTime)),
 			JSON.stringify(result[i].plane.planeType),
@@ -91,6 +91,14 @@ function formatDate(date) {
 	}
 
 
+function pseudo(result){
+	var pseudo = JSON.stringify(result[0]);
+	var role = JSON.stringify(result[1]);
+	sessionStorage.setItem("pseudo",pseudo);
+	sessionStorage.setItem("role",role);
+	$("#pseudo").html(sessionStorage.getItem("pseudo"));
+	
+}
 
 
 $(function(){
@@ -99,3 +107,7 @@ $(function(){
 $(function(){
 	getServerData("ws/plane/all",getAllPlanes);
 });
+$(function(){
+	getServerData("ws/login/getUser",pseudo);
+});
+

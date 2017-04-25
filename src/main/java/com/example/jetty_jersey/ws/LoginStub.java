@@ -5,11 +5,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.HttpResponse;
@@ -17,23 +19,38 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.glassfish.jersey.internal.util.Base64;
+
+import javax.servlet.http.*;
 
 import com.example.jetty_jersey.Dao.*;
 
-import io.netty.handler.codec.base64.Base64Encoder;
+import java.util.*;
+import io.netty.handler.codec.http.HttpRequest;
 
 @Path("/login")
 public class LoginStub {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{username}/{id}")
-	public MRO getUser(@PathParam("username") String username,
-			@PathParam("id") int id){
-		return new MRO();
+	@Path("/getUser")
+	public List<String> getUser(@Context HttpServletRequest hsr){
+		List<String> l = new ArrayList<String>();
+		final String authorization = hsr.getHeader("Authorization");
+	    if (authorization != null && authorization.startsWith("Basic")) {
+	        String base64Credentials = authorization.substring("Basic".length()).trim();
+	        String credentials = new String(Base64.getDecoder().decode(base64Credentials),Charset.forName("UTF-8"));
+	        System.out.println(credentials);
+	        String[] values = credentials.split(":");
+	        l.add(values[0]);
+	        String role = "mcc";//values[1].split(",")[1];
+	        
+	        l.add(role);
+		
+	    }
+		return l;
+	    
 	}
-	
+	/*
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/connectMcc")
@@ -64,6 +81,6 @@ public class LoginStub {
 	        e.printStackTrace();
 	    }
 	}
-	
+	*/
 	
 }

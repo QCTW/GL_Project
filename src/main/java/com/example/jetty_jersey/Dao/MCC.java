@@ -12,6 +12,10 @@ public class MCC
 	private String mccId;
 	private String email;
 
+	
+	public MCC(String email){
+		this.email=email;
+	}
 	public String getMccId()
 	{
 		return mccId;

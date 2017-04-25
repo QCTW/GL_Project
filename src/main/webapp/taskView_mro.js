@@ -10,13 +10,13 @@ var s;
 function getTask(taskInfo) {
 	task = taskInfo;
 	
-	$('#taskId').html("Task n° "+taskInfo.tasklist[0].id);
-	$('#ata').html("Ata Category        : "+JSON.stringify(taskInfo.tasklist[0].ataCategory));
-	$('#startDate').html("Start date    : "+JSON.stringify(taskInfo.tasklist[0].startTime));
-	$('#endDate').html("End date : "+JSON.stringify(taskInfo.tasklist[0].endTime));
-	$('#description').html("Description : "+JSON.stringify(taskInfo.tasklist[0].description));
-	$('#periodicity').html("Periodicity : "+JSON.stringify(taskInfo.tasklist[0].periodicity));
-	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.tasklist[0].hangarNeed);
+	$('#taskId').html("Task n° "+taskInfo.task.id);
+	$('#ata').html("Ata Category        : "+JSON.stringify(taskInfo.task.ataCategory));
+	$('#startDate').html("Start date    : "+JSON.stringify(taskInfo.task.startTime));
+	$('#endDate').html("End date : "+JSON.stringify(taskInfo.task.endTime));
+	$('#description').html("Description : "+JSON.stringify(taskInfo.task.description));
+	$('#periodicity').html("Periodicity : "+JSON.stringify(taskInfo.task.periodicity));
+	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.task.hangarNeed);
 	$('#mro').html("Mro :  "+taskInfo.mro.name);
 	
 	
