@@ -1,5 +1,7 @@
 package com.example.jetty_jersey.Dao;
 
+import com.example.jetty_jersey.db.CustomHashMap;
+
 /**
  * 
  * PUT mro/id
@@ -54,6 +56,16 @@ public class MRO
 		return id;
 	}
 
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
+		chm.put("_id", String.valueOf(id));
+		chm.put("name", name);
+		chm.put("qualification", qualification);
+
+		return chm;
+	}
+	
 	@Override
 	public String toString()
 	{

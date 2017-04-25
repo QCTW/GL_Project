@@ -1,5 +1,7 @@
 package com.example.jetty_jersey.Dao;
 
+import com.example.jetty_jersey.db.CustomHashMap;
+
 /**
  * 
  * PUT mcc/id
@@ -11,7 +13,22 @@ public class MCC
 {
 	private String mccId;
 	private String email;
+	
+	public MCC(String mccId, String email){
+		this.mccId=mccId;
+		this.email=email;
+		
+	}
 
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
+		chm.put("_id", mccId);
+		chm.put("email", email);
+
+		return chm;
+	}
+	
 	public String getMccId()
 	{
 		return mccId;
@@ -25,6 +42,12 @@ public class MCC
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "id=" + mccId + ";email=" + email;
 	}
 
 }
