@@ -1,8 +1,5 @@
 w3IncludeHTML();
 
-//Session["test"] = "blablabla";
-//session.setAttribute("test", var);
-
 function getServerData(url, success){
     $.ajax({
         dataType: "json",
@@ -18,8 +15,6 @@ function getAllTasks(result){
 	} );
 	
 	for(var i=0; i<result.length; i++){
-		//for(var j=0 ; j<result[i].tasklist.length ; j++ ){
-		//console.log(result[i].tasklist[j].id);
 			idt=JSON.stringify(result[i].task.id);
 			tab.row.add( [
 			idt,
@@ -46,19 +41,10 @@ function getAllTasks(result){
 		
 	//}
 	}
-	/*$('#example tbody').on('click','tr', function(){
-		var data = tab.row( this ).data();
-		var x = parseInt(data[0],10);
-		//$("#content").load('viewTask.html');
-		document.location.href="taskView_mro.html?id="+x;
-		//alert ('you clicked on '+data[0]+'\'s row');
-	});*/
 }
 
 function getSTask(id){
 	var x = parseInt(id,10);
-	//$('#myModal').modal('show')
-	//$("#content").load('viewTask.html');
 	document.location.href="taskView_mro.html?id="+x;
 }
 

@@ -6,7 +6,6 @@ function getServerData(url, success) {
 }
 var task;
 var s;
-//$('#taskId').append("Task n° ");
 function getTask(taskInfo) {
 	task = taskInfo;
 	
@@ -19,19 +18,6 @@ function getTask(taskInfo) {
 	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.task.hangarNeed);
 	$('#mro').html("Mro :  "+taskInfo.mro.name);
 	
-	
-	/*var templateTaskView = _.template($('#taskViewScript').html());
-	var html = templateTaskView({
-		"ata" : JSON.stringify(taskInfo.tasklist[0].ataCategory),
-		"id" : JSON.stringify(taskInfo.tasklist[0].id),
-		"qualification" : JSON.stringify(taskInfo.tasklist[0].description),
-		"startDate" : JSON.stringify(taskInfo.tasklist[0].startTime),
-		"endDate" : JSON.stringify(taskInfo.tasklist[0].endTime),
-		"description" : JSON.stringify(taskInfo.tasklist[0].description),
-		"periodicity" : JSON.stringify(taskInfo.tasklist[0].periodicity),
-		"hangarNeed" : JSON.stringify(taskInfo.tasklist[0].hangarNeed),
-		"mro" : JSON.stringify(taskInfo.mro.name),
-
 	});
 	
 	if (taskInfo.tasklist[0].taskStatus == 1) {
@@ -79,7 +65,6 @@ function getAllMro(result) {
 	$(function(){
 		$("#button"+cpt[i]).click(function(){
 			alert(cpt[i]);
-			//getServerData("ws/example/aircraft",callDone);
 		});
 	});
 	
