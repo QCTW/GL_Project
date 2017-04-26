@@ -33,6 +33,7 @@
 		</ul>
 		
 		 <ul class="nav nav-tabs navbar-right">
+		 	<li><a id="pseudo"></a></li>
             <li><a href="#" onclick="location.reload(true)" >Log Out(not working Yet)</a></li>
           </ul>
 
@@ -41,16 +42,19 @@
 			<!-- TASK MENU -->
 
 			<div id="tasksmenu" class="tab-pane fade in active">
-				<h3>view tasks</h3>
+				<div>
+					<button class="btn btn-default navbar-btn"><a href="create_task.html">New Task</a></button>
+					<button class="btn btn-default navbar-btn" for="my-file-selector"><input id="my-file-selector" type="file" style="display:none">Upload</input></button>
+				</div>
 				<table id="example" class="table table-striped">
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>ata category</th>
-							<th>description</th>
-							<th>end Time</th>
-							<th>departure of plane</th>
-							<th>plane</th>
+							<th>ATA category</th>
+							<!--  >th>Description</th -->
+							<th>End Time</th>
+							<th>Departure of plane</th>
+							<th>Plane</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -60,10 +64,10 @@
 			</div>
 
 			<!-- PLANES MENU -->
-
-
 			<div id="planes" class="tab-pane fade">
-				<h3>view planes</h3>
+				<div>
+					<button class="btn btn-default navbar-btn"><a href="create_task.html">New Plane</a></button>
+				</div>
 				<table id="planeslist" class="table table-hover">
 					<thead>
 						<tr>
@@ -104,7 +108,6 @@
 <script type="text/javascript" src="bootstrap/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" class="init" src="tasks_and_planes.js"></script>
 <script type="text/javascript" class="init" src="tasks_and_planes.js"></script>
 <style>
 	

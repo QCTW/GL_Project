@@ -18,8 +18,9 @@ public class MRO
 
 	private String qualification = "N/A";
 	private String name = "Not assigned";
-	private final int id;
+	private int id;
 
+	
 	public MRO()
 	{
 		this.id = -1;
@@ -29,6 +30,10 @@ public class MRO
 	{
 		this.name = name;
 		this.id = mroId;
+	}
+	
+	public MRO(String name){
+		this.name=name;
 	}
 
 	public String getQualification()

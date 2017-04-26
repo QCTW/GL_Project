@@ -14,7 +14,6 @@ import com.example.jetty_jersey.Dao.MRO;
 import com.example.jetty_jersey.Dao.Plane;
 import com.example.jetty_jersey.Dao.Status;
 import com.example.jetty_jersey.Dao.Task;
-import com.example.jetty_jersey.DaoInterface.PlaneDao;
 import com.example.jetty_jersey.DaoInterface.TaskDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
@@ -33,18 +32,26 @@ public class TaskImpl implements TaskDao
 
 	public List<TaskInfo> getAllTasks()
 	{
-		return getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
+		List<TaskInfo> l = getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
+		return l;
 	}
 
 	public TaskInfo getTasksById(int id)
 	{
-		PlaneDao p = new PlaneImpl();
-		Task t = new Task(id, 2);
-		Plane plane = p.getPlanebyId(t.getPlaneId());
-		Flight flight = new Flight(1, plane.getPlaneId());
-		MRO mro = new MRO();
-		TaskInfo taskinfo = new TaskInfo(t, plane, flight, mro);
-		return taskinfo;
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "_id", Integer.toString(id));
+
+		Map<String, String> m = results.get(0);
+		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
+				m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")),
+				Utility.convertIntString(m.get("mroId")));
+		MRO mro = getMROById(dbConnect, m.get("mroId"));
+		Plane p = getPlaneById(dbConnect, m.get("planeId"));
+		Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
+		TaskInfo wrap = new TaskInfo(t, p, f, mro);
+
+		dbConnect.close();
+		return wrap;
 	}
 
 	public List<TaskInfo> getTasksByPlaneId(int id)
@@ -114,6 +121,8 @@ public class TaskImpl implements TaskDao
 
 	private MRO getMROById(DatabaseConnecter dbc, String id)
 	{
+		if (id == null || id.length() == 0)
+			return new MRO(-1, "Not assigned");
 		MRO m = mroCache.get(id);
 		if (m == null)
 		{
@@ -184,6 +193,9 @@ public class TaskImpl implements TaskDao
 				"Each flight", "Aircraft General (ATA 00-18)", false, 3, 5, 1);
 		s = test.addTask(t);
 		System.out.println("Add back task _id=3 : " + s.toString());
+
+		TaskInfo ti = test.getTasksById(1);
+		System.out.println(ti.toString());
 	}
 
 }
