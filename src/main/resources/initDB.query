@@ -187,8 +187,7 @@ PUT gla/task/4
 }
 
 PUT gla/task/5
- {
- 
+{
  "startTime" : "28/03/2017",
  "endTime" : "28/04/2017",
  "description" : "5300   Fuselage Structure (General) : For reports of structural units and associated components and members which make up the compartments for crew, passengers, equipment, cargo, plus the structure of the envelope and gondola of airships.",
@@ -200,9 +199,21 @@ PUT gla/task/5
  "mroId" : "2"
 }
 
+PUT gla/task/6
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MCC",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "1",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
 PUT gla/taskList/1
 {
- 
   "periodicity" : "Once per day",
   "ataCategory" : "Power plant (ATA 70-92)",
   "hangarNeed" : "true"

@@ -32,7 +32,8 @@ public class TaskImpl implements TaskDao
 
 	public List<TaskInfo> getAllTasks()
 	{
-		return getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
+		List<TaskInfo> l = getTasksInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
+		return l;
 	}
 
 	public TaskInfo getTasksById(int id)
@@ -120,6 +121,8 @@ public class TaskImpl implements TaskDao
 
 	private MRO getMROById(DatabaseConnecter dbc, String id)
 	{
+		if (id == null || id.length() == 0)
+			return new MRO(-1, "Not assigned");
 		MRO m = mroCache.get(id);
 		if (m == null)
 		{
@@ -192,7 +195,7 @@ public class TaskImpl implements TaskDao
 		System.out.println("Add back task _id=3 : " + s.toString());
 
 		TaskInfo ti = test.getTasksById(1);
-		System.out.println(ti);
+		System.out.println(ti.toString());
 	}
 
 }
