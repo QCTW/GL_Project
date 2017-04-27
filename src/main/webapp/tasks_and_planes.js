@@ -32,7 +32,7 @@ function getAllTasks(result){
 					:
 						"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
 						"class='btn icon-btn btn-info'>  " +
-						"<span class='glyphicon btn-glyphicon glyphicon-edit'></span> " +
+						"<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> " +
 						"</button>"
 				
 			//'<button onclick="getSTask('+idt+')" class="btn icon-btn btn-success btn-md" data-toggle="modal" data-target="#myModal"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span></button>'
@@ -80,9 +80,9 @@ function formatDate(date) {
 function pseudo(result){
 	var pseudo = JSON.stringify(result[0]);
 	var role = JSON.stringify(result[1]);
-	sessionStorage.setItem("pseudo",pseudo);
-	sessionStorage.setItem("role",role);
-	$("#pseudo").html(sessionStorage.getItem("pseudo"));
+	localStorage.setItem("pseudo",pseudo);
+	localStorage.setItem("role",role);
+	$("#pseudo").html(localStorage.getItem("pseudo"));
 	
 }
 

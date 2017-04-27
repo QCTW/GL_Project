@@ -73,11 +73,11 @@ $.ajax
     async: false,
     data: '{}',
     beforeSend: function (xhr){ 
-        xhr.setRequestHeader('Authorization', make_base_auth('mcc', 'mccpass')); 
-    },
-    success: function (){
-        alert('Thanks for your comment!'); 
+        xhr.setRequestHeader('Authorization', make_base_auth(username, password)); 
     }
-});
+}).done(alert('Success'))
+.fail(alert('failure'));
+
+;
 document.location.href="tasks_and_planes.html";
 }

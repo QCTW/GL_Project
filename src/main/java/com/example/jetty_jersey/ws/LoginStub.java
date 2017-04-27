@@ -7,7 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -23,13 +26,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import javax.servlet.http.*;
 
 import com.example.jetty_jersey.Dao.*;
+import com.example.jetty_jersey.util.Couple;
 
 import java.util.*;
 import io.netty.handler.codec.http.HttpRequest;
 
 @Path("/login")
 public class LoginStub {
-
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getUser")
@@ -50,6 +54,21 @@ public class LoginStub {
 		return l;
 	    
 	}
+	
+	@POST
+	@Path("/{user}/{pass}")
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean postMethod(@PathParam("user") String name,@PathParam("pass") String pass) {
+	  List<Couple> l = new ArrayList<Couple>();
+	  l.add(new Couple("mcc","mccpass"));
+	  l.add(new Couple("mro","mropass"));
+	  //Couple c = new Couple(name, pass);
+	  Couple c = new Couple("mcc", "mro");
+	  return (Couple.inTab(l, c));
+	}
+	
+	
 	/*
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
