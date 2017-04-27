@@ -1,3 +1,10 @@
+$(function (){
+	if(localStorage.getItem("mail") == null){
+		localStorage.setItem("needCo","true");
+		document.location.href="login.html";
+	}
+});
+
 w3IncludeHTML();
 
 function getServerData(url, success){
@@ -82,8 +89,12 @@ function pseudo(result){
 	var role = JSON.stringify(result[1]);
 	localStorage.setItem("pseudo",pseudo);
 	localStorage.setItem("role",role);
-	$("#pseudo").html(localStorage.getItem("pseudo"));
+	$("#pseudo").html(localStorage.getItem("mail"));
 	
+}
+function logout(){
+	localStorage.clear();
+	document.location.href="login.html";
 }
 
 

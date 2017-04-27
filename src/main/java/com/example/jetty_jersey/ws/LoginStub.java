@@ -33,73 +33,82 @@ import io.netty.handler.codec.http.HttpRequest;
 
 @Path("/login")
 public class LoginStub {
-	
+	static boolean connected = false;
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getUser")
-	public List<String> getUser(@Context HttpServletRequest hsr){
+	public List<String> getUser(@Context HttpServletRequest hsr) {
 		List<String> l = new ArrayList<String>();
 		final String authorization = hsr.getHeader("Authorization");
-	    if (authorization != null && authorization.startsWith("Basic")) {
-	        String base64Credentials = authorization.substring("Basic".length()).trim();
-	        String credentials = new String(Base64.getDecoder().decode(base64Credentials),Charset.forName("UTF-8"));
-	        System.out.println(credentials);
-	        String[] values = credentials.split(":");
-	        l.add(values[0]);
-	        String role = "mcc";//values[1].split(",")[1];
-	        
-	        l.add(role);
-		
-	    }
+		if (authorization != null && authorization.startsWith("Basic")) {
+			String base64Credentials = authorization.substring("Basic".length()).trim();
+			String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
+			System.out.println(credentials);
+			String[] values = credentials.split(":");
+			l.add(values[0]);
+			String role = "mcc";// values[1].split(",")[1];
+
+			l.add(role);
+
+		}
 		return l;
-	    
+
 	}
-	
+
 	@POST
 	@Path("/{user}/{pass}")
-	//@Consumes(MediaType.APPLICATION_JSON)
+	// @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean postMethod(@PathParam("user") String name,@PathParam("pass") String pass) {
-	  List<Couple> l = new ArrayList<Couple>();
-	  l.add(new Couple("mcc","mccpass"));
-	  l.add(new Couple("mro","mropass"));
-	  //Couple c = new Couple(name, pass);
-	  Couple c = new Couple("mcc", "mro");
-	  return (Couple.inTab(l, c));
+	public String postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
+		System.out.println("USER : "+name+"\n PASS : "+pass);
+		List<Couple> l = new ArrayList<Couple>();
+		l.add(new Couple("mcc", "mccpass", "mcc"));
+		l.add(new Couple("mro", "mropass", "mro"));
+		Couple c = new Couple(name, pass, "");
+		// Couple c = new Couple("mcc", "mro");
+		System.out.println("USER : "+c.user+"\n PASS : "+c.pass);
+		String role = Couple.inTab(l, c);
+		System.out.println(role);
+		if (!role.equals("incorrect")) {
+			connected = true;
+		}
+		connected = false;
+		return role;
 	}
-	
-	
+
+	@POST
+	@Path("/logout")
+	// @Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void logout() {
+		connected = false;
+	}
+
 	/*
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/connectMcc")
-	public void connection(){
-		try {
-	        DefaultHttpClient Client = new DefaultHttpClient();
-	        Client.getCredentialsProvider().setCredentials(
-	                AuthScope.ANY,
-	                new UsernamePasswordCredentials("mcc", "mccpass")
-	        );
+	 * @GET
+	 * 
+	 * @Produces(MediaType.APPLICATION_JSON)
+	 * 
+	 * @Path("/connectMcc") public void connection(){ try { DefaultHttpClient
+	 * Client = new DefaultHttpClient();
+	 * Client.getCredentialsProvider().setCredentials( AuthScope.ANY, new
+	 * UsernamePasswordCredentials("mcc", "mccpass") );
+	 * 
+	 * HttpGet httpGet = new
+	 * HttpGet("https://httpbin.org/basic-auth/mcc/mccpass"); HttpResponse
+	 * response = Client.execute(httpGet);
+	 * 
+	 * System.out.println("response = " + response);
+	 * 
+	 * BufferedReader breader = new BufferedReader(new
+	 * InputStreamReader(response.getEntity().getContent())); StringBuilder
+	 * responseString = new StringBuilder(); String line = ""; while ((line =
+	 * breader.readLine()) != null) { responseString.append(line); }
+	 * breader.close(); String responseStr = responseString.toString();
+	 * System.out.println("responseStr = " + responseStr);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } }
+	 */
 
-	        HttpGet httpGet = new HttpGet("https://httpbin.org/basic-auth/mcc/mccpass");
-	        HttpResponse response = Client.execute(httpGet);
-
-	        System.out.println("response = " + response);
-
-	        BufferedReader breader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-	        StringBuilder responseString = new StringBuilder();
-	        String line = "";
-	        while ((line = breader.readLine()) != null) {
-	            responseString.append(line);
-	        }
-	        breader.close();
-	        String responseStr = responseString.toString();
-	        System.out.println("responseStr = " + responseStr);
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
-	*/
-	
 }
