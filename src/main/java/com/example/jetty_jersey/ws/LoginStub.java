@@ -57,26 +57,26 @@ public class LoginStub {
 	}
 
 	@POST
-	@Path("/{user}/{pass}")
-	// @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{user}/{pass}")
 	public String postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
 		System.out.println("USER : "+name+"\n PASS : "+pass);
 		List<Couple> l = new ArrayList<Couple>();
 		l.add(new Couple("mcc", "pass", "mcc"));
 		l.add(new Couple("mro", "pass", "mro"));
-		Couple c = new Couple(name, pass, "");
+		Couple c = new Couple(name, pass, "mcc");
 		// Couple c = new Couple("mcc", "mro");
 		System.out.println("USER : "+c.user+"\n PASS : "+c.pass);
 		String role = Couple.inTab(l, c);
-		System.out.println(role);
+		System.out.println("role 1:"+role);
 		if (!role.equals("incorrect")) {
 			connected = true;
 		}
 		else {
 			connected = false;
 		}
-		return role;
+		System.out.println("role 2:"+role);
+		return new String(role);
 	}
 
 	@POST

@@ -5,29 +5,35 @@ alert('ok');
 if(localStorage.getItem("mail") != null){
 	$('#ifConnect').html("<h1> Vous êtes deja connecter </h1>");
 }
-function postLogin(pseudo, pass, sucess){
+function postLogin(pseudo, pass, success){
 	$.ajax({
         dataType: "json",
         url: "ws/login/"+pseudo+"/"+pass,
         type: "POST",
-        success: login()
-    }).done(sucess);
+    }).done(success)
+	.fail(success);
 }
 
+
 function login(result){
-	var role = JSON.stringify(result);
+	var role =  JSON.stringify(result);
+	alert(role);
 	if(role == "incorrect"){
+		
 		$(".alert").html("Wrong Username or Password");
 		$(".alert").show();
 		
 	}
-	else{
-		
+	else if (role == "mcc" || role == "mro")
+	{	
 		var pseudo =localStorage.getItem("tmp");
-		alert(pseudo);
+		//alert(pseudo);
 		localStorage.setItem("mail",pseudo);
 		localStorage.setItem("role",role);
 		document.location.href="tasks_and_planes.html";
+	}
+	else {
+		alert("role : "+role);
 	}
 }
 

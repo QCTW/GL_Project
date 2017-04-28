@@ -8,7 +8,6 @@ var task;
 var s;
 function getTask(taskInfo) {
 	task = taskInfo;
-	
 	$('#taskId').html("Task n° "+taskInfo.task.id);
 	$('#ata').html("Ata Category        : "+JSON.stringify(taskInfo.task.ataCategory));
 	$('#startDate').html("Start date    : "+JSON.stringify(taskInfo.task.startTime));
@@ -17,9 +16,7 @@ function getTask(taskInfo) {
 	$('#periodicity').html("Periodicity : "+JSON.stringify(taskInfo.task.periodicity));
 	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.task.hangarNeed);
 	$('#mro').html("Mro :  "+taskInfo.mro.name);
-	
-	});
-	
+	//});
 	if (taskInfo.tasklist[0].taskStatus == 1) {
 		// s="ws/task/add"
 		$('#buttons')
@@ -39,8 +36,6 @@ function getTask(taskInfo) {
 						"<button type=\"button\" class=\"btn btn-default btn-xl\">Remove</button>");
 	}
 	$('#taskView').append(html);
-	*/
-
 }
 function getAllMro(result) {
 	var cpt=[result.length];
