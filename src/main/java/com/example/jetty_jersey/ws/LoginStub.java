@@ -33,7 +33,7 @@ import io.netty.handler.codec.http.HttpRequest;
 
 @Path("/login")
 public class LoginStub {
-	static boolean connected = false;
+	static boolean connected;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -63,8 +63,8 @@ public class LoginStub {
 	public String postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
 		System.out.println("USER : "+name+"\n PASS : "+pass);
 		List<Couple> l = new ArrayList<Couple>();
-		l.add(new Couple("mcc", "mccpass", "mcc"));
-		l.add(new Couple("mro", "mropass", "mro"));
+		l.add(new Couple("mcc", "pass", "mcc"));
+		l.add(new Couple("mro", "pass", "mro"));
 		Couple c = new Couple(name, pass, "");
 		// Couple c = new Couple("mcc", "mro");
 		System.out.println("USER : "+c.user+"\n PASS : "+c.pass);
@@ -73,7 +73,9 @@ public class LoginStub {
 		if (!role.equals("incorrect")) {
 			connected = true;
 		}
-		connected = false;
+		else {
+			connected = false;
+		}
 		return role;
 	}
 

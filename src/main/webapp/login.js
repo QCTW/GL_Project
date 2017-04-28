@@ -45,10 +45,10 @@ $("#ok").click(function (){
 		$(".alert").html("<a class='close' data-dismiss='alert' href='#'>×</a>password required");
 		$(".alert").show();
 	}
-	else
+	else{
 		localStorage.setItem("tmp",pseudo);
 		postLogin(pseudo,pass,login);
-	
+	}
 });
 
 

@@ -1,5 +1,6 @@
 package com.example.jetty_jersey.ws;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -26,7 +27,11 @@ public class TaskStub
 	@Path("/all")
 	public List<TaskInfo> allTasks()
 	{
-		return taskDao.getAllTasks();
+		if(LoginStub.connected){
+			System.out.println("Connected : "+LoginStub.connected);
+			return taskDao.getAllTasks();
+		}
+		else return new ArrayList<TaskInfo>();
 	}
 
 	@GET
