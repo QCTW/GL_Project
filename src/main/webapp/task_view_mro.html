@@ -9,6 +9,10 @@
 <link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
+<link 
+	href="https://cdn.datatables.net/1.10.15/css/dataTables.foundation.min.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -27,7 +31,7 @@
 <script type="text/javascript"
 	src="bootstrap/js/dataTables.bootstrap.min.js">
         </script>
-<script src="taskView_mro.js"></script>
+<script src="task_view_mro.js"></script>
 
 </head>
 <body>
@@ -44,52 +48,71 @@
 				</div>
 			</div>
 		</div>
-	<div class="row">
-	<div class="col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h2 id="taskId"></h2>
-			</div>
-			<div class="panel-body" style="margin-left: 10px;margin-right: 10px;">
-				<div id=taskView>
-					<h5 id="ata"></h5>
-					<h5 id="qualification"></h5>
-					<h5 id="startDate"></h5>
-					<h5 id="endDate"></h5>
-					<h5 id="description"></h5>
-					<h5 id="periodicity"></h5>
-					<h5 id="hangarNeed"></h5>
-					<h5 id="mro"></h5>
+		<div class="row">
+			<div class="col-md-7">
+				<div class="panel panel-primary" style="margin-right: 10px;">
+					<div class="panel-heading">
+						<h2 id="taskId"></h2>
+					</div>
+					<div class="panel-body">
+						<dl class="row">
+							<dt class="col-sm-3">ATA Category</dt>
+							<dd class="col-sm-9" id="ata"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">Start date</dt>
+							<dd class="col-sm-9" id="startDate"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">End Date</dt>
+							<dd class="col-sm-9" id="endDate"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">Description</dt>
+							<dd class="col-sm-9" id="description"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">Periodicity</dt>
+							<dd class="col-sm-9" id="periodicity"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">Hangar Need</dt>
+							<dd class="col-sm-9" id="hangerNeed"></dd>
+						</dl>
+						<dl class="row">
+							<dt class="col-sm-3">MRO</dt>
+							<dd class="col-sm-9" id="mro"></dd>
+						</dl>
+
+						<h5 id="qualification"></h5>
+					</div>
+					<div class="panel-footer">
+						<div align="center" id="buttons">
+							<button class="btn btn-primary btn-lg">Submit</button>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="panel-footer">
-				<div align="center" id="buttons">
-					<button class="btn btn-primary btn-lg">Submit</button>
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h2 id="taskId">MRO LIST</h2>
+					</div>
+					<div class="panel-body">
+						<table id="mroList" class="table table-hover">
+							<thead>
+								<tr>
+									<th>MRO Id</th>
+									<th>MRO Name</th>
+									<th>Qualification</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-		</div>
-		<div class="col-md-1"></div>
-		<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h2 id="taskId">MRO LIST</h2>
-			</div>
-			<div class="panel-body">
-				<table id="mroList" class="table table-hover">
-					<thead>
-						<tr>
-							<th>MRO Id</th>
-							<th>MRO Name</th>
-							<th>Qualification</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
-		</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
