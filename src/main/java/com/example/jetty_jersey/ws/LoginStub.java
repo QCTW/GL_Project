@@ -59,7 +59,7 @@ public class LoginStub {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{user}/{pass}")
-	public String postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
+	public String[] postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
 		System.out.println("USER : "+name+"\n PASS : "+pass);
 		List<Couple> l = new ArrayList<Couple>();
 		l.add(new Couple("mcc", "pass", "mcc"));
@@ -76,15 +76,14 @@ public class LoginStub {
 			connected = false;
 		}
 		System.out.println("role 2:"+role);
-		return new String(role);
+		return new String[]{role};
 	}
 
-	@POST
+	@GET
 	@Path("/logout")
-	// @Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public void logout() {
 		connected = false;
+		System.out.println("logout");
 	}
 
 	/*

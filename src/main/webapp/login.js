@@ -16,9 +16,11 @@ function postLogin(pseudo, pass, success){
 
 
 function login(result){
-	var role =  JSON.stringify(result);
-	alert(role);
-	if(role == "incorrect"){
+	var r =  JSON.stringify(result[0]);
+	var role = r.toString().substring(1,r.toString().length-1);
+	//alert(role);
+	console.log("role in login "+role)
+	if(role === "incorrect"){
 		
 		$(".alert").html("Wrong Username or Password");
 		$(".alert").show();
@@ -33,7 +35,7 @@ function login(result){
 		document.location.href="tasks_and_planes.html";
 	}
 	else {
-		alert("role : "+role);
+		alert("incorrect or mcc or mro role : "+role);
 	}
 }
 
@@ -53,7 +55,15 @@ $("#ok").click(function (){
 	}
 	else{
 		localStorage.setItem("tmp",pseudo);
-		postLogin(pseudo,pass,login);
+		
+		var jqxhr = $.post( "ws/login/"+pseudo+"/"+pass, function() {
+			  //alert( "success" );
+			})
+			  .done(login)
+			  .fail(function() {
+			    alert( "error" );
+			  });
+		//postLogin(pseudo,pass,login);
 	}
 });
 

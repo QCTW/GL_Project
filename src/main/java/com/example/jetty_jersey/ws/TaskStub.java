@@ -39,7 +39,11 @@ public class TaskStub
 	@Path("/plane/{id}")
 	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id)
 	{
-		return taskDao.getTasksByPlaneId(id);
+		if(LoginStub.connected){
+			return taskDao.getTasksByPlaneId(id);
+		}
+		return new ArrayList<TaskInfo>();
+		
 	}
 
 	@GET
@@ -47,7 +51,11 @@ public class TaskStub
 	@Path("/{id}")
 	public TaskInfo taskById(@PathParam("id") int id)
 	{
-		return taskDao.getTasksById(id);
+		if(LoginStub.connected){
+			return DAO.getTaskDao().getTasksById(id); 
+		}
+		return null;
+				//taskDao.getTasksById(id);
 	}
 
 	@PUT

@@ -52,7 +52,7 @@ function getAllTasks(result){
 
 function getSTask(id){
 	var x = parseInt(id,10);
-	document.location.href="taskView_mro.html?id="+x;
+	document.location.href="task_view_mro.html?id="+x;
 }
 
 function getAllPlanes(result){
@@ -94,7 +94,9 @@ function pseudo(result){
 }
 function logout(){
 	localStorage.clear();
+	getServerData("ws/login/logout",null);
 	document.location.href="login.html";
+	
 }
 
 
