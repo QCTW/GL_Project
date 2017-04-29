@@ -33,7 +33,7 @@ import io.netty.handler.codec.http.HttpRequest;
 
 @Path("/login")
 public class LoginStub {
-	static boolean connected;
+	static boolean connected=true;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
