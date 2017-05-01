@@ -11,13 +11,15 @@ import com.example.jetty_jersey.DaoInterface.MccDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
 
-public class MccImpl implements MccDao {
+public class MccImpl implements MccDao
+{
 
 	private static Logger log = LogManager.getLogger(MccImpl.class.getName());
-	private final Map<String, MCC> mccCache = new HashMap<String, MCC>();
-	
-	public String getEmailById(String id) {
-		DatabaseConnecter dbc=new DatabaseConnecter();
+	private static Map<String, MCC> mccCache = new HashMap<String, MCC>();
+
+	public String getEmailById(String id)
+	{
+		DatabaseConnecter dbc = new DatabaseConnecter();
 		MCC m = mccCache.get(id);
 		if (m == null)
 		{
@@ -39,7 +41,7 @@ public class MccImpl implements MccDao {
 
 	public MCC getMccById(String id)
 	{
-		DatabaseConnecter dbc=new DatabaseConnecter();
+		DatabaseConnecter dbc = new DatabaseConnecter();
 		MCC m = mccCache.get(id);
 		if (m == null)
 		{
@@ -73,7 +75,6 @@ public class MccImpl implements MccDao {
 		return s;
 	}
 
-
 	public Status deleteMcc(int id)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -85,20 +86,17 @@ public class MccImpl implements MccDao {
 	public List<MCC> getMccsInRange(int iStart, int iEnd)
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
-		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("Mcc", iStart, iEnd);
+		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("mcc", iStart, iEnd);
 		List<MCC> mccList = new ArrayList<MCC>();
 		for (Map<String, String> m : results)
 		{
-			MCC mcc = new MCC(m.get("_id"),m.get("email"));
+			MCC mcc = new MCC(m.get("_id"), m.get("email"));
 			MCC wrap = mcc;
 			mccList.add(wrap);
-			System.out.println(mcc.toString());
-
 		}
 		dbConnect.close();
 		return mccList;
 	}
-
 
 	// For unit test
 	public static void main(String[] args)
@@ -108,5 +106,5 @@ public class MccImpl implements MccDao {
 		Status s = test.deleteMcc(1);
 		System.out.println("Delete Mcc _id=1:" + s.toString());
 	}
-	
+
 }
