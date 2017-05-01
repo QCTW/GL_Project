@@ -16,3 +16,4 @@ Jude Ingani judeIngani@gmail.com
 Amadou Sy amadous75@gmail.com 
 Mohamed Diallo mohamed.diallo93.md@gmail.com
 ZIDANE Abderrazak zidane.rezzak@gmail.com
+Binta Diabira binta.dbr@gmail.com
