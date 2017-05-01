@@ -100,7 +100,6 @@ public class TaskStub
 	public void addTasks(@PathParam("task") String task)
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-		List<Task> liste = new ArrayList<Task>();
 		String[] splitedFile;
 		String[] splitedLine;
 		try

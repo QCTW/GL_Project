@@ -52,7 +52,7 @@ public class PlaneStub
 					int id = Integer.parseInt(splitedLine[0]);
 					String type = splitedLine[1];
 					Plane p = new Plane(id, type);
-					planeDao.addPlane(p)
+					planeDao.addPlane(p);
 				}
 
 			}
