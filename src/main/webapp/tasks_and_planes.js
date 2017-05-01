@@ -1,7 +1,11 @@
-w3IncludeHTML();
+$(function (){
+	if(localStorage.getItem("mail") == null){
+		localStorage.setItem("needCo","true");
+		document.location.href="login.html";
+	}
+});
 
-//Session["test"] = "blablabla";
-//session.setAttribute("test", var);
+w3IncludeHTML();
 
 function getServerData(url, success){
     $.ajax({
@@ -18,8 +22,6 @@ function getAllTasks(result){
 	} );
 	
 	for(var i=0; i<result.length; i++){
-		//for(var j=0 ; j<result[i].tasklist.length ; j++ ){
-		//console.log(result[i].tasklist[j].id);
 			idt=JSON.stringify(result[i].task.id);
 			tab.row.add( [
 			idt,
@@ -37,7 +39,7 @@ function getAllTasks(result){
 					:
 						"<button onclick='getSTask("+idt+")' data-toggle='modal' data-target='#myModal' " +
 						"class='btn icon-btn btn-info'>  " +
-						"<span class='glyphicon btn-glyphicon glyphicon-edit'></span> " +
+						"<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> " +
 						"</button>"
 				
 			//'<button onclick="getSTask('+idt+')" class="btn icon-btn btn-success btn-md" data-toggle="modal" data-target="#myModal"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span></button>'
@@ -46,20 +48,11 @@ function getAllTasks(result){
 		
 	//}
 	}
-	/*$('#example tbody').on('click','tr', function(){
-		var data = tab.row( this ).data();
-		var x = parseInt(data[0],10);
-		//$("#content").load('viewTask.html');
-		document.location.href="taskView_mro.html?id="+x;
-		//alert ('you clicked on '+data[0]+'\'s row');
-	});*/
 }
 
 function getSTask(id){
 	var x = parseInt(id,10);
-	//$('#myModal').modal('show')
-	//$("#content").load('viewTask.html');
-	document.location.href="taskView_mro.html?id="+x;
+	document.location.href="task_view_mro.html?id="+x;
 }
 
 function getAllPlanes(result){
@@ -94,9 +87,15 @@ function formatDate(date) {
 function pseudo(result){
 	var pseudo = JSON.stringify(result[0]);
 	var role = JSON.stringify(result[1]);
-	sessionStorage.setItem("pseudo",pseudo);
-	sessionStorage.setItem("role",role);
-	$("#pseudo").html(sessionStorage.getItem("pseudo"));
+	localStorage.setItem("pseudo",pseudo);
+	localStorage.setItem("role",role);
+	$("#pseudo").html(localStorage.getItem("mail"));
+	
+}
+function logout(){
+	localStorage.clear();
+	getServerData("ws/login/logout",null);
+	document.location.href="login.html";
 	
 }
 

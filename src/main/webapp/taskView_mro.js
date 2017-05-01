@@ -6,8 +6,21 @@ function getServerData(url, success) {
 }
 var task;
 var s;
+//$('#taskId').append("Task n° ");
 function getTask(taskInfo) {
-	var templateTaskView = _.template($('#taskViewScript').html());
+	task = taskInfo;
+	
+	$('#taskId').html("Task n° "+taskInfo.task.id);
+	$('#ata').html("Ata Category        : "+JSON.stringify(taskInfo.task.ataCategory));
+	$('#startDate').html("Start date    : "+JSON.stringify(taskInfo.task.startTime));
+	$('#endDate').html("End date : "+JSON.stringify(taskInfo.task.endTime));
+	$('#description').html("Description : "+JSON.stringify(taskInfo.task.description));
+	$('#periodicity').html("Periodicity : "+JSON.stringify(taskInfo.task.periodicity));
+	$('#hangarNeed').html("Hangar Need 	: "+taskInfo.task.hangarNeed);
+	$('#mro').html("Mro :  "+taskInfo.mro.name);
+	
+	
+	/*var templateTaskView = _.template($('#taskViewScript').html());
 	var html = templateTaskView({
 		"ata" : JSON.stringify(taskInfo.tasklist[0].ataCategory),
 		"id" : JSON.stringify(taskInfo.tasklist[0].id),
@@ -17,8 +30,10 @@ function getTask(taskInfo) {
 		"description" : JSON.stringify(taskInfo.tasklist[0].description),
 		"periodicity" : JSON.stringify(taskInfo.tasklist[0].periodicity),
 		"hangarNeed" : JSON.stringify(taskInfo.tasklist[0].hangarNeed),
+		"mro" : JSON.stringify(taskInfo.mro.name),
 
 	});
+	
 	if (taskInfo.tasklist[0].taskStatus == 1) {
 		// s="ws/task/add"
 		$('#buttons')
@@ -38,6 +53,7 @@ function getTask(taskInfo) {
 						"<button type=\"button\" class=\"btn btn-default btn-xl\">Remove</button>");
 	}
 	$('#taskView').append(html);
+	*/
 
 }
 function getAllMro(result) {
@@ -67,22 +83,18 @@ function getAllMro(result) {
 		});
 	});
 	
-	$('#mroList').on('click', 'tr', function() {
-		/*var data = tab.row(this).data();
-		var x = parseInt(data[0], 10);
-		var id = this.id;
-		var index = $.inArray(id, selected);
-
-		if (index === -1) {
-			selected.push(id);
-		} else {
-			selected.splice(index, 1);
-		}
-
-		$(this).toggleClass('selected');
-		*/
-		// document.location.href="taskView_mro.html?id="+x;
-		// alert ('you clicked on '+data[0]+'\'s row');
+	$('#mroList tbody').on('click', 'tr', function() {
+		if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+        	tab.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+		var data = tab.row(this).data();
+		
+		document.getElementById("mroSelected").innerHTML = "<h5><b>Mro : </b>"+data[1]+"</h5>";
+		
 
 	});
 }

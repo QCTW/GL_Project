@@ -20,9 +20,9 @@ public class MroStub
 	public List<MRO> allMro()
 	{
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 50; i++)
 		{
-			l.add(new MRO());
+			l.add(new MRO(i,"mro"+i));
 		}
 		return l;
 

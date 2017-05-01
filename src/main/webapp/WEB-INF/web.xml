@@ -13,7 +13,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Secure resources</web-resource-name>
-			<url-pattern>/tasks_and_planes.html</url-pattern>
+			<url-pattern><!--tasks_and_planes.html--> </url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>mcc</role-name>

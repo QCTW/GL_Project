@@ -73,8 +73,13 @@ public class JettyMain
 		server.setHandler(contexts);
 
 		// Start server
-		server.start();
-		server.join();
+		// Edit by zidane : add try statement, we don't need to kill the server manually if something go wrong
+		try {
+			server.start();	
+			server.join();
+		} finally {
+			server.destroy();
+		}
 
 	}
 }
