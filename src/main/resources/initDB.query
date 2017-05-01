@@ -26,25 +26,65 @@ PUT gla/mcc/3
 
 PUT gla/mro/1
 {
- "qualification" : "studient in master info p7",
+ "qualification" : "Predictive and preventive maintenance (e.g. reliability-centered maintenance)",
  "name" : "Oulebsir",
  "surname" : "Hocine"
 }
 
 PUT gla/mro/2
 {
-
- "qualification" : "studient in master info p7",
+ "qualification" : "Functional system failure analysis and derived requirements specification",
  "name" : "Kaba",
  "surname" : "Sarah"
 }
  
 PUT gla/mro/3
 {
- 
- "qualification" : "studient in master info p7",
+ "qualification" : "System availability and mission readiness analysis and related reliability and maintenance requirement allocation",
  "name" : "Hsieh",
  "surname" : "Quincy"
+}
+
+PUT gla/mro/4
+{
+ "qualification" : "Inherent (system) Design Reliability Analysis and derived requirements specification for both Hardware and Software design",
+ "name" : "Meriem",
+ "surname" : "Fekih"
+}
+
+PUT gla/mro/5
+{
+ "qualification" : "System Diagnostics design",
+ "name" : "Krimo",
+ "surname" : "Hamadi"
+}
+
+PUT gla/mro/6
+{
+ "qualification" : "Fault tolerant systems (e.g. by redundancy)",
+ "name" : "Mohamed",
+ "surname" : "Diallo"
+}
+
+PUT gla/mro/7
+{
+ "qualification" : "Human factors / Human interaction / Human errors",
+ "name" : "Jude",
+ "surname" : "Ingani"
+}
+
+PUT gla/mro/8
+{
+ "qualification" : "Manufacturing- and Assembly-induced failures (effect on the detected 0-hour Quality and reliability)",
+ "name" : "Amadou",
+ "surname" : "Sy"
+}
+
+PUT gla/mro/9
+{
+ "qualification" : "Failure / reliability testing (and derived requirements)",
+ "name" : "Bdiabi",
+ "surname" : "Bdiabi"
 }
  
 PUT gla/plane/1
@@ -129,7 +169,6 @@ PUT gla/flight/5
  
 PUT gla/task/1
 {
- 
  "startTime" : "21/03/2017",
  "endTime" : "25/03/2017",
  "description" : "5101   Aircraft Structures : For reports of aircraft structural problems of a general nature which affects two or more areas. Includes reports of lightning strikes which cannot be associated with a specific JASC code.",
@@ -139,13 +178,11 @@ PUT gla/task/1
  "planeId" : "1",
  "taskStatus" : "8",
  "mroId" : "2"
-
 }
 
 
 PUT gla/task/2
 {
- 
  "startTime" : "22/03/2017",
  "endTime" : "26/03/2017",
  "description" : "2100   Air Conditioning System : For miscellaneous parts that cannot be associated with specific air conditioning, pressurization, or distribution codes. Examples are lines, hoses, etc., with no reference to the specific using system on the incoming report. Also, for those units and components furnishing a means of pressurizing, heating, cooling, moisture controlling, filtering, and treating the air used to ventilate areas of the fuselage within the pressure vessel.",
@@ -155,12 +192,10 @@ PUT gla/task/2
  "planeId" : "2",
  "taskStatus" : "7",
  "mroId" : "3"
-
 }
 
 PUT gla/task/3
 {
- 
  "startTime" : "28/03/2017",
  "endTime" : "28/04/2017",
  "description" : "3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
@@ -173,8 +208,7 @@ PUT gla/task/3
 }
 
 PUT gla/task/4
- {
- 
+{
  "startTime" : "28/03/2017",
  "endTime" : "28/04/2017",
  "description" : "6100   Propeller System : The complete mechanical or electrical propeller, governor, alternators, pumps, motors those units and components external to or integral with the engine used to control the propeller blade angle. Includes the propulsor duct assemblies, aerodynamic fairing of mechanical components, stators, vectoring systems, etc. Use this code for reports with insufficient information to file in a more specific JASC 6100 series code.",
@@ -203,11 +237,76 @@ PUT gla/task/6
 {
  "startTime" : "15/03/2017",
  "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MCC",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
  "periodicity" : "Once per day",
  "ataCategory" : "Power plant (ATA 70-92)",
  "hangarNeed" : "true",
  "planeId" : "1",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
+PUT gla/task/7
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "2",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
+PUT gla/task/8
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "3",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
+PUT gla/task/9
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "4",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
+PUT gla/task/10
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "5",
+ "taskStatus" : "0",
+ "mroId" : ""
+}
+
+PUT gla/task/11
+{
+ "startTime" : "15/03/2017",
+ "endTime" : "15/04/2017",
+ "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Power plant (ATA 70-92)",
+ "hangarNeed" : "true",
+ "planeId" : "6",
  "taskStatus" : "0",
  "mroId" : ""
 }
@@ -217,41 +316,32 @@ PUT gla/taskList/1
   "periodicity" : "Once per day",
   "ataCategory" : "Power plant (ATA 70-92)",
   "hangarNeed" : "true"
- 
  }
  
 PUT gla/taskList/2
 {
- 
   "periodicity" : "Once per day",
   "ataCategory" : "Propeller/rotor (ATA 60-67)",
   "hangarNeed" : "true"
- 
  }
  
 PUT gla/taskList/3
 {
- 
   "periodicity" : "Each flight",
   "ataCategory" : "Aircraft General (ATA 00-18)",
   "hangarNeed" : "false"
- 
 }
 
 PUT gla/taskList/4
 {
- 
   "periodicity" : "Each flight",
   "ataCategory" : "Airframe systems (ATA 20-50)",
   "hangarNeed" : "true"
- 
 }
 
 PUT gla/taskList/5
 {
- 
   "periodicity" : "Each flight",
   "ataCategory" : "Structure (ATA 51-57)",
   "hangarNeed" : "true"
- 
 }
