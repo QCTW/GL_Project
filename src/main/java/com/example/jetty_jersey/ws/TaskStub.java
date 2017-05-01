@@ -1,6 +1,10 @@
 package com.example.jetty_jersey.ws;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -88,6 +92,52 @@ public class TaskStub
 	public void deleteTaskById(@PathParam("id") int id)
 	{
 		taskDao.deleteTask(id);
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addTasks/{tasks}")
+	public void addTasks(@PathParam("task") String task)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		List<Task> liste = new ArrayList<Task>();
+		String[] splitedFile;
+		String[] splitedLine;
+		try
+		{
+			splitedFile = task.split("\n");
+			for (int i =0;i < splitedFile.length;i++)
+			{
+				splitedLine = splitedFile[i].split(",");
+				if (splitedLine.length != 10)
+				{
+					System.out.println("Le fichier n'est pas dans le bon format!");
+				}else{
+					int id = Integer.parseInt(splitedLine[0]);
+					Date starTime = dateFormat.parse(splitedLine[1]);
+					Date endTime = dateFormat.parse(splitedLine[2]);
+					String description = splitedLine[3];
+					String periodicity = splitedLine[4];
+					String ataCategory = splitedLine[5];
+					boolean needHangar = false;
+					if (splitedLine[6].equals("true"))
+						needHangar = true;
+					int planeId = Integer.parseInt(splitedLine[7]);
+					int statut = Integer.parseInt(splitedLine[8]);
+					int morId = Integer.parseInt(splitedLine[9]);
+					Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
+					liste.add(t);
+					taskDao.addTask(t);
+				}
+
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
 	}
 
 }
