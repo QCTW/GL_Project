@@ -2,11 +2,13 @@
 ## Comment always start with ## in our query file
 ## URL must be : <database_name>/<table_name>/<key_id>
 
+##CETTE FONCTION NE MARCHE PAS
+##POUR UN PREMIER LANCEMENT
 ## Clean database first
-POST gla/_delete_by_query
-{
-  "query": { "match_all" : { } }
-}
+##POST gla/_delete_by_query
+##{
+##  "query": { "match_all" : { } }
+##}
 
 ## Start filling up database simulation
 PUT gla/mcc/1
