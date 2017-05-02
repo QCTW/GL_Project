@@ -13,55 +13,42 @@ import javax.ws.rs.core.MediaType;
 import com.example.jetty_jersey.dao.MRO;
 
 @Path("/mro")
-public class MroStub
-{
+public class MroStub {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<MRO> allMro()
-	{
+	public List<MRO> allMro() {
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 0; i < 50; i++)
-		{
-			l.add(new MRO(i,"mro"+i));
+		for (int i = 0; i < 50; i++) {
+			l.add(new MRO(i, "mro" + i));
 		}
 		return l;
 
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addMRO/{mro}")
-	public void addMRO(@PathParam("mro") String mro)
-	{
-				String[] splitedFile;
+	public void addMRO(@PathParam("mro") String mro) {
+		String[] splitedFile;
 		String[] splitedLine;
-		try
-		{
-			splitedFile = mro.split(",");
-			for (int i =0;i< splitedFile.length;i++)
-			{
-				splitedLine = splitedFile[i].split(",");
-				if (splitedLine.length != 2)
-				{
-					System.out.println("Le fichier n'est pas dans le bon format!");
-					
-				}else
-				{
-					int id = Integer.parseInt(splitedLine[0]);
-					String nom = splitedLine[1];
-					MRO m = new MRO(id, nom);
-					
-				}
+
+		splitedFile = mro.split(",");
+		for (int i = 0; i < splitedFile.length; i++) {
+			splitedLine = splitedFile[i].split(",");
+			if (splitedLine.length != 2) {
+				System.out.println("Le fichier n'est pas dans le bon format!");
+
+			} else {
+				int id = Integer.parseInt(splitedLine[0]);
+				String nom = splitedLine[1];
+				MRO m = new MRO(id, nom);
 
 			}
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} 
+		}
 
 	}
-	
+
 }
