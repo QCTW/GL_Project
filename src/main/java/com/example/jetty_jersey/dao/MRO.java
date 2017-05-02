@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.Dao;
+package com.example.jetty_jersey.dao;
 
 import com.example.jetty_jersey.db.CustomHashMap;
 

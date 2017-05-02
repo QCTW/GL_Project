@@ -10,9 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.example.jetty_jersey.Dao.MRO;
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.DaoInterface.MroDao;
+import com.example.jetty_jersey.dao.MRO;
 
 @Path("/mro")
 public class MroStub

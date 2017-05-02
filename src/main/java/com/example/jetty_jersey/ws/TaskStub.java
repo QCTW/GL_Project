@@ -1,7 +1,5 @@
 package com.example.jetty_jersey.ws;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,8 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.example.jetty_jersey.util.TaskInfo;
-import com.example.jetty_jersey.Dao.*;
-import com.example.jetty_jersey.DaoInterface.TaskDao;
+import com.example.jetty_jersey.dao.*;
+import com.example.jetty_jersey.dao_interface.TaskDao;
 
 @Path("/task")
 public class TaskStub

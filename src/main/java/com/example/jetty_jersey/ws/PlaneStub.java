@@ -1,7 +1,5 @@
 package com.example.jetty_jersey.ws;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +10,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.example.jetty_jersey.Dao.DAO;
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.DaoInterface.PlaneDao;
+import com.example.jetty_jersey.dao.DAO;
+import com.example.jetty_jersey.dao.Plane;
+import com.example.jetty_jersey.dao_interface.PlaneDao;
 
 @Path("/plane")
 public class PlaneStub

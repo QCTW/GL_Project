@@ -1,7 +1,7 @@
 package com.example.jetty_jersey.util;
 
-import com.example.jetty_jersey.Dao.Flight;
-import com.example.jetty_jersey.Dao.Plane;
+import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao.Plane;
 
 public class PlaneInfo
 {

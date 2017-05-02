@@ -1,13 +1,13 @@
-package com.example.jetty_jersey.DaoInterfaceImpl;
+package com.example.jetty_jersey.dao_implementation;
 
 import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.example.jetty_jersey.Dao.MCC;
-import com.example.jetty_jersey.Dao.Status;
-import com.example.jetty_jersey.DaoInterface.MccDao;
+import com.example.jetty_jersey.dao.MCC;
+import com.example.jetty_jersey.dao.Status;
+import com.example.jetty_jersey.dao_interface.MccDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
 

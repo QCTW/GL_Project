@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.DaoInterfaceImpl;
+package com.example.jetty_jersey.dao_implementation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,12 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
-import com.example.jetty_jersey.Dao.Flight;
-import com.example.jetty_jersey.Dao.MRO;
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.Dao.Status;
-import com.example.jetty_jersey.Dao.Task;
-import com.example.jetty_jersey.DaoInterface.TaskDao;
+import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao.MRO;
+import com.example.jetty_jersey.dao.Plane;
+import com.example.jetty_jersey.dao.Status;
+import com.example.jetty_jersey.dao.Task;
+import com.example.jetty_jersey.dao_interface.TaskDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
 import com.example.jetty_jersey.db.Utility;

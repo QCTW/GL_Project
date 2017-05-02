@@ -1,13 +1,13 @@
 
-package com.example.jetty_jersey.DaoInterfaceImpl;
+package com.example.jetty_jersey.dao_implementation;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.Dao.Status;
-import com.example.jetty_jersey.DaoInterface.PlaneDao;
+import com.example.jetty_jersey.dao.Plane;
+import com.example.jetty_jersey.dao.Status;
+import com.example.jetty_jersey.dao_interface.PlaneDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.Utility;
 
