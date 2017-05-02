@@ -23,10 +23,6 @@ public class Task
 		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.description = description;
-		this.periodicity = periodicity;
-		this.ataCategory = ataCategory;
-		this.hangarNeed = hangarNeed;
 		this.planeId = planeId;
 		this.taskStatus = taskStatus;
 		this.mroId = mroId;
@@ -38,10 +34,6 @@ public class Task
 		this.id = cpt++;
 		this.startTime = new Date((long) (Math.random() * System.currentTimeMillis()));
 		this.endTime = new Date((long) (Math.random() * System.currentTimeMillis()));
-		this.description = "description" + x;
-		this.periodicity = "periodicity" + x;
-		this.ataCategory = "ata" + x;
-		this.hangarNeed = (Math.random() < 0.5) ? true : false;
 		this.planeId = planeId;
 		this.taskStatus = (Math.random() < 0.5) ? 1 : 2;
 		;
@@ -54,10 +46,10 @@ public class Task
 		chm.put("_id", String.valueOf(id));
 		chm.put("startTime", Utility.convertDateToString(startTime));
 		chm.put("endTime", Utility.convertDateToString(endTime));
-		chm.put("description", description);
-		chm.put("periodicity", periodicity);
-		chm.put("ataCategory", ataCategory);
-		chm.put("hangarNeed", Boolean.toString(hangarNeed));
+		// chm.put("description", description);
+		// chm.put("periodicity", periodicity);
+		// chm.put("ataCategory", ataCategory);
+		// chm.put("hangarNeed", Boolean.toString(hangarNeed));
 		chm.put("planeId", String.valueOf(planeId));
 		chm.put("taskStatus", String.valueOf(taskStatus));
 		chm.put("mroId", String.valueOf(mroId));
@@ -88,46 +80,6 @@ public class Task
 	public void setEndTime(Date endTime)
 	{
 		this.endTime = endTime;
-	}
-
-	public String getDescription()
-	{
-		return description;
-	}
-
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-
-	public String getPeriodicity()
-	{
-		return periodicity;
-	}
-
-	public void setPeriodicity(String periodicity)
-	{
-		this.periodicity = periodicity;
-	}
-
-	public String getAtaCategory()
-	{
-		return ataCategory;
-	}
-
-	public void setAtaCategory(String ataCategory)
-	{
-		this.ataCategory = ataCategory;
-	}
-
-	public boolean isHangarNeed()
-	{
-		return hangarNeed;
-	}
-
-	public void setHangarNeed(boolean hangarNeed)
-	{
-		this.hangarNeed = hangarNeed;
 	}
 
 	public int getPlaneId()
@@ -163,8 +115,8 @@ public class Task
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";start=" + Utility.convertDateToString(startTime) + ";end=" + Utility.convertDateToString(endTime) + ";desc=" + description + ";periodicity=" + periodicity + ";ata="
-				+ ataCategory + ";hangarNeed=" + hangarNeed + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId=" + mroId;
+		return "id=" + id + ";start=" + Utility.convertDateToString(startTime) + ";end=" + Utility.convertDateToString(endTime) + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId="
+				+ mroId;
 	}
 
 }
