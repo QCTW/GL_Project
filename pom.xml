@@ -120,6 +120,25 @@
 		<version>9.2.14.v20151106</version>
 	</dependency>
 
+	  <!-- Email service -->
+	  <dependency>
+		  <groupId>com.sun.mail</groupId>
+		  <artifactId>javax.mail</artifactId>
+		  <version>1.5.5</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>javax.mail</groupId>
+		  <artifactId>mail</artifactId>
+		  <version>1.4.7</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>javax.mail</groupId>
+		  <artifactId>javax.mail-api</artifactId>
+		  <version>1.5.5</version>
+	  </dependency>
+
 	<!-- Jersey -->
 	<dependency>
 		<groupId>org.glassfish.jersey.core</groupId>
