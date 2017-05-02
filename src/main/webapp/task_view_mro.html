@@ -7,12 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
-<link
-	href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-<link
-	href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
-<link 
-	href="https://cdn.datatables.net/1.10.15/css/dataTables.foundation.min.css">
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link href="http://www.eyecon.ro/bootstrap-datepicker/css/datepicker.css">
+
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css.map" rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -20,6 +23,8 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 <script src="bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/underscore-min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -99,7 +104,7 @@
 						<h2 id="taskId">MRO LIST</h2>
 					</div>
 					<div class="panel-body">
-						<table id="mroList" class="table table-hover">
+						<table id="mroLis" class="table table-hover">
 							<thead>
 								<tr>
 									<th>MRO Id</th>
@@ -113,6 +118,14 @@
 				</div>
 			</div>
 		</div>
+		<table class="table">
+        <thead>
+          <tr>
+            <th>Check in: <input type="text" class="span2" value="" id="dpd1" ></th>
+            <th>Check out: <input type="text" class="span2" value="" id="dpd2" ></th>
+          </tr>
+        </thead>
+        </table>
 	</div>
 </body>
 </html>

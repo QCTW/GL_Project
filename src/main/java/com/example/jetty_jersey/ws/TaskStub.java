@@ -125,7 +125,7 @@ public class TaskStub
 					int statut = Integer.parseInt(splitedLine[8]);
 					int morId = Integer.parseInt(splitedLine[9]);
 					Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
-					liste.add(t);
+					//liste.add(t);
 					taskDao.addTask(t);
 				}
 
