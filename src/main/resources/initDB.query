@@ -3,10 +3,10 @@
 ## URL must be : <database_name>/<table_name>/<key_id>
 
 ## Clean database first
-POST gla/_delete_by_query
-{
-  "query": { "match_all" : { } }
-}
+##POST gla/_delete_by_query
+##{
+##  "query": { "match_all" : { } }
+##}
 
 ## Start filling up database simulation
 PUT gla/mcc/1
