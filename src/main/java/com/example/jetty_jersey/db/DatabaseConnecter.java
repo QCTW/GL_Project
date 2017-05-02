@@ -32,8 +32,8 @@ import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.transport.client.*;
 
-import com.example.jetty_jersey.Dao.Status;
-import com.example.jetty_jersey.Dao.Status.Execution;
+import com.example.jetty_jersey.dao.Status;
+import com.example.jetty_jersey.dao.Status.Execution;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.*;
 

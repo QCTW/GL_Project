@@ -1,9 +1,9 @@
-package com.example.jetty_jersey.DaoInterface;
+package com.example.jetty_jersey.dao_interface;
 
 import java.util.List;
 
-import com.example.jetty_jersey.Dao.MCC;
-import com.example.jetty_jersey.Dao.Status;
+import com.example.jetty_jersey.dao.MCC;
+import com.example.jetty_jersey.dao.Status;
 
 public interface MccDao {
 

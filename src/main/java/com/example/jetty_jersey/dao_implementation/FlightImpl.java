@@ -1,9 +1,9 @@
-package com.example.jetty_jersey.DaoInterfaceImpl;
+package com.example.jetty_jersey.dao_implementation;
 
 import java.util.List;
 
-import com.example.jetty_jersey.Dao.Flight;
-import com.example.jetty_jersey.DaoInterface.FlightDao;
+import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao_interface.FlightDao;
 
 import java.util.ArrayList;
 import java.util.Map;

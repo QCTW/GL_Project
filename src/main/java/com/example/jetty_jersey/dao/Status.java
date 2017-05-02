@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.Dao;
+package com.example.jetty_jersey.dao;
 
 /**
  * This class is used to provide the status of backend execution.

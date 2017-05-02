@@ -1,9 +1,9 @@
 package com.example.jetty_jersey.util;
 
-import com.example.jetty_jersey.Dao.Flight;
-import com.example.jetty_jersey.Dao.MRO;
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.Dao.Task;
+import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao.MRO;
+import com.example.jetty_jersey.dao.Plane;
+import com.example.jetty_jersey.dao.Task;
 
 public class TaskInfo
 {

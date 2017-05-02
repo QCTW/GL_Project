@@ -7,7 +7,7 @@
  *
  *}
  **/
-package com.example.jetty_jersey.Dao;
+package com.example.jetty_jersey.dao;
 
 public class TaskList{
 	

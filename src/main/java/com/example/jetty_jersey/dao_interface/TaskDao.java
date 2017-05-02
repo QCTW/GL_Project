@@ -1,9 +1,9 @@
-package com.example.jetty_jersey.DaoInterface;
+package com.example.jetty_jersey.dao_interface;
 
 import java.util.List;
 
 import com.example.jetty_jersey.util.TaskInfo;
-import com.example.jetty_jersey.Dao.*;
+import com.example.jetty_jersey.dao.*;
 
 public interface TaskDao
 {

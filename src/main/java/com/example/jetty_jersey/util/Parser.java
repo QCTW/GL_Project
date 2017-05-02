@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.jetty_jersey.Dao.Flight;
-import com.example.jetty_jersey.Dao.Plane;
-import com.example.jetty_jersey.Dao.Task;
+import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao.Plane;
+import com.example.jetty_jersey.dao.Task;
 
 public class Parser
 {

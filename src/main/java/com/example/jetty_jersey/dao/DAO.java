@@ -1,9 +1,9 @@
-package com.example.jetty_jersey.Dao;
+package com.example.jetty_jersey.dao;
 
-import com.example.jetty_jersey.DaoInterface.FlightDao;
-import com.example.jetty_jersey.DaoInterface.PlaneDao;
-import com.example.jetty_jersey.DaoInterface.TaskDao;
-import com.example.jetty_jersey.DaoInterfaceImpl.*;
+import com.example.jetty_jersey.dao_interface.FlightDao;
+import com.example.jetty_jersey.dao_interface.PlaneDao;
+import com.example.jetty_jersey.dao_interface.TaskDao;
+import com.example.jetty_jersey.dao_implementation.*;
 
 public class DAO
 {
