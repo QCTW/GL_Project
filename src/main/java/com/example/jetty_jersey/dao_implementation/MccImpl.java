@@ -28,7 +28,7 @@ public class MccImpl implements MccDao
 				log.error("Unable to find MCC id : " + id + " in the database!");
 			else
 			{
-				m = new MCC(res.get(0).get("id"), res.get(0).get("email"));
+				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"));
 			}
 		}
 		return m.getEmail();
@@ -50,7 +50,7 @@ public class MccImpl implements MccDao
 				log.error("Unable to find MCC id : " + id + " in the database!");
 			else
 			{
-				m = new MCC(res.get(0).get("id"), res.get(0).get("email"));
+				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"));
 				m.setEmail(res.get(0).get("email"));
 				mccCache.put(id, m);
 				System.out.println(m.toString() + " created");

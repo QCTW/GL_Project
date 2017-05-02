@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 import com.example.jetty_jersey.dao.MRO;
 import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao_interface.MroDao;
@@ -17,10 +18,45 @@ public class MroImpl implements MroDao {
 	private static Logger log = LogManager.getLogger(MccImpl.class.getName());
 	private final Map<String, MRO> mroCache = new HashMap<String, MRO>();
 	
+	public MRO getMroById(int id) {
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		
+		MRO m = mroCache.get(id);
+		if (m == null)
+		{
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("mro", "_id", Integer.toString(id));
+			if (res == null || res.size() <= 0)
+				log.error("Unable to find MCC id : " + id + " in the database!");
+			else
+			{
+				m = new MRO(Utility.convertIntString(res.get(0).get("_id")),res.get(0).get("name"));
+			}
+		}
+		return m;
+	}
+	
 	public List<MRO> getMrobyQualification(String qualification) {
 		DatabaseConnecter dbc=new DatabaseConnecter();
+		List<MRO> mroList = new ArrayList<MRO>();
 		
-		return null;
+		List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("mro", "qualification", qualification);
+		
+		if (res == null || res.size() <= 0){
+			log.error("Unable to find MRO qualification : " + qualification + " in the database!");
+			return null;
+		}
+		else
+		{
+			for (Map<String, String> m : res)
+			{
+				MRO mro = new MRO(Utility.convertIntString(m.get("_id")),m.get("name"));
+				mroList.add(mro);
+
+			}
+		}
+		
+		dbc.close();
+		return mroList;
 	}
 	
 	public List<MRO> getMrosInRange(int iStart, int iEnd)
@@ -70,8 +106,9 @@ public class MroImpl implements MroDao {
 		MroImpl test = new MroImpl();
 		MRO mro=new MRO(-1, "Kaba en test");
 		test.getAllMros();
-		Status s = test.addMro(mro);
-		System.out.println("add Mro _id=1:" + s.toString());
+		//Status s = test.addMro(mro);
+		test.getMrobyQualification("System Diagnostics design");
+		System.out.println("au revoir");
 	}
 
 }

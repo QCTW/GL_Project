@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.example.jetty_jersey.dao.*;
 public interface MroDao{
+	
+	/**
+	 * @return the MCC with the given id
+	 **/
+	 MRO getMroById(int id);
+	 
 	/**
 	*@return the list of mro members with the given qualification
 	**/
