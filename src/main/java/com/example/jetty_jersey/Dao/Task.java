@@ -9,14 +9,11 @@ public class Task
 {
 
 	private final int id;
+	private int idTaskGeneric;
 	private Date startTime;
 	private Date endTime;
-	private String description;
-	private String periodicity;
-	private String ataCategory;
-	private boolean hangarNeed;
 	private int planeId;
-	private int taskStatus;
+	private int taskStatus; // Pas distribue = 1, En cour =2, Effactue = 3
 	private int mroId;
 	private static int cpt = 0;
 
