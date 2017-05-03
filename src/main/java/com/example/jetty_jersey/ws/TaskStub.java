@@ -31,7 +31,7 @@ public class TaskStub
 	{
 		if(LoginStub.connected){
 			System.out.println("Connected : "+LoginStub.connected);
-			return taskDao.getAllTasks();
+			return DAO.getTaskDao().getAllTasks();
 		}
 		else return new ArrayList<TaskInfo>();
 	}

@@ -101,12 +101,12 @@ function logout(){
 
 
 $(function(){
-		getServerData("ws/task/all",getAllTasks);
+		//getServerData("ws/task/all",getAllTasks);
 });
 $(function(){
-	getServerData("ws/plane/all",getAllPlanes);
+	//getServerData("ws/plane/all",getAllPlanes);
 });
 $(function(){
-	getServerData("ws/login/getUser",pseudo);
+	//getServerData("ws/login/getUser",pseudo);
 });
 
