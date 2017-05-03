@@ -47,8 +47,8 @@ public class Parser
 				int statut = Integer.parseInt(splitedLine[8]);
 				int morId = Integer.parseInt(splitedLine[9]);
 				// System.out.println(line);
-				Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
-				liste.add(t);
+				//Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
+				//liste.add(t);
 
 			}
 
