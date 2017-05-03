@@ -8,7 +8,7 @@ import com.example.jetty_jersey.dao.TaskGeneric;
 
 public class TaskInfo
 {
-	public TaskGeneric detail;
+	public TaskGeneric taskGeneric;
 	public Task task;
 	public Plane plane;
 	public Flight flight;
