@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class Utility
 {
 	private static Logger log = LogManager.getLogger(Utility.class.getName());
-	private static DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+	private static DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 	/**
 	 * This method convert dd/MM/yyyy to date object
@@ -27,7 +27,7 @@ public class Utility
 			date = df.parse(strDateInDb);
 		} catch (ParseException e)
 		{
-			log.error("Unrecognized date format (not dd/MM/yyyy):" + strDateInDb);
+			log.error("Unrecognized date format (not yyyy/MM/dd HH:mm):" + strDateInDb);
 		}
 		return date;
 	}
@@ -36,7 +36,7 @@ public class Utility
 	 * Reverse method of convertDateString with the same formatter
 	 * 
 	 * @param date
-	 * @return string with format dd/MM/yyyy
+	 * @return string with format yyyy/MM/dd HH:mm
 	 */
 	public static String convertDateToString(Date date)
 	{
@@ -67,6 +67,8 @@ public class Utility
 	 */
 	public static int convertIntString(String strIntInDb)
 	{
+		if (strIntInDb.length() == 0)
+			return -1;
 		int i = 0;
 		try
 		{

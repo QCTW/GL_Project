@@ -7,37 +7,23 @@ import com.example.jetty_jersey.db.Utility;
 
 public class Task
 {
-
 	private final int id;
-	private int idTaskGeneric;
+	private final int idTaskGeneric;
 	private Date startTime;
 	private Date endTime;
 	private int planeId;
-	private int taskStatus; // Pas distribue = 1, En cour =2, Effactue = 3
+	private int taskStatus; // Pas distribue = 1, En cour =2, Effactu = 3
 	private int mroId;
-	private static int cpt = 0;
 
-	public Task(int id, Date startTime, Date endTime, String description, String periodicity, String ataCategory, boolean hangarNeed, int planeId, int taskStatus, int mroId)
+	public Task(int id, int idTaskGeneric, Date startTime, Date endTime, int planeId, int taskStatus, int mroId)
 	{
-		super();
 		this.id = id;
+		this.idTaskGeneric = idTaskGeneric;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.planeId = planeId;
 		this.taskStatus = taskStatus;
 		this.mroId = mroId;
-	}
-
-	public Task(int id, int planeId)
-	{
-		int x = (int) (Math.random() * 1000);
-		this.id = cpt++;
-		this.startTime = new Date((long) (Math.random() * System.currentTimeMillis()));
-		this.endTime = new Date((long) (Math.random() * System.currentTimeMillis()));
-		this.planeId = planeId;
-		this.taskStatus = (Math.random() < 0.5) ? 1 : 2;
-		;
-		this.mroId = (int) (Math.random() * 10);
 	}
 
 	public CustomHashMap<String, String> toMap()
@@ -60,6 +46,11 @@ public class Task
 	public int getId()
 	{
 		return id;
+	}
+
+	public int getIdTaskGeneric()
+	{
+		return idTaskGeneric;
 	}
 
 	public Date getStartTime()
@@ -115,8 +106,8 @@ public class Task
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";start=" + Utility.convertDateToString(startTime) + ";end=" + Utility.convertDateToString(endTime) + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId="
-				+ mroId;
+		return "id=" + id + ";idTaskGeneric=" + idTaskGeneric + ";start=" + Utility.convertDateToString(startTime) + ";end=" + Utility.convertDateToString(endTime) + ";planeId=" + planeId
+				+ ";taskStatus=" + taskStatus + ";mroId=" + mroId;
 	}
 
 }

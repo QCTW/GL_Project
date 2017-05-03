@@ -5,10 +5,10 @@
 ##CETTE FONCTION NE MARCHE PAS
 ##POUR UN PREMIER LANCEMENT
 ## Clean database first
-##POST gla/_delete_by_query
-##{
-##  "query": { "match_all" : { } }
-##}
+POST gla/_delete_by_query
+{
+  "query": { "match_all" : { } }
+}
 
 ## Start filling up database simulation
 PUT gla/mcc/1
@@ -126,8 +126,8 @@ PUT gla/flight/1
  	"commercialId" : "AF7724",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Nantes-NTE",
-	"departureTime" : "21/03/2017",
-	"arrivalTime" : "23/03/2017"
+	"departureTime" : "2017/05/02 09:40",
+	"arrivalTime" : "2017/05/02 10:40"
 }
  
 PUT gla/flight/2
@@ -136,8 +136,8 @@ PUT gla/flight/2
  	"commercialId" : "AF1134",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Berlin-TXL",
-	"departureTime" : "02/09/2016",
-	"arrivalTime" : "03/09/2016"
+	"departureTime" : "2016/12/24 09:15",
+	"arrivalTime" : "2016/12/24 10:45"
 }
  
 PUT gla/flight/3
@@ -146,8 +146,8 @@ PUT gla/flight/3
  	"commercialId" : "BR88",
 	"departureAirport" : "Taipei-TPE",
 	"arrivalAirport" : "Paris-CDG",
-	"departureTime" : "01/12/2007",
-	"arrivalTime" : "03/12/2007"
+	"departureTime" : "2017/01/20 23:00",
+	"arrivalTime" : "2017/01/21 11:00"
 }
  
 PUT gla/flight/4
@@ -156,8 +156,8 @@ PUT gla/flight/4
  	"commercialId" : "EK72",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Dubaï-DXB",
-	"departureTime" : "15/04/2007",
-	"arrivalTime" : "15/04/2007"
+	"departureTime" : "2017/01/20 23:00",
+	"arrivalTime" : "2017/01/21 06:30"
 }
  
 PUT gla/flight/5
@@ -166,18 +166,15 @@ PUT gla/flight/5
  	"commercialId" : "JAL216",
 	"departureAirport" : "Paris-CDG",
 	"arrivalAirport" : "Tokyo-HND",
-	"departureTime" : "15/03/2007",
-	"arrivalTime" : "16/03/2007"
+	"departureTime" : "2017/05/01 23:00",
+	"arrivalTime" : "2017/05/02 11:00"
 }
  
 PUT gla/task/1
 {
- "startTime" : "21/03/2017",
- "endTime" : "25/03/2017",
- "description" : "5101   Aircraft Structures : For reports of aircraft structural problems of a general nature which affects two or more areas. Includes reports of lightning strikes which cannot be associated with a specific JASC code.",
- "periodicity" : "Every week",
- "ataCategory" : "Structure (ATA 51-57)",
- "hangarNeed" : "true",
+ "startTime" : "2017/05/02 06:40",
+ "endTime" : "2017/05/02 07:40",
+ "idTaskGeneric" : "1",
  "planeId" : "1",
  "taskStatus" : "8",
  "mroId" : "2"
@@ -186,12 +183,9 @@ PUT gla/task/1
 
 PUT gla/task/2
 {
- "startTime" : "22/03/2017",
- "endTime" : "26/03/2017",
- "description" : "2100   Air Conditioning System : For miscellaneous parts that cannot be associated with specific air conditioning, pressurization, or distribution codes. Examples are lines, hoses, etc., with no reference to the specific using system on the incoming report. Also, for those units and components furnishing a means of pressurizing, heating, cooling, moisture controlling, filtering, and treating the air used to ventilate areas of the fuselage within the pressure vessel.",
- "periodicity" : "Each flight",
- "ataCategory" : "Airframe systems (ATA 20-50)",
- "hangarNeed" : "true",
+ "startTime" : "2016/12/24 06:15",
+ "endTime" : "2016/12/24 08:15",
+ "idTaskGeneric" : "5",
  "planeId" : "2",
  "taskStatus" : "7",
  "mroId" : "3"
@@ -199,12 +193,9 @@ PUT gla/task/2
 
 PUT gla/task/3
 {
- "startTime" : "28/03/2017",
- "endTime" : "28/04/2017",
- "description" : "3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
- "periodicity" : "Each flight",
- "ataCategory" : "Aircraft General (ATA 00-18)",
- "hangarNeed" : "false",
+ "startTime" : "2017/01/20 20:00",
+ "endTime" : "2017/01/20 21:15",
+ "idTaskGeneric" : "4",
  "planeId" : "3",
  "taskStatus" : "9",
  "mroId" : "1"
@@ -212,12 +203,9 @@ PUT gla/task/3
 
 PUT gla/task/4
 {
- "startTime" : "28/03/2017",
- "endTime" : "28/04/2017",
- "description" : "6100   Propeller System : The complete mechanical or electrical propeller, governor, alternators, pumps, motors those units and components external to or integral with the engine used to control the propeller blade angle. Includes the propulsor duct assemblies, aerodynamic fairing of mechanical components, stators, vectoring systems, etc. Use this code for reports with insufficient information to file in a more specific JASC 6100 series code.",
- "periodicity" : "Once per day",
- "ataCategory" : "Propeller/rotor (ATA 60-67)",
- "hangarNeed" : "true",
+ "startTime" : "2017/01/20 20:45",
+ "endTime" : "2017/01/20 21:45",
+ "idTaskGeneric" : "3",
  "planeId" : "3",
  "taskStatus" : "9",
  "mroId" : "1"
@@ -225,12 +213,9 @@ PUT gla/task/4
 
 PUT gla/task/5
 {
- "startTime" : "28/03/2017",
- "endTime" : "28/04/2017",
- "description" : "5300   Fuselage Structure (General) : For reports of structural units and associated components and members which make up the compartments for crew, passengers, equipment, cargo, plus the structure of the envelope and gondola of airships.",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2017/01/20 20:15",
+ "endTime" : "2017/01/20 21:30",
+ "idTaskGeneric" : "2",
  "planeId" : "3",
  "taskStatus" : "9",
  "mroId" : "2"
@@ -238,113 +223,110 @@ PUT gla/task/5
 
 PUT gla/task/6
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2017/05/01 22:00",
+ "endTime" : "2017/05/02 00:30",
+ "idTaskGeneric" : "1",
  "planeId" : "1",
  "taskStatus" : "0",
- "mroId" : ""
+ "mroId" : "-1"
 }
 
 PUT gla/task/7
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2016/12/23 23:00",
+ "endTime" : "2016/12/24 01:40",
+ "idTaskGeneric" : "1",
  "planeId" : "2",
  "taskStatus" : "0",
- "mroId" : ""
+ "mroId" : "-1"
 }
 
 PUT gla/task/8
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2017/01/20 20:00",
+ "endTime" : "2017/01/20 20:40",
+ "idTaskGeneric" : "1",
  "planeId" : "3",
  "taskStatus" : "0",
- "mroId" : ""
+ "mroId" : "-1"
 }
 
 PUT gla/task/9
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2017/01/20 10:00",
+ "endTime" : "2017/01/20 13:00",
+ "idTaskGeneric" : "1",
  "planeId" : "4",
  "taskStatus" : "0",
- "mroId" : ""
+ "mroId" : "-1"
 }
 
 PUT gla/task/10
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
- "periodicity" : "Once per day",
- "ataCategory" : "Power plant (ATA 70-92)",
- "hangarNeed" : "true",
+ "startTime" : "2017/05/01 16:00",
+ "endTime" : "2017/05/01 18:30",
+ "idTaskGeneric" : "1",
  "planeId" : "5",
  "taskStatus" : "0",
- "mroId" : ""
+ "mroId" : "-1"
 }
 
 PUT gla/task/11
 {
- "startTime" : "15/03/2017",
- "endTime" : "15/04/2017",
- "description" : "5300   Fuselage Structure (General) : Task not assigned to MRO",
+ "startTime" : "2017/05/02 19:15",
+ "endTime" : "2017/05/02 21:15",
+ "idTaskGeneric" : "1",
+ "planeId" : "6",
+ "taskStatus" : "0",
+ "mroId" : "-1"
+}
+
+PUT gla/taskgeneric/1
+{
+ "description" : "5300   Fuselage Structure (General) : For reports of structural units and associated components and members which make up the compartments for crew, passengers, equipment, cargo, plus the structure of the envelope and gondola of airships.",
  "periodicity" : "Once per day",
  "ataCategory" : "Power plant (ATA 70-92)",
  "hangarNeed" : "true",
- "planeId" : "6",
- "taskStatus" : "0",
- "mroId" : ""
-}
-
-PUT gla/taskList/1
-{
-  "periodicity" : "Once per day",
-  "ataCategory" : "Power plant (ATA 70-92)",
-  "hangarNeed" : "true"
+ "duree" : "1",
+ "planeType" : "Airbus A380"
  }
  
-PUT gla/taskList/2
+PUT gla/taskgeneric/2
 {
-  "periodicity" : "Once per day",
-  "ataCategory" : "Propeller/rotor (ATA 60-67)",
-  "hangarNeed" : "true"
+ "description" : "6100   Propeller System : The complete mechanical or electrical propeller, governor, alternators, pumps, motors those units and components external to or integral with the engine used to control the propeller blade angle. Includes the propulsor duct assemblies, aerodynamic fairing of mechanical components, stators, vectoring systems, etc. Use this code for reports with insufficient information to file in a more specific JASC 6100 series code.",
+ "periodicity" : "Once per day",
+ "ataCategory" : "Propeller/rotor (ATA 60-67)",
+ "hangarNeed" : "true", 
+ "duree" : "1.5",
+ "planeType" : "Airbus A380"
  }
  
-PUT gla/taskList/3
+PUT gla/taskgeneric/3
 {
-  "periodicity" : "Each flight",
-  "ataCategory" : "Aircraft General (ATA 00-18)",
-  "hangarNeed" : "false"
+ "description" : "3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
+ "periodicity" : "Each flight",
+ "ataCategory" : "Aircraft General (ATA 00-18)",
+ "hangarNeed" : "false",
+ "duree" : "0.5",
+ "planeType" : "Airbus A380"
 }
 
-PUT gla/taskList/4
+PUT gla/taskgeneric/4
 {
-  "periodicity" : "Each flight",
-  "ataCategory" : "Airframe systems (ATA 20-50)",
-  "hangarNeed" : "true"
+ "description" : "2100   Air Conditioning System : For miscellaneous parts that cannot be associated with specific air conditioning, pressurization, or distribution codes. Examples are lines, hoses, etc., with no reference to the specific using system on the incoming report. Also, for those units and components furnishing a means of pressurizing, heating, cooling, moisture controlling, filtering, and treating the air used to ventilate areas of the fuselage within the pressure vessel.",
+ "periodicity" : "Each flight",
+ "ataCategory" : "Airframe systems (ATA 20-50)",
+ "hangarNeed" : "true",
+ "duree" : "1",
+ "planeType" : "Airbus A380"
 }
 
-PUT gla/taskList/5
+PUT gla/taskgeneric/5
 {
-  "periodicity" : "Each flight",
-  "ataCategory" : "Structure (ATA 51-57)",
-  "hangarNeed" : "true"
+ "description" : "5101   Aircraft Structures : For reports of aircraft structural problems of a general nature which affects two or more areas. Includes reports of lightning strikes which cannot be associated with a specific JASC code.",
+ "periodicity" : "Every week",
+ "ataCategory" : "Structure (ATA 51-57)",
+ "hangarNeed" : "true",
+ "duree" : "2",
+ "planeType" : "Airbus A380"
 }

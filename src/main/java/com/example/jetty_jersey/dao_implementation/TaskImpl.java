@@ -14,6 +14,7 @@ import com.example.jetty_jersey.dao.MRO;
 import com.example.jetty_jersey.dao.Plane;
 import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao.Task;
+import com.example.jetty_jersey.dao.TaskGeneric;
 import com.example.jetty_jersey.dao_interface.TaskDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
@@ -25,6 +26,7 @@ public class TaskImpl implements TaskDao
 	private final Map<String, Plane> planeCache = new HashMap<String, Plane>();
 	private final Map<String, Flight> flightCache = new HashMap<String, Flight>();
 	private final Map<String, MRO> mroCache = new HashMap<String, MRO>();
+	private final Map<String, TaskGeneric> taskGenericCache = new HashMap<String, TaskGeneric>();
 
 	public TaskImpl()
 	{
@@ -42,16 +44,35 @@ public class TaskImpl implements TaskDao
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "_id", Integer.toString(id));
 
 		Map<String, String> m = results.get(0);
-		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
-				m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")),
-				Utility.convertIntString(m.get("mroId")));
+		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
+				Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 		MRO mro = getMROById(dbConnect, m.get("mroId"));
 		Plane p = getPlaneById(dbConnect, m.get("planeId"));
 		Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
-		TaskInfo wrap = new TaskInfo(t, p, f, mro);
-
+		TaskGeneric tg = getTaskGeneric(dbConnect, m.get("idTaskGeneric"));
+		TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
 		dbConnect.close();
 		return wrap;
+	}
+
+	private TaskGeneric getTaskGeneric(DatabaseConnecter dbc, String id)
+	{
+		TaskGeneric tg = taskGenericCache.get(id);
+		if (tg == null)
+		{
+			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("taskgeneric", "_id", id);
+			if (res == null || res.size() <= 0)
+				log.error("Unable to find flight id : " + id + " in the database!");
+			else
+			{
+				Map<String, String> fst = res.get(0);
+				tg = new TaskGeneric(Utility.convertIntString(fst.get("_id")), fst.get("description"), fst.get("periodicity"), fst.get("ataCategory"), Utility.convertBoolString(fst.get("hangarNeed")),
+						Float.valueOf(fst.get("duree")), fst.get("planeType"));
+				taskGenericCache.put(id, tg);
+			}
+		}
+		return tg;
 	}
 
 	public List<TaskInfo> getTasksByPlaneId(int id)
@@ -61,15 +82,14 @@ public class TaskImpl implements TaskDao
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
-			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
-					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
-					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
+					Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
-			TaskInfo wrap = new TaskInfo(t, p, f, mro);
+			TaskGeneric tg = getTaskGeneric(dbConnect, m.get("idTaskGeneric"));
+			TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
 			tl.add(wrap);
-
 		}
 		dbConnect.close();
 		return tl;
@@ -106,13 +126,13 @@ public class TaskImpl implements TaskDao
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
-			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertDateString(m.get("startTime")), Utility.convertDateString(m.get("endTime")), m.get("description"),
-					m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")), Utility.convertIntString(m.get("planeId")),
-					Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
+					Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
-			TaskInfo wrap = new TaskInfo(t, p, f, mro);
+			TaskGeneric tg = getTaskGeneric(dbConnect, m.get("idTaskGeneric"));
+			TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
 			tl.add(wrap);
 		}
 		dbConnect.close();
@@ -121,7 +141,7 @@ public class TaskImpl implements TaskDao
 
 	private MRO getMROById(DatabaseConnecter dbc, String id)
 	{
-		if (id == null || id.length() == 0)
+		if (id == null || id.length() == 0 || id.equals("-1"))
 			return new MRO(-1, "Not assigned");
 		MRO m = mroCache.get(id);
 		if (m == null)
@@ -180,17 +200,13 @@ public class TaskImpl implements TaskDao
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
-		Task t = new Task(-1, Utility.convertDateString("23/04/2017"), Utility.convertDateString("24/04/2017"),
-				"3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
-				"Each flight", "Aircraft General (ATA 00-18)", false, 3, 9, 1);
+		Task t = new Task(-1, 1, Utility.convertDateString("2017/05/02 19:15"), Utility.convertDateString("2017/05/02 23:15"), 3, 1, 1);
 		Status s = test.addTask(t);
 		System.out.println("Add new task by _id=-1 : " + s.toString());
 		test.getAllTasks();
 		s = test.deleteTask(3);
 		System.out.println("Delete task _id=3 : " + s.toString());
-		t = new Task(3, Utility.convertDateString("23/05/2017"), Utility.convertDateString("24/05/2017"),
-				"3130   Data Recorders (Flight/Maintenance) : The unit which continuously records critical flight, aircraft and powerplant system data, such as attitude, air speed, altitude, engine power, etc., to be used in the event of a crash. Includes the system and parts that provide a source of power and inputs, from various sources critical to flight, to flight data recorder. Typical parts are spool rod, magazine, etc.",
-				"Each flight", "Aircraft General (ATA 00-18)", false, 3, 5, 1);
+		t = new Task(3, 1, Utility.convertDateString("2017/05/02 07:15"), Utility.convertDateString("2017/05/02 12:15"), 3, 1, 1);
 		s = test.addTask(t);
 		System.out.println("Add back task _id=3 : " + s.toString());
 
