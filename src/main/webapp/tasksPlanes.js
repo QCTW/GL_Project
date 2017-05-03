@@ -52,7 +52,7 @@ function getAllTasks(result){
 
 function getSTask(id){
 	var x = parseInt(id,10);
-	document.location.href="task_view_mro.html?id="+x;
+	document.location.href="taskView.html?id="+x;
 }
 
 function getAllPlanes(result){

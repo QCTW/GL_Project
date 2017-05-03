@@ -32,7 +32,7 @@ function login(result){
 		//alert(pseudo);
 		localStorage.setItem("mail",pseudo);
 		localStorage.setItem("role",role);
-		document.location.href="tasks_and_planes.html";
+		document.location.href="tasksPlanes.html";
 	}
 	else {
 		alert("incorrect or mcc or mro role : "+role);

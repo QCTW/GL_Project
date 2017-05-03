@@ -33,54 +33,46 @@
         </script>
         <script type="text/javascript"  src="bootstrap/js/dataTables.bootstrap.min.js">
         </script>
-		<script src="create_task.js"></script>
+		<script src="attributeTask.js"></script>
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div class="panel panel-default">
           <!-- Default panel contents -->
           
-          <div class="panel-heading"><h2>Create a new task</h2></div>
+          <div class="panel-heading"><h2>Attribute a task to MRO</h2></div>
           <div class="panel-body">
             <form class="form-horizontal">
+	            <div class="form-group">
+	            <label class="control-label col-sm-2" for="email">ATA:</label><div class="col-sm-9"></div>
+	          	</div>
+	          	<div class="form-group">
+	          	<label class="control-label col-sm-2" for="email">Start date:</label><div class="col-sm-9"></div>
+	          	</div>
+	          	<div class="form-group">
+	          	<label class="control-label col-sm-2" for="email">End date:</label><div class="col-sm-9"></div>
+	          	</div>
+	          	<div class="form-group">
+	          	<label class="control-label col-sm-2" for="email">Description:</label><div class="col-sm-9"></div>
+	          	</div>
 			  <div class="form-group">
-			    <label class="control-label col-sm-2" for="email" id="task">Task</label>
+			    <label class="control-label col-sm-2" for="email">MRO:</label>
 			    <div class="col-sm-9">
 			      <div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a task
+					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select MRO
 					  <span class="caret"></span></button>
 					  <ul class="dropdown-menu">
-					    <li><a href="#">Task01</a></li>
-					    <li><a href="#">Task02</a></li>
-					    <li><a href="#">Task03</a></li>
+					    <li><a href="#">MRO1</a></li>
+					    <li><a href="#">MRO2</a></li>
+					    <li><a href="#">MRO3</a></li>
 					  </ul>
 				  </div>
 			    </div>
 			  </div>
-			  <div class="form-group">
-			    <label class="control-label col-sm-2" for="pwd">Plane</label>
-			    <div class="col-sm-9"> 
-			      <div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a plane
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Plane01</a></li>
-					    <li><a href="#">Plane02</a></li>
-					    <li><a href="#">Plane03</a></li>
-					  </ul>
-				  </div>
-			    </div>
-			  </div>
+			  
 			  <div class="form-group"> 
 			    <div class="col-sm-offset-2 col-sm-9">
-			      <div class="checkbox">
-			        <label><input type="checkbox"> Remember me</label>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="form-group"> 
-			    <div class="col-sm-offset-2 col-sm-9">
-			      <button type="submit" class="btn btn-default">Submit</button>
+			      <button type="submit" class="btn btn-default">Attribute</button>
 			    </div>
 			  </div>
 			</form>
