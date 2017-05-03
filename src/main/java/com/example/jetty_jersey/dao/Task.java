@@ -30,7 +30,7 @@ public class Task
 	{
 		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
 		chm.put("_id", String.valueOf(id));
-		chm.put("startTime", Utility.convertDateToString(startTime));
+		chm.put("startTime", startTime.toString());//Utility.convertDateToString(startTime));
 		chm.put("endTime", Utility.convertDateToString(endTime));
 		// chm.put("description", description);
 		// chm.put("periodicity", periodicity);

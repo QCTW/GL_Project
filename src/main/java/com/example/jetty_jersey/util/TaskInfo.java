@@ -17,7 +17,7 @@ public class TaskInfo
 	public TaskInfo(Task task, TaskGeneric taskgeneric, Plane plane, Flight flight, MRO mro)
 	{
 		this.task = task;
-		this.detail = taskgeneric;
+		this.taskGeneric = taskgeneric;
 		this.plane = plane;
 		this.flight = flight;
 		this.mro = mro;

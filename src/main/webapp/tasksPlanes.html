@@ -34,7 +34,7 @@
 		
 		 <ul class="nav nav-tabs navbar-right">
 		 	<li><a id="pseudo"></a></li>
-            <li><a href="#" onclick="logout()" >Log Out(not working Yet)</a></li>
+            <li><a href="#" onclick="logout()" class="glyphicon glyphicon-off" ></a></li>
           </ul>
 
 		<div class="tab-content">
@@ -49,16 +49,15 @@
 				<table id="example" class="table table-striped">
 					<thead>
 						<tr>
-							<th>Id</th>
-							<th>ATA category</th>
-							<!--  >th>Description</th -->
-							<th>End Time</th>
-							<th>Departure of plane</th>
-							<th>Plane</th>
-							<th></th>
+							<th id="ataCategory">ATA category</th>
+							<th id="startDate">Start Time</th>
+							<th id="endTime">End Time</th>
+							<th id="planeType">Plane Airbus</th>
+							<th id="planeId">Plane</th>
+							<th id="viewTask"></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 					</tbody>
 				</table>
 			</div>

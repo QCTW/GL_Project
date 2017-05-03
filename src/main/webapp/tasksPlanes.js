@@ -13,14 +13,41 @@ function getServerData(url, success){
         url: url
     }).done(success);
 }
+
+function sub(r){
+	return r.toString().substring(1,r.toString().length-1);
+}
 var task;
 var idt;
 
 //GET ALL TASK
 function getAllTasks(result){
-	var tab =$('#example').DataTable( {
+	var tr="";
+	console.log("in get all tasks function and tr = "+tr);
+	for(var i=0 ; i<result.length; i++){
+		tr+="<tr> " +
+				"<td>"+sub(JSON.stringify(result[i].taskGeneric.ataCategory))+"</td>" +
+				"<td>"+sub(JSON.stringify(result[i].task.startTime))+"</td>" +
+				"<td>"+sub(JSON.stringify(result[i].task.endTime))+"</td>"  +
+				"<td>"+sub(JSON.stringify(result[i].plane.planeType))+"</td>" +
+				"<td>"+sub(JSON.stringify(result[i].plane.planeId))+"</td>" +
+				"<td><button onclick='getSTask("+idt+")' " +
+					"class='btn icon-btn btn-primary'>  " +
+					"<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> " +
+					"</button></td>" +
+				"</tr>";
+		console.log(tr);
+	}
+	$('#tbody').html(tr);
+	/*var tab =$('#example').DataTable( {
 	} );
 	
+	
+	<th id="ataCategory">ATA category</th>
+	<th id="startDate">Start Time</th>
+	<th id="endTime">End Time</th>
+	<th id="planeType">Plane Airbus</th>
+	<th id="planeId">Plane</th>
 	for(var i=0; i<result.length; i++){
 			idt=JSON.stringify(result[i].task.id);
 			tab.row.add( [
@@ -48,6 +75,7 @@ function getAllTasks(result){
 		
 	//}
 	}
+	*/
 }
 
 function getSTask(id){
@@ -101,12 +129,13 @@ function logout(){
 
 
 $(function(){
-		//getServerData("ws/task/all",getAllTasks);
+		getServerData("ws/task/all",getAllTasks);
 });
 $(function(){
 	//getServerData("ws/plane/all",getAllPlanes);
 });
 $(function(){
+	$("#pseudo").html(localStorage.getItem("mail"));
 	//getServerData("ws/login/getUser",pseudo);
 });
 
