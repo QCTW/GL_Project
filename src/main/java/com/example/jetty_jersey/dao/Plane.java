@@ -1,5 +1,5 @@
 package com.example.jetty_jersey.dao;
-
+import com.example.jetty_jersey.db.CustomHashMap;
 /*
  PUT plane/id
  {
@@ -33,6 +33,14 @@ public class Plane
 	{
 		this.planeType = planeType;
 	}
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> l = new CustomHashMap<String, String>();
+		l.put("_id", String.valueOf(planeId));
+		l.put("planeType;", planeType);
+
+		return l;
+}
 
 	@Override
 	public String toString()
