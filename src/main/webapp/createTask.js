@@ -35,11 +35,29 @@ function chooseTask(){
 		}
 	});
 	
-	
+	$('#planes').hide();
+	$('#tasks').show();
 }
 function choosePlane(){
-	$("#content").html('ooooh yeaaaaaaah');
-	
+	$("#content").html(
+			
+		function getAllPlanes(result){
+		
+		var planes =$('#planes').DataTable( {
+			retrieve: true,
+			paging: false,
+		    searching: true
+		} );
+		
+		for(var i=0; i<result.length; i++){
+			planes.row.add( [
+				JSON.stringify(result[i].planeId),
+				JSON.stringify(result[i].planeType)
+			] ).draw( false );
+		}
+	});
+	$('#tasks').hide();
+	$('#planes').show();
 }
 
 function getServerData(url, success){
