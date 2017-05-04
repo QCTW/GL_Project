@@ -3,18 +3,19 @@ package com.example.jetty_jersey.dao_interface;
 import java.util.List;
 
 import com.example.jetty_jersey.dao.*;
-public interface MroDao{
-	
+
+public interface MroDao
+{
 	/**
 	 * @return the MCC with the given id
 	 **/
-	 MRO getMroById(int id);
-	 
+	MRO getMroById(int id);
+
 	/**
-	*@return the list of mro members with the given qualification
-	**/
+	 * @return the list of mro members with the given qualification
+	 **/
 	public List<MRO> getMrobyQualification(String qualification);
-	
+
 	/**
 	 * @return the list of all
 	 **/

@@ -7,7 +7,6 @@ import com.example.jetty_jersey.dao.*;
 
 public interface TaskDao
 {
-
 	/**
 	 * @return the list of all
 	 **/

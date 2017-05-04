@@ -42,7 +42,6 @@ public class TaskImpl implements TaskDao
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "_id", Integer.toString(id));
-
 		Map<String, String> m = results.get(0);
 		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
 				Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
@@ -60,10 +59,9 @@ public class TaskImpl implements TaskDao
 		TaskGeneric tg = taskGenericCache.get(id);
 		if (tg == null)
 		{
-			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
 			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("taskgeneric", "_id", id);
 			if (res == null || res.size() <= 0)
-				log.error("Unable to find flight id : " + id + " in the database!");
+				log.error("Unable to find taskgeneric id : " + id + " in taskgeneric table!");
 			else
 			{
 				Map<String, String> fst = res.get(0);
@@ -148,7 +146,7 @@ public class TaskImpl implements TaskDao
 		{
 			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("mro", "_id", id);
 			if (res == null || res.size() <= 0)
-				log.error("Unable to find MRO id : " + id + " in the database!");
+				log.error("Unable to find MRO id : " + id + " in mro table!");
 			else
 			{
 				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"));
@@ -166,7 +164,7 @@ public class TaskImpl implements TaskDao
 		{
 			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("plane", "_id", id);
 			if (res == null || res.size() <= 0)
-				log.error("Unable to find plane id : " + id + " in the database!");
+				log.error("Unable to find plane id : " + id + " in plane table!");
 			else
 			{
 				p = new Plane(Utility.convertIntString(id), res.get(0).get("planetype"));
@@ -184,7 +182,7 @@ public class TaskImpl implements TaskDao
 			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
 			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", id);
 			if (res == null || res.size() <= 0)
-				log.error("Unable to find flight id : " + id + " in the database!");
+				log.error("Unable to find planeId id : " + id + " in flight table!");
 			else
 			{
 				Map<String, String> fst = res.get(0);

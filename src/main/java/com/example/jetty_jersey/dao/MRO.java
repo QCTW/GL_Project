@@ -12,7 +12,6 @@ import com.example.jetty_jersey.db.CustomHashMap;
  * }
  * 
  */
-
 public class MRO
 {
 
@@ -20,7 +19,6 @@ public class MRO
 	private String name = "Not assigned";
 	private int id;
 
-	
 	public MRO()
 	{
 		this.id = -1;
@@ -31,9 +29,10 @@ public class MRO
 		this.name = name;
 		this.id = mroId;
 	}
-	
-	public MRO(String name){
-		this.name=name;
+
+	public MRO(String name)
+	{
+		this.name = name;
 	}
 
 	public String getQualification()
@@ -67,10 +66,9 @@ public class MRO
 		chm.put("_id", String.valueOf(id));
 		chm.put("name", name);
 		chm.put("qualification", qualification);
-
 		return chm;
 	}
-	
+
 	@Override
 	public String toString()
 	{

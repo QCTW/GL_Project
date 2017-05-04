@@ -5,19 +5,18 @@ import java.util.List;
 import com.example.jetty_jersey.dao.MCC;
 import com.example.jetty_jersey.dao.Status;
 
-public interface MccDao {
+public interface MccDao
+{
 
-	
-	
 	/**
 	 * @return the MCC with the given id
 	 **/
-	 MCC getMccById(String id);
+	MCC getMccById(String id);
 
 	String getEmailById(String id);
-	
+
 	List<MCC> getMccsInRange(int nStart, int nEnd);
-	
+
 	/**
 	 * @return add a MCC
 	 **/

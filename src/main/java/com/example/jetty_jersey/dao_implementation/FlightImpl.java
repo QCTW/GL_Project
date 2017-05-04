@@ -13,7 +13,6 @@ import com.example.jetty_jersey.db.Utility;
 
 public class FlightImpl implements FlightDao
 {
-
 	public Flight getFlightbyId(String commercialId)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();

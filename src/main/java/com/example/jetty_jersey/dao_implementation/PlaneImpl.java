@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.jetty_jersey.dao.MRO;
 import com.example.jetty_jersey.dao.Plane;
 import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao_interface.PlaneDao;
@@ -52,30 +51,28 @@ public class PlaneImpl implements PlaneDao
 		return p;
 	}
 
-	
-	public Status addPlane(Plane plane) {
+	public Status addPlane(Plane plane)
+	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
 		Status s = dbc.insertToTableName("plane", plane.toMap());
 		dbc.close();
 		return s;
-}
-	
+	}
+
 	public Status deletePlane(int id)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
 		Status s = dbc.deleteAllFromTableNameWhereFieldEqValue("plane", "_id", String.valueOf(id));
 		dbc.close();
 		return s;
-}
-	//TEST
-	/*public static void main(String[] args)
+	}
+
+	// TEST
+	public static void main(String[] args)
 	{
-		PlaneImpl pi=new PlaneImpl();
-		Plane planetest=new Plane(-1, "Kaba en test");
+		PlaneImpl pi = new PlaneImpl();
+		Plane planetest = new Plane(-1, "Kaba en test");
 		pi.getAllPlanes();
-		//Status s = test.addMro(mro);
-		pi.getPlanebyId(-1);
-		System.out.println("au revoir");
-	}*/
+	}
 
 }

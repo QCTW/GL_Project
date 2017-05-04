@@ -13,7 +13,6 @@ import com.example.jetty_jersey.dao.Task;
 
 public class Parser
 {
-
 	public static List<Task> parseTask()
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -47,8 +46,8 @@ public class Parser
 				int statut = Integer.parseInt(splitedLine[8]);
 				int morId = Integer.parseInt(splitedLine[9]);
 				// System.out.println(line);
-				//Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
-				//liste.add(t);
+				// Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
+				// liste.add(t);
 
 			}
 
@@ -170,5 +169,4 @@ public class Parser
 		parseTask();
 
 	}
-
 }

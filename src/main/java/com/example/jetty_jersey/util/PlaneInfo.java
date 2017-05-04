@@ -5,7 +5,6 @@ import com.example.jetty_jersey.dao.Plane;
 
 public class PlaneInfo
 {
-
 	private final Plane plane;
 	private final Flight flight;
 

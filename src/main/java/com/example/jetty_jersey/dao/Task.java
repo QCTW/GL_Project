@@ -12,7 +12,7 @@ public class Task
 	private Date startTime;
 	private Date endTime;
 	private int planeId;
-	private int taskStatus; // Pas distribue = 1, En cour =2, Effactu = 3
+	private int taskStatus; // 1=Not dispatch to MRO, 0=Dispatched, 2=On going, 3=Done
 	private int mroId;
 
 	public Task(int id, int idTaskGeneric, Date startTime, Date endTime, int planeId, int taskStatus, int mroId)
@@ -30,16 +30,12 @@ public class Task
 	{
 		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
 		chm.put("_id", String.valueOf(id));
-		chm.put("startTime", startTime.toString());//Utility.convertDateToString(startTime));
+		chm.put("idTaskGeneric", String.valueOf(idTaskGeneric));
+		chm.put("startTime", Utility.convertDateToString(startTime));
 		chm.put("endTime", Utility.convertDateToString(endTime));
-		// chm.put("description", description);
-		// chm.put("periodicity", periodicity);
-		// chm.put("ataCategory", ataCategory);
-		// chm.put("hangarNeed", Boolean.toString(hangarNeed));
 		chm.put("planeId", String.valueOf(planeId));
 		chm.put("taskStatus", String.valueOf(taskStatus));
 		chm.put("mroId", String.valueOf(mroId));
-
 		return chm;
 	}
 
@@ -88,6 +84,14 @@ public class Task
 		return taskStatus;
 	}
 
+	/**
+	 * @param integer
+	 *            taskStatus
+	 *            1 = Not dispatch to MRO
+	 *            0 = Dispatched
+	 *            2 = On going
+	 *            3 = Done
+	 */
 	public void setTaskStatus(int taskStatus)
 	{
 		this.taskStatus = taskStatus;

@@ -6,7 +6,6 @@ import com.example.jetty_jersey.dao.*;
 
 public interface PlaneDao
 {
-
 	/**
 	 * @return the list of planes the given type
 	 **/

@@ -12,7 +12,7 @@ public class TaskInfo
 	public Task task;
 	public Plane plane;
 	public Flight flight;
-	public MRO mro; // To check with Mohamad if MRO should be here or in the Task
+	public MRO mro;
 
 	public TaskInfo(Task task, TaskGeneric taskgeneric, Plane plane, Flight flight, MRO mro)
 	{

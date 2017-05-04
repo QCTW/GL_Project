@@ -11,13 +11,13 @@ import com.example.jetty_jersey.db.CustomHashMap;
  */
 public class MCC
 {
-	private String mccId;
+	private final String mccId;
 	private String email;
-	
-	public MCC(String mccId, String email){
-		this.mccId=mccId;
-		this.email=email;
-		
+
+	public MCC(String mccId, String email)
+	{
+		this.mccId = mccId;
+		this.email = email;
 	}
 
 	public CustomHashMap<String, String> toMap()
@@ -25,12 +25,7 @@ public class MCC
 		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
 		chm.put("_id", mccId);
 		chm.put("email", email);
-
 		return chm;
-	}
-	
-	public MCC(String email){
-		this.email=email;
 	}
 
 	public String getMccId()
@@ -47,7 +42,7 @@ public class MCC
 	{
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString()
 	{

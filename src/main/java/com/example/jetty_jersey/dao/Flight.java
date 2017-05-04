@@ -14,7 +14,6 @@ PUT flight/id
  "arrivaltime" : "example of arrival time"
  }
 */
-
 public class Flight
 {
 
@@ -40,9 +39,9 @@ public class Flight
 	public Flight(int id, int planeId)
 	{
 		this.id = id;
-		this.commercialId = "commercialId" + id;
-		this.departureAirport = "Dairport" + id;
-		this.arrivalAirport = "Aairport" + id;
+		this.commercialId = "SIMDATA" + id;
+		this.departureAirport = "Cristiano Ronaldo-FNC";
+		this.arrivalAirport = "Narsarsuaq-UAK";
 		this.departureTime = new Date();
 		this.arrivalTime = new Date();
 		this.planeId = planeId;

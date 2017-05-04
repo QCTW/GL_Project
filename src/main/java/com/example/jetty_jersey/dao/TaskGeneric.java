@@ -1,5 +1,7 @@
 package com.example.jetty_jersey.dao;
 
+import com.example.jetty_jersey.db.CustomHashMap;
+
 public class TaskGeneric
 {
 	private final int id;
@@ -66,6 +68,19 @@ public class TaskGeneric
 	public String getAtaCategory()
 	{
 		return ataCategory;
+	}
+
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
+		chm.put("_id", String.valueOf(id));
+		chm.put("description", description);
+		chm.put("periodicity", periodicity);
+		chm.put("ataCategory", ataCategory);
+		chm.put("planeType", planeType);
+		chm.put("duree", Float.toString(duree));
+		chm.put("hangarNeed", Boolean.toString(hangarNeed));
+		return chm;
 	}
 
 }
