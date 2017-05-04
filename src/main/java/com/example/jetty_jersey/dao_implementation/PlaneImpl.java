@@ -21,7 +21,7 @@ public class PlaneImpl implements PlaneDao
 		List<Plane> pl = new ArrayList<Plane>();
 		for (Map<String, String> m : res)
 		{
-			Plane p = new Plane(Utility.convertIntString(m.get("planeId")), m.get("planetype"));
+			Plane p = new Plane(Utility.convertIntString(m.get("_id")), m.get("planetype"));
 			pl.add(p);
 		}
 		return pl;
@@ -35,7 +35,7 @@ public class PlaneImpl implements PlaneDao
 		List<Plane> pl = new ArrayList<Plane>();
 		for (Map<String, String> m : res)
 		{
-			Plane p = new Plane(Utility.convertIntString(m.get("planeId")), m.get("planetype"));
+			Plane p = new Plane(Utility.convertIntString(m.get("_id")), m.get("planetype"));
 			pl.add(p);
 		}
 		return pl;
@@ -71,8 +71,12 @@ public class PlaneImpl implements PlaneDao
 	public static void main(String[] args)
 	{
 		PlaneImpl pi = new PlaneImpl();
-		Plane planetest = new Plane(-1, "Kaba en test");
-		pi.getAllPlanes();
+		// Plane planetest = new Plane(-1, "Kaba en test");
+		List<Plane> planeList = pi.getAllPlanes();
+		for (Plane p : planeList)
+		{
+			System.out.println(p.toString());
+		}
 	}
 
 }

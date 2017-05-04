@@ -73,13 +73,13 @@ function getAllPlanes(result) {
 	for (var i = 0; i < result.length; i++) {
 		tr += "<tr> "
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].planeType))
+			+ sub(JSON.stringify(result[i]['planeId']))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].planeId))
+			+ sub(JSON.stringify(result[i]['planeType']))
 			+ "</td>"
 			+ "<td><button onclick='getPlane("
-			+ idt
+			+ sub(JSON.stringify(result[i]['planeId']))
 			+ ")' "
 			+ "class='btn icon-btn btn-primary'>  "
 			+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
@@ -123,20 +123,20 @@ function showPlanes(result){
 	for (var i = 0; i < result.length; i++) {
 		tr += "<tr> "
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].planeId))
+			+ sub(JSON.stringify(result[i]['planeId']))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].planeType))
+			+ sub(JSON.stringify(result[i]['planeType']))
 			+ "</td>"
 			+ "<td><button onclick='chooseTasksByPlane("
-			+ idt
+			+ sub(JSON.stringify(result[i]['planeId']))
 			+ ")' "
 			+ "class='btn icon-btn btn-success'>  "
 			+ "<span class='glyphicon glyphicon-ok'></span> "
 			+ "</button></td>" + "</tr>";
 	}
 	$('#planeTbody2').html(tr);
-	var planes = $('#planeslist2').DataTable({});
+	$('#planeslist2').DataTable({});
 }
 function choosePlane(){
 	
@@ -204,7 +204,7 @@ function viewTask(task){
 $(function() {
 	getServerData("ws/task/all", getAllTasks);
 	//getServerData("ws/plane/all",getAllPlanes);
-	getServerData("ws/plane/all",showPlanes);
+	getServerData("ws/plane/all", showPlanes);
 });
 $(function() {
 	

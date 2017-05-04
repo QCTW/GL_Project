@@ -1,6 +1,7 @@
 package com.example.jetty_jersey.dao_implementation;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class TaskImpl implements TaskDao
 {
 	private static Logger log = LogManager.getLogger(TaskImpl.class.getName());
 	private final Map<String, Plane> planeCache = new HashMap<String, Plane>();
-	private final Map<String, Flight> flightCache = new HashMap<String, Flight>();
+	private final Map<String, Flight> flightByPlaneIdCache = new HashMap<String, Flight>();
 	private final Map<String, MRO> mroCache = new HashMap<String, MRO>();
 	private final Map<String, TaskGeneric> taskGenericCache = new HashMap<String, TaskGeneric>();
 
@@ -174,21 +175,23 @@ public class TaskImpl implements TaskDao
 		return p;
 	}
 
-	private Flight getFlightByPlaneId(DatabaseConnecter dbc, String id)
+	private Flight getFlightByPlaneId(DatabaseConnecter dbc, String pid)
 	{
-		Flight f = flightCache.get(id);
-		if (f == null)
+		Flight f = flightByPlaneIdCache.get(pid);
+		if (f == null || f.getId() == -1) // In case of empty flight, we query again the database to see if there is new flight added
 		{
 			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
-			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", id);
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", pid);
 			if (res == null || res.size() <= 0)
-				log.error("Unable to find planeId id : " + id + " in flight table!");
-			else
+			{
+				log.warn("Unable to find planeId id : " + pid + " in flight table! Creating empty flight");
+				f = new Flight(-1, "NO FLIGHT FOR PLANE " + pid, "N/A", "N/A", new Date(), new Date(), Integer.parseInt(pid));
+			} else
 			{
 				Map<String, String> fst = res.get(0);
 				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"),
 						Utility.convertDateString(fst.get("departureTime")), Utility.convertDateString(fst.get("arrivalTime")), Utility.convertIntString(fst.get("planeId")));
-				flightCache.put(id, f);
+				flightByPlaneIdCache.put(pid, f);
 			}
 		}
 		return f;
