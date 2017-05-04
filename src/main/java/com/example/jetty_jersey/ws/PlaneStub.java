@@ -22,7 +22,7 @@ public class PlaneStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public List<Plane> allPlanes() {
-		return planeDao.getAllPlanes();
+		return DAO.getPlaneDao().getAllPlanes();
 	}
 
 	@POST
@@ -48,4 +48,6 @@ public class PlaneStub {
 		}
 
 	}
+	
+	
 }
