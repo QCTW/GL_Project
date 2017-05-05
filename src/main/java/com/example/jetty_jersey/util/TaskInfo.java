@@ -26,7 +26,7 @@ public class TaskInfo
 	@Override
 	public String toString()
 	{
-		return "TaskInfo [task=" + task + ", plane=" + plane + ", flight=" + flight + ", mro=" + mro + "]";
+		return "task=" + task + ";plane=" + plane + ";flight=" + flight + ";mro=" + mro + ";taskGeneric=" + taskGeneric;
 	}
 
 }

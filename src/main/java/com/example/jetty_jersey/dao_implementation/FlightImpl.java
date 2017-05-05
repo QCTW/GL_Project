@@ -70,16 +70,19 @@ public class FlightImpl implements FlightDao
 		return lf;
 	}
 
-	public Flight getFlightbyPlaneId(int planeId)
+	public List<Flight> getFlightsbyPlaneId(int planeId)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
-		List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "arrivalAirport", Integer.toString(planeId));
-		;
+		List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", Integer.toString(planeId));
 		dbc.close();
-		Map<String, String> ligne = res.get(0);
-		Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
-				ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
-		return f;
+		List<Flight> lf = new ArrayList<Flight>();
+		for (Map<String, String> m : res)
+		{
+			Flight f = new Flight(Utility.convertIntString(m.get("id")), m.get("commercialId"), m.get("departureAirport"), m.get("arrivalAirport"), m.get("departureTime"), m.get("arrivalTime"),
+					Utility.convertIntString(m.get("planeId")));
+			lf.add(f);
+		}
+		return lf;
 	}
 
 	public Status addFlight(Flight f)

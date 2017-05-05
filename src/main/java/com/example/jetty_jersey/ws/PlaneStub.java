@@ -30,14 +30,13 @@ public class PlaneStub
 	{
 		return DAO.getPlaneDao().getAllPlanes();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/allPlaneInfo")
-	public List<PlaneInfo> allPlaneInfo()
+	@Path("/allPlaneInfos")
+	public List<PlaneInfo> allPlaneInfos()
 	{
-		/* to do*/
-		return null;//return DAO.getPlaneDao().getAllPlanes();
+		return DAO.getPlaneDao().getAllPlaneInfos();
 	}
 
 	@POST

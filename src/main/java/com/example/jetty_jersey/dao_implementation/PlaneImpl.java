@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.jetty_jersey.dao.Flight;
 import com.example.jetty_jersey.dao.Plane;
 import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao_interface.PlaneDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.Utility;
+import com.example.jetty_jersey.util.PlaneInfo;
 
 public class PlaneImpl implements PlaneDao
 {
@@ -67,7 +69,24 @@ public class PlaneImpl implements PlaneDao
 		return s;
 	}
 
-	// TEST
+	public List<PlaneInfo> getAllPlaneInfos()
+	{
+		List<Plane> lp = getAllPlanes();
+		List<PlaneInfo> lpi = new ArrayList<PlaneInfo>();
+		for (Plane p : lp)
+		{
+			PlaneInfo pinfo = new PlaneInfo(p, getAllFlights(p.getPlaneId()));
+			lpi.add(pinfo);
+		}
+		return lpi;
+	}
+
+	private List<Flight> getAllFlights(int planeId)
+	{
+		FlightImpl fImpl = new FlightImpl();
+		return fImpl.getFlightsbyPlaneId(planeId);
+	}
+
 	public static void main(String[] args)
 	{
 		PlaneImpl pi = new PlaneImpl();

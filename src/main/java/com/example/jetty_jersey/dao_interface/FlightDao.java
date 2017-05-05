@@ -29,7 +29,7 @@ public interface FlightDao
 	/**
 	 * @return the flight by the planeid
 	 **/
-	Flight getFlightbyPlaneId(int planeId);
+	List<Flight> getFlightsbyPlaneId(int planeId);
 
 	Status addFlight(Flight f);
 
