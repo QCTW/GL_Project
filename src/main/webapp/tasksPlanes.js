@@ -49,6 +49,9 @@ function getAllTasks(result) {
 				+ "<td>"
 				+ sub(JSON.stringify(result[i].plane.planeId))
 				+ "</td>"
+				+ "<td>"
+				+ sub(JSON.stringify(result[i].task.mroId))
+				+ "</td>"
 				+ "<td><button onclick='getSTask("
 				+ sub(JSON.stringify(result[i].task.id))
 				+ ")' "
@@ -126,8 +129,7 @@ function showPlanes(result) {
 		tr += "<tr> " 
 				+ "<td>"+ sub(JSON.stringify(result[i]['planeId']))+ "</td>" 
 				+ "<td>"+ sub(JSON.stringify(result[i].planeType)) + "</td>"
-				+ "<td><button onclick='chooseTasksByPlane(Canadair RJ 1000)'"
-				+ "class='btn icon-btn btn-success'>  "
+				+ "<td><button onclick='chooseTasksByPlane(\"Canadair RJ 1000\")' class='btn icon-btn btn-success'>  "
 				+ "<span class='glyphicon glyphicon-ok'></span> "
 				+ "</button></td>" + "</tr>";
 	}
@@ -160,9 +162,6 @@ function chooseTasksByPlaneAux(result) {
 				+ "<td>"
 				+ sub(JSON.stringify(result[i].planeType))
 				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].planeId))
-				+ "</td>"
 				+ "<td><button onclick='callViewTask("
 				+ result[i].id
 				+ ")' class='btn icon-btn btn-primary' data-toggle='modal' data-target='#myModal'><span class='glyphicon btn-glyphicon glyphicon-eye-open'></span></button></td>"
@@ -176,7 +175,7 @@ function chooseTasksByPlaneAux(result) {
 	$('#createTaskBody')
 			.html(
 					"<table class='table table-striped'>"
-							+ "<thead><tr><th>task Id</th>  <th >ATA category</th> <th >Plane</th> <th>Plane</th> <th> show tasks </th> <th>Choose Task</th> </tr></thead>"
+							+ "<thead><tr><th>Generic task Id</th>  <th >ATA category</th> <th >Plane type</th> <th> show tasks </th> <th>Choose Task</th> </tr></thead>"
 							+ "<tbody id='tbody'>" + tr + "</tbody>"
 							+ "</table>");
 }

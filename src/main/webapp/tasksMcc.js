@@ -37,6 +37,9 @@ function getAllTasks(result){
 				+ "<td>"
 				+ sub(JSON.stringify(result[i].plane.planeId))
 				+ "</td>"
+				+ "<td>"
+				+ sub(JSON.stringify(result[i].task.mroId))
+				+ "</td>"
 				+ "<td><button onclick='getSTask("
 				+ sub(JSON.stringify(result[i].task.id))
 				+ ")' "
@@ -49,33 +52,37 @@ function getAllTasks(result){
 	$('#tbody').html(tr);
 } 
 
-function sub(r) {
+function subb(r) {
 	return r.toString().substring(1, r.toString().length - 1);
 }
 
 //<0
 function taskToAssign(){
 	var tr = "";
+	var tmp;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId < 0 ){
 			tr += "<tr> "
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
+			+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].task.startTime))
+			+ sub(JSON.stringify(taskList[i].task.startTime))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].task.endTime))
+			+ sub(JSON.stringify(taskList[i].task.endTime))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].plane.planeType))
+			+ sub(JSON.stringify(taskList[i].plane.planeType))
 			+ "</td>"
 			+ "<td>"
-			+ sub(JSON.stringify(result[i].plane.planeId))
+			+ sub(JSON.stringify(taskList[i].plane.planeId))
+			+ "</td>"
+			+ "<td>"
+			+ sub(JSON.stringify(taskList[i].task.mroId))
 			+ "</td>"
 			+ "<td><button onclick='getSTask("
-			+ sub(JSON.stringify(result[i].task.id))
+			+ sub(JSON.stringify(taskList[i].task.id))
 			+ ")' "
 			+ "class='btn icon-btn btn-primary'>  "
 			+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
@@ -97,22 +104,22 @@ function inProgress(){
 			if(today < endTime){
 				tr += "<tr> "
 				+ "<td>"
-				+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
+				+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
 				+ "</td>"
 				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.startTime))
+				+ sub(JSON.stringify(taskList[i].task.startTime))
 				+ "</td>"
 				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.endTime))
+				+ sub(JSON.stringify(taskList[i].task.endTime))
 				+ "</td>"
 				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeType))
+				+ sub(JSON.stringify(taskList[i].plane.planeType))
 				+ "</td>"
 				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeId))
+				+ sub(JSON.stringify(taskList[i].plane.planeId))
 				+ "</td>"
 				+ "<td><button onclick='getSTask("
-				+ sub(JSON.stringify(result[i].task.id))
+				+ sub(JSON.stringify(taskList[i].task.id))
 				+ ")' "
 				+ "class='btn icon-btn btn-primary'>  "
 				+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "

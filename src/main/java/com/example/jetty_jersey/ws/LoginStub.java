@@ -22,7 +22,7 @@ import java.util.*;
 @Path("/login")
 public class LoginStub
 {
-	static boolean connected = false;
+	static boolean connected = true;
 	private static Logger log = LogManager.getLogger(LoginStub.class.getName());
 
 	@GET

@@ -43,12 +43,15 @@ public class TaskStub
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/genericByPlane/{type}")
-	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String id)
+	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String type)
 	{
+		LoginStub.connected = true;
 		if (LoginStub.connected)
 		{
 			log.debug("Login connected : " + LoginStub.connected);
-			return null;//return DAO.getTaskDao().getAllTasks();
+			System.out.println(DAO.getTaskDao().getGenericTasksByPlaneType("Canadair RJ 1000"));
+			return DAO.getTaskDao().getGenericTasksByPlaneType("Canadair RJ 1000");
+			
 		} else
 			return new ArrayList<TaskGeneric>();
 	}
@@ -83,7 +86,7 @@ public class TaskStub
 	@Path("/add")
 	public void addTask(TaskInfo taskInfo)
 	{
-
+		
 	}
 
 	@POST
