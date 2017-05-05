@@ -259,17 +259,40 @@ public class DatabaseConnecter
 
 	public List<Map<String, String>> selectAllFromTableWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
 	{
-		QueryBuilder qb = QueryBuilders.termQuery(fieldName, fieldValue);
+		QueryBuilder qb = QueryBuilders.queryStringQuery(fieldName + ":" + fieldValue);
+		System.out.println("QueryBuilder=" + qb);
 		SearchResponse scrollResp = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).addSort(FieldSortBuilder.DOC_FIELD_NAME, SortOrder.ASC)
 				.setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).setQuery(qb).setSize(DatabaseSettings.MAX_BOLK_RESULTS).get();
 		// Scroll until no hits are returned
 		List<Map<String, String>> lRet = new ArrayList<Map<String, String>>();
+		System.out.println("selectAllFromTableWhereFieldEqValue=" + lRet.size());
 		do
 		{
 			lRet.addAll(wrapResults(scrollResp));
 			scrollResp = client.prepareSearchScroll(scrollResp.getScrollId()).setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).execute().actionGet();
 		} while (scrollResp.getHits().getHits().length != 0); // Zero hits mark the end of the scroll and the while loop.
 		return lRet;
+	}
+
+	public List<Map<String, String>> selectAllFromTableWhereFieldEqValueSortAscendingByField(String tableName, String fieldName, String fieldValue, String sortField)
+	{
+		List<Map<String, String>> l = selectAllFromTableWhereFieldEqValue(tableName, fieldName, fieldValue);
+		System.out.println(tableName + "," + fieldName + "," + fieldValue + "," + sortField + "," + l.size());
+		if (l.size() > 0)
+		{
+			Collections.sort(l, new MapValueAscendingComparator(sortField));
+		}
+		return l;
+	}
+
+	public List<Map<String, String>> selectAllFromTableWhereFieldEqValueSortDescendingByField(String tableName, String fieldName, String fieldValue, String sortField)
+	{
+		List<Map<String, String>> l = selectAllFromTableWhereFieldEqValue(tableName, fieldName, fieldValue);
+		if (l.size() > 0)
+		{
+			Collections.sort(l, new MapValueDescendingComparator(sortField));
+		}
+		return l;
 	}
 
 	private List<Map<String, String>> wrapResults(SearchResponse res)

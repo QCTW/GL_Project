@@ -181,38 +181,57 @@ public class TaskImpl implements TaskDao
 		if (f == null || f.getId() == -1) // In case of empty flight, we query again the database to see if there is new flight added
 		{
 			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
-			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "planeId", pid);
+			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValueSortAscendingByField("flight", "planeId", pid, "departureTime");
 			if (res == null || res.size() <= 0)
 			{
 				log.warn("Unable to find planeId id : " + pid + " in flight table! Creating empty flight");
-				f = new Flight(-1, "NO FLIGHT FOR PLANE " + pid, "N/A", "N/A", new Date(), new Date(), Integer.parseInt(pid));
+				f = new Flight(-1, "NO FLIGHT FOR PLANE " + pid, "N/A", "N/A", Utility.convertDateToString(new Date()), Utility.convertDateToString(new Date()), Integer.parseInt(pid));
 			} else
 			{
 				Map<String, String> fst = res.get(0);
-				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"),
-						Utility.convertDateString(fst.get("departureTime")), Utility.convertDateString(fst.get("arrivalTime")), Utility.convertIntString(fst.get("planeId")));
+				f = new Flight(Utility.convertIntString(fst.get("_id")), fst.get("commercialId"), fst.get("departureAirport"), fst.get("arrivalAirport"), fst.get("departureTime"),
+						fst.get("arrivalTime"), Utility.convertIntString(fst.get("planeId")));
 				flightByPlaneIdCache.put(pid, f);
 			}
 		}
 		return f;
 	}
 
+	public List<TaskGeneric> getGenericTasksByPlaneType(String planeType)
+	{
+		List<TaskGeneric> l = new ArrayList<TaskGeneric>();
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		List<Map<String, String>> res = dbConnect.selectAllFromTableWhereFieldEqValueSortAscendingByField("taskgeneric", "planeType", planeType, "_id");
+		dbConnect.close();
+		for (Map<String, String> m : res)
+		{
+			TaskGeneric tg = new TaskGeneric(Utility.convertIntString(m.get("_id")), m.get("description"), m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")),
+					Utility.convertFloatString(m.get("duree")), m.get("planeType"));
+			l.add(tg);
+		}
+		return l;
+	}
+
 	// For unit test
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
-		Task t = new Task(-1, 1, "2017/05/02 19:15", "2017/05/02 23:15", 3, 1, 1);
-		Status s = test.addTask(t);
-		System.out.println("Add new task by _id=-1 : " + s.toString());
-		test.getAllTasks();
-		s = test.deleteTask(3);
-		System.out.println("Delete task _id=3 : " + s.toString());
-		t = new Task(3, 1, "2017/05/02 07:15", "2017/05/02 12:15", 3, 1, 1);
-		s = test.addTask(t);
-		System.out.println("Add back task _id=3 : " + s.toString());
-
-		TaskInfo ti = test.getTasksById(1);
-		System.out.println(ti.toString());
+		// Task t = new Task(-1, 1, "2017/05/02 19:15", "2017/05/02 23:15", 3, 1, 1);
+		// Status s = test.addTask(t);
+		// System.out.println("Add new task by _id=-1 : " + s.toString());
+		// test.getAllTasks();
+		// s = test.deleteTask(3);
+		// System.out.println("Delete task _id=3 : " + s.toString());
+		// t = new Task(3, 1, "2017/05/02 07:15", "2017/05/02 12:15", 3, 1, 1);
+		// s = test.addTask(t);
+		// System.out.println("Add back task _id=3 : " + s.toString());
+		// TaskInfo ti = test.getTasksById(1);
+		// System.out.println(ti.toString());
+		List<TaskGeneric> l = test.getGenericTasksByPlaneType("Airbus A380");
+		for (TaskGeneric tg : l)
+		{
+			System.out.println(tg);
+		}
 	}
 
 }

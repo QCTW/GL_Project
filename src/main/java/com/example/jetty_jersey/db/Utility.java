@@ -79,4 +79,15 @@ public class Utility
 		}
 		return i;
 	}
+
+	/**
+	 * In case we need to display float value nicely...
+	 * 
+	 * @param str
+	 * @return float
+	 */
+	public static float convertFloatString(String str)
+	{
+		return Float.parseFloat(str);
+	}
 }

@@ -3,6 +3,7 @@ package com.example.jetty_jersey.dao_implementation;
 import java.util.List;
 
 import com.example.jetty_jersey.dao.Flight;
+import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao_interface.FlightDao;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class FlightImpl implements FlightDao
 		List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("flight", "commercialId", commercialId);
 		dbc.close();
 		Map<String, String> ligne = res.get(0);
-		Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"),
-				Utility.convertDateString(ligne.get("departureTime")), Utility.convertDateString(ligne.get("arrivalTime")), Utility.convertIntString(ligne.get("planeId")));
+		Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
+				ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
 		return f;
 	}
 
@@ -32,8 +33,8 @@ public class FlightImpl implements FlightDao
 		List<Flight> lf = new ArrayList<Flight>();
 		for (Map<String, String> ligne : res)
 		{
-			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"),
-					Utility.convertDateString(ligne.get("departureTime")), Utility.convertDateString(ligne.get("arrivalTime")), Utility.convertIntString(ligne.get("planeId")));
+			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
+					ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
 			lf.add(f);
 		}
 		return lf;
@@ -47,8 +48,8 @@ public class FlightImpl implements FlightDao
 		List<Flight> lf = new ArrayList<Flight>();
 		for (Map<String, String> ligne : res)
 		{
-			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"),
-					Utility.convertDateString(ligne.get("departureTime")), Utility.convertDateString(ligne.get("arrivalTime")), Utility.convertIntString(ligne.get("planeId")));
+			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
+					ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
 			lf.add(f);
 		}
 		return lf;
@@ -62,8 +63,8 @@ public class FlightImpl implements FlightDao
 		List<Flight> lf = new ArrayList<Flight>();
 		for (Map<String, String> ligne : res)
 		{
-			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"),
-					Utility.convertDateString(ligne.get("departureTime")), Utility.convertDateString(ligne.get("arrivalTime")), Utility.convertIntString(ligne.get("planeId")));
+			Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
+					ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
 			lf.add(f);
 		}
 		return lf;
@@ -76,8 +77,16 @@ public class FlightImpl implements FlightDao
 		;
 		dbc.close();
 		Map<String, String> ligne = res.get(0);
-		Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"),
-				Utility.convertDateString(ligne.get("departureTime")), Utility.convertDateString(ligne.get("arrivalTime")), Utility.convertIntString(ligne.get("planeId")));
+		Flight f = new Flight(Utility.convertIntString(ligne.get("id")), ligne.get("commercialId"), ligne.get("departureAirport"), ligne.get("arrivalAirport"), ligne.get("departureTime"),
+				ligne.get("arrivalTime"), Utility.convertIntString(ligne.get("planeId")));
 		return f;
+	}
+
+	public Status addFlight(Flight f)
+	{
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		Status s = dbc.insertToTableName("flight", f.toMap());
+		dbc.close();
+		return s;
 	}
 }
