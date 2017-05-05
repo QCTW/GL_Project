@@ -39,7 +39,7 @@ function getAllTasks(result) {
 				+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
 				+ "</td>"
 				+ "<td>"
-				+result[i].task.startTime
+				+ sub(JSON.stringify(result[i].task.startTime))
 				+ "</td>"
 				+ "<td>"
 				+ sub(JSON.stringify(result[i].task.endTime))

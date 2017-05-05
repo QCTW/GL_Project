@@ -10,17 +10,24 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.example.jetty_jersey.dao.MRO;
 
 @Path("/mro")
-public class MroStub {
+public class MroStub
+{
+	private static Logger log = LogManager.getLogger(MroStub.class.getName());
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<MRO> allMro() {
+	public List<MRO> allMro()
+	{
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 50; i++)
+		{
 			l.add(new MRO(i, "mro" + i));
 		}
 		return l;
@@ -30,21 +37,25 @@ public class MroStub {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addMRO/{mro}")
-	public void addMRO(@PathParam("mro") String mro) {
+	public void addMRO(@PathParam("mro") String mro)
+	{
 		String[] splitedFile;
 		String[] splitedLine;
 
 		splitedFile = mro.split(",");
-		for (int i = 0; i < splitedFile.length; i++) {
+		for (int i = 0; i < splitedFile.length; i++)
+		{
 			splitedLine = splitedFile[i].split(",");
-			if (splitedLine.length != 2) {
-				System.out.println("Le fichier n'est pas dans le bon format!");
+			if (splitedLine.length != 2)
+			{
+				log.error("Le fichier n'est pas dans le bon format!");
 
-			} else {
+			} else
+			{
 				int id = Integer.parseInt(splitedLine[0]);
 				String nom = splitedLine[1];
 				MRO m = new MRO(id, nom);
-
+				// TODO Not implemented
 			}
 
 		}

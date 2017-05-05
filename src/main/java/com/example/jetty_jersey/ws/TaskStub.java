@@ -1,7 +1,6 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -117,8 +116,8 @@ public class TaskStub
 				} else
 				{
 					int id = Integer.parseInt(splitedLine[0]);
-					Date starTime = Utility.convertDateString(splitedLine[1]);
-					Date endTime = Utility.convertDateString(splitedLine[2]);
+					String starTime = splitedLine[1];
+					String endTime = splitedLine[2];
 					String description = splitedLine[3];
 					String periodicity = splitedLine[4];
 					String ataCategory = splitedLine[5];

@@ -44,8 +44,8 @@ public class TaskImpl implements TaskDao
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "_id", Integer.toString(id));
 		Map<String, String> m = results.get(0);
-		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
-				Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"), Utility.convertIntString(m.get("planeId")),
+				Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 		MRO mro = getMROById(dbConnect, m.get("mroId"));
 		Plane p = getPlaneById(dbConnect, m.get("planeId"));
 		Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
@@ -81,8 +81,8 @@ public class TaskImpl implements TaskDao
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
-			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
-					Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"),
+					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
@@ -125,8 +125,8 @@ public class TaskImpl implements TaskDao
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
-			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), Utility.convertDateString(m.get("startTime")),
-					Utility.convertDateString(m.get("endTime")), Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"),
+					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
@@ -201,13 +201,13 @@ public class TaskImpl implements TaskDao
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
-		Task t = new Task(-1, 1, Utility.convertDateString("2017/05/02 19:15"), Utility.convertDateString("2017/05/02 23:15"), 3, 1, 1);
+		Task t = new Task(-1, 1, "2017/05/02 19:15", "2017/05/02 23:15", 3, 1, 1);
 		Status s = test.addTask(t);
 		System.out.println("Add new task by _id=-1 : " + s.toString());
 		test.getAllTasks();
 		s = test.deleteTask(3);
 		System.out.println("Delete task _id=3 : " + s.toString());
-		t = new Task(3, 1, Utility.convertDateString("2017/05/02 07:15"), Utility.convertDateString("2017/05/02 12:15"), 3, 1, 1);
+		t = new Task(3, 1, "2017/05/02 07:15", "2017/05/02 12:15", 3, 1, 1);
 		s = test.addTask(t);
 		System.out.println("Add back task _id=3 : " + s.toString());
 

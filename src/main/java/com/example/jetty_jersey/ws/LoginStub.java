@@ -10,6 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.*;
 
 import com.example.jetty_jersey.util.Couple;
@@ -17,25 +20,27 @@ import com.example.jetty_jersey.util.Couple;
 import java.util.*;
 
 @Path("/login")
-public class LoginStub {
-	static boolean connected=true;
+public class LoginStub
+{
+	static boolean connected = false;
+	private static Logger log = LogManager.getLogger(LoginStub.class.getName());
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getUser")
-	public List<String> getUser(@Context HttpServletRequest hsr) {
+	public List<String> getUser(@Context HttpServletRequest hsr)
+	{
 		List<String> l = new ArrayList<String>();
 		final String authorization = hsr.getHeader("Authorization");
-		if (authorization != null && authorization.startsWith("Basic")) {
+		if (authorization != null && authorization.startsWith("Basic"))
+		{
 			String base64Credentials = authorization.substring("Basic".length()).trim();
 			String credentials = new String(Base64.getDecoder().decode(base64Credentials), Charset.forName("UTF-8"));
-			System.out.println(credentials);
+			log.debug(credentials);
 			String[] values = credentials.split(":");
 			l.add(values[0]);
 			String role = "mcc";// values[1].split(",")[1];
-
 			l.add(role);
-
 		}
 		return l;
 
@@ -44,29 +49,29 @@ public class LoginStub {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{user}/{pass}")
-	public String[] postMethod(@PathParam("user") String name, @PathParam("pass") String pass) {
-		System.out.println("USER : "+name+"\n PASS : "+pass);
+	public String[] postMethod(@PathParam("user") String name, @PathParam("pass") String pass)
+	{
 		List<Couple> l = new ArrayList<Couple>();
 		l.add(new Couple("mcc", "pass", "mcc"));
 		l.add(new Couple("mro", "pass", "mro"));
 		Couple c = new Couple(name, pass, "mcc");
 		// Couple c = new Couple("mcc", "mro");
-		System.out.println("USER : "+c.user+"\n PASS : "+c.pass);
+		log.debug("USER : " + c.user + "; PASS : " + c.pass);
 		String role = Couple.inTab(l, c);
-		System.out.println("role 1:"+role);
-		if (!role.equals("incorrect")) {
+		if (!role.equals("incorrect"))
+		{
 			connected = true;
-		}
-		else {
+		} else
+		{
 			connected = false;
 		}
-		System.out.println("role 2:"+role);
-		return new String[]{role};
+		return new String[] { role };
 	}
 
 	@GET
 	@Path("/logout")
-	public void logout() {
+	public void logout()
+	{
 		connected = false;
 		System.out.println("logout");
 	}

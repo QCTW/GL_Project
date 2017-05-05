@@ -1,10 +1,9 @@
 $(".alert").hide();
-/*if(localStorage.getItem("logFalse")!= null)
-alert('ok');
-*/
 if(localStorage.getItem("mail") != null){
-	$('#ifConnect').html("<h1> Vous êtes deja connecter </h1>");
+	localStorage.clear(); //Clean localStorage when recall login.html in order to re-loggin
+	$('#ifConnect').html("<h1> You are already logged in. </h1>");
 }
+
 function postLogin(pseudo, pass, success){
 	$.ajax({
         dataType: "json",
@@ -13,7 +12,6 @@ function postLogin(pseudo, pass, success){
     }).done(success)
 	.fail(success);
 }
-
 
 function login(result){
 	var r =  JSON.stringify(result[0]);
@@ -35,12 +33,9 @@ function login(result){
 		document.location.href="tasksPlanes.html";
 	}
 	else {
-		alert("incorrect or mcc or mro role : "+role);
+		alert("Incorrect or mcc or mro role : "+role);
 	}
 }
-
-
-
 
 $("#ok").click(function (){
 	var pseudo =$('#username').val();
@@ -53,7 +48,7 @@ $("#ok").click(function (){
 		$(".alert").html("<a class='close' data-dismiss='alert' href='#'>×</a>password required");
 		$(".alert").show();
 	}
-	else{
+	else {
 		localStorage.setItem("tmp",pseudo);
 		
 		var jqxhr = $.post( "ws/login/"+pseudo+"/"+pass, function() {

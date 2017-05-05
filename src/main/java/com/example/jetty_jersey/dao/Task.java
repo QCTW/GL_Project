@@ -9,13 +9,13 @@ public class Task
 {
 	private final int id;
 	private final int idTaskGeneric;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private int planeId;
 	private int taskStatus; // 1=Not dispatch to MRO, 0=Dispatched, 2=On going, 3=Done
 	private int mroId;
 
-	public Task(int id, int idTaskGeneric, Date startTime, Date endTime, int planeId, int taskStatus, int mroId)
+	public Task(int id, int idTaskGeneric, String startTime, String endTime, int planeId, int taskStatus, int mroId)
 	{
 		this.id = id;
 		this.idTaskGeneric = idTaskGeneric;
@@ -31,8 +31,8 @@ public class Task
 		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
 		chm.put("_id", String.valueOf(id));
 		chm.put("idTaskGeneric", String.valueOf(idTaskGeneric));
-		chm.put("startTime", Utility.convertDateToString(startTime));
-		chm.put("endTime", Utility.convertDateToString(endTime));
+		chm.put("startTime", startTime);
+		chm.put("endTime", endTime);
 		chm.put("planeId", String.valueOf(planeId));
 		chm.put("taskStatus", String.valueOf(taskStatus));
 		chm.put("mroId", String.valueOf(mroId));
@@ -49,24 +49,39 @@ public class Task
 		return idTaskGeneric;
 	}
 
-	public Date getStartTime()
+	public String getStartTime()
 	{
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime)
+	public void setStartTime(String startTime)
 	{
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime()
+	public String getEndTime()
 	{
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime)
+	public void setEndTime(String endTime)
 	{
 		this.endTime = endTime;
+	}
+
+	public Date getStartTimeAsDate()
+	{
+		return Utility.convertDateString(startTime);
+	}
+
+	public Date getEndTimeAsDate()
+	{
+		return Utility.convertDateString(endTime);
+	}
+
+	public void setEndTime(Date endTime)
+	{
+		this.endTime = Utility.convertDateToString(endTime);
 	}
 
 	public int getPlaneId()
@@ -110,8 +125,7 @@ public class Task
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";idTaskGeneric=" + idTaskGeneric + ";start=" + Utility.convertDateToString(startTime) + ";end=" + Utility.convertDateToString(endTime) + ";planeId=" + planeId
-				+ ";taskStatus=" + taskStatus + ";mroId=" + mroId;
+		return "id=" + id + ";idTaskGeneric=" + idTaskGeneric + ";start=" + startTime + ";end=" + endTime + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId=" + mroId;
 	}
 
 }
