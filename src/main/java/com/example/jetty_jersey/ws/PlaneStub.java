@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import com.example.jetty_jersey.dao.DAO;
 import com.example.jetty_jersey.dao.Plane;
 import com.example.jetty_jersey.dao_interface.PlaneDao;
+import com.example.jetty_jersey.util.PlaneInfo;
 
 @Path("/plane")
 public class PlaneStub
@@ -28,6 +29,15 @@ public class PlaneStub
 	public List<Plane> allPlanes()
 	{
 		return DAO.getPlaneDao().getAllPlanes();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/allPlaneInfo")
+	public List<PlaneInfo> allPlaneInfo()
+	{
+		/* to do*/
+		return null;//return DAO.getPlaneDao().getAllPlanes();
 	}
 
 	@POST

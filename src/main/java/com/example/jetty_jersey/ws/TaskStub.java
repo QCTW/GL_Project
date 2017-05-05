@@ -39,6 +39,19 @@ public class TaskStub
 		} else
 			return new ArrayList<TaskInfo>();
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/genericByPlane/{type}")
+	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String id)
+	{
+		if (LoginStub.connected)
+		{
+			log.debug("Login connected : " + LoginStub.connected);
+			return null;//return DAO.getTaskDao().getAllTasks();
+		} else
+			return new ArrayList<TaskGeneric>();
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

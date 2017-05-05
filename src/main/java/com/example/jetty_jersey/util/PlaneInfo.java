@@ -7,6 +7,7 @@ public class PlaneInfo
 {
 	private final Plane plane;
 	private final Flight flight;
+	private int numberOfFlights;
 
 	public PlaneInfo(Plane plane, Flight flight)
 	{
