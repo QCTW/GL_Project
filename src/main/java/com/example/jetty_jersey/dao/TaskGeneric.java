@@ -83,4 +83,10 @@ public class TaskGeneric
 		return chm;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "id=" + id + ";description=" + description + ";periodicity=" + periodicity + ";ataCategory=" + ataCategory + ";hangarNeed=" + hangarNeed + ";duree=" + duree + ";planeType=" + planeType;
+	}
+
 }

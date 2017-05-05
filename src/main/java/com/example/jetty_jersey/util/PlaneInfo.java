@@ -1,15 +1,18 @@
 package com.example.jetty_jersey.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.jetty_jersey.dao.Flight;
 import com.example.jetty_jersey.dao.Plane;
 
 public class PlaneInfo
 {
 	private final Plane plane;
-	private final Flight flight;
+	private final List<Flight> flight;
 	private int numberOfFlights;
 
-	public PlaneInfo(Plane plane, Flight flight)
+	public PlaneInfo(Plane plane, List<Flight> flight)
 	{
 		this.plane = plane;
 		this.flight = flight;
@@ -20,9 +23,9 @@ public class PlaneInfo
 		return plane;
 	}
 
-	public Flight getFligh()
+	public List<Flight> getFlighs()
 	{
-		return flight;
+		return new ArrayList();
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.example.jetty_jersey.dao;
 
 import java.util.Date;
-
+import com.example.jetty_jersey.db.CustomHashMap;
 import com.example.jetty_jersey.db.Utility;
 
 /*
@@ -21,11 +21,11 @@ public class Flight
 	private String commercialId;
 	private String departureAirport;
 	private String arrivalAirport;
-	private Date departureTime;
-	private Date arrivalTime;
+	private String departureTime;
+	private String arrivalTime;
 	private int planeId;
 
-	public Flight(int id, String commercialId, String departureAirport, String arrivalAirport, Date departureTime, Date arrivalTime, int planeId)
+	public Flight(int id, String commercialId, String departureAirport, String arrivalAirport, String departureTime, String arrivalTime, int planeId)
 	{
 		this.id = id;
 		this.commercialId = commercialId;
@@ -42,8 +42,8 @@ public class Flight
 		this.commercialId = "SIMDATA" + id;
 		this.departureAirport = "Cristiano Ronaldo-FNC";
 		this.arrivalAirport = "Narsarsuaq-UAK";
-		this.departureTime = new Date();
-		this.arrivalTime = new Date();
+		this.departureTime = Utility.convertDateToString(new Date());
+		this.arrivalTime = Utility.convertDateToString(new Date());
 		this.planeId = planeId;
 	}
 
@@ -92,31 +92,53 @@ public class Flight
 		this.arrivalAirport = arrivalAirport;
 	}
 
-	public Date getDepartureTime()
+	public String getDepartureTime()
 	{
 		return departureTime;
 	}
 
-	public void setDepartureTime(Date departureTime)
+	public void setDepartureTime(String departureTime)
 	{
 		this.departureTime = departureTime;
 	}
 
-	public Date getArrivalTime()
+	public String getArrivalTime()
 	{
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Date arrivalTime)
+	public void setArrivalTime(String arrivalTime)
 	{
 		this.arrivalTime = arrivalTime;
+	}
+
+	public Date getDepartureTimeAsDate()
+	{
+		return Utility.convertDateString(departureTime);
+	}
+
+	public Date getArrivalTimeAsDate()
+	{
+		return Utility.convertDateString(arrivalTime);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Flight(" + id + "," + commercialId + "," + departureAirport + "," + arrivalAirport + "," + Utility.convertDateToString(departureTime) + "," + Utility.convertDateToString(arrivalTime)
-				+ "," + planeId + ")";
+		return "Flight(" + id + "," + commercialId + "," + departureAirport + "," + arrivalAirport + "," + departureTime + "," + arrivalTime + "," + planeId + ")";
+	}
+
+	public CustomHashMap<String, String> toMap()
+	{
+		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();
+		chm.put("_id", String.valueOf(id));
+		chm.put("commercialId", commercialId);
+		chm.put("departureAirport", departureAirport);
+		chm.put("arrivalAirport", arrivalAirport);
+		chm.put("departureTime", departureTime);
+		chm.put("arrivalTime", arrivalTime);
+		chm.put("planeId", String.valueOf(planeId));
+		return chm;
 	}
 
 }

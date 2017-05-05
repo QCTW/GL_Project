@@ -31,4 +31,6 @@ public interface FlightDao
 	 **/
 	Flight getFlightbyPlaneId(int planeId);
 
+	Status addFlight(Flight f);
+
 }
