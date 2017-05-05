@@ -90,7 +90,7 @@ public class DatabaseConnecter
 			s = new Status(Execution.FAILED);
 			String msg = "No record found for deletion: " + fieldName + "=" + fieldValue + " in table:" + tableName;
 			s.setMessage(msg);
-			log.error("[Data inconsistency] " + msg);
+			log.error("Data inconsistency!! " + msg);
 		} else
 		{
 			int sucessCount = 0;
@@ -143,7 +143,7 @@ public class DatabaseConnecter
 		Status s = new Status((successCount > 0) ? Execution.SUCCESSFUL : Execution.FAILED);
 		s.setResultyCount(successCount);
 		if (successCount == 0)
-			s.setMessage("Data update failed");
+			s.setMessage("Data update into " + tableName + " failed");
 		return s;
 
 	}
@@ -234,7 +234,7 @@ public class DatabaseConnecter
 		Status s = new Status((successCount > 0) ? Execution.SUCCESSFUL : Execution.FAILED);
 		s.setResultyCount(successCount);
 		if (successCount == 0)
-			s.setMessage("Data insert failed");
+			s.setMessage("Data insert into " + tableName + " failed");
 		return s;
 	}
 
@@ -260,12 +260,12 @@ public class DatabaseConnecter
 	public List<Map<String, String>> selectAllFromTableWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
 	{
 		QueryBuilder qb = QueryBuilders.queryStringQuery(fieldName + ":" + fieldValue);
-		System.out.println("QueryBuilder=" + qb);
+		log.debug("Build query " + qb);
 		SearchResponse scrollResp = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).addSort(FieldSortBuilder.DOC_FIELD_NAME, SortOrder.ASC)
 				.setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).setQuery(qb).setSize(DatabaseSettings.MAX_BOLK_RESULTS).get();
 		// Scroll until no hits are returned
 		List<Map<String, String>> lRet = new ArrayList<Map<String, String>>();
-		System.out.println("selectAllFromTableWhereFieldEqValue=" + lRet.size());
+
 		do
 		{
 			lRet.addAll(wrapResults(scrollResp));
@@ -277,7 +277,6 @@ public class DatabaseConnecter
 	public List<Map<String, String>> selectAllFromTableWhereFieldEqValueSortAscendingByField(String tableName, String fieldName, String fieldValue, String sortField)
 	{
 		List<Map<String, String>> l = selectAllFromTableWhereFieldEqValue(tableName, fieldName, fieldValue);
-		System.out.println(tableName + "," + fieldName + "," + fieldValue + "," + sortField + "," + l.size());
 		if (l.size() > 0)
 		{
 			Collections.sort(l, new MapValueAscendingComparator(sortField));
@@ -335,7 +334,6 @@ public class DatabaseConnecter
 	{
 		SearchResponse response = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).setSearchType(SearchType.DFS_QUERY_THEN_FETCH).setFrom(nStart).setSize(nEnd).setExplain(true)
 				.get();
-		log.debug("selectInRangeFromTableName(" + tableName + "," + nStart + "" + nEnd + ") result:\n" + response.toString());
 		return wrapResults(response);
 	}
 
