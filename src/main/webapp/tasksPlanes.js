@@ -129,7 +129,7 @@ function showPlanes(result) {
 		tr += "<tr> " 
 				+ "<td>"+ sub(JSON.stringify(result[i]['planeId']))+ "</td>" 
 				+ "<td>"+ sub(JSON.stringify(result[i].planeType)) + "</td>"
-				+ "<td><button onclick='chooseTasksByPlane(\"Canadair RJ 1000\")' class='btn icon-btn btn-success'>  "
+				+ "<td><button onclick='chooseTasksByPlane(\""+sub(JSON.stringify(result[i].planeType))+"\")' class='btn icon-btn btn-success'>  "
 				+ "<span class='glyphicon glyphicon-ok'></span> "
 				+ "</button></td>" + "</tr>";
 	}

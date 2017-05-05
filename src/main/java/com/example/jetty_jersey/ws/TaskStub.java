@@ -50,7 +50,7 @@ public class TaskStub
 		{
 			log.debug("Login connected : " + LoginStub.connected);
 			System.out.println(DAO.getTaskDao().getGenericTasksByPlaneType("Canadair RJ 1000"));
-			return DAO.getTaskDao().getGenericTasksByPlaneType("Canadair RJ 1000");
+			return DAO.getTaskDao().getGenericTasksByPlaneType(type);
 			
 		} else
 			return new ArrayList<TaskGeneric>();
