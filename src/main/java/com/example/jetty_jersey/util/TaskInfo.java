@@ -1,5 +1,7 @@
 package com.example.jetty_jersey.util;
 
+import java.util.Date;
+
 import com.example.jetty_jersey.dao.Flight;
 import com.example.jetty_jersey.dao.MRO;
 import com.example.jetty_jersey.dao.Plane;
@@ -29,4 +31,13 @@ public class TaskInfo
 		return "task=" + task + ";plane=" + plane + ";flight=" + flight + ";mro=" + mro + ";taskGeneric=" + taskGeneric;
 	}
 
+	// For unit test only
+	public TaskInfo(Date dateInTheTask)
+	{
+		taskGeneric = new TaskGeneric();
+		task = new Task(dateInTheTask);
+		plane = new Plane(1, "Unit Test");
+		flight = new Flight(1, 1);
+		mro = new MRO();
+	}
 }

@@ -36,6 +36,7 @@ public class Flight
 		this.planeId = planeId;
 	}
 
+	// For unit test only
 	public Flight(int id, int planeId)
 	{
 		this.id = id;

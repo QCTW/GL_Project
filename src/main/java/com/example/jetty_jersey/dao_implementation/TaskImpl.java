@@ -199,21 +199,6 @@ public class TaskImpl implements TaskDao
 		return f;
 	}
 
-	public List<TaskGeneric> getGenericTasksByPlaneType(String planeType)
-	{
-		List<TaskGeneric> l = new ArrayList<TaskGeneric>();
-		DatabaseConnecter dbConnect = new DatabaseConnecter();
-		List<Map<String, String>> res = dbConnect.selectAllFromTableWhereFieldEqValueSortAscendingByField("taskgeneric", "planeType", planeType, "_id");
-		dbConnect.close();
-		for (Map<String, String> m : res)
-		{
-			TaskGeneric tg = new TaskGeneric(Utility.convertIntString(m.get("_id")), m.get("description"), m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")),
-					Utility.convertFloatString(m.get("duree")), m.get("planeType"));
-			l.add(tg);
-		}
-		return l;
-	}
-
 	// For unit test
 	public static void main(String[] args)
 	{
@@ -233,11 +218,6 @@ public class TaskImpl implements TaskDao
 		// System.out.println("Add back task _id=3 : " + s.toString());
 		// TaskInfo ti = test.getTasksById(1);
 		// System.out.println(ti.toString());
-		List<TaskGeneric> l2 = test.getGenericTasksByPlaneType("Airbus A380");
-		for (TaskGeneric tg : l2)
-		{
-			System.out.println(tg);
-		}
 	}
 
 }

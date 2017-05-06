@@ -15,6 +15,18 @@ public class Task
 	private int taskStatus; // 1=Not dispatch to MRO, 0=Dispatched, 2=On going, 3=Done
 	private int mroId;
 
+	// For unit test only
+	public Task(Date d)
+	{
+		this.id = (int) (Math.random() * 100);
+		this.idTaskGeneric = id;
+		this.startTime = Utility.convertDateToString(d);
+		this.endTime = startTime;
+		this.planeId = id;
+		this.taskStatus = 1;
+		this.mroId = -1;
+	}
+
 	public Task(int id, int idTaskGeneric, String startTime, String endTime, int planeId, int taskStatus, int mroId)
 	{
 		this.id = id;

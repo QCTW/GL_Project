@@ -28,11 +28,6 @@ public interface TaskDao
 	List<TaskInfo> getTasksByPlaneId(int id);
 
 	/**
-	 * @return the generic task with the given plane type
-	 **/
-	List<TaskGeneric> getGenericTasksByPlaneType(String planeType);
-
-	/**
 	 * @return add a task
 	 **/
 	Status addTask(Task t);

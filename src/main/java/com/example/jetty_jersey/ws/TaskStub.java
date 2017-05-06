@@ -18,14 +18,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.dao.*;
-import com.example.jetty_jersey.dao_interface.TaskDao;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
 public class TaskStub
 {
 	private static Logger log = LogManager.getLogger(TaskStub.class.getName());
-	private static TaskDao taskDao = DAO.getTaskDao();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +37,7 @@ public class TaskStub
 		} else
 			return new ArrayList<TaskInfo>();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/genericByPlane/{type}")
@@ -49,9 +47,8 @@ public class TaskStub
 		if (LoginStub.connected)
 		{
 			log.debug("Login connected : " + LoginStub.connected);
-			System.out.println(DAO.getTaskDao().getGenericTasksByPlaneType("Canadair RJ 1000"));
-			return DAO.getTaskDao().getGenericTasksByPlaneType(type);
-			
+			return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
+
 		} else
 			return new ArrayList<TaskGeneric>();
 	}
@@ -63,7 +60,7 @@ public class TaskStub
 	{
 		if (LoginStub.connected)
 		{
-			return taskDao.getTasksByPlaneId(id);
+			return DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
 
@@ -84,25 +81,18 @@ public class TaskStub
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public void addTask(TaskInfo taskInfo)
+	public void addTask(Task task)
 	{
-		
+		DAO.getTaskDao().addTask(task);
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/modify/{id}")
-	public void modifyTaskById(@PathParam("id") int id)
+	@Path("/update")
+	// http://stackoverflow.com/questions/8194408/how-to-access-parameters-in-a-restful-post-method
+	public void modifyTask(Task task)
 	{
-
-	}
-
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/update/{id}")
-	public void updateTaskById(@PathParam("id") int id)
-	{
-
+		DAO.getTaskDao().modifyTask(task);
 	}
 
 	@DELETE
@@ -110,7 +100,7 @@ public class TaskStub
 	@Path("/delete/{id}")
 	public void deleteTaskById(@PathParam("id") int id)
 	{
-		taskDao.deleteTask(id);
+		DAO.getTaskDao().deleteTask(id);
 	}
 
 	@POST
@@ -141,8 +131,7 @@ public class TaskStub
 					int planeId = Integer.parseInt(splitedLine[7]);
 					int statut = Integer.parseInt(splitedLine[8]);
 					int mroId = Integer.parseInt(splitedLine[9]);
-					Task t = new Task(id, -1, starTime, endTime, planeId, statut, mroId);
-					taskDao.addTask(t);
+					// TODO : This web service is not finished
 				}
 
 			}
