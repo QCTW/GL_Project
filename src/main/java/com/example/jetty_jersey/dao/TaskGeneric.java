@@ -9,7 +9,7 @@ public class TaskGeneric
 	private final String periodicity;
 	private final String ataCategory;
 	private final boolean hangarNeed;
-	private final float duree; // in hour
+	private final float duration; // in hour
 	private final String planeType;
 
 	public TaskGeneric()
@@ -20,18 +20,18 @@ public class TaskGeneric
 		this.periodicity = "Daily";
 		this.ataCategory = "Demain, dès l’aube (Victor Hugo)";
 		this.hangarNeed = (Math.random() < 0.5) ? true : false;
-		this.duree = (long) (Math.random() * 12);
+		this.duration = (long) (Math.random() * 12);
 		this.planeType = "Fake Data Type" + rand;
 	}
 
-	public TaskGeneric(int id, String description, String periodicity, String ataCategory, boolean hangarNeed, float duree, String planeType)
+	public TaskGeneric(int id, String description, String periodicity, String ataCategory, boolean hangarNeed, float duration, String planeType)
 	{
 		this.id = id;
 		this.description = description;
 		this.periodicity = periodicity;
 		this.ataCategory = ataCategory;
 		this.hangarNeed = hangarNeed;
-		this.duree = duree;
+		this.duration = duration;
 		this.planeType = planeType;
 	}
 
@@ -40,9 +40,9 @@ public class TaskGeneric
 		return id;
 	}
 
-	public float getDuree()
+	public float getduration()
 	{
-		return duree;
+		return duration;
 	}
 
 	public String getPlaneType()
@@ -78,7 +78,7 @@ public class TaskGeneric
 		chm.put("periodicity", periodicity);
 		chm.put("ataCategory", ataCategory);
 		chm.put("planeType", planeType);
-		chm.put("duree", Float.toString(duree));
+		chm.put("duration", Float.toString(duration));
 		chm.put("hangarNeed", Boolean.toString(hangarNeed));
 		return chm;
 	}
@@ -86,7 +86,7 @@ public class TaskGeneric
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";description=" + description + ";periodicity=" + periodicity + ";ataCategory=" + ataCategory + ";hangarNeed=" + hangarNeed + ";duree=" + duree + ";planeType=" + planeType;
+		return "id=" + id + ";description=" + description + ";periodicity=" + periodicity + ";ataCategory=" + ataCategory + ";hangarNeed=" + hangarNeed + ";duration=" + duration + ";planeType=" + planeType;
 	}
 
 }

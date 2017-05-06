@@ -46,7 +46,7 @@ public class TaskGenericImpl implements TaskGenericDao
 		for (Map<String, String> m : res)
 		{
 			TaskGeneric tg = new TaskGeneric(Utility.convertIntString(m.get("_id")), m.get("description"), m.get("periodicity"), m.get("ataCategory"), Utility.convertBoolString(m.get("hangarNeed")),
-					Utility.convertFloatString(m.get("duree")), m.get("planeType"));
+					Utility.convertFloatString(m.get("duration")), m.get("planeType"));
 			l.add(tg);
 		}
 		return l;
