@@ -287,7 +287,7 @@ PUT gla/taskgeneric/1
  "periodicity" : "Once per day",
  "ataCategory" : "Power plant (ATA 70-92)",
  "hangarNeed" : "true",
- "duree" : "1",
+ "duration" : "1",
  "planeType" : "Airbus A380"
  }
  
@@ -297,7 +297,7 @@ PUT gla/taskgeneric/2
  "periodicity" : "Once per day",
  "ataCategory" : "Propeller/rotor (ATA 60-67)",
  "hangarNeed" : "true", 
- "duree" : "1.5",
+ "duration" : "1.5",
  "planeType" : "Airbus A380"
  }
  
@@ -307,7 +307,7 @@ PUT gla/taskgeneric/3
  "periodicity" : "Each flight",
  "ataCategory" : "Aircraft General (ATA 00-18)",
  "hangarNeed" : "false",
- "duree" : "0.5",
+ "duration" : "0.5",
  "planeType" : "Airbus A380"
 }
 
@@ -317,7 +317,7 @@ PUT gla/taskgeneric/4
  "periodicity" : "Each flight",
  "ataCategory" : "Airframe systems (ATA 20-50)",
  "hangarNeed" : "true",
- "duree" : "1",
+ "duration" : "1",
  "planeType" : "Airbus A380"
 }
 
@@ -327,7 +327,7 @@ PUT gla/taskgeneric/5
  "periodicity" : "Every week",
  "ataCategory" : "Structure (ATA 51-57)",
  "hangarNeed" : "true",
- "duree" : "2",
+ "duration" : "2",
  "planeType" : "Airbus A380"
 }
 
@@ -337,7 +337,7 @@ PUT gla/taskgeneric/6
  "periodicity" : "Once per day",
  "ataCategory" : "Power plant (ATA 70-92)",
  "hangarNeed" : "true",
- "duree" : "1.5",
+ "duration" : "1.5",
  "planeType" : "Boeing 777"
  }
  
@@ -347,7 +347,7 @@ PUT gla/taskgeneric/7
  "periodicity" : "Once per day",
  "ataCategory" : "Propeller/rotor (ATA 60-67)",
  "hangarNeed" : "true", 
- "duree" : "3",
+ "duration" : "3",
  "planeType" : "Boeing 777"
  }
  
@@ -357,7 +357,7 @@ PUT gla/taskgeneric/8
  "periodicity" : "Each flight",
  "ataCategory" : "Aircraft General (ATA 00-18)",
  "hangarNeed" : "false",
- "duree" : "1",
+ "duration" : "1",
  "planeType" : "Boeing 777"
 }
 
@@ -367,7 +367,7 @@ PUT gla/taskgeneric/9
  "periodicity" : "Each flight",
  "ataCategory" : "Airframe systems (ATA 20-50)",
  "hangarNeed" : "true",
- "duree" : "0.5",
+ "duration" : "0.5",
  "planeType" : "Canadair RJ 1000"
 }
 
@@ -377,6 +377,6 @@ PUT gla/taskgeneric/10
  "periodicity" : "Every week",
  "ataCategory" : "Structure (ATA 51-57)",
  "hangarNeed" : "true",
- "duree" : "1",
+ "duration" : "1",
  "planeType" : "Canadair RJ 1000"
 }
