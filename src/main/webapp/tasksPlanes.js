@@ -118,10 +118,11 @@ function logout() {
 	document.location.href = "login.html";
 
 }
-
+var planeList;
 // CREATE TASK MENU JS
 function showPlanes(result) {
 	console.log(result);
+	planeList = result;
 	//
 	var tr = "";
 	for (var i = 0; i < result.length; i++) {
@@ -144,11 +145,13 @@ function chooseTasksByPlane(planetype) {
 	console.log(planetype);
 	idPlane=1;
 	getServerData("ws/task/genericByPlane/"+planetype, chooseTasksByPlaneAux);
+	$('#returnCreateTask').append('<li><a onclick="showPlanes('+planeList+')">'+planetype+'</a></li>');
 }
 
 var tab;
 
 function chooseTasksByPlaneAux(result) {
+	
 	var tr = "";
 	// console.log("in get all tasks function and tr = "+tr);
 	for (var i = 0; i < result.length; i++) {
@@ -181,16 +184,40 @@ function chooseTasksByPlaneAux(result) {
 }
 var genericTaskId;
 function chooseStartDate(taskId) {
-	genericTaskId = taskId
-	$("#createTaskBody").load("chooseStartDate.html");
+	$('#returnCreateTask').append('<li><a> task n°'+taskId+'</a></li>');
+	//genericTaskId = taskId;
+	//var res = '<input type="date" data-date-format="DD MMMM YYYY" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date" />';
+	//res+='<input type=time'
+	var res = '<div class="control-group">';
+    res+='<label class="control-label">Choose a date</label>'; 
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy MM dd - HH:ii p"  data-link-field="dtp_input1">';
+    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly>';
+    res+='<span class="add-on"><i class="icon-remove"></i></span>';
+	res+='<span class="add-on"><i class="icon-th"></i></span>';
+    res+='</div>';
+	res+='<input type="hidden" id="dtp_input1" value="" /><br/></div>';
+	res+='<button type="submit" onclick="validTask()" class="btn btn-primary">Submit</button>'
+	$("#createTaskBody").html(res);
+	$('.form_datetime').datetimepicker({
+	    //language:  'fr',
+	    weekStart: 1,
+	    todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+	    showMeridian: 1
+	});
+	//$("#createTaskBody").load("chooseStartDate.html");
 	
 }
+
 
 function validTask() {
 	//var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	
-	
-	alert('task id Validate'+'\n plane id = '+planeId+'\n taskId = '+genericTaskId);
+	alert('date : '+$('#textDate').val());
+	//alert('task id Validate'+'\n plane id = '+planeId+'\n taskId = '+genericTaskId);
 	document.location.href = "tasksPlanes.html";
 }
 function callViewTask(id) {
