@@ -24,7 +24,10 @@ public class Utility
 		Date date = new Date();
 		try
 		{
-			date = df.parse(strDateInDb);
+			synchronized (df)
+			{
+				date = df.parse(strDateInDb);
+			}
 		} catch (ParseException e)
 		{
 			log.error("Unrecognized date format (not yyyy/MM/dd HH:mm):" + strDateInDb);
@@ -40,7 +43,12 @@ public class Utility
 	 */
 	public static String convertDateToString(Date date)
 	{
-		return df.format(date);
+		String s = "";
+		synchronized (df)
+		{
+			s = df.format(date);
+		}
+		return s;
 	}
 
 	/**
