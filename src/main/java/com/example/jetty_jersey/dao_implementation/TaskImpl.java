@@ -68,7 +68,7 @@ public class TaskImpl implements TaskDao
 			{
 				Map<String, String> fst = res.get(0);
 				tg = new TaskGeneric(Utility.convertIntString(fst.get("_id")), fst.get("description"), fst.get("periodicity"), fst.get("ataCategory"), Utility.convertBoolString(fst.get("hangarNeed")),
-						Float.valueOf(fst.get("duree")), fst.get("planeType"));
+						Float.valueOf(fst.get("duration")), fst.get("planeType"));
 				taskGenericCache.put(id, tg);
 			}
 		}
