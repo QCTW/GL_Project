@@ -206,7 +206,7 @@ function viewTask(task) {
 	$('#hangerNeed').html(
 			sub(JSON.stringify((task.taskGeneric.hangarNeed == true))) ? 'yes'
 					: 'no');
-	$('#length').html(sub(JSON.stringify(task.taskGeneric.duree)));
+	$('#length').html(sub(JSON.stringify(task.taskGeneric.duration)));
 	$('#planeType2').html(sub(JSON.stringify(task.taskGeneric.planeType)));
 	console.log(task.taskGeneric.planeType);
 
