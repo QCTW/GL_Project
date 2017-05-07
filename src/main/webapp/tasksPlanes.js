@@ -237,12 +237,12 @@ function validTask() {
 			    "endTime": d2,"planeId": planeId,"taskStatus": 1, 
 			    "mroId": -1}),
 			type: "PUT",
-			processData: false
+			processData: true
 		    }).done(function() {
 		    	document.location.href = "tasksPlanes.html";
 				
 		    }).fail(function() {
-				alert( "Une erreur est survenue. Merci de revérifier les informations rentrées." );
+				alert( "An error has occurred. Thank you for re-verifying the information." );
 		    });
 	/*//console.log(d.split(" ")[0]);
 	alert('date : '+d2+"\n plane id : "+idPlane+"\ngenericTaskId : "+genericTaskId);

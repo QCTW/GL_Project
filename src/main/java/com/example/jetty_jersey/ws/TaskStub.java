@@ -83,7 +83,8 @@ public class TaskStub
 	@Path("/add")
 	public void addTask(Task task)
 	{
-		DAO.getTaskDao().addTask(task);
+		Task t = new Task(-1, 9, "2017/05/07 16:41", "2017/05/07 16:41", 1, 1, 0);
+		DAO.getTaskDao().addTask(t);
 	}
 
 	@POST

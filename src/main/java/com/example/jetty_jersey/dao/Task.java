@@ -91,10 +91,10 @@ public class Task
 		return Utility.convertDateString(endTime);
 	}
 
-	public void setEndTime(Date endTime)
+	/*public void setEndTime(Date endTime)
 	{
 		this.endTime = Utility.convertDateToString(endTime);
-	}
+	}*/
 
 	public int getPlaneId()
 	{
