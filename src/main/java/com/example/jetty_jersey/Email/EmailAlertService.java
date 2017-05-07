@@ -30,7 +30,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailAlertService
 {
     static int limit_not_assigned = 30;
-    static int limit_not_confirmed = 2;
+    static int limit_not_confirmed = 100;
     static String debug_email = "zidane.rezzak@gmail.com";
 
     static List<String> idtask_list_not_assigned = new ArrayList<String>();
@@ -81,7 +81,15 @@ public class EmailAlertService
         db.close();
     }
 
-    private static void send_mail_to_mcc_task_not_confirmed(String id, String mccId, String mroId, String date) {
+    private static void send_mail_to_mcc_task_not_confirmed(String id, String mccId, String mroId, String date) throws AddressException, MessagingException{
+        String emailBody = "System Alert. " + "<br><br> We have detected that the task N°" + id +
+                " " + "was assigned to mro N°" + mroId +", but was not yet confirmed by this one.<br> Task Start time: " + date + "";
+
+        DatabaseConnecter db = new DatabaseConnecter();
+        List<Map<String, String>> list = db.selectAllFromTableWhereFieldEqValue("mcc", "_id", mccId);
+        db.close();
+
+        send_mail(emailBody, list.get(0).get("email"));
     }
 
     private static void send_mail_to_mcc_task_not_assigned(String id, String mccId, String date) throws AddressException, MessagingException {
