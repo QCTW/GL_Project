@@ -86,6 +86,18 @@ public class TaskStub
 		Task t = new Task(-1, 9, "2017/05/07 16:41", "2017/05/07 16:41", 1, 1, -1, -1);
 		DAO.getTaskDao().addTask(t);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/test")
+	public void test()
+	{
+		Task t = new Task(-1, 9/5, "2017/05/07 00:00", "2017/05/07 16:41", 5, 1, -1, -1);
+		//Task tt = new Task(-1, 5, startTime, endTime, planeId, taskStatus, mroId, mccId)
+		DAO.getTaskDao().addTask(t);
+	}
+	
+	
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

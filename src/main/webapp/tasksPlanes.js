@@ -231,11 +231,12 @@ function validTask() {
 	var d2 = year+"/"+month+"/"+day+" "+hour+":"+min;
 	 $.ajax({
 			contentType: "application/json",
+			dataType : "json",
 			url: "ws/task/add",
 			data: JSON.stringify({
 			    "id": -1, "idTaskGeneric": genericTaskId, "startTime": d2,
 			    "endTime": d2,"planeId": planeId,"taskStatus": 1, 
-			    "mroId": -1}),
+			    "mroId": -1,"mccId":-1}),
 			type: "PUT",
 			processData: true
 		    }).done(function() {
