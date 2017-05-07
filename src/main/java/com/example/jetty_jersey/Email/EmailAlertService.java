@@ -22,9 +22,9 @@ import javax.mail.internet.MimeMessage;
 /**
  *  This is an Email Alert System
  *  - If a task was not assigned to any MRO and the start date is soon (controlled with limit_not_assigned)
- *    then send an email to the CTO
+ *    then send an email to the MCC
  *  - If a task was assigned but not confirmed by the MRO and the task start date is soon
- *    (Controlled with limit_not_confirmed), then send an email to the CTO
+ *    (Controlled with limit_not_confirmed), then send an email to the MCC
  *
  *  debug_email : is an address email for debugging: each email sent by our system will be sent to this email to.
  *
