@@ -46,7 +46,7 @@ public class TaskImpl implements TaskDao
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "_id", Integer.toString(id));
 		Map<String, String> m = results.get(0);
 		Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"), Utility.convertIntString(m.get("planeId")),
-				Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+				Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")), Utility.convertIntString(m.get("mccId")));
 		MRO mro = getMROById(dbConnect, m.get("mroId"));
 		Plane p = getPlaneById(dbConnect, m.get("planeId"));
 		Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
@@ -84,7 +84,7 @@ public class TaskImpl implements TaskDao
 		for (Map<String, String> m : results)
 		{
 			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"),
-					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")), Utility.convertIntString(m.get("mccId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
@@ -128,7 +128,7 @@ public class TaskImpl implements TaskDao
 		for (Map<String, String> m : results)
 		{
 			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"),
-					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")));
+					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")), Utility.convertIntString(m.get("mccId")));
 			MRO mro = getMROById(dbConnect, m.get("mroId"));
 			Plane p = getPlaneById(dbConnect, m.get("planeId"));
 			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));

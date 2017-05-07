@@ -177,7 +177,8 @@ PUT gla/task/1
  "idTaskGeneric" : "1",
  "planeId" : "1",
  "taskStatus" : "8",
- "mroId" : "2"
+ "mroId" : "2",
+ "mccId" : "1"
 }
 
 
@@ -188,7 +189,8 @@ PUT gla/task/2
  "idTaskGeneric" : "5",
  "planeId" : "2",
  "taskStatus" : "7",
- "mroId" : "3"
+ "mroId" : "3",
+ "mccId" : "1"
 }
 
 PUT gla/task/3
@@ -198,7 +200,8 @@ PUT gla/task/3
  "idTaskGeneric" : "4",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "1"
+ "mroId" : "1",
+ "mccId" : "1"
 }
 
 PUT gla/task/4
@@ -208,7 +211,8 @@ PUT gla/task/4
  "idTaskGeneric" : "3",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "1"
+ "mroId" : "1",
+ "mccId" : "1"
 }
 
 PUT gla/task/5
@@ -218,7 +222,8 @@ PUT gla/task/5
  "idTaskGeneric" : "2",
  "planeId" : "3",
  "taskStatus" : "9",
- "mroId" : "2"
+ "mroId" : "2",
+ "mccId" : "1"
 }
 
 PUT gla/task/6
@@ -228,7 +233,8 @@ PUT gla/task/6
  "idTaskGeneric" : "1",
  "planeId" : "1",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/task/7
@@ -238,7 +244,8 @@ PUT gla/task/7
  "idTaskGeneric" : "1",
  "planeId" : "2",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/task/8
@@ -248,7 +255,8 @@ PUT gla/task/8
  "idTaskGeneric" : "1",
  "planeId" : "3",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/task/9
@@ -258,7 +266,8 @@ PUT gla/task/9
  "idTaskGeneric" : "1",
  "planeId" : "4",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/task/10
@@ -268,7 +277,8 @@ PUT gla/task/10
  "idTaskGeneric" : "1",
  "planeId" : "5",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/task/11
@@ -278,7 +288,8 @@ PUT gla/task/11
  "idTaskGeneric" : "1",
  "planeId" : "6",
  "taskStatus" : "0",
- "mroId" : "-1"
+ "mroId" : "-1",
+ "mccId" : "-1"
 }
 
 PUT gla/taskgeneric/1

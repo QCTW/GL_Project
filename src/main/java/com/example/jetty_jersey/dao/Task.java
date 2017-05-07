@@ -14,6 +14,7 @@ public class Task
 	private int planeId;
 	private int taskStatus; // 1=Not dispatch to MRO, 0=Dispatched, 2=On going, 3=Done
 	private int mroId;
+	private int mccId;
 
 	// For unit test only
 	public Task(Date d)
@@ -25,9 +26,10 @@ public class Task
 		this.planeId = id;
 		this.taskStatus = 1;
 		this.mroId = -1;
+		this.mccId = -1;
 	}
 
-	public Task(int id, int idTaskGeneric, String startTime, String endTime, int planeId, int taskStatus, int mroId)
+	public Task(int id, int idTaskGeneric, String startTime, String endTime, int planeId, int taskStatus, int mroId, int mccId)
 	{
 		this.id = id;
 		this.idTaskGeneric = idTaskGeneric;
@@ -36,6 +38,7 @@ public class Task
 		this.planeId = planeId;
 		this.taskStatus = taskStatus;
 		this.mroId = mroId;
+		this.mccId = mccId;
 	}
 
 	public CustomHashMap<String, String> toMap()
@@ -48,6 +51,7 @@ public class Task
 		chm.put("planeId", String.valueOf(planeId));
 		chm.put("taskStatus", String.valueOf(taskStatus));
 		chm.put("mroId", String.valueOf(mroId));
+		chm.put("mccId", String.valueOf(mroId));
 		return chm;
 	}
 
@@ -91,10 +95,12 @@ public class Task
 		return Utility.convertDateString(endTime);
 	}
 
-	/*public void setEndTime(Date endTime)
-	{
-		this.endTime = Utility.convertDateToString(endTime);
-	}*/
+	/*
+	 * public void setEndTime(Date endTime)
+	 * {
+	 * this.endTime = Utility.convertDateToString(endTime);
+	 * }
+	 */
 
 	public int getPlaneId()
 	{
@@ -134,10 +140,20 @@ public class Task
 		this.mroId = mroId;
 	}
 
+	public int getMccId()
+	{
+		return mccId;
+	}
+
+	public void setMccId(int mccId)
+	{
+		this.mccId = mccId;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";idTaskGeneric=" + idTaskGeneric + ";start=" + startTime + ";end=" + endTime + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId=" + mroId;
+		return "id=" + id + ";idTaskGeneric=" + idTaskGeneric + ";start=" + startTime + ";end=" + endTime + ";planeId=" + planeId + ";taskStatus=" + taskStatus + ";mroId=" + mroId + ";mccId=" + mccId;
 	}
 
 }
