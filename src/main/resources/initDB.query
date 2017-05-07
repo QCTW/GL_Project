@@ -18,12 +18,42 @@ PUT gla/mcc/1
 
 PUT gla/mcc/2
 { 
-  "email" : "hocine@gmail.com" 
+  "email" : "fekih.meriem2@gmail.com"
 }
 
 PUT gla/mcc/3
 {
-  "email" : "abc@hotmail.fr"
+  "email" : "skaba1606@gmail.com"
+}
+
+PUT gla/mcc/4
+{
+  "email" : "Hamadikrimo@hotmail.com"
+}
+
+PUT gla/mcc/5
+{
+  "email" : "yazid_lefoot@hotmail.fr"
+}
+
+PUT gla/mcc/6
+{
+  "email" : "judeIngani@gmail.com"
+}
+
+PUT gla/mcc/7
+{
+  "email" : "amadous75@gmail.com"
+}
+
+PUT gla/mcc/8
+{
+  "email" : "mohamed.diallo93.md@gmail.com"
+}
+
+PUT gla/mcc/9
+{
+  "email" : "binta.dbr@gmail.com"
 }
 
 ## Reference for MRO qualification : https://en.wikipedia.org/wiki/Reliability_engineering
@@ -190,7 +220,7 @@ PUT gla/task/2
  "planeId" : "2",
  "taskStatus" : "2",
  "mroId" : "3",
- "mccId" : "2"
+ "mccId" : "1"
 }
 
 PUT gla/task/3
@@ -201,7 +231,7 @@ PUT gla/task/3
  "planeId" : "3",
  "taskStatus" : "3",
  "mroId" : "1",
- "mccId" : "1"
+ "mccId" : "3"
 }
 
 PUT gla/task/4
@@ -212,7 +242,7 @@ PUT gla/task/4
  "planeId" : "3",
  "taskStatus" : "0",
  "mroId" : "1",
- "mccId" : "2"
+ "mccId" : "4"
 }
 
 PUT gla/task/5
@@ -223,7 +253,7 @@ PUT gla/task/5
  "planeId" : "3",
  "taskStatus" : "2",
  "mroId" : "2",
- "mccId" : "1"
+ "mccId" : "2"
 }
 
 PUT gla/task/6
@@ -234,7 +264,7 @@ PUT gla/task/6
  "planeId" : "1",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "2"
+ "mccId" : "3"
 }
 
 PUT gla/task/7
@@ -245,7 +275,7 @@ PUT gla/task/7
  "planeId" : "2",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "1"
+ "mccId" : "4"
 }
 
 PUT gla/task/8
@@ -256,7 +286,7 @@ PUT gla/task/8
  "planeId" : "3",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "2"
+ "mccId" : "5"
 }
 
 PUT gla/task/9
@@ -267,7 +297,7 @@ PUT gla/task/9
  "planeId" : "4",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "1"
+ "mccId" : "6"
 }
 
 PUT gla/task/10
@@ -278,7 +308,7 @@ PUT gla/task/10
  "planeId" : "5",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "2"
+ "mccId" : "7"
 }
 
 PUT gla/task/11
@@ -289,7 +319,18 @@ PUT gla/task/11
  "planeId" : "6",
  "taskStatus" : "1",
  "mroId" : "-1",
- "mccId" : "1"
+ "mccId" : "8"
+}
+
+PUT gla/task/12
+{
+ "startTime" : "2017/06/02 19:15",
+ "endTime" : "2017/06/02 21:15",
+ "idTaskGeneric" : "1",
+ "planeId" : "6",
+ "taskStatus" : "1",
+ "mroId" : "-1",
+ "mccId" : "9"
 }
 
 PUT gla/taskgeneric/1

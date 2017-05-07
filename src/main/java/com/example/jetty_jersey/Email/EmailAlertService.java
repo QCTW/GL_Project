@@ -20,17 +20,22 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * query the task database each sunday at 00:00 and send the emails
- * alpha version for now (not complete)
+ *  This is an Email Alert System
+ *  - If a task was not assigned to any MRO and the start date is soon (controlled with limit_not_assigned)
+ *    then send an email to the CTO
+ *  - If a task was assigned but not confirmed by the MRO and the task start date is soon
+ *    (Controlled with limit_not_confirmed), then send an email to the CTO
  *
- * For this purpose we created an email address for the group to send email
+ *  debug_email : is an address email for debugging: each email sent by our system will be sent to this email to.
+ *
+ *  For the purpose od this ALERT SYSTEM, we created an email address to send email
  *  email: no.reply.alert.task@gmail.com
  *  password: 123456789ABC
  */
 public class EmailAlertService
 {
-    static int limit_not_assigned = 30;
-    static int limit_not_confirmed = 100;
+    static int limit_not_assigned = 400; // 400 days (for testing purpose)
+    static int limit_not_confirmed = 400; // 400 days (for testing purpose)
     static String debug_email = "zidane.rezzak@gmail.com";
 
     static List<String> idtask_list_not_assigned = new ArrayList<String>();
@@ -41,7 +46,7 @@ public class EmailAlertService
 
     public static void main(String args[]) throws AddressException, MessagingException {
         generateAndSendEmail();
-        System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
+        System.out.println("\n\n ===> Emails sent successfully. Check your emails..");
     }
 
     public static void generateAndSendEmail() throws AddressException, MessagingException {
@@ -89,7 +94,7 @@ public class EmailAlertService
         List<Map<String, String>> list = db.selectAllFromTableWhereFieldEqValue("mcc", "_id", mccId);
         db.close();
 
-        send_mail(emailBody, list.get(0).get("email"));
+        send_mail(emailBody, list.get(0).get("email"), "\"ALERT: task not confirmed");
     }
 
     private static void send_mail_to_mcc_task_not_assigned(String id, String mccId, String date) throws AddressException, MessagingException {
@@ -100,34 +105,34 @@ public class EmailAlertService
         List<Map<String, String>> list = db.selectAllFromTableWhereFieldEqValue("mcc", "_id", mccId);
         db.close();
 
-        send_mail(emailBody, list.get(0).get("email"));
+        send_mail(emailBody, list.get(0).get("email"), "\"ALERT : task not assigned\"");
 
         //System.out.println("taskId: " + id + "\tmccID: " + mccId + "\tmcc_email: " + list.get(0).get("email"));
 
 
     }
 
-    private static void send_mail(String email_body, String email_address) throws AddressException, MessagingException {
+    private static void send_mail(String email_body, String email_address, String title) throws AddressException, MessagingException {
         // Step1
-        System.out.println("\n 1st ===> setup Mail Server Properties..");
+        //System.out.println("\n 1st ===> setup Mail Server Properties..");
         mailServerProperties = System.getProperties();
         mailServerProperties.put("mail.smtp.port", "587");
         mailServerProperties.put("mail.smtp.auth", "true");
         mailServerProperties.put("mail.smtp.starttls.enable", "true");
-        System.out.println("Mail Server Properties have been setup successfully..");
+        //System.out.println("Mail Server Properties have been setup successfully..");
 
         // Step2
-        System.out.println("\n\n 2nd ===> get Mail Session..");
+        //System.out.println("\n\n 2nd ===> get Mail Session..");
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         generateMailMessage = new MimeMessage(getMailSession);
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email_address));
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(debug_email));
-        generateMailMessage.setSubject("ALERT task");
+        generateMailMessage.setSubject(title);
         generateMailMessage.setContent(email_body, "text/html");
-        System.out.println("Mail Session has been created successfully..");
+        //System.out.println("Mail Session has been created successfully..");
 
         // Step3
-        System.out.println("\n\n 3rd ===> Get Session and Send mail");
+        //System.out.println("\n\n 3rd ===> Get Session and Send mail");
         Transport transport = getMailSession.getTransport("smtp");
 
         // Enter your correct gmail UserID and Password
@@ -135,6 +140,7 @@ public class EmailAlertService
         transport.connect("smtp.gmail.com", "no.reply.alert.task@gmail.com", "123456789ABC");
         transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
         transport.close();
+        System.out.println("Mail have been sent to: " + email_address);
 
     }
 }
