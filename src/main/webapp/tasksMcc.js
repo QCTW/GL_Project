@@ -15,44 +15,20 @@ $(function() {
 	getServerData("ws/task/all", getAllTasks);
 });
  var taskList;
- 
+
 function getAllTasks(result){
 	taskList = result;
 	var tr = "";
 	// console.log("in get all tasks function and tr = "+tr);
 	for (var i = 0; i < result.length; i++) {
-		tr += "<tr> "
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.startTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.endTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeType))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeId))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.mroId))
-				+ "</td>"
-				+ "<td><button onclick='getSTask("
-				+ sub(JSON.stringify(result[i].task.id))
-				+ ")' "
-				+ "class='btn icon-btn btn-primary'>  "
-				+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-				+ "</button></td>" + "</tr>";
+        tr += printTask(result, i);
 		// console.log(tr);
 	}
 	
 	$('#tbody').html(tr);
 } 
 
-function subb(r) {
+function sub(r) {
 	return r.toString().substring(1, r.toString().length - 1);
 }
 
@@ -62,7 +38,8 @@ function taskToAssign(){
 	var tmp;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId < 0 ){
-			tr += "<tr> "
+		    //printTasks();
+		tr += "<tr> "
 			+ "<td>"
 			+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
 			+ "</td>"
@@ -87,7 +64,7 @@ function taskToAssign(){
 			+ "class='btn icon-btn btn-primary'>  "
 			+ "<span class='glyphicon glyphicon-ok'></span> "
 			+ "</button></td>" + "</tr>";
-		
+
 		}
 	}
 	$('#tbody').html(tr);
@@ -169,4 +146,29 @@ function done(){
 		}
 	}
 	$('#tbody').html(tr);
+}
+
+function printTask(result, i){
+    return "<tr> "
+        + "<td>"
+        + sub(JSON.stringify(result[i].taskGeneric.ataCategory))
+        + "</td>"
+        + "<td>"
+        + sub(JSON.stringify(result[i].task.startTime))
+        + "</td>"
+        + "<td>"
+        + sub(JSON.stringify(result[i].task.endTime))
+        + "</td>"
+        + "<td>"
+        + sub(JSON.stringify(result[i].plane.planeType))
+        + "</td>"
+        + "<td>"
+        + sub(JSON.stringify(result[i].plane.planeId))
+        + "</td>"
+        + "<td><button onclick='getSTask("
+        + sub(JSON.stringify(result[i].task.id))
+        + ")' "
+        + "class='btn icon-btn btn-primary'>  "
+        + "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
+        + "</button></td>" + "</tr>";
 }
