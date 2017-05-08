@@ -85,7 +85,7 @@ function taskToAssign(){
 			+ sub(JSON.stringify(taskList[i].task.id))
 			+ ")' "
 			+ "class='btn icon-btn btn-primary'>  "
-			+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
+			+ "<span class='glyphicon glyphicon-ok'></span> "
 			+ "</button></td>" + "</tr>";
 		
 		}
