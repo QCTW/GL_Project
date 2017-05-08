@@ -29,7 +29,7 @@ var task;
 var idt;
 
 // GET ALL TASK
-function getAllTasks(result) {
+/*function getAllTasks(result) {
 	var tr = "";
 	// console.log("in get all tasks function and tr = "+tr);
 	for (var i = 0; i < result.length; i++) {
@@ -62,13 +62,13 @@ function getAllTasks(result) {
 	}
 	$('#tbody').html(tr);
 }
-
+*/
 function getSTask(id) {
 	var x = parseInt(id, 10);
 	document.location.href = "taskView.html?id=" + x;
 }
 
-function getAllPlanes(result) {
+/*function getAllPlanes(result) {
 	console.log(result);
 	//
 	var tr = "";
@@ -90,7 +90,7 @@ function getAllPlanes(result) {
 	$('#planeTbody').html(tr);
 	var planes = $('#planeslist').DataTable({});
 }
-
+*/
 function formatDate(date) {
 	var monthNames = [ "January", "February", "March", "April", "May", "June",
 			"July", "August", "September", "October", "November", "December" ];

@@ -70,13 +70,11 @@
 						All tasks</button>
 					<button onclick="taskToAssign()" class="btn btn-default navbar-btn">
 						Tasks to assign</button>
-
-					<button class="btn btn-default navbar-btn">
-						<a href="createTask.html">Tasks in progress</a>
+					<button onclick="inProgress()" class="btn btn-default navbar-btn">
+						Tasks in progress
 					</button>
-
-					<button class="btn btn-default navbar-btn">
-						<a href="createTask.html">Tasks done</a>
+					<button onclick="done()"class="btn btn-default navbar-btn">
+						Tasks done
 					</button>
 				</div>
 				<table id="example" class="table table-striped">
@@ -96,18 +94,17 @@
 				</table>
 			</div>
 
-			<!-- PLANES MENU -->
+			<!-- TASK MENU -->
 			<div id="planes" class="tab-pane fade">
-				<table id="planeslist" class="table table-hover">
+				<table id="planeslist" class="table table-striped">
 					<thead>
 						<tr>
 							<th>Plane Id</th>
 							<th>Plane Type</th>
-							<th></th>
+							<th>View tasks</th>
 						</tr>
 					</thead>
 					<tbody id="planeTbody">
-
 					</tbody>
 				</table>
 			</div>
