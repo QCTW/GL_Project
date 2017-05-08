@@ -38,32 +38,7 @@ function taskToAssign(){
 	var tmp;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId < 0 ){
-		    //printTasks();
-		tr += "<tr> "
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
-			+ "</td>"
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].task.startTime))
-			+ "</td>"
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].task.endTime))
-			+ "</td>"
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].plane.planeType))
-			+ "</td>"
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].plane.planeId))
-			+ "</td>"
-			+ "<td>"
-			+ sub(JSON.stringify(taskList[i].task.mroId))
-			+ "</td>"
-			+ "<td><button onclick='getSTask("
-			+ sub(JSON.stringify(taskList[i].task.id))
-			+ ")' "
-			+ "class='btn icon-btn btn-primary'>  "
-			+ "<span class='glyphicon glyphicon-ok'></span> "
-			+ "</button></td>" + "</tr>";
+            tr += printTask(result, i);
 
 		}
 	}
@@ -78,33 +53,10 @@ function inProgress(){
 			var endTime = new Date(taskList[i].task.endTime.substring(0,5),taskList[i].task.endTime.substring(6,8),
 					taskList[i].task.endTime.substring(9,11),taskList[i].task.endTime.substring(12,14),
 					taskList[i].task.endTime.substring(15,17));
-			if(today < endTime){
-				tr += "<tr> "
-				+ "<td>"
-				+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(taskList[i].task.startTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(taskList[i].task.endTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(taskList[i].plane.planeType))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(taskList[i].plane.planeId))
-				+ "</td>"
-				+ "<td><button onclick='getSTask("
-				+ sub(JSON.stringify(taskList[i].task.id))
-				+ ")' "
-				+ "class='btn icon-btn btn-primary'>  "
-				+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-				+ "</button></td>" + "</tr>";
-			}
-		
-		}
-	}
+			if(today < endTime)
+                tr += printTask(result, i);
+        }
+    }
 	$('#tbody').html(tr);
 }
 	
@@ -118,31 +70,8 @@ function done(){
 			var endTime = new Date(taskList[i].task.endTime.substring(0,5),taskList[i].task.endTime.substring(6,8),
 					taskList[i].task.endTime.substring(9,11),taskList[i].task.endTime.substring(12,14),
 					taskList[i].task.endTime.substring(15,17));
-			if(today >= endTime){
-				tr += "<tr> "
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.startTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.endTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeType))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeId))
-				+ "</td>"
-				+ "<td><button onclick='getSTask("
-				+ sub(JSON.stringify(result[i].task.id))
-				+ ")' "
-				+ "class='btn icon-btn btn-primary'>  "
-				+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-				+ "</button></td>" + "</tr>";
-			}
-		
+			if(today >= endTime)
+                tr += printTask(result, i);
 		}
 	}
 	$('#tbody').html(tr);
