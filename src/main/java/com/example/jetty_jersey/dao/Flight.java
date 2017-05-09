@@ -25,6 +25,12 @@ public class Flight
 	private String arrivalTime;
 	private int planeId;
 
+	// For json serialization
+	public Flight()
+	{
+		this.id = -1;
+	}
+
 	public Flight(int id, String commercialId, String departureAirport, String arrivalAirport, String departureTime, String arrivalTime, int planeId)
 	{
 		this.id = id;

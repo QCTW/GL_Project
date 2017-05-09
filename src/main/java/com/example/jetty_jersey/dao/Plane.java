@@ -13,6 +13,12 @@ public class Plane
 	private final int planeId;
 	private String planeType;
 
+	// For json serialization
+	public Plane()
+	{
+		planeId = -1;
+	}
+
 	public Plane(int planeId, String planeType)
 	{
 		this.planeId = planeId;
