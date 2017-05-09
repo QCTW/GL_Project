@@ -76,6 +76,7 @@ PUT gla/mro/3
  "qualification" : "System availability and mission readiness analysis and related reliability and maintenance requirement allocation",
  "name" : "Hsieh",
  "surname" : "Quincy"
+  "email" : "quincy.tw@gmail.com" 
 }
 
 PUT gla/mro/4
@@ -90,6 +91,7 @@ PUT gla/mro/5
  "qualification" : "System Diagnostics design",
  "name" : "Krimo",
  "surname" : "Hamadi"
+ "email":
 }
 
 PUT gla/mro/6
