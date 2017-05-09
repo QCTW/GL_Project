@@ -101,6 +101,7 @@ PUT gla/mro/6
  "qualification" : "Fault tolerant systems (e.g. by redundancy)",
  "name" : "Mohamed",
  "surname" : "Diallo"
+ "email" : "mohamed.diallo93.md@gmail.com"
 }
 
 PUT gla/mro/7
@@ -108,6 +109,7 @@ PUT gla/mro/7
  "qualification" : "Human factors / Human interaction / Human errors",
  "name" : "Jude",
  "surname" : "Ingani"
+ "email" : "judeIngani@gmail.com"
 }
 
 PUT gla/mro/8
