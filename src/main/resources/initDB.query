@@ -125,6 +125,7 @@ PUT gla/mro/9
  "qualification" : "Failure / reliability testing (and derived requirements)",
  "name" : "Bdiabi",
  "surname" : "Diabira"
+ "email" : "binta.dbr@gmail.com"
 }
  
 PUT gla/plane/1
