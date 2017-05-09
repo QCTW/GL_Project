@@ -117,6 +117,7 @@ PUT gla/mro/8
  "qualification" : "Manufacturing- and Assembly-induced failures (effect on the detected 0-hour Quality and reliability)",
  "name" : "Amadou",
  "surname" : "Sy"
+ "email" : "amadous75@gmail.com"
 }
 
 PUT gla/mro/9
