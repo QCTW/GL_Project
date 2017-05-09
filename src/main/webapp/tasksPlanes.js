@@ -46,40 +46,6 @@ function sub(r) {
 var task;
 var idt;
 
-// GET ALL TASK
-function getAllTasks(result) {
-	var tr = "";
-	// console.log("in get all tasks function and tr = "+tr);
-	for (var i = 0; i < result.length; i++) {
-		tr += "<tr> "
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].taskGeneric.ataCategory))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.startTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.endTime))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeType))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].plane.planeId))
-				+ "</td>"
-				+ "<td>"
-				+ sub(JSON.stringify(result[i].task.mroId))
-				+ "</td>"
-				+ "<td><button onclick='getSTask("
-				+ sub(JSON.stringify(result[i].task.id))
-				+ ")' "
-				+ "class='btn icon-btn btn-primary'>  "
-				+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-				+ "</button></td>" + "</tr>";
-		// console.log(tr);
-	}
-	$('#tbody').html(tr);
-}
 
 function getSTask(id) {
 	var x = parseInt(id, 10);
@@ -146,10 +112,10 @@ function showPlanes(result) {
 function choosePlane() {
 
 }
-var planeId;
+var planeIdCreate;
 function chooseTasksByPlane(planetype, id) {
 	console.log("plane type "+planetype+", plane id "+id);
-	planeId=id;
+	planeIdCreate=id;
 	getServerData("ws/task/genericByPlane/"+planetype, chooseTasksByPlaneAux);
 	$('#returnCreateTask').append('<li><a onclick="showPlanes('+planeList+')">'+planetype+'</a></li>');
 }
@@ -242,7 +208,7 @@ function validTask() {
 			    "idTaskGeneric": genericTaskId, 
 			    "startTime": d2,
 			    "endTime": d2,
-			    "planeId": planeId,
+			    "planeId": planeIdCreate,
 			    "taskStatus": 1, 
 			    "mroId": -1,
 			    "mccId": -1}),

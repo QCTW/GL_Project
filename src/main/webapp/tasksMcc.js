@@ -99,6 +99,7 @@ function expired(){
 }
 
 function printTask(result, i){
+	console.log(result[i]);
     return "<tr> "
 	+ "<td>"
 	+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
@@ -110,10 +111,10 @@ function printTask(result, i){
 	+ sub(JSON.stringify(taskList[i].task.endTime))
 	+ "</td>"
 	+ "<td>"
-	+ sub(JSON.stringify(taskList[i].plane.planeType))
+	+ sub(JSON.stringify(taskList[i].taskGeneric.planeType))
 	+ "</td>"
 	+ "<td>"
-	+ sub(JSON.stringify(taskList[i].plane.planeId))
+	+ sub(JSON.stringify(taskList[i].task.planeId))
 	+ "</td>"
 	+ "<td><button onclick='getSTask("
 	+ sub(JSON.stringify(taskList[i].task.id))
