@@ -84,6 +84,7 @@ PUT gla/mro/4
  "qualification" : "Inherent (system) Design Reliability Analysis and derived requirements specification for both Hardware and Software design",
  "name" : "Meriem",
  "surname" : "Fekih"
+ "email":"fekih.meriem2@gmail.com" 
 }
 
 PUT gla/mro/5
