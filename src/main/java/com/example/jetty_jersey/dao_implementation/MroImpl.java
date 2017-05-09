@@ -30,7 +30,7 @@ public class MroImpl implements MroDao
 				log.error("Unable to find MRO id : " + id + " in mro table!");
 			else
 			{
-				m = new MRO(Utility.convertIntString(res.get(0).get("_id")), res.get(0).get("name"));
+				m = new MRO(Utility.convertIntString(res.get(0).get("_id")), res.get(0).get("name"), res.get(0).get("email"));
 			}
 		}
 		return m;
@@ -51,7 +51,7 @@ public class MroImpl implements MroDao
 		{
 			for (Map<String, String> m : res)
 			{
-				MRO mro = new MRO(Utility.convertIntString(m.get("_id")), m.get("name"));
+				MRO mro = new MRO(Utility.convertIntString(m.get("_id")), m.get("name"), res.get(0).get("email"));
 				mroList.add(mro);
 
 			}
@@ -68,7 +68,7 @@ public class MroImpl implements MroDao
 		List<MRO> mroList = new ArrayList<MRO>();
 		for (Map<String, String> m : results)
 		{
-			MRO mro = new MRO(Utility.convertIntString(m.get("_id")), m.get("name"));
+			MRO mro = new MRO(Utility.convertIntString(m.get("_id")), m.get("name"), m.get("email"));
 			MRO wrap = mro;
 			mroList.add(wrap);
 			System.out.println(mro.toString());
