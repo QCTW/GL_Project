@@ -12,6 +12,7 @@ public class TaskGeneric
 	private final float duration; // in hour
 	private final String planeType;
 
+	// For json serialization
 	public TaskGeneric()
 	{
 		int rand = (int) (Math.random() * 1000);
@@ -86,7 +87,8 @@ public class TaskGeneric
 	@Override
 	public String toString()
 	{
-		return "id=" + id + ";description=" + description + ";periodicity=" + periodicity + ";ataCategory=" + ataCategory + ";hangarNeed=" + hangarNeed + ";duration=" + duration + ";planeType=" + planeType;
+		return "id=" + id + ";description=" + description + ";periodicity=" + periodicity + ";ataCategory=" + ataCategory + ";hangarNeed=" + hangarNeed + ";duration=" + duration + ";planeType="
+				+ planeType;
 	}
 
 }
