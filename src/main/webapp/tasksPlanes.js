@@ -142,10 +142,10 @@ function showPlanes(result) {
 function choosePlane() {
 
 }
-var idPlane;
-function chooseTasksByPlane(planetype,planeId) {
-	console.log("plane type "+planetype+", plane id "+planeId);
-	idPlane=planeId;
+var planeId;
+function chooseTasksByPlane(planetype, id) {
+	console.log("plane type "+planetype+", plane id "+id);
+	planeId=id;
 	getServerData("ws/task/genericByPlane/"+planetype, chooseTasksByPlaneAux);
 	$('#returnCreateTask').append('<li><a onclick="showPlanes('+planeList+')">'+planetype+'</a></li>');
 }
@@ -234,9 +234,14 @@ function validTask() {
 			dataType : "json",
 			url: "ws/task/add",
 			data: JSON.stringify({
-			    "id": -1, "idTaskGeneric": genericTaskId, "startTime": d2,
-			    "endTime": d2,"planeId": planeId,"taskStatus": 1, 
-			    "mroId": -1,"mccId":-1}),
+			    "id": -1, 
+			    "idTaskGeneric": genericTaskId, 
+			    "startTime": d2,
+			    "endTime": d2,
+			    "planeId": planeId,
+			    "taskStatus": 1, 
+			    "mroId": -1,
+			    "mccId": -1}),
 			type: "PUT",
 			processData: true
 		    }).done(function() {

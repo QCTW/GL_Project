@@ -14,6 +14,12 @@ public class MCC
 	private final String mccId;
 	private String email;
 
+	// For json serialization
+	public MCC()
+	{
+		mccId = "-1";
+	}
+
 	public MCC(String mccId, String email)
 	{
 		this.mccId = mccId;

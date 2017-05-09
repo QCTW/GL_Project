@@ -15,6 +15,11 @@ public class Status
 	private String msg = "";
 	private Execution exe = Execution.FAILED;
 
+	// For json serialization
+	public Status()
+	{
+	}
+
 	public Status(Execution e)
 	{
 		exe = e;
