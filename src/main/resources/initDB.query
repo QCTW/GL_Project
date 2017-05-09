@@ -93,7 +93,7 @@ PUT gla/mro/5
  "qualification" : "System Diagnostics design",
  "name" : "Krimo",
  "surname" : "Hamadi"
- "email":
+ "email" : "Hamadikrimo@hotmail.com"
 }
 
 PUT gla/mro/6
