@@ -85,7 +85,7 @@ public class MRO
 	@Override
 	public String toString()
 	{
-		return "MRO(" + id + "," + name + "," + qualification + ")";
+		return "MRO(" + id + "," + name + "," + qualification + "," + email + ")";
 	}
 
 }
