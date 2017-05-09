@@ -16,6 +16,10 @@ $(function() {
 });
  var taskList;
 
+ function callGetAllTasks(){
+		getServerData("ws/task/all", getAllTasks);
+	}
+ 
 function getAllTasks(result){
 	taskList = result;
 	var tr = "";
@@ -38,7 +42,7 @@ function taskToAssign(){
 	var tmp;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId < 0 ){
-            tr += printTask(result, i);
+            tr += printTask(taskList, i);
 
 		}
 	}
@@ -50,11 +54,11 @@ function inProgress(){
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
-			var endTime = new Date(taskList[i].task.endTime.substring(0,5),taskList[i].task.endTime.substring(6,8),
-					taskList[i].task.endTime.substring(9,11),taskList[i].task.endTime.substring(12,14),
-					taskList[i].task.endTime.substring(15,17));
+			var endTime = new Date(taskList[i].task.endTime.substring(0,4),taskList[i].task.endTime.substring(5,7),
+					taskList[i].task.endTime.substring(8,10),taskList[i].task.endTime.substring(11,13),
+					taskList[i].task.endTime.substring(14,16));
 			if(today < endTime)
-                tr += printTask(result, i);
+                tr += printTask(taskList, i);
         }
     }
 	$('#tbody').html(tr);
@@ -67,11 +71,11 @@ function done(){
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
-			var endTime = new Date(taskList[i].task.endTime.substring(0,5),taskList[i].task.endTime.substring(6,8),
-					taskList[i].task.endTime.substring(9,11),taskList[i].task.endTime.substring(12,14),
-					taskList[i].task.endTime.substring(15,17));
+			var endTime = new Date(taskList[i].task.endTime.substring(0,4),taskList[i].task.endTime.substring(5,7),
+					taskList[i].task.endTime.substring(8,10),taskList[i].task.endTime.substring(11,13),
+					taskList[i].task.endTime.substring(14,16));
 			if(today >= endTime)
-                tr += printTask(result, i);
+                tr += printTask(taskList, i);
 		}
 	}
 	$('#tbody').html(tr);
@@ -79,25 +83,25 @@ function done(){
 
 function printTask(result, i){
     return "<tr> "
-        + "<td>"
-        + sub(JSON.stringify(result[i].taskGeneric.ataCategory))
-        + "</td>"
-        + "<td>"
-        + sub(JSON.stringify(result[i].task.startTime))
-        + "</td>"
-        + "<td>"
-        + sub(JSON.stringify(result[i].task.endTime))
-        + "</td>"
-        + "<td>"
-        + sub(JSON.stringify(result[i].plane.planeType))
-        + "</td>"
-        + "<td>"
-        + sub(JSON.stringify(result[i].plane.planeId))
-        + "</td>"
-        + "<td><button onclick='getSTask("
-        + sub(JSON.stringify(result[i].task.id))
-        + ")' "
-        + "class='btn icon-btn btn-primary'>  "
-        + "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-        + "</button></td>" + "</tr>";
+	+ "<td>"
+	+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
+	+ "</td>"
+	+ "<td>"
+	+ sub(JSON.stringify(taskList[i].task.startTime))
+	+ "</td>"
+	+ "<td>"
+	+ sub(JSON.stringify(taskList[i].task.endTime))
+	+ "</td>"
+	+ "<td>"
+	+ sub(JSON.stringify(taskList[i].plane.planeType))
+	+ "</td>"
+	+ "<td>"
+	+ sub(JSON.stringify(taskList[i].plane.planeId))
+	+ "</td>"
+	+ "<td><button onclick='getSTask("
+	+ sub(JSON.stringify(taskList[i].task.id))
+	+ ")' "
+	+ "class='btn icon-btn btn-primary'>  "
+	+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
+	+ "</button></td>" + "</tr>";
 }
