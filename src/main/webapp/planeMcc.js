@@ -74,3 +74,4 @@ function chooseTasksByPlaneAux(result) {
 				+ "</button></td>" + "</tr>";
 		// console.log(tr);
 	}
+}
