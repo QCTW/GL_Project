@@ -69,6 +69,7 @@ PUT gla/mro/2
  "qualification" : "Functional system failure analysis and derived requirements specification",
  "name" : "Kaba",
  "surname" : "Sarah"
+ "email" : "skaba1606@gmail.com"
 }
  
 PUT gla/mro/3
