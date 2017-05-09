@@ -24,7 +24,7 @@ function login(result){
 		$(".alert").show();
 		
 	}
-	else if (role == "mcc" || role == "mro")
+	else if (role == "mcc")
 	{	
 		var pseudo =localStorage.getItem("tmp");
 		//alert(pseudo);
@@ -32,6 +32,15 @@ function login(result){
 		localStorage.setItem("role",role);
 		document.location.href="tasksPlanes.html";
 	}
+	else if (role == "mro")
+	{
+        var pseudo =localStorage.getItem("tmp");
+        //alert(pseudo);
+        localStorage.setItem("mail",pseudo);
+        localStorage.setItem("role",role);
+        document.location.href="tasksPlanesMRO.html";
+
+    }
 	else {
 		alert("Incorrect or mcc or mro role : "+role);
 	}

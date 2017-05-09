@@ -37,7 +37,7 @@ function sub(r) {
 }
 
 //<0
-function taskToAssign(){
+function taskToDo(){
     var tr = "";
     var tmp;
     for (var i = 0; i < taskList.length; i++) {
