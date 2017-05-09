@@ -16,6 +16,13 @@ public class Task
 	private int mroId;
 	private int mccId;
 
+	// For json serialization
+	public Task()
+	{
+		this.id = -1;
+		this.idTaskGeneric = id;
+	}
+
 	// For unit test only
 	public Task(Date d)
 	{
