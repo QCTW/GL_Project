@@ -65,7 +65,7 @@ function getAllTasks(result) {
 
 function getSTask(id) {
     var x = parseInt(id, 10);
-    document.location.href = "taskView.html?id=" + x;
+    document.location.href = "taskViewMro.html?id=" + x;
 }
 
 function getAllPlanes(result) {
