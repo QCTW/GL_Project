@@ -69,6 +69,7 @@ PUT gla/mro/2
  "qualification" : "Functional system failure analysis and derived requirements specification",
  "name" : "Kaba",
  "surname" : "Sarah"
+ "email" : "skaba1606@gmail.com"
 }
  
 PUT gla/mro/3
@@ -76,6 +77,7 @@ PUT gla/mro/3
  "qualification" : "System availability and mission readiness analysis and related reliability and maintenance requirement allocation",
  "name" : "Hsieh",
  "surname" : "Quincy"
+  "email" : "quincy.tw@gmail.com" 
 }
 
 PUT gla/mro/4
@@ -83,6 +85,7 @@ PUT gla/mro/4
  "qualification" : "Inherent (system) Design Reliability Analysis and derived requirements specification for both Hardware and Software design",
  "name" : "Meriem",
  "surname" : "Fekih"
+ "email":"fekih.meriem2@gmail.com" 
 }
 
 PUT gla/mro/5
@@ -90,6 +93,7 @@ PUT gla/mro/5
  "qualification" : "System Diagnostics design",
  "name" : "Krimo",
  "surname" : "Hamadi"
+ "email" : "Hamadikrimo@hotmail.com"
 }
 
 PUT gla/mro/6
@@ -97,6 +101,7 @@ PUT gla/mro/6
  "qualification" : "Fault tolerant systems (e.g. by redundancy)",
  "name" : "Mohamed",
  "surname" : "Diallo"
+ "email" : "mohamed.diallo93.md@gmail.com"
 }
 
 PUT gla/mro/7
@@ -104,6 +109,7 @@ PUT gla/mro/7
  "qualification" : "Human factors / Human interaction / Human errors",
  "name" : "Jude",
  "surname" : "Ingani"
+ "email" : "judeIngani@gmail.com"
 }
 
 PUT gla/mro/8
@@ -111,6 +117,7 @@ PUT gla/mro/8
  "qualification" : "Manufacturing- and Assembly-induced failures (effect on the detected 0-hour Quality and reliability)",
  "name" : "Amadou",
  "surname" : "Sy"
+ "email" : "amadous75@gmail.com"
 }
 
 PUT gla/mro/9
@@ -118,6 +125,7 @@ PUT gla/mro/9
  "qualification" : "Failure / reliability testing (and derived requirements)",
  "name" : "Bdiabi",
  "surname" : "Diabira"
+ "email" : "binta.dbr@gmail.com"
 }
  
 PUT gla/plane/1

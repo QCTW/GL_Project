@@ -143,7 +143,7 @@ public class TaskImpl implements TaskDao
 	private MRO getMROById(DatabaseConnecter dbc, String id)
 	{
 		if (id == null || id.length() == 0 || id.equals("-1"))
-			return new MRO(-1, "Not assigned");
+			return new MRO(-1, "Not assigned", "");
 		MRO m = mroCache.get(id);
 		if (m == null)
 		{
@@ -152,7 +152,7 @@ public class TaskImpl implements TaskDao
 				log.error("Unable to find MRO id : " + id + " in mro table!");
 			else
 			{
-				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"));
+				m = new MRO(Utility.convertIntString(id), res.get(0).get("name"), res.get(0).get("email"));
 				m.setQualification(res.get(0).get("qualification"));
 				mroCache.put(id, m);
 			}

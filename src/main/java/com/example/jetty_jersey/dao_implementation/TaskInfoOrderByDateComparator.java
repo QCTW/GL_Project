@@ -12,7 +12,7 @@ import com.example.jetty_jersey.util.TaskInfo;
 
 public class TaskInfoOrderByDateComparator implements Comparator<TaskInfo>
 {
-	private final Date dateNow = new Date();
+	private final Date now = new Date();
 
 	public int compare(TaskInfo ti1, TaskInfo ti2)
 	{
@@ -22,7 +22,7 @@ public class TaskInfoOrderByDateComparator implements Comparator<TaskInfo>
 		{
 			Date dTask1Start = t1.getStartTimeAsDate();
 			Date dTask2Start = t2.getStartTimeAsDate();
-			return dTask1Start.compareTo(dTask2Start);
+			return (int) (dTask1Start.getTime() - dTask2Start.getTime());
 		}
 		return 0;
 	}

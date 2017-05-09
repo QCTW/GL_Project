@@ -14,20 +14,22 @@ import com.example.jetty_jersey.db.CustomHashMap;
  */
 public class MRO
 {
-
 	private String qualification = "N/A";
 	private String name = "Not assigned";
+	private String email = "";
 	private int id;
 
+	// For json serialization
 	public MRO()
 	{
 		this.id = -1;
 	}
 
-	public MRO(int mroId, String name)
+	public MRO(int mroId, String name, String mail)
 	{
 		this.name = name;
 		this.id = mroId;
+		this.email = mail;
 	}
 
 	public MRO(String name)
@@ -55,6 +57,16 @@ public class MRO
 		this.name = name;
 	}
 
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String e)
+	{
+		this.email = e;
+	}
+
 	public int getId()
 	{
 		return id;
@@ -66,13 +78,14 @@ public class MRO
 		chm.put("_id", String.valueOf(id));
 		chm.put("name", name);
 		chm.put("qualification", qualification);
+		chm.put("email", email);
 		return chm;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "MRO(" + id + "," + name + "," + qualification + ")";
+		return "MRO(" + id + "," + name + "," + qualification + "," + email + ")";
 	}
 
 }
