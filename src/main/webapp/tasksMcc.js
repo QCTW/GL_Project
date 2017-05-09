@@ -41,7 +41,7 @@ function taskToAssign(){
 	var tr = "";
 	var tmp;
 	for (var i = 0; i < taskList.length; i++) {
-		if(taskList[i].task.mroId < 0 ){
+		if(taskList[i].task.taskStatus == 1 ){
             tr += printTask(taskList, i);
 
 		}
@@ -49,15 +49,21 @@ function taskToAssign(){
 	$('#tbody').html(tr);
 }
 //>0 and dateNow < Enddate
+
+function stringToDate(dateStr){
+	return new Date(dateStr.substring(0,4),dateStr.substring(5,7),
+			dateStr.substring(8,10),dateStr.substring(11,13),
+			dateStr.substring(14,16));
+	
+}
+
 function inProgress(){
 	var tr = "";
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
-			var endTime = new Date(taskList[i].task.endTime.substring(0,4),taskList[i].task.endTime.substring(5,7),
-					taskList[i].task.endTime.substring(8,10),taskList[i].task.endTime.substring(11,13),
-					taskList[i].task.endTime.substring(14,16));
-			if(today < endTime)
+			var endTime = stringToDate(taskList[i].task.endTime);
+			if(today < endTime && taskList[i].task.taskStatus == 2)
                 tr += printTask(taskList, i);
         }
     }
@@ -71,13 +77,24 @@ function done(){
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
-			var endTime = new Date(taskList[i].task.endTime.substring(0,4),taskList[i].task.endTime.substring(5,7),
-					taskList[i].task.endTime.substring(8,10),taskList[i].task.endTime.substring(11,13),
-					taskList[i].task.endTime.substring(14,16));
-			if(today >= endTime)
+			//var endTime = stringToDate(taskList[i].task.endTime);
+			if(taskList[i].task.taskStatus == 3)
                 tr += printTask(taskList, i);
 		}
 	}
+	$('#tbody').html(tr);
+}
+
+function expired(){
+	var tr = "";
+	for (var i = 0; i < taskList.length; i++) {
+		//if(taskList[i].task.mroId > 0 ){
+			var today = new Date();
+			var endTime = stringToDate(taskList[i].task.endTime);
+			if(today > endTime && taskList[i].task.taskStatus != 3)
+                tr += printTask(taskList, i);
+        //}
+    }
 	$('#tbody').html(tr);
 }
 
