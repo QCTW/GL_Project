@@ -28,7 +28,7 @@ public class MroStub
 		List<MRO> l = new ArrayList<MRO>();
 		for (int i = 0; i < 50; i++)
 		{
-			l.add(new MRO(i, "mro" + i));
+			l.add(new MRO(i, "mro" + i,""));
 		}
 		return l;
 
@@ -54,7 +54,7 @@ public class MroStub
 			{
 				int id = Integer.parseInt(splitedLine[0]);
 				String nom = splitedLine[1];
-				MRO m = new MRO(id, nom);
+				MRO m = new MRO(id, nom,"");
 				// TODO Not implemented
 			}
 
