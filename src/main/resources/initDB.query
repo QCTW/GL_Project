@@ -5,10 +5,10 @@
 ##CETTE FONCTION NE MARCHE PAS
 ##POUR UN PREMIER LANCEMENT
 ## Clean database first
-##POST gla/_delete_by_query
-##{
-##  "query": { "match_all" : { } }
-##}
+POST gla/_delete_by_query
+{
+  "query": { "match_all" : { } }
+}
 
 ## Start filling up database simulation
 PUT gla/mcc/1
@@ -61,7 +61,8 @@ PUT gla/mro/1
 {
  "qualification" : "Predictive and preventive maintenance (e.g. reliability-centered maintenance)",
  "name" : "Oulebsir",
- "surname" : "Hocine"
+ "surname" : "Hocine",
+ "email" : "zidane.abderrazak@gmail.com"
 }
 
 PUT gla/mro/2
@@ -270,8 +271,8 @@ PUT gla/task/6
  "endTime" : "2017/06/02 00:30",
  "idTaskGeneric" : "1",
  "planeId" : "1",
- "taskStatus" : "1",
- "mroId" : "-1",
+ "taskStatus" : "2",
+ "mroId" : "1",
  "mccId" : "3"
 }
 

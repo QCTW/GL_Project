@@ -44,12 +44,52 @@ public class EmailAlertService
     static Session getMailSession;
     static MimeMessage generateMailMessage;
 
-    public static void main(String args[]) throws AddressException, MessagingException {
+    public static void main(String[] args) throws Exception {
+        send_mail_to_MRO("6", 400);
+    }
+
+    public static void send_mail_to_MRO(String taskId, int countDay) throws AddressException, MessagingException {
+
+        // Step0
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
+        DateTime today = new DateTime(); // today date and time
+
+        DatabaseConnecter db = new DatabaseConnecter();
+        List<Map<String, String>> list =  db.selectAllFromTableWhereFieldEqValue("task", "_id", taskId);
+
+        if (list.get(0).get("mroId").equals("-1")) {
+            System.out.println("mroId of this task is -1, no email sent.");
+            db.close();
+            return;
+        }
+
+        if (!list.get(0).get("taskStatus").equals("2")) {
+            System.out.println("the task status is not 2, no email sent.");
+            db.close();
+            return;
+        }
+
+        DateTime startTime = formatter.parseDateTime(list.get(0).get("startTime"));
+        int days = Days.daysBetween(today, startTime).getDays();
+
+        if (days <= countDay) {
+            String emailBody = "System Alert. " + "<br><br> You have been assigned a new task (N°" + taskId +
+                    ") " + " but was not yet confirmed by you.<br> Task Start time: " + startTime;
+
+            List<Map<String, String>> list2 =  db.selectAllFromTableWhereFieldEqValue("mro", "_id", list.get(0).get("mroId"));
+
+            send_mail(emailBody, list2.get(0).get("email"), "\"ALERT: task not confirmed yet");
+        }
+
+        db.close();
+    }
+
+    public static void iterateAllTaskAndsendEmailtoMCC(String args[]) throws AddressException, MessagingException {
         generateAndSendEmail();
         System.out.println("\n\n ===> Emails sent successfully. Check your emails..");
     }
 
-    public static void generateAndSendEmail() throws AddressException, MessagingException {
+    private static void generateAndSendEmail() throws AddressException, MessagingException {
 
         // Step0
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
