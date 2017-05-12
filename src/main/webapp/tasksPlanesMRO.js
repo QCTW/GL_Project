@@ -25,7 +25,7 @@ function getServerData(url, success) {
 function sub(r) {
     return r.toString().substring(1, r.toString().length - 1);
 }
-var task;
+
 var idt;
 
 // GET ALL TASK
@@ -33,6 +33,7 @@ function getAllTasks(result) {
     var tr = "";
     // console.log("in get all tasks function and tr = "+tr);
     for (var i = 0; i < result.length; i++) {
+    	console.log(result[i]);
         tr += "<tr> "
             + "<td>"
             + sub(JSON.stringify(result[i].taskGeneric.ataCategory))
@@ -52,9 +53,9 @@ function getAllTasks(result) {
             + "<td>"
             + sub(JSON.stringify(result[i].task.mroId))
             + "</td>"
-            + "<td><button onclick='getSTask("
-            + sub(JSON.stringify(result[i].task.id))
-            + ")' "
+            + "<td><button onclick='callViewTask("
+            + result[i]
+            + ")'"
             + "class='btn icon-btn btn-primary'>  "
             + "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
             + "</button></td>" + "</tr>";
@@ -63,9 +64,16 @@ function getAllTasks(result) {
     $('#tbody').html(tr);
 }
 
-function getSTask(id) {
-    var x = parseInt(id, 10);
-    document.location.href = "taskViewMro.html?id=" + x;
+function getSTask(task) {
+	alert("merde !!! ")
+    $("#tab-content").html(""
+    +"Task n°" + sub(JSON.stringify(task.taskGeneric.id))
+    +"ATA category" + sub(JSON.stringify(task.taskGeneric.ataCategory))
+    +"description" + sub(JSON.stringify(task.taskGeneric.description))
+    +"periodicity" + sub(JSON.stringify(task.taskGeneric.periodicity))
+    +"hangerNeed" + sub(JSON.stringify((task.taskGeneric.hangarNeed == true))) ? 'yes' : 'no'
+    +"length" + sub(JSON.stringify(task.taskGeneric.duration))
+    +"planeType" + sub(JSON.stringify(task.taskGeneric.planeType)) + "");
 }
 
 function getAllPlanes(result) {
