@@ -1,4 +1,6 @@
 /target/
 /bin/
-
-*.class
+*.project*
+*.class*
+*.settings*
+jetty-jersey.iml
