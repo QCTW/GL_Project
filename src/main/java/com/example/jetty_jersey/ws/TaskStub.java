@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.dao.*;
+import com.example.jetty_jersey.dao_implementation.TaskGenericImpl;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
@@ -142,6 +143,45 @@ public class TaskStub
 					int statut = Integer.parseInt(splitedLine[8]);
 					int mroId = Integer.parseInt(splitedLine[9]);
 					// TODO : This web service is not finished
+				}
+
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addGenericTasks/{tasks}")
+	public void addGenericTasks(@PathParam("task") String task)
+	{
+		String[] splitedFile;
+		String[] splitedLine;
+		try
+		{
+			splitedFile = task.split("\n");
+			for (int i = 0; i < splitedFile.length; i++)
+			{
+				splitedLine = splitedFile[i].split(",");
+				if (splitedLine.length != 7)
+				{
+					log.error("Le fichier n'est pas dans le bon format!");
+				} else
+				{
+					int id = Integer.parseInt(splitedLine[0]);
+					String description = splitedLine[1];
+					String periodicity = splitedLine[2];
+					String ataCategory = splitedLine[3];
+					boolean needHangar = Utility.convertBoolString(splitedLine[4]);
+					float duration = Integer.parseInt(splitedLine[5]);
+					String typeAvion = splitedLine[6];
+					TaskGeneric tg = new TaskGeneric(id,description,
+							periodicity,ataCategory,needHangar,duration,
+							typeAvion);
 				}
 
 			}
