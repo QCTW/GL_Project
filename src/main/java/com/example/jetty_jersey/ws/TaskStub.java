@@ -2,7 +2,7 @@ package com.example.jetty_jersey.ws;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Base64;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,13 +19,14 @@ import org.apache.logging.log4j.Logger;
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.dao.*;
 import com.example.jetty_jersey.dao_implementation.TaskGenericImpl;
+import com.example.jetty_jersey.dao_interface.TaskGenericDao;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
 public class TaskStub
 {
 	private static Logger log = LogManager.getLogger(TaskStub.class.getName());
-
+	private  TaskGenericDao taskGeneric= new TaskGenericImpl();
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -162,8 +163,9 @@ public class TaskStub
 		String[] splitedFile;
 		String[] splitedLine;
 		try
-		{
-			splitedFile = task.split("\n");
+		{	byte[] decoded = Base64.getDecoder().decode(task); 
+			String tasks = new String(decoded);
+			splitedFile = tasks.split("\n");
 			for (int i = 0; i < splitedFile.length; i++)
 			{
 				splitedLine = splitedFile[i].split(",");
@@ -182,6 +184,8 @@ public class TaskStub
 					TaskGeneric tg = new TaskGeneric(id,description,
 							periodicity,ataCategory,needHangar,duration,
 							typeAvion);
+					taskGeneric.addTaskGeneric(tg);
+					
 				}
 
 			}
