@@ -14,14 +14,31 @@ function getServerData(url, success) {
 $(function() {
 	getServerData("ws/task/all", getAllTasks);
 });
- var taskList;
 
+$(function() {
+	getServerData("ws/mro/all", getAllMRO);
+});
+
+ var taskList;
+ var mroList;
  function callGetAllTasks(){
 		getServerData("ws/task/all", getAllTasks);
 	}
  
 function getAllTasks(result){
 	taskList = result;
+	var tr = "";
+	// console.log("in get all tasks function and tr = "+tr);
+	for (var i = 0; i < result.length; i++) {
+        tr += printTask(result, i);
+		// console.log(tr);
+	}
+	
+	$('#tbody').html(tr);
+} 
+
+function getAllMRO(result){
+	mroList = result;
 	var tr = "";
 	// console.log("in get all tasks function and tr = "+tr);
 	for (var i = 0; i < result.length; i++) {
@@ -98,6 +115,48 @@ function expired(){
 	$('#tbody').html(tr);
 }
 
+function callShowTask(id) {
+	getServerData("ws/task/" + id, showTask)
+}
+function showTask(task) {
+	console.log(task);
+	var res='';
+
+	res+='<div class="col-md-1"></div>';
+	res+='<div class="col-md-10">';
+	res+='<div>';
+	res+='<h3>Task n° ' + (sub(JSON.stringify(task.taskGeneric.id)))+' </h3>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> ATA </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.ataCategory)))+'</div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> Description </b></div><div class="col-md-10">'+'<p align="justify">'+(sub(JSON.stringify(task.taskGeneric.description)))+'</p></div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> Periodicity </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.periodicity)))+'</div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> Hanger Need </b></div><div class="col-md-10">'+(sub(JSON.stringify((task.taskGeneric.hangarNeed == true))) ? 'yes': 'no')+'</div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> Length </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.duration)))+'</div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> Plane Type </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.planeType)))+'</div>';
+	res+='</div>';
+	res+='<div class="row">';
+	res+='<div class="col-md-2"><b> MRO </b></div><div class="col-md-10">'
+	res+='<div  class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose MRO<span class="caret"></span></button>'
+	res+='<ul class="dropdown-menu">'
+		
+	res+='</div>'
+	$("#tab-content").html(res);
+	//console.log(task.taskGeneric.planeType);
+
+	// $('#viewTaskGen').html('Task n°'+taskId);
+}
+
 function printTask(result, i){
 	console.log(result[i]);
     return "<tr> "
@@ -116,7 +175,7 @@ function printTask(result, i){
 	+ "<td>"
 	+ sub(JSON.stringify(taskList[i].task.planeId))
 	+ "</td>"
-	+ "<td><button onclick='getSTask("
+	+ "<td><button onclick='callShowTask("
 	+ sub(JSON.stringify(taskList[i].task.id))
 	+ ")' "
 	+ "class='btn icon-btn btn-primary'>  "
