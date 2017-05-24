@@ -14,47 +14,58 @@ POST gla/_delete_by_query
 PUT gla/mcc/1
 { 
   "email" : "quincy.tw@gmail.com" 
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/2
 { 
   "email" : "fekih.meriem2@gmail.com"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/3
 {
   "email" : "skaba1606@gmail.com"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/4
 {
   "email" : "Hamadikrimo@hotmail.com"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/5
 {
   "email" : "yazid_lefoot@hotmail.fr"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/6
 {
   "email" : "judeIngani@gmail.com"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/7
 {
   "email" : "amadous75@gmail.com"
+  "pass" : "blabla"
 }
 
 PUT gla/mcc/8
 {
   "email" : "mohamed.diallo93.md@gmail.com"
+  "pass" : "blabla"
+  
 }
 
 PUT gla/mcc/9
 {
   "email" : "binta.dbr@gmail.com"
+  "pass" : "blabla"
 }
+
 
 ## Reference for MRO qualification : https://en.wikipedia.org/wiki/Reliability_engineering
 PUT gla/mro/1
