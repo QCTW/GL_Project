@@ -67,6 +67,7 @@ public class TaskStub
 		return new ArrayList<TaskInfo>();
 
 	}
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
