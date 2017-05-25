@@ -17,6 +17,11 @@ public class DatabaseSimulator
 {
 	public static void main(String[] args)
 	{
+		execute();
+	}
+
+	protected static void execute()
+	{
 		String queryPath = "src/main/resources/initDB.query";
 		File fQuery = new File(queryPath);
 		System.out.println("Read query file from : " + fQuery.getAbsolutePath());

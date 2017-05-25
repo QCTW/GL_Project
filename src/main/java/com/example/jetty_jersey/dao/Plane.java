@@ -10,13 +10,12 @@ import com.example.jetty_jersey.db.CustomHashMap;
 */
 public class Plane
 {
-	private final int planeId;
+	private int planeId;
 	private String planeType;
 
 	// For json serialization
 	public Plane()
 	{
-		planeId = -1;
 	}
 
 	public Plane(int planeId, String planeType)
@@ -28,6 +27,11 @@ public class Plane
 	public int getPlaneId()
 	{
 		return planeId;
+	}
+
+	public void setPlaneId(int id)
+	{
+		planeId = id;
 	}
 
 	public String getPlaneType()
