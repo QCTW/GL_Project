@@ -19,6 +19,7 @@ $(function() {
 	getServerData("ws/mro/all", getAllMRO);
 });
 
+
  var taskList;
  var mroList;
  function callGetAllTasks(){
@@ -36,17 +37,18 @@ function getAllTasks(result){
 	
 	$('#tbody').html(tr);
 } 
-
+var select='';
 function getAllMRO(result){
 	mroList = result;
-	var tr = "";
-	// console.log("in get all tasks function and tr = "+tr);
-	for (var i = 0; i < result.length; i++) {
-        tr += printTask(result, i);
-		// console.log(tr);
-	}
 	
-	$('#tbody').html(tr);
+	 
+	select+='<select class="form-control" id="sel1">';
+	for (var i=0; i<5; i++){
+		
+		select+='<option>'+JSON.stringify(result[i].name)+'</option>';
+	}    
+	select+='</select>';
+
 } 
 
 function sub(r) {
@@ -102,6 +104,8 @@ function done(){
 	$('#tbody').html(tr);
 }
 
+
+
 function expired(){
 	var tr = "";
 	for (var i = 0; i < taskList.length; i++) {
@@ -119,38 +123,41 @@ function callShowTask(id) {
 	getServerData("ws/task/" + id, showTask)
 }
 function showTask(task) {
-	console.log(task);
-	var res='';
-
-	res+='<div class="col-md-1"></div>';
+	console.log(task);	
+	var res='<div class="col-md-1"></div>';
 	res+='<div class="col-md-10">';
 	res+='<div>';
-	res+='<h3>Task n° ' + (sub(JSON.stringify(task.taskGeneric.id)))+' </h3>';
+	res+='<h3><br>Task n° ' + (sub(JSON.stringify(task.taskGeneric.id)))+' </br></h3>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> ATA </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.ataCategory)))+'</div>';
+	res+='<div class="col-md-2"><br><b> ATA </b></br></div><div class="col-md-10"><br>'+(sub(JSON.stringify(task.taskGeneric.ataCategory)))+'</br></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> Description </b></div><div class="col-md-10">'+'<p align="justify">'+(sub(JSON.stringify(task.taskGeneric.description)))+'</p></div>';
+	res+='<div class="col-md-2"><b><br> Description </br></b></div><div class="col-md-10">'+'<p align="justify"><br>'+(sub(JSON.stringify(task.taskGeneric.description)))+'</br></p></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> Periodicity </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.periodicity)))+'</div>';
+	res+='<div class="col-md-2"><b><br> Periodicity </br></b></div><div class="col-md-10"><br>'+(sub(JSON.stringify(task.taskGeneric.periodicity)))+'</br></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> Hanger Need </b></div><div class="col-md-10">'+(sub(JSON.stringify((task.taskGeneric.hangarNeed == true))) ? 'yes': 'no')+'</div>';
+	res+='<div class="col-md-2"><b><br> Hanger Need </br></b></div><div class="col-md-10"><br>'+(sub(JSON.stringify((task.taskGeneric.hangarNeed == true))) ? 'yes': 'no')+'</br></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> Length </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.duration)))+'</div>';
+	res+='<div class="col-md-2"><b><br> Length </br></b></div><div class="col-md-10"><br>'+(sub(JSON.stringify(task.taskGeneric.duration)))+'</br></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> Plane Type </b></div><div class="col-md-10">'+(sub(JSON.stringify(task.taskGeneric.planeType)))+'</div>';
+	res+='<div class="col-md-2"><b><br> Plane Type </br></b></div><div class="col-md-10"><br>'+(sub(JSON.stringify(task.taskGeneric.planeType)))+'</br></div>';
 	res+='</div>';
 	res+='<div class="row">';
-	res+='<div class="col-md-2"><b> MRO </b></div><div class="col-md-10">'
-	res+='<div  class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose MRO<span class="caret"></span></button>'
-	res+='<ul class="dropdown-menu">'
-		
-	res+='</div>'
+	res+='<div class="col-md-2"><b><br> MRO </br></b></div><div class="col-md-10">';
+	res+='<div class="form-group">';
+	res+=''+select;
+	res+='</div>';
+	res+='<div class="row" align="center">';
+	res+='<br></br>';
+	res+='<button class="btn btn-primary" type="submit">Valider</button>';
+	res+='<br></br>';
+	res+='</div>';
+	
 	$("#tab-content").html(res);
 	//console.log(task.taskGeneric.planeType);
 
