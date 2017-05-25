@@ -104,8 +104,6 @@ function done(){
 	$('#tbody').html(tr);
 }
 
-
-
 function expired(){
 	var tr = "";
 	for (var i = 0; i < taskList.length; i++) {
