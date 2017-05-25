@@ -48,7 +48,6 @@ public class Parser
 				// System.out.println(line);
 				// Task t = new Task(id, starTime, endTime, description, periodicity, ataCategory, needHangar, planeId, statut, morId);
 				// liste.add(t);
-
 			}
 
 		} catch (Exception e)
