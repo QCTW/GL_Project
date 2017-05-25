@@ -82,7 +82,6 @@ function formatDate(date) {
 	return year + ' ' + monthNames[monthIndex] + ' ' + day;
 }
 
-
 var planeList;
 function showPlanes(result) {
 	console.log(result);
@@ -141,12 +140,10 @@ function chooseTasksByPlaneAux(result, planeid) {
 function chooseStartDate(taskId, planeId) {
 	console.log('Test'+taskId+ ',' +planeId);
 	$('#returnCreateTask').append('<li><a> task n°'+taskId+'</a></li>');
-	//var res = '<input type="date" data-date-format="DD MMMM YYYY" placeholder="dd-MM-dd HH:mm:ss" size="16" ng-model="data.action.date" />';
-	//res+='<input type=time'
 	var res = '<div class="control-group">';
     res+='<label class="control-label">Choose a date</label>'; 
-    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy MM dd - HH:mm p"  data-link-field="dtp_input1">';
-    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly>';
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
+    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
     res+='<span class="add-on"><i class="icon-remove"></i></span>';
 	res+='<span class="add-on"><i class="icon-th"></i></span>';
     res+='</div>';
@@ -170,16 +167,6 @@ function chooseStartDate(taskId, planeId) {
 function validTask(genericTaskId, planeId) {
 	//var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	var d = $('#textDate').val();
-	//" 2017 May 07 - 03:49 pm "
-	var year = d.split(" ")[0];
-	var month = d.split(" ")[1];
-	var day = d.split(" ")[2];
-	var pm = (d.split(" ")[5].localeCompare("am") == 0)?true:false;
-	var h = parseInt((d.split(" ")[4]).split(":")[0]);
-	console.log("h "+ h);
-	var hour = (pm)?(d.split(" ")[4]).split(":")[0]:h+12;
-	var min = (d.split(" ")[4]).split(":")[1];
-	var d2 = year+"/"+month+"/"+day+" "+hour+":"+min;
 	 $.ajax({
 			contentType: "application/json",
 			dataType : "json",
@@ -187,8 +174,8 @@ function validTask(genericTaskId, planeId) {
 			data: JSON.stringify({
 			    "id": -1, 
 			    "idTaskGeneric": genericTaskId, 
-			    "startTime": d2,
-			    "endTime": d2,
+			    "startTime": d,
+			    "endTime": d,
 			    "planeId": planeId,
 			    "taskStatus": 1, 
 			    "mroId": -1,
