@@ -114,7 +114,7 @@ function getlistMros(){
 	console.log('rf');
 	var mroOption='<select id="sel" class="form-control">';
 	for(var j = 0; j < listMros.length; j++){
-		mroOption+="<option onclick=\"choseMro("+listMros[j].id+")\">"+subFy(listMros[j].email)+"</option>";
+		mroOption+="<option>"+listMros[j].id+"</option>";
 	}
 	mroOption+='</select>';
 	console.log(mroOption);
@@ -144,7 +144,7 @@ function viewTask(taskSelected){
 	else {
 		task+= dl("Mro ", taskSelected.task.mroId);
 	}
-	task+='<center><button class="btn icon-btn btn-primary" onclick="validTask()"> submit </button></center>';
+	task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
 	
 	
 	/** add Panel **/  
@@ -159,8 +159,9 @@ function viewTask(taskSelected){
 
 
 
-function validTask(){
+function validTask(id){
+	var m = $('#sel option:selected').val();
 	
-	console.log("mroChosen : "+$('#sel option:selected').val());
+	console.log("mroChosen : "+$('#sel option:selected').val() +" id : "+id);
 }
 /** END FUNCTIONS **/

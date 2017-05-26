@@ -42,6 +42,6 @@ public interface TaskDao
 	 **/
 	Status deleteTask(int taskId);
 	
-	int addMroToTask(int mroId);
+	int addMroToTask(int mroId, int taskId);
 
 }

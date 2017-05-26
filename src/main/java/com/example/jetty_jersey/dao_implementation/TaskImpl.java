@@ -220,7 +220,7 @@ public class TaskImpl implements TaskDao
 		// System.out.println(ti.toString());
 	}
 
-	public int addMroToTask(int mroId) {
+	public int addMroToTask(int mroId, int taskId) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
