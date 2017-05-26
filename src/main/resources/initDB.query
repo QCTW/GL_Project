@@ -14,7 +14,7 @@ POST gla/_delete_by_query
 PUT gla/mcc/1
 { 
   "email" : "quincy.tw@gmail.com",
-  "pass" : "blabla"
+  "pass" : "pass"
 }
 
 PUT gla/mcc/2

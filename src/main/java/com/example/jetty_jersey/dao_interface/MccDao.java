@@ -14,7 +14,7 @@ public interface MccDao
 	MCC getMccById(String id);
 
 	String getEmailById(String id);
-
+	List<MCC> getAllMccs();
 	List<MCC> getMccsInRange(int nStart, int nEnd);
 
 	/**
