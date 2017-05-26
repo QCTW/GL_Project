@@ -80,6 +80,17 @@ public class TaskStub
 		}
 		return null;
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public int attributeToMro(@PathParam("id") int id)
+	{
+		if (LoginStub.connected)
+		{
+			return DAO.getTaskDao().getTasksById(id);
+		}
+		return 0;
+	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
