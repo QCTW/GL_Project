@@ -134,17 +134,21 @@ function viewTask(taskSelected){
 	task+= dl("Hangar Need", stringify(taskSelected.taskGeneric.hangarNeed) );
 	task+= dl("Duration"   , taskSelected.taskGeneric.duration );
 	task+= dl("Plane Type",subFy(taskSelected.taskGeneric.planeType    ) );
-	if(taskSelected.taskGeneric.duration == 1){
+	console.log("status "+taskSelected.task.taskStatus);
+	if(taskSelected.task.taskStatus == 1){
 		task+= dl("Mro list", getlistMros());
+		task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
 	}
-	else if(taskSelected.taskGeneric.duration == 2) {
+	else if(taskSelected.task.taskStatus == 2) {
 		task+= dl("Mro ", taskSelected.task.mroId);
 		task+= dl("Mro list", getlistMros());
+		task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> edit </button></center>';
 	}
 	else {
 		task+= dl("Mro ", taskSelected.task.mroId);
+		task+='<center><button class="btn icon-btn btn-primary" onclick="location.reload()"> Return </button></center>';
 	}
-	task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
+	
 	
 	
 	/** add Panel **/  
@@ -161,7 +165,7 @@ function viewTask(taskSelected){
 
 function validTask(id){
 	var m = $('#sel option:selected').val();
-	
+	getServerData("ws/task/mro/"+m+"/"+id,alert('success'),null);
 	console.log("mroChosen : "+$('#sel option:selected').val() +" id : "+id);
 }
 /** END FUNCTIONS **/

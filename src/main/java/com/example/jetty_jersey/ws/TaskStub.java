@@ -82,12 +82,14 @@ public class TaskStub
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public int attributeToMro(@PathParam("id") int id)
+	@Path("/mro/{mroid}/{taskid}")
+	public int attributeToMro(@PathParam("mroid") int mroId,@PathParam("taskid") int taskId)
 	{
 		if (LoginStub.connected)
 		{
-			return DAO.getTaskDao().getTasksById(id);
+			System.out.println("mro id : "+ mroId);
+			System.out.println("task id : "+ taskId);
+			DAO.getTaskDao().addMroToTask(mroId, taskId);//return DAO.getTaskDao().getTasksById(id);
 		}
 		return 0;
 	}
