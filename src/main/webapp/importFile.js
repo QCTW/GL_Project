@@ -12,8 +12,3 @@ $("#uploadMPD").change(function() {
 	
 });
 
-function importMDP(){
-var file = $("#uploadMPD")[0].files[0];
-	
-	console.log(file);
-}

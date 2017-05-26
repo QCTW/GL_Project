@@ -11,7 +11,6 @@ function pseudo(result) {
 	localStorage.setItem("pseudo", pseudo);
 	localStorage.setItem("role", role);
 	$("#pseudo").html(localStorage.getItem("mail"));
-
 }
 function logout() {
 	// localStorage.clear();
@@ -19,7 +18,6 @@ function logout() {
 	localStorage.removeItem("role");
 	getServerData("ws/login/logout", null);
 	document.location.href = "login.html";
-
 }
 
 function getServerData(url, callback) {
@@ -220,3 +218,5 @@ $(function() {
 	$("#pseudo").html(localStorage.getItem("mail"));
 
 });
+
+

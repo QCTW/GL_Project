@@ -26,9 +26,10 @@ public class MroStub
 	public List<MRO> allMro()
 	{
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			l.add(new MRO(i, "mro" + i,""));
+			l.add(new MRO(i, "mro" + i,"mro"+i+"@mro.com"));
+			System.out.println("Email : mro"+i+"@mro.com");
 		}
 		return l;
 

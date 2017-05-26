@@ -10,6 +10,18 @@ function getServerData(url, success) {
 		url : url
 	}).done(success);
 }
+function importMDP(){
+		var file = $("#uploadMPD")[0].files[0];
+		var reader = new FileReader();
+			reader.onload = function(){
+				var text = reader.result;
+				//var node = document.getElementById('output');
+				//node.innerText = text;
+				console.log(reader.result.substring(0, 200));
+				getServerData("ws/task/addGenericTasks/"+JSON.parse('\"'+text+'\"'),alert("upload done"));
+			};
+		reader.readAsText($("#uploadMPD")[0].files[0]);
+}
 
 $(function() {
 	getServerData("ws/task/all", getAllTasks);

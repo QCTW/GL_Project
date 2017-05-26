@@ -1,6 +1,6 @@
 $(".alert").hide();
 if(localStorage.getItem("mail") != null){
-	localStorage.clear(); //Clean localStorage when recall login.html in order to re-loggin
+	//localStorage.clear(); //Clean localStorage when recall login.html in order to re-loggin
 	$('#ifConnect').html("<h1> You are already logged in. </h1>");
 }
 
@@ -24,26 +24,13 @@ function login(result){
 		$(".alert").show();
 		
 	}
-	else if (role == "mcc")
-	{	
+	else {
 		var pseudo =localStorage.getItem("tmp");
-		//alert(pseudo);
 		localStorage.setItem("mail",pseudo);
 		localStorage.setItem("role",role);
 		document.location.href="tasksPlanes.html";
 	}
-	else if (role == "mro")
-	{
-        var pseudo =localStorage.getItem("tmp");
-        //alert(pseudo);
-        localStorage.setItem("mail",pseudo);
-        localStorage.setItem("role",role);
-        document.location.href="tasksPlanesMRO.html";
-
-    }
-	else {
-		alert("Incorrect or mcc or mro role : "+role);
-	}
+	
 }
 
 $("#ok").click(function (){
