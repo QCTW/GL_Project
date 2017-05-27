@@ -102,7 +102,20 @@ function printTask(taskList, i){
 	+ ")' "
 	+ "class='btn icon-btn btn-primary'>  "
 	+ "<span class='glyphicon btn-glyphicon glyphicon-eye-open'></span> "
-	+ "</button></td>" + "</tr>";
+	+ "</button></td>"
+	+ sub(JSON.stringify(taskList[i].task.planeId))
+	+ "</td>"
+	+ "<td><button onclick='sendAlert("
+	+  taskList[i].task.id//sub(JSON.stringify(taskList[i].task.id))
+	+ ")' "
+	+ "class='btn icon-btn btn-danger'>  "
+	+ "<span class='glyphicon glyphicon-alert'></span> "
+	+ "</button></td>"
+	+ "</tr>";
+}
+/** SEND MESSAGES TO MRO **/
+function sendAlert(id){
+	alert('id'+id);
 }
 
 /** VIEW AND VALID TASKS **/

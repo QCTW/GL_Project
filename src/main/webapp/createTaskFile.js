@@ -78,7 +78,7 @@ function showGenericTaskSelected(){
 	
 	var res = '<div class="control-group">';
     //res+='<label class="control-label">Choose a date</label>'; 
-    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy-mm-dd hh:mm"  data-link-field="dtp_input1">';
     res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
     res+='<span class="add-on"><i class="icon-remove"></i></span>';
 	res+='<span class="add-on"><i class="icon-th"></i></span>';
@@ -105,33 +105,17 @@ function showGenericTaskSelected(){
 	//res+='<button type="submit" onclick="createTask()" class="btn btn-primary">Submit</button>'
 }
 function createTask(){
+	var newGenericTask = $('#selectGenericTask option:selected').val();
+	var newPlane = $('#selectPLanes option:selected').val();
+	var newDate = $('#textDate').val();
+	
+	//var newData =  {"id": -1,"idTaskGeneric": newGenericTask,"startTime": newDate,"endTime": newDate,"planeId": newPlane,"taskStatus": 1,"mroId": -1,"mccId": -1};
+	console.log(newDate);
+	postServerData("ws/task/create/"+newGenericTask+"/"+newPlane+"/"+newDate,location.reload(),null);
+	//alert('task generic id'+newTask+' plane id '+newPlane+' date '+newDate);
 	
 }
-function chooseStartDate(taskId, planeId) {
-	console.log('Test'+taskId+ ',' +planeId);
-	$('#returnCreateTask').append('<li><a> task n°'+taskId+'</a></li>');
-	var res = '<div class="control-group">';
-    res+='<label class="control-label">Choose a date</label>'; 
-    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
-    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
-    res+='<span class="add-on"><i class="icon-remove"></i></span>';
-	res+='<span class="add-on"><i class="icon-th"></i></span>';
-    res+='</div>';
-	res+='<input type="hidden" id="dtp_input1" value="" /><br/></div>';
-	res+='<button type="submit" onclick="validTask('+taskId+','+planeId+')" class="btn btn-primary">Submit</button>'
-	$("#createTaskBody").html(res);
-	$('.form_datetime').datetimepicker({
-	    //language:  'fr',
-	    weekStart: 1,
-	    todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-	    showMeridian: 1
-	});
-	//$("#createTaskBody").load("chooseStartDate.html");
-}
+
 
 
 

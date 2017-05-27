@@ -73,6 +73,19 @@ public class TaskStub
 
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/mro/{id}")
+	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId)
+	{
+		if (LoginStub.connected)
+		{
+			return new ArrayList<TaskInfo>();//DAO.getTaskDao().getTasksByPlaneId(id);
+		}
+		return new ArrayList<TaskInfo>();
+
+	}
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -98,13 +111,26 @@ public class TaskStub
 		}
 		return 0;
 	}
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/create/{taskGenericId}/{planeId}/{date}")
+	public int createTask(@PathParam("taskGenericId") int taskGeneric,@PathParam("planeId") int planeId,@PathParam("date") String date)
+	{
+		if (LoginStub.connected)
+		{
+			Task t = new Task(-1, taskGeneric, date, date, planeId, 1, -1, -1);
+			System.out.println(t.toString());
+		}
+		return 0;
+	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/add")
 	public void addTask(Task task)
 	{
-		DAO.getTaskDao().addTask(task);
+		System.out.println(task.toString());
+		//DAO.getTaskDao().addTask(task);
 	}
 
 	@GET

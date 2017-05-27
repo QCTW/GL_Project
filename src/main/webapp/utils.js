@@ -23,6 +23,16 @@ function postServerData(url, success, failure) {
 		error: failure
 	});
 }
+function putServerData(url, success,failure,data) {
+	$.ajax({
+		dataType : "json",
+		url : url,
+		data: JSON.stringify(data),
+		type: "PUT",
+		success: success,
+		error: failure
+	});
+}
 function logout() {
 	// localStorage.clear();
 	localStorage.removeItem("mail");
