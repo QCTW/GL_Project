@@ -50,6 +50,12 @@ function sub(r) {
 function dl(res,val){
 	return '<dl class="row"><dt class="col-sm-3">'+res+'</dt><dd class="col-sm-9">'+val+'</dd></dl>';
 }
+function dl2(res,val,but){
+	return '<dl class="row"><dt class="col-sm-3">'+res+'</dt><dd class="col-sm-6">'+val+'</dd><dd class="col-sm-3">'+but+'</dd></dl>';
+}
+function option(res){
+	return '<option>'+res+'</option>';
+}
 function stringify(res){
 return JSON.stringify(res);
 }
