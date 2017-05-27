@@ -1,6 +1,7 @@
 /** DECLARE VARIABLE **/
-var planeSelected;
-var genericTaskSelected;
+var planesForCreation;
+var genericTaskForCreation;
+var sptmp;
 
 /** END DECLARE VARIABLE **/
 
@@ -20,24 +21,116 @@ function ok(){
 }
 function getPlanesForCreateTask(planes){
 	//console.log(planes);
-	var lines= '<select id="selectPLanes" class="form-control">';
+	planesForCreation = planes;
+	var lines= '<select id="selectPLanes" class="form-control" >';
 	for(var i=0; i<planes.length; i++){
 		lines+= option(planes[i].plane.planeId);
 	}
 	lines+='</select>';
-	var but = '<button class="btn icon-btn btn-primary" onclick="getGenericTask('+JSON.stringify(planes[i])+')"> ok </button>';
+	$("#selectPlanes").change(function () {
+		console.log("new selection "+$('#selectPLanes option:selected').val());
+	});
+	
+	var but = '<button class="btn icon-btn btn-primary" onclick="showPlaneSelected()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
+	
 	$('#createChose').html(dl2("Chose a plane",lines,but));
+	
 	//$('#planeslist2').DataTable({});
 }
 
-function getGenericTask(p){
-	//console.log(p.plane.id);
-	alert(p);
-	//alert($('#selectPLanes option:selected').val());
-	//getServerData("ws/task/genericByPlane/"+planetype, getGenericTaskAux,null);
+function showPlaneSelected(){
+	//sptmp = $('#createChose').val();
+	var id=$('#selectPLanes option:selected').val();
+	var pt = subFy(planesForCreation[id].plane.planeType);
+	console.log(pt);
+	var content = dl("plane Type ",pt);
+	var airport = subFy(planesForCreation[id].flighs[0].departureAirport); console.log(airport);
+	content += dl("AirPort",airport);
+	content += dl("Next Departure ",stringToDate(subFy(planesForCreation[id].flighs[0].departureTime))); 
+	$('#createShow').html("<h3>Plane n° "+id+"</h3>"+content);
+	getServerData("ws/task/genericByPlane/"+pt,getGenericTasks,null);
+	
+	
+	//alert(id+" "+pt);
+	
 }
-function getGenericTaskAux(genericTasks){
-	console.log(genericTasks);
+function getGenericTasks(genericTasks){
+	genericTaskForCreation = genericTasks;
+	var lines= '<select id="selectGenericTask" class="form-control" >';
+	for(var i=0; i<genericTasks.length; i++){
+		lines+= option(genericTasks[i].id);
+	}
+	lines+='</select>';
+	var but = '<button class="btn icon-btn btn-primary" onclick="showGenericTaskSelected()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
+	var fullSel = '<dl id="toRemove" class="row"><dt class="col-sm-3">Chose a Task </dt><dd class="col-sm-6">'+lines+'</dd><dd class="col-sm-3">'+but+'</dd></dl>';
+		
+	$("#toRemove").remove();
+	$("#toRemove2").remove();
+	$('#createChose').append(fullSel);
+	//console.log(genericTasks);
+}
+function showGenericTaskSelected(){
+	var j = $('#selectGenericTask option:selected').val();
+	//alert('cool'+genericTaskForCreation[j].id);
+	//console.log()
+	var r = printGenericTask(genericTaskForCreation[j]);
+	$('#createShow').html("<h3>Task Generic n° "+j+"</h3>"+r);
+	
+	var res = '<div class="control-group">';
+    //res+='<label class="control-label">Choose a date</label>'; 
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
+    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
+    res+='<span class="add-on"><i class="icon-remove"></i></span>';
+	res+='<span class="add-on"><i class="icon-th"></i></span>';
+    res+='</div>';
+	res+='<input type="hidden" id="dtp_input1" value="" /><br/></div>';
+	//res+='<button type="submit" onclick="createTask()" class="btn btn-primary">Submit</button>'
+	var but = '<button class="btn icon-btn btn-success" onclick="createTask()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
+	var fullSel = '<dl id="toRemove2" class="row"><dt class="col-sm-3">Chose a Task </dt><dd class="col-sm-6">'+res+'</dd><dd class="col-sm-3">'+but+'</dd></dl>';
+
+	$("#toRemove2").remove();
+	$('#createChose').append(fullSel);
+	$('.form_datetime').datetimepicker({
+	    //language:  'fr',
+	    weekStart: 1,
+	    todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+	    showMeridian: 1
+	});
+	
+	
+	//res+='<button type="submit" onclick="createTask()" class="btn btn-primary">Submit</button>'
+}
+function createTask(){
+	
+}
+function chooseStartDate(taskId, planeId) {
+	console.log('Test'+taskId+ ',' +planeId);
+	$('#returnCreateTask').append('<li><a> task n°'+taskId+'</a></li>');
+	var res = '<div class="control-group">';
+    res+='<label class="control-label">Choose a date</label>'; 
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
+    res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
+    res+='<span class="add-on"><i class="icon-remove"></i></span>';
+	res+='<span class="add-on"><i class="icon-th"></i></span>';
+    res+='</div>';
+	res+='<input type="hidden" id="dtp_input1" value="" /><br/></div>';
+	res+='<button type="submit" onclick="validTask('+taskId+','+planeId+')" class="btn btn-primary">Submit</button>'
+	$("#createTaskBody").html(res);
+	$('.form_datetime').datetimepicker({
+	    //language:  'fr',
+	    weekStart: 1,
+	    todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+	    showMeridian: 1
+	});
+	//$("#createTaskBody").load("chooseStartDate.html");
 }
 
 

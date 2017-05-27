@@ -60,5 +60,16 @@ function stringify(res){
 return JSON.stringify(res);
 }
 function subFy(res){
-return sub(stringify(res));
+	return sub(stringify(res));
+}
+function printGenericTask(task){
+	var content;
+	content = dl("Ata Category",subFy(task.ataCategory) );
+	content+= dl("Description ",subFy(task.description) );
+	content+= dl("Periodicity", subFy(task.periodicity) );
+	content+= dl("Hangar Need", stringify(task.hangarNeed) );
+	content+= dl("Duration"   , task.duration );
+	content+= dl("Plane Type",subFy(task.planeType) );
+	
+	return content;
 }

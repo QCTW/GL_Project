@@ -36,7 +36,7 @@ public class PlaneStub
 	@Path("/allPlaneInfos")
 	public List<PlaneInfo> allPlaneInfos()
 	{
-		return DAO.getPlaneDao().getAllPlaneInfos();
+		return PlaneInfo.alea(); //DAO.getPlaneDao().getAllPlaneInfos();
 	}
 
 	@POST

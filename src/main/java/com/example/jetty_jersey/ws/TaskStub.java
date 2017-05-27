@@ -49,7 +49,12 @@ public class TaskStub
 		if (LoginStub.connected)
 		{
 			log.debug("Login connected : " + LoginStub.connected);
-			return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
+			List<TaskGeneric> l = new ArrayList<TaskGeneric>();
+			for(int i = 0; i<10; i++){
+				l.add(new TaskGeneric(i, "description", "periodicity", "atacategory", true, 15, type));
+			}
+			return l;
+			//return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
 
 		} else
 			return new ArrayList<TaskGeneric>();
