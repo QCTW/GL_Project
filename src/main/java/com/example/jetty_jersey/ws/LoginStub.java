@@ -56,13 +56,13 @@ public class LoginStub
 	public String[] postMethod(@PathParam("user") String name, @PathParam("pass") String pass)
 	{
 		List<Couple> l = new ArrayList<Couple>();
-		/*for (MCC mcc : DAO.getMccDao().getAllMccs()) {
+		for (MCC mcc : DAO.getMccDao().getAllMccs()) {
 			l.add(new Couple(mcc.getEmail(), mcc.getPass(), "mcc"));
 		}
 		for (MRO mro : DAO.getMroDao().getAllMros()) {
 			l.add(new Couple(mro.getName(), "pass", "mro"));
 		}
-		*/
+		
 		l.add(new Couple("mcc", "pass", "mcc"));
 		l.add(new Couple("mro", "pass", "mro"));
 		Couple c = new Couple(name, pass, "mcc");
