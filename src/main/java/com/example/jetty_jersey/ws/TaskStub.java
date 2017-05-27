@@ -143,14 +143,7 @@ public class TaskStub
 		DAO.getTaskDao().addTask(t);
 	}
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/update")
-	// http://stackoverflow.com/questions/8194408/how-to-access-parameters-in-a-restful-post-method
-	public void modifyTask(Task task)
-	{
-		DAO.getTaskDao().modifyTask(task);
-	}
+	
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
@@ -240,6 +233,19 @@ public class TaskStub
 			e.printStackTrace();
 		}
 
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/mpd/{mpd}")
+	public void addMPD(@PathParam("mpd") String mpd)
+	{
+		System.out.println("MPD IS CALLED");
+		
+		String [] tab = mpd.split("--");
+		for (int i = 0; i < tab.length; i++) {
+			System.out.println(tab[i]);
+		}
 	}
 
 }
