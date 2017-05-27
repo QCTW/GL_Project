@@ -3,6 +3,7 @@ var taskList;
 var mroChosen;
 var listMros;
 /** END DECLARE VARIABLE **/
+$('#example').DataTable({});
 
 $(function() {
 	if(localStorage.getItem("role") == "mcc"){
@@ -24,6 +25,7 @@ $(function() {
 
 function allTasks(result){
 	taskList = result;
+	
 	getAllTasks();
 }
 
@@ -39,6 +41,7 @@ function getAllTasks(){
 	for (var i = 0; i < taskList.length; i++) {
 		line += printTask(taskList, i);
 	}
+	
 	$('#tbody').html(line);
 }
 
