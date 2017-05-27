@@ -1,5 +1,6 @@
 package com.example.jetty_jersey.ws;
 
+import java.util.Base64;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -46,8 +47,9 @@ public class PlaneStub
 	{
 		String[] splitedFile;
 		String[] splitedLine;
-
-		splitedFile = planes.split(",");
+		byte[] decoded = Base64.getDecoder().decode(planes); 
+		String planesDecoded = new String(decoded);
+		splitedFile = planesDecoded.split(",");
 		for (int i = 0; i < splitedFile.length; i++)
 		{
 			splitedLine = splitedFile[i].split(",");
