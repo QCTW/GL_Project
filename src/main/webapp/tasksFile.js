@@ -81,6 +81,19 @@ function getTasksdone(){
 
 /** PRINT **/
 function printTask(taskList, i){
+	var but = "<button onclick='sendAlert("
+		+  taskList[i].task.id//sub(JSON.stringify(taskList[i].task.id))
+		+ ")' "
+		+ "class='btn icon-btn btn-danger'>  "
+		+ "<span class='glyphicon glyphicon-alert'></span> "
+		+ "</button>";
+	var ifMcc="";
+	if (localStorage.getItem("role") == "mcc"){
+		ifMcc = "<td>"+but+"</td>";
+	}
+	else {
+		$("#sendAlert").hide();
+	}
     return "<tr> "
 	+ "<td>"
 	+ sub(JSON.stringify(taskList[i].taskGeneric.ataCategory))
@@ -105,13 +118,9 @@ function printTask(taskList, i){
 	+ "</button></td>"
 	+ sub(JSON.stringify(taskList[i].task.planeId))
 	+ "</td>"
-	+ "<td><button onclick='sendAlert("
-	+  taskList[i].task.id//sub(JSON.stringify(taskList[i].task.id))
-	+ ")' "
-	+ "class='btn icon-btn btn-danger'>  "
-	+ "<span class='glyphicon glyphicon-alert'></span> "
-	+ "</button></td>"
+	+ ifMcc
 	+ "</tr>";
+   
 }
 /** SEND MESSAGES TO MRO **/
 function sendAlert(id){
@@ -148,18 +157,23 @@ function viewTask(taskSelected){
 	task+= dl("Duration"   , taskSelected.taskGeneric.duration );
 	task+= dl("Plane Type",subFy(taskSelected.taskGeneric.planeType    ) );
 	console.log("status "+taskSelected.task.taskStatus);
-	if(taskSelected.task.taskStatus == 1){
-		task+= dl("Mro list", getlistMros());
-		task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
-	}
-	else if(taskSelected.task.taskStatus == 2) {
-		task+= dl("Mro ", taskSelected.task.mroId);
-		task+= dl("Mro list", getlistMros());
-		task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> edit </button></center>';
+	if(localStorage.getItem("role") == "mcc"){
+		if(taskSelected.task.taskStatus == 1){
+			task+= dl("Mro list", getlistMros());
+			task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
+		}
+		else if(taskSelected.task.taskStatus == 2) {
+			task+= dl("Mro ", taskSelected.task.mroId);
+			task+= dl("Mro list", getlistMros());
+			task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> edit </button></center>';
+		}
+		else {
+			task+= dl("Mro ", taskSelected.task.mroId);
+			task+='<center><button class="btn icon-btn btn-primary" onclick="location.reload()"> Return </button></center>';
+		}
 	}
 	else {
-		task+= dl("Mro ", taskSelected.task.mroId);
-		task+='<center><button class="btn icon-btn btn-primary" onclick="location.reload()"> Return </button></center>';
+		task+='<center><button class="btn icon-btn btn-primary" onclick="mroValidTask('+taskSelected.task.id+')"> Task Done </button></center>';
 	}
 	
 	
@@ -174,7 +188,9 @@ function viewTask(taskSelected){
 	$('#tasksmenu').html(panel);
 }
 
-
+function mroValidTask(id){
+	alert('Task Done');
+}
 
 function validTask(id){
 	var m = $('#sel option:selected').val();
