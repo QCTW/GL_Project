@@ -50,5 +50,7 @@ public interface TaskDao
 	 * @return
 	 */
 	Status addMroToTask(int mroId, int taskId);
+	
+	List<TaskInfo> getTasksByMroId(int mroId);
 
 }

@@ -86,7 +86,7 @@ function showGenericTaskSelected(){
 	res+='<input type="hidden" id="dtp_input1" value="" /><br/></div>';
 	//res+='<button type="submit" onclick="createTask()" class="btn btn-primary">Submit</button>'
 	var but = '<button class="btn icon-btn btn-success" onclick="createTask()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
-	var fullSel = '<dl id="toRemove2" class="row"><dt class="col-sm-3">Chose a Task </dt><dd class="col-sm-6">'+res+'</dd><dd class="col-sm-3">'+but+'</dd></dl>';
+	var fullSel = '<dl id="toRemove2" class="row"><dt class="col-sm-3">Chose a Date </dt><dd class="col-sm-6">'+res+'</dd><dd class="col-sm-3">'+but+'</dd></dl>';
 
 	$("#toRemove2").remove();
 	$('#createChose').append(fullSel);

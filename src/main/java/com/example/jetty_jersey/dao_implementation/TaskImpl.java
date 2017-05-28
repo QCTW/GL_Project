@@ -231,4 +231,9 @@ public class TaskImpl implements TaskDao
 		return s;
 	}
 
+	public List<TaskInfo> getTasksByMroId(int mroId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -80,7 +80,7 @@ public class TaskStub
 	{
 		if (LoginStub.connected)
 		{
-			return new ArrayList<TaskInfo>();//DAO.getTaskDao().getTasksByPlaneId(id);
+			return DAO.getTaskDao().getTasksByMroId(mroId);//DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
 
@@ -107,7 +107,7 @@ public class TaskStub
 		{
 			System.out.println("mro id : "+ mroId);
 			System.out.println("task id : "+ taskId);
-			DAO.getTaskDao().addMroToTask(mroId, taskId);//return DAO.getTaskDao().getTasksById(id);
+			DAO.getTaskDao().addMroToTask(mroId, taskId);
 		}
 		return 0;
 	}
@@ -134,17 +134,6 @@ public class TaskStub
 		//DAO.getTaskDao().addTask(task);
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/test")
-	public void test()
-	{
-		Task t = new Task(-1, 9 / 5, "2017/05/07 00:00", "2017/05/07 16:41", 5, 1, -1, -1);
-		// Task tt = new Task(-1, 5, startTime, endTime, planeId, taskStatus, mroId, mccId)
-		DAO.getTaskDao().addTask(t);
-	}
-
-	
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
@@ -152,46 +141,6 @@ public class TaskStub
 	public void deleteTaskById(@PathParam("id") int id)
 	{
 		DAO.getTaskDao().deleteTask(id);
-	}
-
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addTasks/{tasks}")
-	public void addTasks(@PathParam("task") String task)
-	{
-		String[] splitedFile;
-		String[] splitedLine;
-		try
-		{
-			splitedFile = task.split("\n");
-			for (int i = 0; i < splitedFile.length; i++)
-			{
-				splitedLine = splitedFile[i].split(",");
-				if (splitedLine.length != 10)
-				{
-					log.error("Le fichier n'est pas dans le bon format!");
-				} else
-				{
-					int id = Integer.parseInt(splitedLine[0]);
-					String starTime = splitedLine[1];
-					String endTime = splitedLine[2];
-					String description = splitedLine[3];
-					String periodicity = splitedLine[4];
-					String ataCategory = splitedLine[5];
-					boolean needHangar = Utility.convertBoolString(splitedLine[6]);
-					int planeId = Integer.parseInt(splitedLine[7]);
-					int statut = Integer.parseInt(splitedLine[8]);
-					int mroId = Integer.parseInt(splitedLine[9]);
-					// TODO : This web service is not finished
-				}
-
-			}
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
 	}
 	
 	@POST
