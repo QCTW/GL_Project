@@ -231,9 +231,24 @@ public class TaskImpl implements TaskDao
 		return s;
 	}
 
-	public List<TaskInfo> getTasksByMroId(int mroId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TaskInfo> getTasksByMroId(int mroId)
+	{
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "mroId", Integer.toBinaryString(mroId));
+		List<TaskInfo> tl = new ArrayList<TaskInfo>();
+		for (Map<String, String> m : results)
+		{
+			Task t = new Task(Utility.convertIntString(m.get("_id")), Utility.convertIntString(m.get("idTaskGeneric")), m.get("startTime"), m.get("endTime"),
+					Utility.convertIntString(m.get("planeId")), Utility.convertIntString(m.get("taskStatus")), Utility.convertIntString(m.get("mroId")), Utility.convertIntString(m.get("mccId")));
+			MRO mro = getMROById(dbConnect, m.get("mroId"));
+			Plane p = getPlaneById(dbConnect, m.get("planeId"));
+			Flight f = getFlightByPlaneId(dbConnect, m.get("planeId"));
+			TaskGeneric tg = getTaskGeneric(dbConnect, m.get("idTaskGeneric"));
+			TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
+			tl.add(wrap);
+		}
+		dbConnect.close();
+		return tl;
 	}
 
 }
