@@ -1,6 +1,6 @@
 $(".alert").hide();
 if(localStorage.getItem("mail") != null){
-	//localStorage.clear(); //Clean localStorage when recall login.html in order to re-loggin
+	localStorage.clear(); //Clean localStorage when recall login.html in order to re-loggin
 	$('#ifConnect').html("<h1> You are already logged in. </h1>");
 }
 

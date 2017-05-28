@@ -18,6 +18,7 @@ import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao.Task;
 import com.example.jetty_jersey.dao.TaskGeneric;
 import com.example.jetty_jersey.dao_interface.TaskDao;
+import com.example.jetty_jersey.db.CustomHashMap;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.db.DatabaseSettings;
 import com.example.jetty_jersey.db.Utility;
@@ -220,9 +221,14 @@ public class TaskImpl implements TaskDao
 		// System.out.println(ti.toString());
 	}
 
-	public int addMroToTask(int mroId, int taskId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Status addMroToTask(int mroId, int taskId)
+	{
+		Map<String, String> data = new CustomHashMap<String, String>();
+		data.put("mroId", Integer.toString(mroId));
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
+		dbConnect.close();
+		return s;
 	}
 
 }

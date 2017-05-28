@@ -41,7 +41,14 @@ public interface TaskDao
 	 * @return delete a task
 	 **/
 	Status deleteTask(int taskId);
-	
-	int addMroToTask(int mroId, int taskId);
+
+	/**
+	 * Used to assign MRO to a task
+	 * 
+	 * @param mroId
+	 * @param taskId
+	 * @return
+	 */
+	Status addMroToTask(int mroId, int taskId);
 
 }
