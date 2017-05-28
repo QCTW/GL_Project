@@ -78,7 +78,7 @@ function showGenericTaskSelected(){
 	
 	var res = '<div class="control-group">';
     //res+='<label class="control-label">Choose a date</label>'; 
-    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy-mm-dd hh:mm"  data-link-field="dtp_input1">';
+    res+='<div class="controls input-append date form_datetime" data-date-format="yyyy/mm/dd hh:mm"  data-link-field="dtp_input1">';
     res+='<input class="form-control" size="20" id="textDate" type="text" value="" readonly/>';
     res+='<span class="add-on"><i class="icon-remove"></i></span>';
 	res+='<span class="add-on"><i class="icon-th"></i></span>';
@@ -111,7 +111,7 @@ function createTask(){
 	
 	//var newData =  {"id": -1,"idTaskGeneric": newGenericTask,"startTime": newDate,"endTime": newDate,"planeId": newPlane,"taskStatus": 1,"mroId": -1,"mccId": -1};
 	console.log(newDate);
-	postServerData("ws/task/create/"+newGenericTask+"/"+newPlane+"/"+newDate,location.reload(),null);
+	postServerData("ws/task/create/"+newGenericTask+"/"+newPlane+"/"+encodeURIComponent(newDate),location.reload(),null);
 	//alert('task generic id'+newTask+' plane id '+newPlane+' date '+newDate);
 	
 }

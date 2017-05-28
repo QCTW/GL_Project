@@ -120,6 +120,7 @@ public class TaskStub
 		{
 			Task t = new Task(-1, taskGeneric, date, date, planeId, 1, -1, -1);
 			System.out.println(t.toString());
+			DAO.getTaskDao().addTask(t);
 		}
 		return 0;
 	}
