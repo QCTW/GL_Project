@@ -45,10 +45,13 @@ public class EmailAlertService
     static MimeMessage generateMailMessage;
 
     public static void main(String[] args) throws Exception {
-        send_mail_to_MRO("6", 400);
+        send_mail_to_MRO("6");
     }
 
-    public static void send_mail_to_MRO(String taskId, int countDay) throws AddressException, MessagingException {
+    public static void send_mail_to_MRO(String taskId) throws AddressException, MessagingException {
+
+        // fix countDay
+        int countDay = 99999;
 
         // Step0
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
