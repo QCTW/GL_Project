@@ -60,7 +60,7 @@ function getGenericTasks(genericTasks){
 	genericTaskForCreation = genericTasks;
 	var lines= '<select id="selectGenericTask" class="form-control" >';
 	for(var i=0; i<genericTasks.length; i++){
-		lines+= option(genericTasks[i].id+" "+subFy(genericTasks[i].ataCategory));
+		lines+= option(genericTasks[i].id+"-"+subFy(genericTasks[i].ataCategory));
 	}
 	lines+='</select>';
 	var but = '<button class="btn icon-btn btn-primary" onclick="showGenericTaskSelected()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';

@@ -37,6 +37,7 @@ function logout() {
 	// localStorage.clear();
 	localStorage.removeItem("mail");
 	localStorage.removeItem("role");
+	localStorage.removeItem("idMRO");
 	getServerData("ws/login/logout",document.location.href = "login.html",null);
 	;
 }

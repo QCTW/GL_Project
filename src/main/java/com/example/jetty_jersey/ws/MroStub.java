@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.example.jetty_jersey.dao.DAO;
 import com.example.jetty_jersey.dao.MRO;
 
 @Path("/mro")
@@ -26,11 +27,14 @@ public class MroStub
 	public List<MRO> allMro()
 	{
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 0; i < 10; i++)
+		for (int i = 1; i < 10; i++)
 		{
-			l.add(new MRO(i, "mro" + i,"mro"+i+"@mro.com"));
-			//System.out.println("Email : mro"+i+"@mro.com");
+		//	l.add(new MRO(i, "mro" + i,"mro"+i+"@mro.com"));
+			
+			System.out.println("Email : mro"+i+"@mro.com");
 		}
+		l = DAO.getMroDao().getAllMros();
+		System.out.println("LISTE OF MROS "+l);
 		return l;
 
 	}

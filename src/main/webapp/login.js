@@ -16,7 +16,14 @@ function postLogin(pseudo, pass, success){
 function login(result){
 	var r =  JSON.stringify(result[0]);
 	var role = r.toString().substring(1,r.toString().length-1);
-	//alert(role);
+	var idMRO="";
+	if(role != "mcc" && role != "incorrect"){
+		console.log("role :"+role);
+		idMRO = role.split("-")[1];
+		role = role.split("-")[0];
+		console.log("id MRO : "+idMRO+"\n role : "+role);
+		
+	}//alert(role);
 	console.log("role in login "+role)
 	if(role === "incorrect"){
 		
@@ -25,12 +32,13 @@ function login(result){
 		
 	}
 	else {
+		
 		var pseudo =localStorage.getItem("tmp");
 		localStorage.setItem("mail",pseudo);
 		localStorage.setItem("role",role);
+		localStorage.setItem("idMRO",idMRO);
 		document.location.href="tasksPlanes.html";
-	}
-	
+	}	
 }
 
 $("#ok").click(function (){

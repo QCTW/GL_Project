@@ -80,6 +80,7 @@ public class TaskStub {
 	@Path("/mro/{id}")
 	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId) {
 		if (LoginStub.connected) {
+			System.out.println("login");
 			return DAO.getTaskDao().getTasksByMroId(mroId);// DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
@@ -101,8 +102,8 @@ public class TaskStub {
 	@Path("/mro/{mroid}/{taskid}")
 	public int attributeToMro(@PathParam("mroid") int mroId, @PathParam("taskid") int taskId) {
 		if (LoginStub.connected) {
-			System.out.println("mro id : " + mroId);
-			System.out.println("task id : " + taskId);
+			System.out.println("MRO ID : " + mroId);
+			System.out.println("TASK ID : " + taskId);
 			DAO.getTaskDao().addMroToTask(mroId, taskId);
 		}
 		return 0;
@@ -114,7 +115,7 @@ public class TaskStub {
 	public int createTask(@PathParam("taskGenericId") int taskGeneric, @PathParam("planeId") int planeId,
 			@PathParam("date") String date) {
 		if (LoginStub.connected) {
-			Task t = new Task(-1, taskGeneric, date, date, planeId, 1, -1, -1);
+			Task t = new Task(-1, taskGeneric, date, date, planeId, 0,-1,-1);
 			System.out.println(t.toString());
 			DAO.getTaskDao().addTask(t);
 		}
@@ -141,7 +142,7 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/done/{id}")
 	public void setTaskDone(@PathParam("id") int id){
-		
+		DAO.getTaskDao().notifyTaskDone(id);
 	}
 
 	@PUT
@@ -188,7 +189,7 @@ public class TaskStub {
 					String typeAvion = splitedLine[5];
 					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
 					System.out.println(i+" : "+tg.toString());
-					//System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
+					System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
 					
 				}
 

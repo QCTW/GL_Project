@@ -9,8 +9,8 @@ function importMDP() {
 		// var node = document.getElementById('output');
 		// node.innerText = text;
 		console.log("text " +text);
-		upload(text );
-		//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
+		//upload(text );
+		postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
 	}
 	reader.readAsText($("#uploadMPD")[0].files[0]);
 	

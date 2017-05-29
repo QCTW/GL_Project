@@ -59,12 +59,16 @@ public class LoginStub
 		/*for (MCC mcc : DAO.getMccDao().getAllMccs()) {
 			l.add(new Couple(mcc.getEmail(), mcc.getPass(), "mcc"));
 		}
-		for (MRO mro : DAO.getMroDao().getAllMros()) {
-			l.add(new Couple(mro.getName(), "pass", "mro"));
+		*/for (MRO mro : DAO.getMroDao().getAllMros()) {
+			System.out.println("liste pas vide");
+			l.add(new Couple(mro.getId(),mro.getName(), "pass", "mro"));
+			System.out.println("mro " +mro.getEmail());
 		}
-		*/
+		System.out.println(l.size());
+		
+		
 		l.add(new Couple("mcc", "pass", "mcc"));
-		l.add(new Couple("mro", "pass", "mro"));
+		l.add(new Couple(1,"mro", "pass", "mro"));
 		Couple c = new Couple(name, pass, "mcc");
 		// Couple c = new Couple("mcc", "mro");
 		log.debug("USER : " + c.user + "; PASS : " + c.pass);

@@ -8,15 +8,19 @@ $('#example').DataTable({});
 $(function() {
 	if(localStorage.getItem("role") == "mcc"){
 		getServerData("ws/task/all", allTasks,null)
+		getServerData("ws/mro/all", allMros,null)
 	}
 	else {
 		$("#createTaskToggle").hide();
 		$("#uploadTaskToggle").hide();
 		$("#tasksToAssign").hide();
-		getServerData("ws/task/all", allTasks,null)
+		var im = localStorage.getItem("idMRO");
+		console.log('im = '+im);
+		getServerData("ws/task/mro/"+1, allTasks,null)
+		taskList = null;
+		
 		//$("#body").html('vous êtes un mro');
 	}
-	getServerData("ws/mro/all", allMros,null)
 	
 });
 
@@ -25,9 +29,12 @@ $(function() {
 
 function allTasks(result){
 	taskList = result;
-	
+	console.log(taskList);
 	//getAllTasks();
-	getTaskToAssign()
+	if(localStorage.getItem("role") == "mcc"){
+		getTaskToAssign();
+	}
+	else getAllTasks();
 }
 
 function allMros(result){
@@ -38,6 +45,7 @@ function allMros(result){
 
 /** SORT TASKS FUNCTION **/
 function getAllTasks(){
+	$("#sendAlert").show();
 	var line = "";
 	for (var i = 0; i < taskList.length; i++) {
 		line += printTask(taskList, i);
@@ -47,6 +55,7 @@ function getAllTasks(){
 }
 
 function getTaskToAssign(){
+	$("#sendAlert").hide();
 	var line;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.taskStatus == 0 ){
@@ -57,6 +66,7 @@ function getTaskToAssign(){
 }
 
 function getTasksInProgress(){
+	$("#sendAlert").show();
 	var line;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.taskStatus == 1){
@@ -73,6 +83,7 @@ function getTasksInProgress(){
 }
 
 function getTasksdone(){
+	$("#sendAlert").hide();
 	var tr = "";
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.mroId > 0 ){
@@ -96,11 +107,12 @@ function printTask(taskList, i){
 		+ "<span class='glyphicon glyphicon-alert'></span> "
 		+ "</button>";
 	var ifMcc="";
+	//console.log(localStorage.getItem("role")+" "+taskList[i].task.taskStatus);
 	if (localStorage.getItem("role") == "mcc" && taskList[i].task.taskStatus == 1){
 		ifMcc = "<td>"+but+"</td>";
 	}
 	else {
-		$("#sendAlert").hide();
+		
 	}
     return "<tr> "
 	+ "<td>"
@@ -110,7 +122,7 @@ function printTask(taskList, i){
 	+ sub(JSON.stringify(taskList[i].task.startTime))
 	+ "</td>"
 	+ "<td>"
-	+ sub(JSON.stringify(taskList[i].task.endTime))
+	+ sub(JSON.stringify(taskList[i].taskGeneric.duration))
 	+ "</td>"
 	+ "<td>"
 	+ sub(JSON.stringify(taskList[i].taskGeneric.planeType))
@@ -145,7 +157,7 @@ function getlistMros(){
 	console.log('rf');
 	var mroOption='<select id="sel" class="form-control">';
 	for(var j = 0; j < listMros.length; j++){
-		mroOption+="<option>"+listMros[j].id+"</option>";
+		mroOption+="<option>"+listMros[j].id+"- "+subFy(listMros[j].email) +"</option>";
 	}
 	mroOption+='</select>';
 	console.log(mroOption);
@@ -167,11 +179,11 @@ function viewTask(taskSelected){
 	task+= dl("Plane Type",subFy(taskSelected.taskGeneric.planeType    ) );
 	console.log("status "+taskSelected.task.taskStatus);
 	if(localStorage.getItem("role") == "mcc"){
-		if(taskSelected.task.taskStatus == 1){
+		if(taskSelected.task.taskStatus == 0){
 			task+= dl("Mro list", getlistMros());
 			task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> submit </button></center>';
 		}
-		else if(taskSelected.task.taskStatus == 2) {
+		else if(taskSelected.task.taskStatus == 1) {
 			task+= dl("Mro ", taskSelected.task.mroId);
 			task+= dl("Mro list", getlistMros());
 			task+='<center><button class="btn icon-btn btn-primary" onclick="validTask('+taskSelected.task.id+')"> edit </button></center>';
@@ -198,12 +210,14 @@ function viewTask(taskSelected){
 }
 
 function mroValidTask(id){
-	alert('Task Done');
+	//alert('Task Done');
+	postServerData('ws/task/done/'+id,location.reload(),null);
 }
 
 function validTask(id){
-	var m = $('#sel option:selected').val();
+	var m = split0($('#sel option:selected').val());
+	console.log("m "+m);
 	getServerData("ws/task/mro/"+m+"/"+id,alert('success'),null);
-	console.log("mroChosen : "+$('#sel option:selected').val() +" id : "+id);
+	//console.log("mroChosen : "+$('#sel option:selected').val() +" id : "+id);
 }
 /** END FUNCTIONS **/
