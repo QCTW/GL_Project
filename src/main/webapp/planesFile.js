@@ -1,5 +1,31 @@
+var planeList;
 
-function printPlane(PlaneInfo, i){
+
+$(function() {
+	if(localStorage.getItem("role") == "mcc"){
+		getServerData("ws/plane/allPlaneInfos", allPlanes,null)
+	}
+	else {
+		
+	}
+});
+
+function allPlanes(res){
+	planeList = res;
+	var line = "";
+	for (var i = 0; i < planeList.length; i++) {
+		line += printPlane(planeList, i);
+	}	
+	$('#planeTbody').html(line);
+}
+
+function printPlane(planeInfo, i){
+	var content="<tr>";
+	content+= td(planeInfo[i].plane.planeId);
+	content+=td('<button class="btn icon-btn btn-primary" onclick="viewTaskByPlanes('+planeInfo[i].plane.planeId+')"><span class="glyphicon btn-glyphicon glyphicon-eye-open"></span></button>');
+	content+="</tr>";
+	return content;
+	/*
 	//console.log(taskList[i]);
 	var but = "<button onclick='sendAlert("
 		+  PlaneInfo.flights[i].id//sub(JSON.stringify(PlaneInfo.flights[i].id))
@@ -43,5 +69,9 @@ function printPlane(PlaneInfo, i){
 	+ "</td>"
 	+ ifMcc
 	+ "</tr>";
-   
+   */
+}
+
+function viewTaskByPlanes(id){
+	console.log("id "+id);
 }

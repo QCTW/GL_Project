@@ -12,7 +12,7 @@ function importMDP() {
 		upload(text );
 		//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
 	}
-	//reader.readAsText($("#uploadMPD")[0].files[0]);
+	reader.readAsText($("#uploadMPD")[0].files[0]);
 	
 }
 
@@ -35,8 +35,8 @@ function uploadFlights() {
 
 function upload(text){
 	var content = text;
-	console.log("content \n");
-	//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
+	console.log("content \n"+content);
+	postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
 }
 
 function valid(){

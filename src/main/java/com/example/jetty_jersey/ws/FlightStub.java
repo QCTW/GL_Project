@@ -56,8 +56,8 @@ public class FlightStub
 			int planeID =Integer.parseInt(splitedLine[5]);
 			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, 
 					departureTime,  arrivalTime,  planeID);
-			DAO.getFlightDao().addFlight(f);
-		
+			//DAO.getFlightDao().addFlight(f);
+			
 			
 		}
 
