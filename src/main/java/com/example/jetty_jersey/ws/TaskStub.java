@@ -197,7 +197,7 @@ public class TaskStub {
 					String typeAvion = splitedLine[5];
 					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
 					//System.out.println(i+" : "+tg.toString());
-					DAO.getTaskGenericDao().addTaskGeneric(tg);
+					System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
 					
 				}
 
