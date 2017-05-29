@@ -3,6 +3,9 @@ package com.example.jetty_jersey.ws;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
+import com.example.jetty_jersey.Email.EmailAlertService;
 import com.example.jetty_jersey.dao.*;
 import com.example.jetty_jersey.dao_implementation.TaskGenericImpl;
 import com.example.jetty_jersey.dao_interface.TaskGenericDao;
@@ -115,6 +119,29 @@ public class TaskStub {
 			DAO.getTaskDao().addTask(t);
 		}
 		return 0;
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/alert/{id}")
+	public void sendAlert(@PathParam("id") int id){
+		System.out.println("SEND ALERT FOR TASK "+id);
+		/*try {
+			EmailAlertService.send_mail_to_MRO(id+"", 1);
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/done/{id}")
+	public void setTaskDone(@PathParam("id") int id){
+		
 	}
 
 	@PUT
