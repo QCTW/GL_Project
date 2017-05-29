@@ -77,8 +77,11 @@ public class EmailAlertService
                     ") " + " but was not yet confirmed by you.<br> Task Start time: " + startTime;
 
             List<Map<String, String>> list2 =  db.selectAllFromTableWhereFieldEqValue("mro", "_id", list.get(0).get("mroId"));
-
-            send_mail(emailBody, list2.get(0).get("email"), "\"ALERT: task not confirmed yet");
+            
+            //String mail = list2.get(0).get("email");
+            String mail = "mohameddiallo93md@gmail.com";
+            
+            send_mail(emailBody, mail, "\"ALERT: task not confirmed yet");
         }
 
         db.close();
