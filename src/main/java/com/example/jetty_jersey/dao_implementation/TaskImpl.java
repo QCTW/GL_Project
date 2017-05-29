@@ -80,7 +80,7 @@ public class TaskImpl implements TaskDao
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "planeId", Integer.toString(id));
-		dbConnect.close();
+
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
@@ -93,6 +93,7 @@ public class TaskImpl implements TaskDao
 			TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
 			tl.add(wrap);
 		}
+		dbConnect.close();
 		Collections.sort(tl, new TaskInfoOrderByDateComparator());
 		return tl;
 	}
@@ -204,28 +205,29 @@ public class TaskImpl implements TaskDao
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
-		// Task t = new Task(-1, 1, "2017/05/02 19:15", "2017/05/02 23:15", 3, 1, 1);
-		// Status s = test.addTask(t);
-		// System.out.println("Add new task by _id=-1 : " + s.toString());
 		List<TaskInfo> l = test.getAllTasks();
 		for (TaskInfo ti : l)
 		{
 			System.out.println(ti);
 		}
-		// s = test.deleteTask(3);
-		// System.out.println("Delete task _id=3 : " + s.toString());
-		// t = new Task(3, 1, "2017/05/02 07:15", "2017/05/02 12:15", 3, 1, 1);
-		// s = test.addTask(t);
-		// System.out.println("Add back task _id=3 : " + s.toString());
-		// TaskInfo ti = test.getTasksById(1);
-		// System.out.println(ti.toString());
 	}
 
 	public Status addMroToTask(int mroId, int taskId)
 	{
 		Map<String, String> data = new CustomHashMap<String, String>();
 		data.put("mroId", Integer.toString(mroId));
+		data.put("taskStatus", "1");
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
+		dbConnect.close();
+		return s;
+	}
+
+	public Status notifyTaskDone(int taskId)
+	{
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		Map<String, String> data = new CustomHashMap<String, String>();
+		data.put("taskStatus", "2");
 		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
 		dbConnect.close();
 		return s;

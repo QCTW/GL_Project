@@ -28,17 +28,17 @@ public interface TaskDao
 	List<TaskInfo> getTasksByPlaneId(int id);
 
 	/**
-	 * @return add a task
+	 * @return status to check if execute successful or not
 	 **/
 	Status addTask(Task t);
 
 	/**
-	 * @return modify a task
+	 * @return status to check if execute successful or not
 	 **/
 	Status modifyTask(Task t);
 
 	/**
-	 * @return delete a task
+	 * @return status to check if execute successful or not
 	 **/
 	Status deleteTask(int taskId);
 
@@ -55,5 +55,10 @@ public interface TaskDao
 	 * @return the task with the given mro id
 	 **/
 	List<TaskInfo> getTasksByMroId(int mroId);
+
+	/**
+	 * @return status to check if execute successful or not
+	 **/
+	Status notifyTaskDone(int taskId);
 
 }

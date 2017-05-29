@@ -26,7 +26,8 @@ $(function() {
 function allTasks(result){
 	taskList = result;
 	
-	getAllTasks();
+	//getAllTasks();
+	getTaskToAssign()
 }
 
 function allMros(result){
@@ -48,7 +49,7 @@ function getAllTasks(){
 function getTaskToAssign(){
 	var line;
 	for (var i = 0; i < taskList.length; i++) {
-		if(taskList[i].task.taskStatus == 1 ){
+		if(taskList[i].task.taskStatus == 0 ){
             line += printTask(taskList, i);
 		}
 	}
@@ -58,12 +59,15 @@ function getTaskToAssign(){
 function getTasksInProgress(){
 	var line;
 	for (var i = 0; i < taskList.length; i++) {
-		if(taskList[i].task.mroId > 0 ){
+		if(taskList[i].task.taskStatus == 1){
+			line += printTask(taskList, i);
+		}
+		/*if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
 			var endTime = stringToDate(taskList[i].task.endTime);
 			if(today < endTime && taskList[i].task.taskStatus == 2)
                 line += printTask(taskList, i);
-        }
+        }*/
     }
 	$('#tbody').html(line);
 }
@@ -74,7 +78,7 @@ function getTasksdone(){
 		if(taskList[i].task.mroId > 0 ){
 			var today = new Date();
 			//var endTime = stringToDate(taskList[i].task.endTime);
-			if(taskList[i].task.taskStatus == 3)
+			if(taskList[i].task.taskStatus == 2)
                 tr += printTask(taskList, i);
 		}
 	}
@@ -92,7 +96,7 @@ function printTask(taskList, i){
 		+ "<span class='glyphicon glyphicon-alert'></span> "
 		+ "</button>";
 	var ifMcc="";
-	if (localStorage.getItem("role") == "mcc"){
+	if (localStorage.getItem("role") == "mcc" && taskList[i].task.taskStatus == 1){
 		ifMcc = "<td>"+but+"</td>";
 	}
 	else {
@@ -128,7 +132,8 @@ function printTask(taskList, i){
 }
 /** SEND MESSAGES TO MRO **/
 function sendAlert(id){
-	alert('id'+id);
+	postServerData("ws/task/alert/"+id,alert('Task n°'+id+'send'),null);
+	//alert('id'+id);
 }
 
 /** VIEW AND VALID TASKS **/

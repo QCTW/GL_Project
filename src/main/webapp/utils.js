@@ -86,3 +86,6 @@ function printGenericTask(task){
 function split0 (res){
 	return res.split("-")[0];
 }
+function td(res){
+	return '<td>'+res+'</td>';
+}

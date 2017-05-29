@@ -167,7 +167,7 @@ public class DatabaseConnecter
 		return jsonb;
 	}
 
-	private String generateNewId(String tableName)
+	String generateNewId(String tableName)
 	{
 		Integer maxId = new Integer(0);
 		synchronized (maxIdMap) // Only once at a time to update the max _id of each table in the hash map

@@ -62,8 +62,8 @@ public class FlightStub
 			System.out.println("_______ARRIVAL TIME: "+arrivalTime);
 			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, 
 					departureTime,  arrivalTime,  planeID);
-			DAO.getFlightDao().addFlight(f);
-		
+			//DAO.getFlightDao().addFlight(f);
+			
 			
 		}
 		FlightImpl f = new FlightImpl();
