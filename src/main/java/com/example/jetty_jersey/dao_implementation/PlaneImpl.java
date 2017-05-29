@@ -15,6 +15,7 @@ import com.example.jetty_jersey.util.PlaneInfo;
 
 public class PlaneImpl implements PlaneDao
 {
+	//return a list of all planes in the table plane wich have some type
 	public List<Plane> getPlanesbyType(String type)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -29,6 +30,7 @@ public class PlaneImpl implements PlaneDao
 		return pl;
 	}
 
+	//return a list of all planes in the table plane
 	public List<Plane> getAllPlanes()
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -43,6 +45,7 @@ public class PlaneImpl implements PlaneDao
 		return pl;
 	}
 
+	//return a unique plane by his id
 	public Plane getPlanebyId(int id)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -53,6 +56,7 @@ public class PlaneImpl implements PlaneDao
 		return p;
 	}
 
+	//insert a plane into the table plane
 	public Status addPlane(Plane plane)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -61,6 +65,7 @@ public class PlaneImpl implements PlaneDao
 		return s;
 	}
 
+	//delete a plane by his id field
 	public Status deletePlane(int id)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -69,6 +74,7 @@ public class PlaneImpl implements PlaneDao
 		return s;
 	}
 
+	
 	public List<PlaneInfo> getAllPlaneInfos()
 	{
 		List<Plane> lp = getAllPlanes();
@@ -81,12 +87,14 @@ public class PlaneImpl implements PlaneDao
 		return lpi;
 	}
 
+	//return a list of all flight concerning a plane
 	private List<Flight> getAllFlights(int planeId)
 	{
 		FlightImpl fImpl = new FlightImpl();
 		return fImpl.getFlightsbyPlaneId(planeId);
 	}
 
+	//print test of the function getAllplanes
 	public static void main(String[] args)
 	{
 		PlaneImpl pi = new PlaneImpl();
