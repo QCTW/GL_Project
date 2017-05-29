@@ -1,3 +1,5 @@
+var content;
+
 function importMDP() {
 	var file = $("#uploadMPD")[0].files[0];
 	var text;
@@ -10,10 +12,16 @@ function importMDP() {
 		upload(text);
 		//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
 	}
-	reader.readAsText($("#uploadMPD")[0].files[0]);
+	//reader.readAsText($("#uploadMPD")[0].files[0]);
 	
 }
 
 function upload(text){
-	postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
+	var content = text;
+	console.log("content \n");
+	//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
+}
+
+function valid(){
+	
 }
