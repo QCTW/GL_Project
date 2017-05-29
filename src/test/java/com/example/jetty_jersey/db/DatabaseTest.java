@@ -3,6 +3,7 @@ package com.example.jetty_jersey.db;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,35 @@ public class DatabaseTest
 	}
 
 	@Test
+	public void testDatabaseFunction()
+	{
+		DatabaseConnecter dbc = new DatabaseConnecter();
+		String id = dbc.generateNewId("mro");
+		assertEquals(id, "10");
+
+		Map<String, String> data = new CustomHashMap<String, String>();
+		data.put("qualification", "JUnit test qualification");
+		data.put("name", "JUnit");
+		data.put("surname", "Test");
+		data.put("email", "test@gmail.com");
+		dbc.insertToTableName("mro", data);
+		// dbc.deleteAllFromTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
+		// dbc.updateDataInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue, data);
+
+		//
+		// dbc.selectAllFromTableName(tableName);
+		//
+		// dbc.selectAllFromTableWhereFieldEqValue(tableName, fieldName, fieldValue);
+		//
+		// dbc.selectAllFromTableWhereFieldEqValueSortAscendingByField(tableName, fieldName, fieldValue, sortField);
+		//
+		// dbc.selectAllFromTableWhereFieldEqValueSortDescendingByField(tableName, fieldName, fieldValue, sortField);
+		//
+		// dbc.getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
+		dbc.close();
+	}
+
+	@Test
 	public void testTaskImpl()
 	{
 		TaskImpl test = new TaskImpl();
@@ -35,7 +65,12 @@ public class DatabaseTest
 		List<TaskInfo> tInfoList = test.getTasksByPlaneId(99);
 		if (tInfoList.size() == 0)
 			fail("Unable to find newly added task into database.");
-		s = test.deleteTask(tInfoList.get(0).task.getId());
+
+		Task newTask = tInfoList.get(0).task;
+		s = test.modifyTask(new Task(newTask.getId(), 3, newTask.getStartTime(), newTask.getEndTime(), newTask.getPlaneId(), newTask.getTaskStatus(), newTask.getMccId(), newTask.getMroId()));
+		assertTrue(s.getExecutionStatus() == Status.Execution.SUCCESSFUL);
+
+		s = test.deleteTask(newTask.getId());
 		assertTrue(s.getExecutionStatus() == Status.Execution.SUCCESSFUL);
 		if (s.getExecutionStatus() != Status.Execution.SUCCESSFUL)
 			fail("Unable to delete newly added task into database.");

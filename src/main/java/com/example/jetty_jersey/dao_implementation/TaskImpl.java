@@ -205,23 +205,14 @@ public class TaskImpl implements TaskDao
 	public static void main(String[] args)
 	{
 		TaskImpl test = new TaskImpl();
-		// Task t = new Task(-1, 1, "2017/05/02 19:15", "2017/05/02 23:15", 3, 1, 1);
-		// Status s = test.addTask(t);
-		// System.out.println("Add new task by _id=-1 : " + s.toString());
 		List<TaskInfo> l = test.getAllTasks();
 		for (TaskInfo ti : l)
 		{
 			System.out.println(ti);
 		}
-		// s = test.deleteTask(3);
-		// System.out.println("Delete task _id=3 : " + s.toString());
-		// t = new Task(3, 1, "2017/05/02 07:15", "2017/05/02 12:15", 3, 1, 1);
-		// s = test.addTask(t);
-		// System.out.println("Add back task _id=3 : " + s.toString());
-		// TaskInfo ti = test.getTasksById(1);
-		// System.out.println(ti.toString());
 	}
 
+	// Add status change
 	public Status addMroToTask(int mroId, int taskId)
 	{
 		Map<String, String> data = new CustomHashMap<String, String>();
@@ -230,6 +221,11 @@ public class TaskImpl implements TaskDao
 		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
 		dbConnect.close();
 		return s;
+	}
+
+	public Status notifyTaskDone(int taskId)
+	{
+		return null;
 	}
 
 	public List<TaskInfo> getTasksByMroId(int mroId)
