@@ -84,6 +84,7 @@ function getTasksdone(){
 
 /** PRINT **/
 function printTask(taskList, i){
+	//console.log(taskList[i]);
 	var but = "<button onclick='sendAlert("
 		+  taskList[i].task.id//sub(JSON.stringify(taskList[i].task.id))
 		+ ")' "

@@ -53,8 +53,8 @@ public class TaskStub {
 			for (int i = 0; i < 10; i++) {
 				l.add(new TaskGeneric(i, "description", "periodicity", "atacategory", true, 15, type));
 			}
-			return l;
-			// return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
+			//return l;
+			return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
 
 		} else
 			return new ArrayList<TaskGeneric>();
@@ -179,26 +179,25 @@ public class TaskStub {
 		try
 		{	byte[] decoded = Base64.getDecoder().decode(mpd); 
 			String tasks = new String(decoded);
-			splitedFile = tasks.split("--");
+			splitedFile = tasks.split("\n");
 			for (int i = 0; i < splitedFile.length; i++)
 			{
 				splitedLine = splitedFile[i].split(",");
-				if (splitedLine.length != 7)
+				if (splitedLine.length != 6)
 				{
 					log.error("Le fichier n'est pas dans le bon format!");
 				} else
 				{
-					int id = Integer.parseInt(splitedLine[0]);
-					String description = splitedLine[1];
-					String periodicity = splitedLine[2];
-					String ataCategory = splitedLine[3];
-					boolean needHangar = Utility.convertBoolString(splitedLine[4]);
-					float duration = Integer.parseInt(splitedLine[5]);
-					String typeAvion = splitedLine[6];
-					TaskGeneric tg = new TaskGeneric(id,description,
-							periodicity,ataCategory,needHangar,duration,
-							typeAvion);
-					taskGeneric.addTaskGeneric(tg);
+					//int id = Integer.parseInt(splitedLine[0]);
+					String description = splitedLine[0];
+					String periodicity = splitedLine[1];
+					String ataCategory = splitedLine[2];
+					boolean needHangar = Utility.convertBoolString(splitedLine[3]);
+					float duration = Integer.parseInt(splitedLine[4]);
+					String typeAvion = splitedLine[5];
+					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
+					//System.out.println(i+" : "+tg.toString());
+					DAO.getTaskGenericDao().addTaskGeneric(tg);
 					
 				}
 
@@ -208,8 +207,6 @@ public class TaskStub {
 		{
 			e.printStackTrace();
 		}
-
->>>>>>> 8de0a70e52a4e2c3341b340e3d5ccda6982bd8ec
 	}
 
 }
