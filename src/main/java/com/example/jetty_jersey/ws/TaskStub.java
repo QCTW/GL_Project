@@ -23,19 +23,17 @@ import com.example.jetty_jersey.dao_interface.TaskGenericDao;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
-public class TaskStub
-{
+public class TaskStub {
 	private static Logger log = LogManager.getLogger(TaskStub.class.getName());
-	private  TaskGenericDao taskGeneric= new TaskGenericImpl();
+	private TaskGenericDao taskGeneric = new TaskGenericImpl();
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<TaskInfo> allTasks()
-	{
-		if (LoginStub.connected)
-		{
-			//log.debug("Login connected : " + LoginStub.connected);
-			List<TaskInfo> l  = DAO.getTaskDao().getAllTasks();
+	public List<TaskInfo> allTasks() {
+		if (LoginStub.connected) {
+			// log.debug("Login connected : " + LoginStub.connected);
+			List<TaskInfo> l = DAO.getTaskDao().getAllTasks();
 			for (TaskInfo taskInfo : l) {
 				l.toString();
 			}
@@ -47,18 +45,16 @@ public class TaskStub
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/genericByPlane/{type}")
-	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String type)
-	{
+	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String type) {
 		LoginStub.connected = true;
-		if (LoginStub.connected)
-		{
+		if (LoginStub.connected) {
 			log.debug("Login connected : " + LoginStub.connected);
 			List<TaskGeneric> l = new ArrayList<TaskGeneric>();
-			for(int i = 0; i<10; i++){
+			for (int i = 0; i < 10; i++) {
 				l.add(new TaskGeneric(i, "description", "periodicity", "atacategory", true, 15, type));
 			}
 			return l;
-			//return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
+			// return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
 
 		} else
 			return new ArrayList<TaskGeneric>();
@@ -67,61 +63,53 @@ public class TaskStub
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/plane/{id}")
-	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id)
-	{
-		if (LoginStub.connected)
-		{
+	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id) {
+		if (LoginStub.connected) {
 			return DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
 
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mro/{id}")
-	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId)
-	{
-		if (LoginStub.connected)
-		{
-			return DAO.getTaskDao().getTasksByMroId(mroId);//DAO.getTaskDao().getTasksByPlaneId(id);
+	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId) {
+		if (LoginStub.connected) {
+			return DAO.getTaskDao().getTasksByMroId(mroId);// DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
 
 	}
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public TaskInfo taskById(@PathParam("id") int id)
-	{
-		if (LoginStub.connected)
-		{
+	public TaskInfo taskById(@PathParam("id") int id) {
+		if (LoginStub.connected) {
 			return DAO.getTaskDao().getTasksById(id);
 		}
 		return null;
 	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mro/{mroid}/{taskid}")
-	public int attributeToMro(@PathParam("mroid") int mroId,@PathParam("taskid") int taskId)
-	{
-		if (LoginStub.connected)
-		{
-			System.out.println("mro id : "+ mroId);
-			System.out.println("task id : "+ taskId);
+	public int attributeToMro(@PathParam("mroid") int mroId, @PathParam("taskid") int taskId) {
+		if (LoginStub.connected) {
+			System.out.println("mro id : " + mroId);
+			System.out.println("task id : " + taskId);
 			DAO.getTaskDao().addMroToTask(mroId, taskId);
 		}
 		return 0;
 	}
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/create/{taskGenericId}/{planeId}/{date}")
-	public int createTask(@PathParam("taskGenericId") int taskGeneric,@PathParam("planeId") int planeId,@PathParam("date") String date)
-	{
-		if (LoginStub.connected)
-		{
+	public int createTask(@PathParam("taskGenericId") int taskGeneric, @PathParam("planeId") int planeId,
+			@PathParam("date") String date) {
+		if (LoginStub.connected) {
 			Task t = new Task(-1, taskGeneric, date, date, planeId, 1, -1, -1);
 			System.out.println(t.toString());
 			DAO.getTaskDao().addTask(t);
@@ -132,32 +120,66 @@ public class TaskStub
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public void addTask(Task task)
-	{
+	public void addTask(Task task) {
 		System.out.println(task.toString());
-		//DAO.getTaskDao().addTask(task);
+		// DAO.getTaskDao().addTask(task);
 	}
-
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/delete/{id}")
-	public void deleteTaskById(@PathParam("id") int id)
-	{
+	public void deleteTaskById(@PathParam("id") int id) {
 		DAO.getTaskDao().deleteTask(id);
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addGenericTasks/{tasks}")
-	public void addGenericTasks(@PathParam("task") String task)
+	public void addGenericTasks(@PathParam("task") String task) {
+		String[] splitedFile;
+		String[] splitedLine;
+		try {
+			byte[] decoded = Base64.getDecoder().decode(task);
+			String tasks = new String(decoded);
+			splitedFile = tasks.split("-");
+			for (int i = 0; i < splitedFile.length; i++) {
+				splitedLine = splitedFile[i].split(",");
+				if (splitedLine.length != 7) {
+					log.error("Le fichier n'est pas dans le bon format!");
+				} else {
+					int id = Integer.parseInt(splitedLine[0]);
+					String description = splitedLine[1];
+					String periodicity = splitedLine[2];
+					String ataCategory = splitedLine[3];
+					boolean needHangar = Utility.convertBoolString(splitedLine[4]);
+					float duration = Integer.parseInt(splitedLine[5]);
+					String typeAvion = splitedLine[6];
+					TaskGeneric tg = new TaskGeneric(id, description, periodicity, ataCategory, needHangar, duration,
+							typeAvion);
+					taskGeneric.addTaskGeneric(tg);
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/mpd/{mpd}")
+	public void addMPD(@PathParam("mpd") String mpd)
 	{
+		
 		String[] splitedFile;
 		String[] splitedLine;
 		try
-		{	byte[] decoded = Base64.getDecoder().decode(task); 
+		{	byte[] decoded = Base64.getDecoder().decode(mpd); 
 			String tasks = new String(decoded);
-			splitedFile = tasks.split("\n");
+			splitedFile = tasks.split("--");
 			for (int i = 0; i < splitedFile.length; i++)
 			{
 				splitedLine = splitedFile[i].split(",");
@@ -187,20 +209,7 @@ public class TaskStub
 			e.printStackTrace();
 		}
 
-	}
-	
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/mpd/{mpd}")
-	public void addMPD(@PathParam("mpd") String mpd)
-	{
-		System.out.println("MPD IS CALLED"+mpd);
-		/*
-		String [] tab = mpd.split("--");
-		for (int i = 0; i < tab.length; i++) {
-			System.out.println(tab[i]);
-		}
-		*/
+>>>>>>> 8de0a70e52a4e2c3341b340e3d5ccda6982bd8ec
 	}
 
 }
