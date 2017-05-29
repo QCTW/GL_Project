@@ -54,14 +54,14 @@ public class PlaneStub
 		for (int i = 0; i < splitedFile.length; i++)
 		{
 			splitedLine = splitedFile[i].split(",");
-			if (splitedLine.length != 2)
+			if (splitedLine.length != 1)
 			{
 				log.error("Le fichier n'est pas dans le bon format!");
 			} else
 			{
-				int id = Integer.parseInt(splitedLine[0]);
-				String type = splitedLine[1];
-				Plane p = new Plane(id, type);
+//				int id = Integer.parseInt(splitedLine[0]);
+				String type = splitedLine[0];
+				Plane p = new Plane(-1, type);
 				planeDao.addPlane(p);
 			}
 
