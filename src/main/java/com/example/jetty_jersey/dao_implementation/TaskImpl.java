@@ -212,11 +212,11 @@ public class TaskImpl implements TaskDao
 		}
 	}
 
-	// Add status change
 	public Status addMroToTask(int mroId, int taskId)
 	{
 		Map<String, String> data = new CustomHashMap<String, String>();
 		data.put("mroId", Integer.toString(mroId));
+		data.put("taskStatus", "1");
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
 		dbConnect.close();
@@ -225,7 +225,12 @@ public class TaskImpl implements TaskDao
 
 	public Status notifyTaskDone(int taskId)
 	{
-		return null;
+		DatabaseConnecter dbConnect = new DatabaseConnecter();
+		Map<String, String> data = new CustomHashMap<String, String>();
+		data.put("taskStatus", "2");
+		Status s = dbConnect.updateDataInTableNameWhereFieldEqValue("task", "_id", Integer.toString(taskId), data);
+		dbConnect.close();
+		return s;
 	}
 
 	public List<TaskInfo> getTasksByMroId(int mroId)
