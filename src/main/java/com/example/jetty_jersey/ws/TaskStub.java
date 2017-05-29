@@ -34,8 +34,12 @@ public class TaskStub
 	{
 		if (LoginStub.connected)
 		{
-			log.debug("Login connected : " + LoginStub.connected);
-			return DAO.getTaskDao().getAllTasks();
+			//log.debug("Login connected : " + LoginStub.connected);
+			List<TaskInfo> l  = DAO.getTaskDao().getAllTasks();
+			for (TaskInfo taskInfo : l) {
+				l.toString();
+			}
+			return l;
 		} else
 			return new ArrayList<TaskInfo>();
 	}
@@ -190,12 +194,13 @@ public class TaskStub
 	@Path("/mpd/{mpd}")
 	public void addMPD(@PathParam("mpd") String mpd)
 	{
-		System.out.println("MPD IS CALLED");
-		
+		System.out.println("MPD IS CALLED"+mpd);
+		/*
 		String [] tab = mpd.split("--");
 		for (int i = 0; i < tab.length; i++) {
 			System.out.println(tab[i]);
 		}
+		*/
 	}
 
 }
