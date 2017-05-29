@@ -134,42 +134,6 @@ public class TaskStub {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addGenericTasks/{tasks}")
-	public void addGenericTasks(@PathParam("task") String task) {
-		String[] splitedFile;
-		String[] splitedLine;
-		try {
-			byte[] decoded = Base64.getDecoder().decode(task);
-			String tasks = new String(decoded);
-			splitedFile = tasks.split("-");
-			for (int i = 0; i < splitedFile.length; i++) {
-				splitedLine = splitedFile[i].split(",");
-				if (splitedLine.length != 7) {
-					log.error("Le fichier n'est pas dans le bon format!");
-				} else {
-					int id = Integer.parseInt(splitedLine[0]);
-					String description = splitedLine[1];
-					String periodicity = splitedLine[2];
-					String ataCategory = splitedLine[3];
-					boolean needHangar = Utility.convertBoolString(splitedLine[4]);
-					float duration = Integer.parseInt(splitedLine[5]);
-					String typeAvion = splitedLine[6];
-					TaskGeneric tg = new TaskGeneric(id, description, periodicity, ataCategory, needHangar, duration,
-							typeAvion);
-					taskGeneric.addTaskGeneric(tg);
-
-				}
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mpd/{mpd}")
 	public void addMPD(@PathParam("mpd") String mpd)
 	{
@@ -196,8 +160,8 @@ public class TaskStub {
 					float duration = Integer.parseInt(splitedLine[4]);
 					String typeAvion = splitedLine[5];
 					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
-					//System.out.println(i+" : "+tg.toString());
-					System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
+					System.out.println(i+" : "+tg.toString());
+					//System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
 					
 				}
 

@@ -23,13 +23,10 @@ function getPlanesForCreateTask(planes){
 	//console.log(planes);
 	planesForCreation = planes;
 	var lines= '<select id="selectPLanes" class="form-control" >';
-	for(var i=0; i<planes.length; i++){
-		lines+= option(planes[i].plane.planeId);
+	for(var i=0; i<planesForCreation.length; i++){
+		lines+= option(planesForCreation[i].plane.planeId+"- "+subFy(planesForCreation[i].plane.planeType)) ;
 	}
 	lines+='</select>';
-	$("#selectPlanes").change(function () {
-		console.log("new selection "+$('#selectPLanes option:selected').val());
-	});
 	
 	var but = '<button class="btn icon-btn btn-primary" onclick="showPlaneSelected()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
 	
@@ -38,16 +35,21 @@ function getPlanesForCreateTask(planes){
 	//$('#planeslist2').DataTable({});
 }
 
+
+
 function showPlaneSelected(){
 	//sptmp = $('#createChose').val();
-	var id=$('#selectPLanes option:selected').val();
+	//var e = document.getElementById("selectPLanes");
+	var id = document.getElementById("selectPLanes").selectedIndex; //e.options[e.selectedIndex].value;
+	//var id= $('#selectPLanes option:selected').val();
+	console.log("id select "+id);
 	var pt = subFy(planesForCreation[id].plane.planeType);
 	console.log(pt);
 	var content = dl("plane Type ",pt);
 	var airport = subFy(planesForCreation[id].flighs[0].departureAirport); console.log(airport);
 	content += dl("AirPort",airport);
 	content += dl("Next Departure ",stringToDate(subFy(planesForCreation[id].flighs[0].departureTime))); 
-	$('#createShow').html("<h3>Plane n° "+id+"</h3>"+content);
+	$('#createShow').html("<h3>Plane n° "+planesForCreation[id].plane.planeId+"</h3>"+content);
 	getServerData("ws/task/genericByPlane/"+pt,getGenericTasks,null);
 	
 	
@@ -58,7 +60,7 @@ function getGenericTasks(genericTasks){
 	genericTaskForCreation = genericTasks;
 	var lines= '<select id="selectGenericTask" class="form-control" >';
 	for(var i=0; i<genericTasks.length; i++){
-		lines+= option(genericTasks[i].id);
+		lines+= option(genericTasks[i].id+" "+subFy(genericTasks[i].ataCategory));
 	}
 	lines+='</select>';
 	var but = '<button class="btn icon-btn btn-primary" onclick="showGenericTaskSelected()"><span class="glyphicon btn-glyphicon glyphicon-ok"></span></button>';
@@ -70,11 +72,11 @@ function getGenericTasks(genericTasks){
 	//console.log(genericTasks);
 }
 function showGenericTaskSelected(){
-	var j = $('#selectGenericTask option:selected').val();
+	var j = document.getElementById("selectGenericTask").selectedIndex;
 	//alert('cool'+genericTaskForCreation[j].id);
 	//console.log()
 	var r = printGenericTask(genericTaskForCreation[j]);
-	$('#createShow').html("<h3>Task Generic n° "+j+"</h3>"+r);
+	$('#createShow').html("<h3>Task Generic n° "+genericTaskForCreation[j].id+"</h3>"+r);
 	
 	var res = '<div class="control-group">';
     //res+='<label class="control-label">Choose a date</label>'; 
@@ -105,8 +107,8 @@ function showGenericTaskSelected(){
 	//res+='<button type="submit" onclick="createTask()" class="btn btn-primary">Submit</button>'
 }
 function createTask(){
-	var newGenericTask = $('#selectGenericTask option:selected').val();
-	var newPlane = $('#selectPLanes option:selected').val();
+	var newGenericTask = split0($('#selectGenericTask option:selected').val());
+	var newPlane = split0($('#selectPLanes option:selected').val());
 	var newDate = $('#textDate').val();
 	
 	//var newData =  {"id": -1,"idTaskGeneric": newGenericTask,"startTime": newDate,"endTime": newDate,"planeId": newPlane,"taskStatus": 1,"mroId": -1,"mccId": -1};
