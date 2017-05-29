@@ -1,5 +1,7 @@
 package com.example.jetty_jersey.ws;
 
+import java.util.Base64;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -30,24 +32,33 @@ public class FlightStub
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/view/{flights}")
+	@Path("/addFlights/{flights}")
 	public void addFlights(@PathParam("flights") String flights)
 	{
 		String[] splitedFile;
 		String[] splitedLine;
-
-		splitedFile = flights.split("\n");
+		byte[] decoded = Base64.getDecoder().decode(flights); 
+		String flightsDecoded = new String(decoded);
+		splitedFile = flightsDecoded.split("\n");
+		System.out.println(flightsDecoded);
 		for (int i = 0; i < splitedFile.length; i++)
 		{
 			splitedLine = splitedFile[i].split(",");
-			if (splitedLine.length != 2)
+			if (splitedLine.length != 6)
 			{
 				log.error("Le fichier n'est pas dans le bon format!");
 			}
-			int id = Integer.parseInt(splitedLine[0]);
-			int planeId = Integer.parseInt(splitedLine[1]);
-			Flight f = new Flight(id, planeId);
-			// TODO Not implemented
+			String commercialId = splitedLine[0];
+			String departureAirport = splitedLine[1];
+			String arrivalAirport = splitedFile[2];
+			String departureTime = splitedFile[3];
+			String arrivalTime = splitedFile[4];
+			int planeID =Integer.parseInt(splitedLine[5]);
+			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, 
+					departureTime,  arrivalTime,  planeID);
+			DAO.getFlightDao().addFlight(f);
+		
+			
 		}
 
 	}

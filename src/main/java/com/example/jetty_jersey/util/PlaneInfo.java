@@ -33,7 +33,7 @@ public class PlaneInfo
 		for(int i = 0 ; i<10; i++){
 			tab = new ArrayList<Flight>(); 
 			tab.add(new Flight(i+10, "commercialId", "departureAirport", "arrivalAirport", "2017/12/24 09:15", "2017/12/24 09:15", i));
-			pl = new Plane(i, "planeType"+i);
+			pl = new Plane(i+10, "planeType"+(i+10));
 			pa.add(new PlaneInfo(pl, tab));
 		}
 		return pa;
