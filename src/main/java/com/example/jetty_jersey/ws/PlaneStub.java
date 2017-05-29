@@ -47,23 +47,23 @@ public class PlaneStub
 	public void addPlanes(@PathParam("planes") String planes)
 	{
 		String[] splitedFile;
-		String[] splitedLine;
+		//String[] splitedLine;
 		byte[] decoded = Base64.getDecoder().decode(planes); 
 		String planesDecoded = new String(decoded);
 		splitedFile = planesDecoded.split(",");
 		for (int i = 0; i < splitedFile.length; i++)
 		{
-			splitedLine = splitedFile[i].split(",");
-			if (splitedLine.length != 2)
-			{
-				log.error("Le fichier n'est pas dans le bon format!");
-			} else
-			{
-				int id = Integer.parseInt(splitedLine[0]);
-				String type = splitedLine[1];
-				Plane p = new Plane(id, type);
+//			splitedLine = splitedFile[i].split(",");
+//			if (splitedLine.length != 1)
+//			{
+//				log.error("Le fichier n'est pas dans le bon format!");
+//			} else
+//			{
+//				int id = Integer.parseInt(splitedLine[0]);
+				String type = splitedFile[i];
+				Plane p = new Plane(-1, type);
 				planeDao.addPlane(p);
-			}
+//			}
 
 		}
 

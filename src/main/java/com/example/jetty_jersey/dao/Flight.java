@@ -134,7 +134,8 @@ public class Flight
 	{
 		return "Flight(" + id + "," + commercialId + "," + departureAirport + "," + arrivalAirport + "," + departureTime + "," + arrivalTime + "," + planeId + ")";
 	}
-
+	
+	//using to insert a flight as a line into the table Flight
 	public CustomHashMap<String, String> toMap()
 	{
 		CustomHashMap<String, String> chm = new CustomHashMap<String, String>();

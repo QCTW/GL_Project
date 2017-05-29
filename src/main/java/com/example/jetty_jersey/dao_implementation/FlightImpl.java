@@ -14,6 +14,7 @@ import com.example.jetty_jersey.db.Utility;
 
 public class FlightImpl implements FlightDao
 {
+	//return a unique flight by his commercial id
 	public Flight getFlightbyId(String commercialId)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -25,6 +26,8 @@ public class FlightImpl implements FlightDao
 		return f;
 	}
 
+	//return a list of all flights in the table flight wich have airport in there field arrivalAirport
+	//considering by default that getting flight by airport mean getting glight by arrival airport
 	public List<Flight> getFlightsbyAirport(String airport)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -39,7 +42,8 @@ public class FlightImpl implements FlightDao
 		}
 		return lf;
 	}
-
+	
+	//return a list of all flights in the table flight wich have airport in there field departureAirport
 	public List<Flight> getFlightsbyDepartureAirport(String airport)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -54,7 +58,8 @@ public class FlightImpl implements FlightDao
 		}
 		return lf;
 	}
-
+	
+	//return a list of all flights in the table flight wich have airport in there field arrivalAirport
 	public List<Flight> getFlightsbyArrivalAirport(String airport)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -70,6 +75,7 @@ public class FlightImpl implements FlightDao
 		return lf;
 	}
 
+	//return a list of all flights in the table flight wich have planeId in there field planeId
 	public List<Flight> getFlightsbyPlaneId(int planeId)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
@@ -85,6 +91,7 @@ public class FlightImpl implements FlightDao
 		return lf;
 	}
 
+	//add a flight f in the table flight
 	public Status addFlight(Flight f)
 	{
 		DatabaseConnecter dbc = new DatabaseConnecter();
