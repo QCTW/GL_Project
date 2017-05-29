@@ -22,6 +22,11 @@ function allPlanes(res){
 function printPlane(planeInfo, i){
 	var content="<tr>";
 	content+= td(planeInfo[i].plane.planeId);
+	content+= td(subFy(planeInfo[i].plane.planeType));
+	if(planeInfo.flights!=undefined){
+	content+= td(subFy(planeInfo[i].flights[0].departureTime));
+	content+= td(subFy(planeInfo[i].flights[0].departureAirport));
+	}
 	content+=td('<button class="btn icon-btn btn-primary" onclick="viewTaskByPlanes('+planeInfo[i].plane.planeId+')"><span class="glyphicon btn-glyphicon glyphicon-eye-open"></span></button>');
 	content+="</tr>";
 	return content;
