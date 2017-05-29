@@ -9,7 +9,6 @@ import com.example.jetty_jersey.dao.MRO;
 import com.example.jetty_jersey.dao.Status;
 import com.example.jetty_jersey.dao_interface.MroDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
-import com.example.jetty_jersey.db.DatabaseSettings;
 import com.example.jetty_jersey.db.Utility;
 
 public class MroImpl implements MroDao
@@ -61,26 +60,18 @@ public class MroImpl implements MroDao
 		return mroList;
 	}
 
-	public List<MRO> getMrosInRange(int iStart, int iEnd)
+	public List<MRO> getAllMros()
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
-		List<Map<String, String>> results = dbConnect.selectInRangeFromTableName("Mro", iStart, iEnd);
+		List<Map<String, String>> results = dbConnect.selectAllFromTableName("mro");
 		List<MRO> mroList = new ArrayList<MRO>();
 		for (Map<String, String> m : results)
 		{
 			MRO mro = new MRO(Utility.convertIntString(m.get("_id")), m.get("name"), m.get("email"));
-			MRO wrap = mro;
-			mroList.add(wrap);
-			System.out.println(mro.toString());
-
+			mroList.add(mro);
 		}
 		dbConnect.close();
 		return mroList;
-	}
-
-	public List<MRO> getAllMros()
-	{
-		return getMrosInRange(0, DatabaseSettings.MAX_RESULTS_PER_QUERY);
 	}
 
 	public Status addMro(MRO mro)
