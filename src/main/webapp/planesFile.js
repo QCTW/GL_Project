@@ -1,5 +1,5 @@
 
-function printTask(PlaneInfo, i){
+function printPlane(PlaneInfo, i){
 	//console.log(taskList[i]);
 	var but = "<button onclick='sendAlert("
 		+  PlaneInfo.flights[i].id//sub(JSON.stringify(PlaneInfo.flights[i].id))
