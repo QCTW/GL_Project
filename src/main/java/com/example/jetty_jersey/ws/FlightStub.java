@@ -62,13 +62,13 @@ public class FlightStub
 			System.out.println("_______ARRIVAL TIME: "+arrivalTime);
 			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, 
 					departureTime,  arrivalTime,  planeID);
-			//DAO.getFlightDao().addFlight(f);
+			DAO.getFlightDao().addFlight(f);
 			
 			
 		}
 		FlightImpl f = new FlightImpl();
 		List<Flight> l = f.getFlightsbyDepartureAirport("roissy");
-		System.out.println("AFFICHAGE DES FLIGHTs:");
+		System.out.println("AFFICHAGE DES FLIGHTs:"+ l.size());
 		for(Flight fl : l ){
 			System.out.println(fl.getId()+","+fl.getPlaneId());
 		}
