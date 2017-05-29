@@ -80,7 +80,7 @@ public class TaskImpl implements TaskDao
 	{
 		DatabaseConnecter dbConnect = new DatabaseConnecter();
 		List<Map<String, String>> results = dbConnect.selectAllFromTableWhereFieldEqValue("task", "planeId", Integer.toString(id));
-		dbConnect.close();
+
 		List<TaskInfo> tl = new ArrayList<TaskInfo>();
 		for (Map<String, String> m : results)
 		{
@@ -93,6 +93,7 @@ public class TaskImpl implements TaskDao
 			TaskInfo wrap = new TaskInfo(t, tg, p, f, mro);
 			tl.add(wrap);
 		}
+		dbConnect.close();
 		Collections.sort(tl, new TaskInfoOrderByDateComparator());
 		return tl;
 	}
