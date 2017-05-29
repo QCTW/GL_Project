@@ -12,7 +12,7 @@ function importMDP() {
 		upload(text );
 		//postServerData("ws/task/mpd/"+encodeURIComponent(btoa(text)),alert(text),null);
 	}
-	//reader.readAsText($("#uploadMPD")[0].files[0]);
+	reader.readAsText($("#uploadMPD")[0].files[0]);
 	
 }
 
