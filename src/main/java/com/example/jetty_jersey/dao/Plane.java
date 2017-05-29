@@ -43,7 +43,8 @@ public class Plane
 	{
 		this.planeType = planeType;
 	}
-
+	
+	//using to insert a plane as a line into the table Flight
 	public CustomHashMap<String, String> toMap()
 	{
 		CustomHashMap<String, String> l = new CustomHashMap<String, String>();
