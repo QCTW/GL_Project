@@ -29,25 +29,27 @@ public class DatabaseTest
 		String id = dbc.generateNewId("mro");
 		assertEquals(id, "10");
 
+		String emailTxt = "test@gmail.com";
 		Map<String, String> data = new CustomHashMap<String, String>();
 		data.put("qualification", "JUnit test qualification");
 		data.put("name", "JUnit");
 		data.put("surname", "Test");
-		data.put("email", "test@gmail.com");
-		dbc.insertToTableName("mro", data);
-		// dbc.deleteAllFromTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
-		// dbc.updateDataInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue, data);
+		data.put("email", emailTxt);
+		data.put("_id", "-1");
+		Status s = dbc.insertToTableName("mro", data);
+		assertTrue(s.getExecutionStatus() == Status.Execution.SUCCESSFUL);
+		List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValue("mro", "email", emailTxt);
+		assertTrue(res.size() > 0);
 
-		//
-		// dbc.selectAllFromTableName(tableName);
-		//
-		// dbc.selectAllFromTableWhereFieldEqValue(tableName, fieldName, fieldValue);
-		//
-		// dbc.selectAllFromTableWhereFieldEqValueSortAscendingByField(tableName, fieldName, fieldValue, sortField);
-		//
-		// dbc.selectAllFromTableWhereFieldEqValueSortDescendingByField(tableName, fieldName, fieldValue, sortField);
-		//
-		// dbc.getIdInTableNameWhereFieldEqValue(tableName, fieldName, fieldValue);
+		data.put("qualification", "Modified junit qualification");
+		data.put("_id", dbc.getMaxIdFromCache("mro").toString());
+
+		s = dbc.updateDataInTableNameWhereFieldEqValue("mro", "_id", dbc.getMaxIdFromCache("mro").toString(), data);
+		assertTrue(s.getExecutionStatus() == Status.Execution.SUCCESSFUL);
+
+		s = dbc.deleteAllFromTableNameWhereFieldEqValue("mro", "_id", dbc.getMaxIdFromCache("mro").toString());
+		assertTrue(s.getExecutionStatus() == Status.Execution.SUCCESSFUL);
+
 		dbc.close();
 	}
 

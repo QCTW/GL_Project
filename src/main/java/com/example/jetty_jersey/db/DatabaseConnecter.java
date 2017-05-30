@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
-
 import org.apache.http.HttpHost;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.transport.TransportClient;
@@ -40,19 +41,33 @@ import static org.elasticsearch.common.xcontent.XContentFactory.*;
 public class DatabaseConnecter
 {
 	private static Logger log = LogManager.getLogger(DatabaseConnecter.class.getName());
+	private static boolean alreadyInit = false;
 	private static HashMap<String, Integer> maxIdMap = new HashMap<String, Integer>();
 	private final RestClient restClient = RestClient
 			.builder(new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_DEFAULT, "http"), new HttpHost(DatabaseSettings.DB_HOST, DatabaseSettings.DB_PORT_SECOND, "http")).build();
 
 	// About TransportClient : https://www.devdiscoveries.com/elasticsearch/java-elasticsearch-become-up-and-running/
-	private final Settings settings = Settings.builder().put("client.transport.sniff", true).build();
+	private static Settings settings = Settings.builder().put("client.transport.sniff", true).build();
+
 	@SuppressWarnings("unchecked")
-	private final TransportClient client = new PreBuiltTransportClient(settings);
+	private static TransportClient client = new PreBuiltTransportClient(settings);
 
 	/**
 	 * Create one instance for one session and don't forget to call close() at the end of query.
 	 */
 	public DatabaseConnecter()
+	{
+		synchronized (client)
+		{
+			if (!alreadyInit)
+			{
+				initClient();
+				alreadyInit = true;
+			}
+		}
+	}
+
+	static void initClient()
 	{
 		try
 		{
@@ -98,10 +113,11 @@ public class DatabaseConnecter
 			{
 				DeleteResponse res = client.prepareDelete(DatabaseSettings.DB_NAME, tableName, id).get();
 				System.out.println(res);
-				sucessCount++;
+				if (res.getResult().equals(Result.DELETED))
+					sucessCount++;
 			}
 
-			s = new Status(Execution.SUCCESSFUL);
+			s = new Status((sucessCount > 0 ? Execution.SUCCESSFUL : Execution.FAILED));
 			s.setResultyCount(sucessCount);
 		}
 
@@ -129,8 +145,10 @@ public class DatabaseConnecter
 			updateRequest.doc(jsonDoc);
 			try
 			{
-				client.update(updateRequest).get();
-				successCount++;
+				UpdateResponse res = client.update(updateRequest).get();
+				System.out.println(res);
+				if (res.getResult().equals(Result.UPDATED))
+					successCount++;
 			} catch (InterruptedException e)
 			{
 				log.error("Unable to execute database update", e);
@@ -189,6 +207,11 @@ public class DatabaseConnecter
 		return maxId.toString();
 	}
 
+	Integer getMaxIdFromCache(String tableName)
+	{
+		return maxIdMap.get(tableName);
+	}
+
 	private String findMaxIndexId(List<Map<String, String>> l)
 	{
 		int nMax = 0;
@@ -221,8 +244,10 @@ public class DatabaseConnecter
 		updateRequest.doc(jsonDoc).upsert(indexRequest);
 		try
 		{
-			client.update(updateRequest).get();
-			successCount++;
+			UpdateResponse res = client.update(updateRequest).get();
+			System.out.println(res);
+			if (res.getResult().equals(Result.CREATED))
+				successCount++;
 		} catch (InterruptedException e)
 		{
 			log.error("Unable to execute database update", e);
@@ -259,10 +284,13 @@ public class DatabaseConnecter
 
 	public List<Map<String, String>> selectAllFromTableWhereFieldEqValue(String tableName, String fieldName, String fieldValue)
 	{
+		// QueryBuilder qb = QueryBuilders.commonTermsQuery(fieldName, fieldValue);
 		QueryBuilder qb = QueryBuilders.queryStringQuery(fieldName + ":" + fieldValue);
-		log.debug("Build query " + qb);
+		// log.debug("Build query " + qb);
 		SearchResponse scrollResp = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).addSort(FieldSortBuilder.DOC_FIELD_NAME, SortOrder.ASC)
 				.setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).setQuery(qb).setSize(DatabaseSettings.MAX_BOLK_RESULTS).get();
+		// SearchResponse scrollResp = client.prepareSearch(DatabaseSettings.DB_NAME).setTypes(tableName).addSort(FieldSortBuilder.DOC_FIELD_NAME, SortOrder.ASC)
+		// .setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).setSize(DatabaseSettings.MAX_BOLK_RESULTS).get();
 		// Scroll until no hits are returned
 		List<Map<String, String>> lRet = new ArrayList<Map<String, String>>();
 
@@ -271,6 +299,28 @@ public class DatabaseConnecter
 			lRet.addAll(wrapResults(scrollResp));
 			scrollResp = client.prepareSearchScroll(scrollResp.getScrollId()).setScroll(DatabaseSettings.MAX_DATA_KEEP_TIME).execute().actionGet();
 		} while (scrollResp.getHits().getHits().length != 0); // Zero hits mark the end of the scroll and the while loop.
+		return lRet;
+	}
+
+	private List<Map<String, String>> wrapResults(SearchResponse res, String fieldName, String fieldValue)
+	{
+		List<Map<String, String>> lRet = new ArrayList<Map<String, String>>();
+		for (SearchHit hit : res.getHits().getHits())
+		{
+			CustomHashMap<String, String> hm = new CustomHashMap<String, String>();
+			hm.put("_db", hit.getIndex());
+			hm.put("_id", hit.getId());
+			boolean discard = false;
+			for (Entry<String, Object> s : hit.getSource().entrySet())
+			{
+				hm.putIfAbsent(s.getKey(), (String) s.getValue());
+				if (s.getKey().equals(fieldName) && !((String) s.getValue()).equals(fieldValue))
+					discard = true;
+			}
+
+			if (!discard)
+				lRet.add(hm);
+		}
 		return lRet;
 	}
 
@@ -347,9 +397,9 @@ public class DatabaseConnecter
 			{
 				log.error("Unable to close REST database connection", e);
 			}
-
-		if (client != null)
-			client.close();
+		// Never close client as client is an static
+		// if (client != null)
+		// client.close();
 	}
 
 }
