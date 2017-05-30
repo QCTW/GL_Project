@@ -21,8 +21,7 @@ import com.example.jetty_jersey.util.PlaneInfo;
 @Path("/plane")
 public class PlaneStub
 {
-	private static Logger log = LogManager.getLogger(PlaneStub.class.getName());
-	private static PlaneDao planeDao = DAO.getPlaneDao();
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,32 +40,8 @@ public class PlaneStub
 		return DAO.getPlaneDao().getAllPlaneInfos();
 	}
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPlanes/{planes}")
-	public void addPlanes(@PathParam("planes") String planes)
-	{
-		String[] splitedFile;
-		//String[] splitedLine;
-		byte[] decoded = Base64.getDecoder().decode(planes); 
-		String planesDecoded = new String(decoded);
-		splitedFile = planesDecoded.split(",");
-		for (int i = 0; i < splitedFile.length; i++)
-		{
-//			splitedLine = splitedFile[i].split(",");
-//			if (splitedLine.length != 1)
-//			{
-//				log.error("Le fichier n'est pas dans le bon format!");
-//			} else
-//			{
-//				int id = Integer.parseInt(splitedLine[0]);
-				String type = splitedFile[i];
-				Plane p = new Plane(-1, type);
-				planeDao.addPlane(p);
-//			}
+	
 
-		}
-
-	}
+	
 
 }
