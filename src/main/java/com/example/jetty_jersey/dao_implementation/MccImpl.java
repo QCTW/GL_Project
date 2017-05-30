@@ -29,7 +29,7 @@ public class MccImpl implements MccDao
 				log.error("Unable to find MCC id : " + id + " in the database!");
 			else
 			{
-				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"),res.get(0).get("pass"));
+				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"), res.get(0).get("pass"));
 			}
 		}
 		return m.getEmail();
@@ -51,10 +51,9 @@ public class MccImpl implements MccDao
 				log.error("Unable to find MCC id : " + id + " in the database!");
 			else
 			{
-				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"),res.get(0).get("pass"));
+				m = new MCC(res.get(0).get("_id"), res.get(0).get("email"), res.get(0).get("pass"));
 				m.setEmail(res.get(0).get("email"));
 				mccCache.put(id, m);
-				System.out.println(m.toString() + " created");
 			}
 		}
 		return m;
@@ -91,10 +90,9 @@ public class MccImpl implements MccDao
 		List<MCC> mccList = new ArrayList<MCC>();
 		for (Map<String, String> m : results)
 		{
-			MCC mcc = new MCC(m.get("_id"), m.get("email"),m.get("pass"));
-			Couple cp= new Couple(mcc.getEmail(), mcc.getPass(), "mcc");
-			MCC wrap = mcc;
-			mccList.add(wrap);
+			MCC mcc = new MCC(m.get("_id"), m.get("email"), m.get("pass"));
+			Couple cp = new Couple(mcc.getEmail(), mcc.getPass(), "mcc");
+			mccList.add(mcc);
 		}
 		dbConnect.close();
 		return mccList;

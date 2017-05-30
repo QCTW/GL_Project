@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.dao.*;
 import com.example.jetty_jersey.dao_interface.FlightDao;
-import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.dao_implementation.FlightImpl;
 
 @Path("/Flight")
@@ -39,41 +38,32 @@ public class FlightStub
 	{
 		String[] splitedFile;
 		String[] splitedLine;
-		byte[] decoded = Base64.getDecoder().decode(flights); 
+		byte[] decoded = Base64.getDecoder().decode(flights);
 		String flightsDecoded = new String(decoded);
 		splitedFile = flightsDecoded.split("\n");
-		System.out.println(flightsDecoded);
-		System.out.println("________________________________________");
 		for (int i = 0; i < splitedFile.length; i++)
 		{
 			splitedLine = splitedFile[i].split(",");
 			if (splitedLine.length != 6)
-			{
 				log.error("Le fichier n'est pas dans le bon format!");
-			}
-			
+
 			String commercialId = splitedLine[0];
 			String departureAirport = splitedLine[1];
 			String arrivalAirport = splitedLine[2];
 			String departureTime = splitedLine[3];
 			String arrivalTime = splitedLine[4];
-			int planeID =Integer.parseInt(splitedLine[5]);
-			System.out.println("______DEPARTURE TIME: "+departureTime);
-			System.out.println("_______ARRIVAL TIME: "+arrivalTime);
-			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, 
-					departureTime,  arrivalTime,  planeID);
+			int planeID = Integer.parseInt(splitedLine[5]);
+
+			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, departureTime, arrivalTime, planeID);
 			DAO.getFlightDao().addFlight(f);
-			
-			
 		}
 		FlightImpl f = new FlightImpl();
 		List<Flight> l = f.getFlightsbyDepartureAirport("roissy");
-		System.out.println("AFFICHAGE DES FLIGHTs:"+ l.size());
-		for(Flight fl : l ){
-			System.out.println(fl.getId()+","+fl.getPlaneId());
+
+		for (Flight fl : l)
+		{
+			log.info("Flight " + fl.getId() + " with plane " + fl.getPlaneId() + " added");
 		}
-		
-				
 	}
 
 }
