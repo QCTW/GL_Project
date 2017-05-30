@@ -79,8 +79,12 @@ public class TaskStub {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mro/{id}")
 	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId) {
+		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		if (LoginStub.connected) {
 			System.out.println("login");
+			for (TaskInfo t : DAO.getTaskDao().getTasksByMroId(mroId)) {
+				System.out.println(t.mro.toString()+" "+t.task.toString());
+			}
 			return DAO.getTaskDao().getTasksByMroId(mroId);// DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
@@ -127,15 +131,15 @@ public class TaskStub {
 	@Path("/alert/{id}")
 	public void sendAlert(@PathParam("id") int id){
 		System.out.println("SEND ALERT FOR TASK "+id);
-		/*try {
-			EmailAlertService.send_mail_to_MRO(id+"", 1);
+		try {
+			EmailAlertService.send_mail_to_MRO(id+"");
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	@POST
