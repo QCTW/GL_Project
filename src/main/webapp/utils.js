@@ -47,7 +47,7 @@ $(function() {
 
 /** UTILS FUNCTION **/
 function stringToDate(dateStr){
-	return new Date(dateStr.substring(0,4),dateStr.substring(5,7),
+	return new Date(dateStr.substring(0,4),dateStr.substring(5,7)-1,
 			dateStr.substring(8,10),dateStr.substring(11,13),
 			dateStr.substring(14,16));
 	
