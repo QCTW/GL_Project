@@ -181,7 +181,7 @@ public class TaskStub {
 					String ataCategory = splitedLine[2];
 					boolean needHangar = Utility.convertBoolString(splitedLine[3]);
 					float duration = Integer.parseInt(splitedLine[4]);
-					String typeAvion = splitedLine[5];
+					String typeAvion = splitedLine[5].replaceAll("\r", "");
 					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
 					System.out.println(i+" : "+tg.toString());
 					System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
