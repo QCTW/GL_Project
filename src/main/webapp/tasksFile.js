@@ -9,6 +9,7 @@ $(function() {
 	if(localStorage.getItem("role") == "mcc"){
 		getServerData("ws/task/all", allTasks,null)
 		getServerData("ws/mro/all", allMros,null)
+		getServerData("ws/plane/all", allPlanes,null)
 	}
 	else {
 		$("#createTaskToggle").hide();
@@ -17,6 +18,7 @@ $(function() {
 		var im = localStorage.getItem("idMRO");
 		console.log('im = '+im);
 		getServerData("ws/task/mro/"+1, allTasks,null)
+		getServerData("ws/plane/all", allPlanes,null)
 		taskList = null;
 		
 		//$("#body").html('vous êtes un mro');
@@ -35,6 +37,12 @@ function allTasks(result){
 		getTaskToAssign();
 	}
 	else getAllTasks();
+}
+
+function allPlanes(result){
+	planeList = result;
+	
+	getAllPlanes();
 }
 
 function allMros(result){
@@ -95,6 +103,16 @@ function getTasksdone(){
 	}
 	$('#tbody').html(tr);
 }
+
+function getAllPlanes(){
+	var line = "";
+	for (var i = 0; i < planeList.length; i++) {
+		line += printPlane(planeList, i);
+	}
+	
+	$('#planeTbody').html(line);
+}
+
 /** END SORT TASKS FUNCTIONS **/
 
 /** PRINT **/
@@ -142,6 +160,18 @@ function printTask(taskList, i){
 	+ "</tr>";
    
 }
+
+function printPlane(planeList, i){
+	return "<tr> "
+	+ "<td>"
+	+ sub(JSON.stringify(planeList[i].planeId))
+	+ "</td>"
+	+ "<td>"
+	+ sub(JSON.stringify(planeList[i].planeType))
+	+ "</td>"
+	+ "</tr>";
+}
+
 /** SEND MESSAGES TO MRO **/
 function sendAlert(id){
 	postServerData("ws/task/alert/"+id,alert('Task n°'+id+'send'),null);
