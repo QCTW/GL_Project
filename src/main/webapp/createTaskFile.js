@@ -48,10 +48,6 @@ function showPlaneSelected(){
 	var content = dl("plane Type ",pt);
 	var airport = subFy(planesForCreation[id].flighs[0].departureAirport); console.log(airport);
 	content += dl("AirPort",airport);
-        for(var i= 0; i < planesForCreation[id].flighs.length; i++)
-        {
-            console.log(planesForCreation[id].flighs[i].departureTime);
-        }
         planesForCreation[id].flighs.sort(function(a, b) {
             return (a.date < b.date) ? -1 : ((a.date > b.date) ? 1 : 0);
         });
