@@ -22,7 +22,6 @@ public class MRO
 	// For json serialization
 	public MRO()
 	{
-		this.id = -1;
 	}
 
 	public MRO(int mroId, String name, String mail)
@@ -70,6 +69,11 @@ public class MRO
 	public int getId()
 	{
 		return id;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 
 	public CustomHashMap<String, String> toMap()

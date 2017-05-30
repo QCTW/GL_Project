@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="jetty-jersey:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="jetty-authentication-example.war">
-      <element id="artifact" artifact-name="jetty-jersey:war exploded" />
-    </root>
-  </artifact>
-</component>
