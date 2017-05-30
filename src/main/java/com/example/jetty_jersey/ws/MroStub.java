@@ -27,14 +27,7 @@ public class MroStub
 	public List<MRO> allMro()
 	{
 		List<MRO> l = new ArrayList<MRO>();
-		for (int i = 1; i < 10; i++)
-		{
-		//	l.add(new MRO(i, "mro" + i,"mro"+i+"@mro.com"));
-			
-			System.out.println("Email : mro"+i+"@mro.com");
-		}
 		l = DAO.getMroDao().getAllMros();
-		System.out.println("LISTE OF MROS "+l);
 		return l;
 
 	}
@@ -59,7 +52,7 @@ public class MroStub
 			{
 				int id = Integer.parseInt(splitedLine[0]);
 				String nom = splitedLine[1];
-				MRO m = new MRO(id, nom,"");
+				MRO m = new MRO(id, nom, "");
 				// TODO Not implemented
 			}
 

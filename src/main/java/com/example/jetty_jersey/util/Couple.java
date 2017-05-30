@@ -2,10 +2,9 @@ package com.example.jetty_jersey.util;
 
 import java.util.List;
 
-
 public class Couple
 {
-	public int id=-1;
+	public int id = -1;
 	public String user;
 	public String pass;
 	public String role;
@@ -17,7 +16,8 @@ public class Couple
 		this.role = role;
 	}
 
-	public Couple(int id, String user, String pass, String role) {
+	public Couple(int id, String user, String pass, String role)
+	{
 		super();
 		this.id = id;
 		this.user = user;
@@ -30,14 +30,10 @@ public class Couple
 		String res;
 		for (Couple e : l)
 		{
-			res = (e.id!=-1)?e.id+"":"";
+			res = (e.id != -1) ? e.id + "" : "";
 			if (e.user.equals(c.user) && e.pass.equals(c.pass))
-				return e.role+"-"+res;
+				return e.role + "-" + res;
 		}
 		return "incorrect";
 	}
-	
-		
-	
-
 }

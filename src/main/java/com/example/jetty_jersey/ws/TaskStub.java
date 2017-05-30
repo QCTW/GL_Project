@@ -22,25 +22,21 @@ import org.apache.logging.log4j.Logger;
 import com.example.jetty_jersey.util.TaskInfo;
 import com.example.jetty_jersey.Email.EmailAlertService;
 import com.example.jetty_jersey.dao.*;
-import com.example.jetty_jersey.dao_implementation.TaskGenericImpl;
-import com.example.jetty_jersey.dao_interface.TaskGenericDao;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
-public class TaskStub {
+public class TaskStub
+{
 	private static Logger log = LogManager.getLogger(TaskStub.class.getName());
-	private TaskGenericDao taskGeneric = new TaskGenericImpl();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public List<TaskInfo> allTasks() {
-		if (LoginStub.connected) {
-			// log.debug("Login connected : " + LoginStub.connected);
+	public List<TaskInfo> allTasks()
+	{
+		if (LoginStub.connected)
+		{
 			List<TaskInfo> l = DAO.getTaskDao().getAllTasks();
-			for (TaskInfo taskInfo : l) {
-				l.toString();
-			}
 			return l;
 		} else
 			return new ArrayList<TaskInfo>();
@@ -49,15 +45,18 @@ public class TaskStub {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/genericByPlane/{type}")
-	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String type) {
+	public List<TaskGeneric> getGenericTasksByPlaneType(@PathParam("type") String type)
+	{
 		LoginStub.connected = true;
-		if (LoginStub.connected) {
+		if (LoginStub.connected)
+		{
 			log.debug("Login connected : " + LoginStub.connected);
 			List<TaskGeneric> l = new ArrayList<TaskGeneric>();
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++)
+			{
 				l.add(new TaskGeneric(i, "description", "periodicity", "atacategory", true, 15, type));
 			}
-			//return l;
+			// return l;
 			return DAO.getTaskGenericDao().getGenericTasksByPlaneType(type);
 
 		} else
@@ -67,8 +66,10 @@ public class TaskStub {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/plane/{id}")
-	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id) {
-		if (LoginStub.connected) {
+	public List<TaskInfo> allTasksByPlaneId(@PathParam("id") int id)
+	{
+		if (LoginStub.connected)
+		{
 			return DAO.getTaskDao().getTasksByPlaneId(id);
 		}
 		return new ArrayList<TaskInfo>();
@@ -78,24 +79,28 @@ public class TaskStub {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mro/{id}")
-	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId) {
+	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId)
+	{
 		List<TaskInfo> l = new ArrayList<TaskInfo>();
-		if (LoginStub.connected) {
-			System.out.println("login");
-			for (TaskInfo t : DAO.getTaskDao().getTasksByMroId(mroId)) {
-				System.out.println(t.mro.toString()+" "+t.task.toString());
+		if (LoginStub.connected)
+		{
+			log.info("MRO: " + mroId + " logged in");
+			for (TaskInfo t : DAO.getTaskDao().getTasksByMroId(mroId))
+			{
+				log.info(t.mro.toString() + " " + t.task.toString());
 			}
-			return DAO.getTaskDao().getTasksByMroId(mroId);// DAO.getTaskDao().getTasksByPlaneId(id);
+			return DAO.getTaskDao().getTasksByMroId(mroId);
 		}
-		return new ArrayList<TaskInfo>();
-
+		return l;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public TaskInfo taskById(@PathParam("id") int id) {
-		if (LoginStub.connected) {
+	public TaskInfo taskById(@PathParam("id") int id)
+	{
+		if (LoginStub.connected)
+		{
 			return DAO.getTaskDao().getTasksById(id);
 		}
 		return null;
@@ -104,10 +109,10 @@ public class TaskStub {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/mro/{mroid}/{taskid}")
-	public int attributeToMro(@PathParam("mroid") int mroId, @PathParam("taskid") int taskId) {
-		if (LoginStub.connected) {
-			System.out.println("MRO ID : " + mroId);
-			System.out.println("TASK ID : " + taskId);
+	public int attributeToMro(@PathParam("mroid") int mroId, @PathParam("taskid") int taskId)
+	{
+		if (LoginStub.connected)
+		{
 			DAO.getTaskDao().addMroToTask(mroId, taskId);
 		}
 		return 0;
@@ -116,51 +121,57 @@ public class TaskStub {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/create/{taskGenericId}/{planeId}/{date}")
-	public int createTask(@PathParam("taskGenericId") int taskGeneric, @PathParam("planeId") int planeId,
-			@PathParam("date") String date) {
-		if (LoginStub.connected) {
-			Task t = new Task(-1, taskGeneric, date, date, planeId, 0,-1,-1);
-			System.out.println(t.toString());
+	public int createTask(@PathParam("taskGenericId") int taskGeneric, @PathParam("planeId") int planeId, @PathParam("date") String date)
+	{
+		if (LoginStub.connected)
+		{
+			Task t = new Task(-1, taskGeneric, date, date, planeId, 0, -1, -1);
+			log.info("Task created: " + t.toString());
 			DAO.getTaskDao().addTask(t);
 		}
 		return 0;
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/alert/{id}")
-	public void sendAlert(@PathParam("id") int id){
-		System.out.println("SEND ALERT FOR TASK "+id);
-		try {
-			EmailAlertService.send_mail_to_MRO(id+"");
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void sendAlert(@PathParam("id") int id)
+	{
+		log.info("SEND ALERT FOR TASK " + id);
+		try
+		{
+			EmailAlertService.send_mail_to_MRO(id + "");
+		} catch (AddressException e)
+		{
+			log.error("Unable to send to address", e);
+		} catch (MessagingException e)
+		{
+			log.error(e);
 		}
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/done/{id}")
-	public void setTaskDone(@PathParam("id") int id){
+	public void setTaskDone(@PathParam("id") int id)
+	{
 		DAO.getTaskDao().notifyTaskDone(id);
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public void addTask(Task task) {
-		System.out.println(task.toString());
-		// DAO.getTaskDao().addTask(task);
+	public void addTask(Task task)
+	{
+		log.info("Add new task: " + task.toString());
+		DAO.getTaskDao().addTask(task);
 	}
 
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/delete/{id}")
-	public void deleteTaskById(@PathParam("id") int id) {
+	public void deleteTaskById(@PathParam("id") int id)
+	{
 		DAO.getTaskDao().deleteTask(id);
 	}
 
@@ -169,11 +180,12 @@ public class TaskStub {
 	@Path("/mpd/{mpd}")
 	public void addMPD(@PathParam("mpd") String mpd)
 	{
-		
+
 		String[] splitedFile;
 		String[] splitedLine;
 		try
-		{	byte[] decoded = Base64.getDecoder().decode(mpd); 
+		{
+			byte[] decoded = Base64.getDecoder().decode(mpd);
 			String tasks = new String(decoded);
 			splitedFile = tasks.split("\n");
 			for (int i = 0; i < splitedFile.length; i++)
@@ -184,19 +196,17 @@ public class TaskStub {
 					log.error("Le fichier n'est pas dans le bon format!");
 				} else
 				{
-					//int id = Integer.parseInt(splitedLine[0]);
+					// int id = Integer.parseInt(splitedLine[0]);
 					String description = splitedLine[0];
 					String periodicity = splitedLine[1];
 					String ataCategory = splitedLine[2];
 					boolean needHangar = Utility.convertBoolString(splitedLine[3]);
 					float duration = Integer.parseInt(splitedLine[4]);
 					String typeAvion = splitedLine[5];
-					TaskGeneric tg = new TaskGeneric(-1,description,periodicity,ataCategory,needHangar,duration,typeAvion);
-					System.out.println(i+" : "+tg.toString());
-					System.out.println(DAO.getTaskGenericDao().addTaskGeneric(tg));
-					
+					TaskGeneric tg = new TaskGeneric(-1, description, periodicity, ataCategory, needHangar, duration, typeAvion);
+					DAO.getTaskGenericDao().addTaskGeneric(tg);
+					log.info("TaskGeneric added; " + tg.toString());
 				}
-
 			}
 
 		} catch (Exception e)

@@ -112,7 +112,7 @@ public class DatabaseConnecter
 			for (String id : idList)
 			{
 				DeleteResponse res = client.prepareDelete(DatabaseSettings.DB_NAME, tableName, id).get();
-				System.out.println(res);
+				log.info(res);
 				if (res.getResult().equals(Result.DELETED))
 					sucessCount++;
 			}
@@ -146,7 +146,7 @@ public class DatabaseConnecter
 			try
 			{
 				UpdateResponse res = client.update(updateRequest).get();
-				System.out.println(res);
+				log.info(res);
 				if (res.getResult().equals(Result.UPDATED))
 					successCount++;
 			} catch (InterruptedException e)
@@ -245,7 +245,7 @@ public class DatabaseConnecter
 		try
 		{
 			UpdateResponse res = client.update(updateRequest).get();
-			System.out.println(res);
+			log.info(res);
 			if (res.getResult().equals(Result.CREATED))
 				successCount++;
 		} catch (InterruptedException e)

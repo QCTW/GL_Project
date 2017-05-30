@@ -184,7 +184,6 @@ public class TaskImpl implements TaskDao
 		Flight f = flightByPlaneIdCache.get(pid);
 		if (f == null || f.getId() == -1) // In case of empty flight, we query again the database to see if there is new flight added
 		{
-			// TODO: Add the ordering into all the flights of the same planeId. To ensure to have the last active flight at position 0
 			List<Map<String, String>> res = dbc.selectAllFromTableWhereFieldEqValueSortAscendingByField("flight", "planeId", pid, "departureTime");
 			if (res == null || res.size() <= 0)
 			{

@@ -16,9 +16,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.*;
 
 import com.example.jetty_jersey.dao.DAO;
-import com.example.jetty_jersey.dao.MCC;
 import com.example.jetty_jersey.dao.MRO;
-import com.example.jetty_jersey.dao_interface.MccDao;
 import com.example.jetty_jersey.util.Couple;
 
 import java.util.*;
@@ -56,19 +54,17 @@ public class LoginStub
 	public String[] postMethod(@PathParam("user") String name, @PathParam("pass") String pass)
 	{
 		List<Couple> l = new ArrayList<Couple>();
-		/*for (MCC mcc : DAO.getMccDao().getAllMccs()) {
-			l.add(new Couple(mcc.getEmail(), mcc.getPass(), "mcc"));
+		/*
+		 * for (MCC mcc : DAO.getMccDao().getAllMccs()) {
+		 * l.add(new Couple(mcc.getEmail(), mcc.getPass(), "mcc"));
+		 * }
+		 */for (MRO mro : DAO.getMroDao().getAllMros())
+		{
+			l.add(new Couple(mro.getId(), mro.getName(), "pass", "mro"));
 		}
-		*/for (MRO mro : DAO.getMroDao().getAllMros()) {
-			System.out.println("liste pas vide");
-			l.add(new Couple(mro.getId(),mro.getName(), "pass", "mro"));
-			System.out.println("mro " +mro.getEmail());
-		}
-		System.out.println(l.size());
-		
-		
+
 		l.add(new Couple("mcc", "pass", "mcc"));
-		l.add(new Couple(1,"mro", "pass", "mro"));
+		l.add(new Couple(1, "mro", "pass", "mro"));
 		Couple c = new Couple(name, pass, "mcc");
 		// Couple c = new Couple("mcc", "mro");
 		log.debug("USER : " + c.user + "; PASS : " + c.pass);
@@ -88,7 +84,7 @@ public class LoginStub
 	public void logout()
 	{
 		connected = false;
-		System.out.println("logout");
+		log.info("User logout");
 	}
 
 	/*
