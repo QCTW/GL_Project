@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import com.example.jetty_jersey.dao.*;
 import com.example.jetty_jersey.dao_interface.FlightDao;
 import com.example.jetty_jersey.dao_implementation.FlightImpl;
-import com.example.jetty_jersey.dao_implementation.PlaneImpl;
 
 @Path("/Flight")
 public class FlightStub
@@ -58,7 +57,6 @@ public class FlightStub
 			Flight f = new Flight(-1, commercialId, departureAirport, arrivalAirport, departureTime, arrivalTime, planeID);
 			DAO.getFlightDao().addFlight(f);
 		}
-
 		FlightImpl f = new FlightImpl();
 		List<Flight> l = f.getFlightsbyDepartureAirport("roissy");
 

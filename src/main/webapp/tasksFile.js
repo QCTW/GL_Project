@@ -37,7 +37,7 @@ function allTasks(result){
 	if(localStorage.getItem("role") == "mcc"){
 		getTaskToAssign();
 	}
-	else getAllTasks();
+	else getTasksInProgress();
 }
 
 function allPlanes(result){
@@ -255,7 +255,7 @@ function mroValidTask(id){
 function validTask(id){
 	var m = split0($('#sel option:selected').val());
 	console.log("m "+m);
-	getServerData("ws/task/mro/"+m+"/"+id,alert('success'),null);
+	getServerData("ws/task/mro/"+m+"/"+id,location.reload(),null);
 	//console.log("mroChosen : "+$('#sel option:selected').val() +" id : "+id);
 }
 /** END FUNCTIONS **/
