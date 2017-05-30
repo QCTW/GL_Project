@@ -1,5 +1,6 @@
 /** DECLARE VARIABLE **/
 var taskList;
+var planeList;
 var mroChosen;
 var listMros;
 /** END DECLARE VARIABLE **/
@@ -53,7 +54,10 @@ function allMros(result){
 
 /** SORT TASKS FUNCTION **/
 function getAllTasks(){
-	$("#sendAlert").show();
+	if(localStorage.getItem("role") == "mro"){
+		$("#sendAlert").hide();
+	}
+	else $("#sendAlert").show();
 	var line = "";
 	for (var i = 0; i < taskList.length; i++) {
 		line += printTask(taskList, i);
@@ -74,7 +78,12 @@ function getTaskToAssign(){
 }
 
 function getTasksInProgress(){
-	$("#sendAlert").show();
+	console.log(localStorage.getItem("role"));
+	if(localStorage.getItem("role") == "mcc"){
+		$("#sendAlert").show();
+	}
+	else $("#sendAlert").hide();
+	
 	var line;
 	for (var i = 0; i < taskList.length; i++) {
 		if(taskList[i].task.taskStatus == 1){
@@ -107,7 +116,7 @@ function getTasksdone(){
 function getAllPlanes(){
 	var line = "";
 	for (var i = 0; i < planeList.length; i++) {
-		line += printPlane(planeList, i);
+		line += printPlane(i);
 	}
 	
 	$('#planeTbody').html(line);
@@ -161,15 +170,14 @@ function printTask(taskList, i){
    
 }
 
-function printPlane(planeList, i){
-	return "<tr> "
-	+ "<td>"
-	+ sub(JSON.stringify(planeList[i].planeId))
-	+ "</td>"
-	+ "<td>"
-	+ sub(JSON.stringify(planeList[i].planeType))
-	+ "</td>"
-	+ "</tr>";
+function printPlane(i){
+	var content="";
+	content+="<tr> ";
+	content += td(sub(JSON.stringify(planeList[i].planeId)));
+	content += td(sub(JSON.stringify(planeList[i].planeType)));
+	//content += td(subFy(planeList[i].flighs[0].departureAirport));
+	content += "</tr>";
+	return content;
 }
 
 /** SEND MESSAGES TO MRO **/
