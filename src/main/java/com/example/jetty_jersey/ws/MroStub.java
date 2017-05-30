@@ -32,32 +32,6 @@ public class MroStub
 
 	}
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addMRO/{mro}")
-	public void addMRO(@PathParam("mro") String mro)
-	{
-		String[] splitedFile;
-		String[] splitedLine;
-
-		splitedFile = mro.split(",");
-		for (int i = 0; i < splitedFile.length; i++)
-		{
-			splitedLine = splitedFile[i].split(",");
-			if (splitedLine.length != 2)
-			{
-				log.error("Le fichier n'est pas dans le bon format!");
-
-			} else
-			{
-				int id = Integer.parseInt(splitedLine[0]);
-				String nom = splitedLine[1];
-				MRO m = new MRO(id, nom, "");
-				// TODO Not implemented
-			}
-
-		}
-
-	}
+	
 
 }
