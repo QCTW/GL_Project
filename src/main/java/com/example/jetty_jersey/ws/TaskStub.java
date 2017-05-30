@@ -140,14 +140,13 @@ public class TaskStub
 		log.info("SEND ALERT FOR TASK " + id);
 		try
 		{
-			EmailAlertService.send_mail_to_MRO(id + "");
-		} catch (AddressException e)
+			String s = Integer.toString(id);
+			System.out.println("S IN ALERT "+ s);
+			EmailAlertService.send_mail_to_MRO(s);
+		} catch (Exception e)
 		{
 			log.error("Unable to send to address", e);
-		} catch (MessagingException e)
-		{
-			log.error(e);
-		}
+		} 
 	}
 
 	@POST

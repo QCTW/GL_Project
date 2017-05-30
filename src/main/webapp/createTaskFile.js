@@ -46,7 +46,8 @@ function showPlaneSelected(){
 	var pt = subFy(planesForCreation[id].plane.planeType);
 	console.log(pt);
 	var content = dl("plane Type ",pt);
-	var airport = subFy(planesForCreation[id].flighs[0].departureAirport); console.log(airport);
+	var airport = subFy(planesForCreation[id].flighs[0].departureAirport);
+	console.log(airport);
 	content += dl("AirPort",airport);
         planesForCreation[id].flighs.sort(function(a, b) {
             return (a.date < b.date) ? -1 : ((a.date > b.date) ? 1 : 0);
