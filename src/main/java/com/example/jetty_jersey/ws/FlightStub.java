@@ -17,6 +17,7 @@ import com.example.jetty_jersey.dao.*;
 import com.example.jetty_jersey.dao_interface.FlightDao;
 import com.example.jetty_jersey.db.DatabaseConnecter;
 import com.example.jetty_jersey.dao_implementation.FlightImpl;
+import com.example.jetty_jersey.dao_implementation.PlaneImpl;
 
 @Path("/Flight")
 public class FlightStub
@@ -66,12 +67,10 @@ public class FlightStub
 			
 			
 		}
-		FlightImpl f = new FlightImpl();
-		List<Flight> l = f.getFlightsbyDepartureAirport("roissy");
-		System.out.println("AFFICHAGE DES FLIGHTs:"+ l.size());
-		for(Flight fl : l ){
-			System.out.println(fl.getId()+","+fl.getPlaneId());
-		}
+//		PlaneImpl f = new PlaneImpl();
+//		List<Flight> l = f.getAllFlights(2);
+//		System.out.println("AFFICHAGE DES FLIGHTs:"+ l.size());
+		
 		
 				
 	}
