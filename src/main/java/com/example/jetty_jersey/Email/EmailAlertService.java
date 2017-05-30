@@ -65,6 +65,7 @@ public class EmailAlertService
 		DatabaseConnecter db = new DatabaseConnecter();
 		List<Map<String, String>> list = db.selectAllFromTableWhereFieldEqValue("task", "_id", taskId);
 
+		/*
 		if (list.get(0).get("mroId").equals("-1"))
 		{
 			log.info("mroId of this task is -1, no email sent.");
@@ -78,12 +79,13 @@ public class EmailAlertService
 			db.close();
 			return;
 		}
+		*/
 
 		DateTime startTime = formatter.parseDateTime(list.get(0).get("startTime"));
-		int days = Days.daysBetween(today, startTime).getDays();
+		//int days = Days.daysBetween(today, startTime).getDays();
 
-		if (days <= countDay)
-		{
+		//if (days <= countDay)
+		//{
 			String emailBody = "System Alert. " + "<br><br> You have been assigned a new task (N°" + taskId + ") " + " but was not yet confirmed by you.<br> Task Start time: " + startTime;
 
 			List<Map<String, String>> list2 = db.selectAllFromTableWhereFieldEqValue("mro", "_id", list.get(0).get("mroId"));
@@ -91,7 +93,7 @@ public class EmailAlertService
 			String mail = "mohameddiallo93md@gmail.com";
 
 			send_mail(emailBody, mail, "\"ALERT: task not confirmed yet");
-		}
+		//}
 
 		db.close();
 	}
