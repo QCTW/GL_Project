@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,16 +20,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.example.jetty_jersey.util.TaskInfo;
+import com.example.jetty_jersey.Email.EmailAlertService;
 import com.example.jetty_jersey.dao.*;
-import com.example.jetty_jersey.dao_implementation.TaskGenericImpl;
-import com.example.jetty_jersey.dao_interface.TaskGenericDao;
 import com.example.jetty_jersey.db.Utility;
 
 @Path("/task")
 public class TaskStub
 {
 	private static Logger log = LogManager.getLogger(TaskStub.class.getName());
-	private final TaskGenericDao taskGeneric = new TaskGenericImpl();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -36,12 +36,7 @@ public class TaskStub
 	{
 		if (LoginStub.connected)
 		{
-			// log.debug("Login connected : " + LoginStub.connected);
 			List<TaskInfo> l = DAO.getTaskDao().getAllTasks();
-			for (TaskInfo taskInfo : l)
-			{
-				l.toString();
-			}
 			return l;
 		} else
 			return new ArrayList<TaskInfo>();
@@ -86,13 +81,17 @@ public class TaskStub
 	@Path("/mro/{id}")
 	public List<TaskInfo> allTasksByMroId(@PathParam("id") int mroId)
 	{
+		List<TaskInfo> l = new ArrayList<TaskInfo>();
 		if (LoginStub.connected)
 		{
 			log.info("MRO: " + mroId + " logged in");
+			for (TaskInfo t : DAO.getTaskDao().getTasksByMroId(mroId))
+			{
+				log.info(t.mro.toString() + " " + t.task.toString());
+			}
 			return DAO.getTaskDao().getTasksByMroId(mroId);
 		}
-		return new ArrayList<TaskInfo>();
-
+		return l;
 	}
 
 	@GET
@@ -139,17 +138,16 @@ public class TaskStub
 	public void sendAlert(@PathParam("id") int id)
 	{
 		log.info("SEND ALERT FOR TASK " + id);
-		/*
-		 * try {
-		 * EmailAlertService.send_mail_to_MRO(id+"", 1);
-		 * } catch (AddressException e) {
-		 * // TODO Auto-generated catch block
-		 * e.printStackTrace();
-		 * } catch (MessagingException e) {
-		 * // TODO Auto-generated catch block
-		 * e.printStackTrace();
-		 * }
-		 */
+		try
+		{
+			EmailAlertService.send_mail_to_MRO(id + "");
+		} catch (AddressException e)
+		{
+			log.error("Unable to send to address", e);
+		} catch (MessagingException e)
+		{
+			log.error(e);
+		}
 	}
 
 	@POST

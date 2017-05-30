@@ -20,6 +20,7 @@ function allPlanes(res){
 }
 
 function printPlane(planeInfo, i){
+	console.log("plane  = "+planeInfo);
 	var content="<tr>";
 	content+= td(planeInfo[i].plane.planeId);
 	content+= td(subFy(planeInfo[i].plane.planeType));
